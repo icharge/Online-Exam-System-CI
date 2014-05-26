@@ -1,0 +1,80 @@
+body {
+	padding-top: 80px;
+}
+
+tr.course {
+	cursor: pointer;
+}
+
+#content {
+	margin-top: 60px;
+}
+
+.navbar .label {
+	position: relative;
+	top: 11px;
+}
+
+.nav-list>li {
+	margin: 0px 5px;
+}
+
+.nav-list>li.nav-header {
+	font-weight: bold;
+}
+
+.nav-list>li>a {
+	padding: 5px 15px;
+	margin: 3px 0px;
+}
+
+.nav-list>li.active {
+	background-color: #3CC594;
+	border-radius: 4px;
+}
+
+.nav-list>li.active>a {
+	color: #fff;
+	background-color: #3CC594;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.nav-list>li>a:hover {
+	background-color: #3CC594;
+	color: #fff;
+}
+.nav-list > li > a, .nav-list > li > a:active {
+	border-radius: 4px;
+}
+
+.top-row {
+	text-align: center;
+	margin: 10px 0;
+}
+
+.top-row a div {
+	font-size: 10px;
+	line-height: 12px;
+}
+
+.anim.ng-enter {
+	transition: opacity 1s;
+	opacity: 0.0;
+}
+
+.anim.ng-enter-active {
+	opacity: 1.0;
+}
+.anim.ng-leave {
+	display: none;
+}
+
+#loading {
+	position: absolute;
+	width: 300px;
+	top: 10px;
+	left: 500px;
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+	z-index: 1040;
+}

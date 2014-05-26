@@ -1,10 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Login</title>
-</head>
-<body>
+<!-- Begin login -->
 <?php
 	if ($this->session->flashdata('msg_error')) {
 		echo "<p><font color=red>";
@@ -20,5 +14,4 @@
 		form_password('password', set_value('password')).br().
 		form_submit('submit', 'เข้าสู่ระบบ');
 ?>
-</body>
-</html>
+<!-- End login -->

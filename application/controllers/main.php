@@ -6,14 +6,18 @@ class Main extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Users_model','Users');
-
 	}
 
 	public function index()
 	{
-		echo "hello";
 		if ($this->session->userdata('logged')) {
+			$this->load->view('users/header_view');
+			$this->load->view('users/nav_view');
+			$this->load->view('users/beginbody_view');
+
 			$this->load->view('users/index_view');
+
+			$this->load->view('users/footer_view');
 		} else {
 			redirect('main/login');
 		}
@@ -21,12 +25,23 @@ class Main extends CI_Controller {
 
 	public function login()
 	{
+		$this->load->view('users/header_view');
+		$this->load->view('users/nav_view');
+		$this->load->view('users/beginbody_view');
+
 		$this->load->view('users/login_view');
 
+		$this->load->view('users/footer_view');
 	}
 
 	public function dologin()
 	{
+		# Load View
+		$this->load->view('users/header_view');
+		$this->load->view('users/nav_view');
+		$this->load->view('users/beginbody_view');
+
+		# Login Process
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		$this->form_validation->set_error_delimiters('<span style="color: red">', '</span>');
@@ -39,8 +54,14 @@ class Main extends CI_Controller {
 				$check = $this->Users->_checkuser($username, $password);
 				if ($check)
 				{
+					$userinfo = $this->Users->_getUserInfo($username)[0];
 					$data = array(
-						'username' => $username, 
+						'username' => $username,
+						'fullname' => $userinfo['name']." ".$userinfo['lname'],
+						'fname' => $userinfo['name'],
+						'lname' => $userinfo['lname'],
+						'birth' => $userinfo['birth'],
+						'perm' => $userinfo['perm'],
 						'logged' => true
 					);
 					$this->session->set_userdata($data);
@@ -56,6 +77,7 @@ class Main extends CI_Controller {
 		} else {
 			redirect('users/login');
 		}
+		$this->load->view('users/footer_view');
 	}
 
 	public function logout()
