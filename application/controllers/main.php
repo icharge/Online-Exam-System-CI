@@ -52,23 +52,67 @@ class Main extends CI_Controller {
 			if ($this->form_validation->run())
 			{
 				$check = $this->Users->_checkuser($username, $password);
-				if ($check)
+				switch ($check) 
 				{
-					$userinfo = $this->Users->_getUserInfo($username)[0];
-					$data = array(
-						'username' => $username,
-						'fullname' => $userinfo['name']." ".$userinfo['lname'],
-						'fname' => $userinfo['name'],
-						'lname' => $userinfo['lname'],
-						'birth' => $userinfo['birth'],
-						'perm' => $userinfo['perm'],
-						'logged' => true
-					);
-					$this->session->set_userdata($data);
-					redirect('main');
-				} else {
-					$this->session->set_flashdata('msg_error', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
-					$this->load->view('users/login_view');
+					case 'admin':
+						// Admin table ??
+						//$userinfo = $this->Users->_getUserInfo($username, $check)[0];
+						$data = array(
+							'username' => $username,
+							'fullname' => $username,
+							'fname' => $username,
+							'lname' => "",
+							'role' => $check,
+							'logged' => true
+						);
+						$this->session->set_userdata($data);
+						redirect('admin');
+						break;
+					
+					case 'teacher':
+						$userinfo = $this->Users->_getUserInfo($username, $check)[0];
+						$data = array(
+							'id' => $userinfo['id'],
+							'username' => $username,
+							'fullname' => $userinfo['name']." ".$userinfo['lname'],
+							'fname' => $userinfo['name'],
+							'lname' => $userinfo['lname'],
+							'faculty' => $userinfo['faculty'],
+							'role' => $userinfo['role'],
+							'logged' => true
+						);
+						$this->session->set_userdata($data);
+						redirect('main'); // Must changed
+						break;
+
+					case 'student':
+						$userinfo = $this->Users->_getUserInfo($username, $check)[0];
+						$data = array(
+							'username' => $username,
+							'fullname' => $userinfo['name']." ".$userinfo['lname'],
+							'fname' => $userinfo['name'],
+							'lname' => $userinfo['lname'],
+							'birth' => $userinfo['birth'],
+							'gender' => $userinfo['gender'],
+							'year' => $userinfo['year'],
+							'faculty' => $userinfo['faculty'],
+							'branch' => $userinfo['branch'],
+							'role' => $userinfo['role'],
+							'logged' => true
+						);
+						$this->session->set_userdata($data);
+						redirect('main'); // Must changed
+						break;
+
+					case 'notfound':
+						$this->session->set_flashdata('msg_error', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+						$this->load->view('users/login_view');
+						break;
+
+					default:
+						$this->session->set_flashdata('msg_error', 'Error');
+						$this->load->view('users/login_view');
+						
 				}
 			} else {
 				$this->session->set_flashdata('msg_error', 'กรุณากรอกข้อมูลให้ครบ');
