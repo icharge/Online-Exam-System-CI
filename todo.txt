@@ -1,7 +1,7 @@
 TODO LIST
 =========
 
-- Make CTRL (Teacher, Student)
+/ Make CTRL (Teacher, Student)
 - Courses list
 - Enroll system
 - XLS Importer

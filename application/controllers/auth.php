@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Main extends CI_Controller {
+class Auth extends CI_Controller {
 
 	public function __construct()
 	{
@@ -10,36 +10,26 @@ class Main extends CI_Controller {
 
 	public function index()
 	{
-		if ($this->session->userdata('logged')) {
-			$this->load->view('users/header_view');
-			$this->load->view('users/nav_view');
-			$this->load->view('users/beginbody_view');
-
-			$this->load->view('users/index_view');
-
-			$this->load->view('users/footer_view');
-		} else {
-			redirect('main/login');
-		}
+		redirect('main');
 	}
 
 	public function login()
 	{
-		$this->load->view('users/header_view');
-		$this->load->view('users/nav_view');
-		$this->load->view('users/beginbody_view');
+		$this->load->view('frontend/header_view');
+		$this->load->view('frontend/nav_view');
+		$this->load->view('frontend/beginbody_view');
 
-		$this->load->view('users/login_view');
+		$this->load->view('frontend/login_view');
 
-		$this->load->view('users/footer_view');
+		$this->load->view('frontend/footer_view');
 	}
 
 	public function dologin()
 	{
 		# Load View
-		$this->load->view('users/header_view');
-		$this->load->view('users/nav_view');
-		$this->load->view('users/beginbody_view');
+		$this->load->view('frontend/header_view');
+		$this->load->view('frontend/nav_view');
+		$this->load->view('frontend/beginbody_view');
 
 		# Login Process
 		$this->form_validation->set_rules('username', 'Username', 'required');
@@ -82,7 +72,7 @@ class Main extends CI_Controller {
 							'logged' => true
 						);
 						$this->session->set_userdata($data);
-						redirect('main'); // Must changed
+						redirect('teacher'); // Must changed
 						break;
 
 					case 'student':
@@ -101,35 +91,36 @@ class Main extends CI_Controller {
 							'logged' => true
 						);
 						$this->session->set_userdata($data);
-						redirect('main'); // Must changed
+						redirect('student'); // Must changed
 						break;
 
 					case 'notfound':
 						$this->session->set_flashdata('msg_error', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
-						$this->load->view('users/login_view');
+						$this->load->view('frontend/login_view');
 						break;
 
 					default:
 						$this->session->set_flashdata('msg_error', 'Error');
-						$this->load->view('users/login_view');
+						$this->load->view('frontend/login_view');
 						
 				}
 			} else {
 				$this->session->set_flashdata('msg_error', 'กรุณากรอกข้อมูลให้ครบ');
-				$this->load->view('users/login_view');
+				$this->load->view('frontend/login_view');
 			}
 		} else {
-			redirect('users/login');
+			redirect('auth/login');
 		}
-		$this->load->view('users/footer_view');
+		$this->load->view('frontend/footer_view');
 	}
 
 	public function logout()
 	{
 		$this->session->sess_destroy();
-		redirect('main/login');
+		redirect('auth/login');
 	}
+
 }
 
-/* End of file main.php */
-/* Location: ./application/controllers/main.php */
+/* End of file auth.php */
+/* Location: ./application/controllers/auth.php */
