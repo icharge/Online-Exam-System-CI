@@ -1,13 +1,11 @@
 <!-- Begin content -->
-<div class="span12">
-	<h2>Online Examination System </h2>
-<?php
-	echo "ยินดีต้อนรับเข้าสู่ระบบ, ".$this->session->userdata('fullname').
-	br().
-	"วันเกิด: ".$this->session->userdata('birth').br().
-	"เพศ: ".$this->session->userdata('gender').br(3);
-
-	echo anchor('auth/logout', 'ออกจากระบบ');
-?>
+<div class="col-md-12">
+	<div class="jumbotron">
+		<h1>สวัสดี</h1>
+		<p>ยินดีต้อนรับสู่ระบบการสอบออนไลน์  เว็บไซต์เพื่อการสอบโดยเฉพาะ  ท่านสามารถเข้าใช้งานได้โดย
+			คลิกที่เข้าสู่ระบบ</p>
+		<p><a class="btn btn-primary btn-lg" role="button">เข้าสู่ระบบ</a></p>
+		<p>สำหรับท่านอาจารย์ที่สอน หากต้องการจะเปิดสอบวิชาใหม่ ให้เข้าสู่ระบบและเลือกเมนู ขอวิชาใหม่</p>
+	</div>
 </div>
 <!-- End content -->

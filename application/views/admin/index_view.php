@@ -7,7 +7,7 @@
 	"วันเกิด: ".$this->session->userdata('birth').br().
 	"เพศ: ".$this->session->userdata('gender').br(3);
 
-	echo anchor('main/logout', 'ออกจากระบบ');
+	echo anchor('auth/logout', 'ออกจากระบบ');
 ?>
 </div>
 <!-- End content -->

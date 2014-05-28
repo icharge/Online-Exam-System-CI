@@ -12,7 +12,6 @@
 			<div class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="active"><a href="#">แผงควบคุม</a></li>
-					<li><a href="#">ตั้งค่าเว็บ</a></li>
 					<li><a href="#">ช่วยเหลือ</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php 

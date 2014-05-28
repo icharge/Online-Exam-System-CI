@@ -1,6 +1,6 @@
 	<!-- Begin navbar -->
 	<div class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
 					<span class="icon-bar"></span>
@@ -11,9 +11,9 @@
 			</div>
 			<div class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav">
-					<li ng-class="{active: $routeSegment.startsWith('frontend')}"><a href="#/">Home</a></li>
-					<li ng-class="{active: $routeSegment.startsWith('tea')}"><a href="#/teacher">Teacher</a></li>
-					<li ng-class="{active: $routeSegment.startsWith('admin')}"><a href="#/admin">Administrator</a></li>
+					<li><a href="#/">Home</a></li>
+					<li><a href="#/teacher">Teacher</a></li>
+					<li><a href="#/admin">Administrator</a></li>
 					<li class="dropdown">
 						<a href class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 						<ul class="dropdown-menu">

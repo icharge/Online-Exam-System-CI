@@ -72,7 +72,7 @@ class Auth extends CI_Controller {
 							'logged' => true
 						);
 						$this->session->set_userdata($data);
-						redirect('teacher'); // Must changed
+						redirect('teacher');
 						break;
 
 					case 'student':
@@ -91,7 +91,7 @@ class Auth extends CI_Controller {
 							'logged' => true
 						);
 						$this->session->set_userdata($data);
-						redirect('student'); // Must changed
+						redirect('student');
 						break;
 
 					case 'notfound':

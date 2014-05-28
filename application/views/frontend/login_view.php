@@ -1,12 +1,25 @@
+<?php
+	$attrLabel = array(
+		'class' => 'col-sm-3 control-label'
+	);
+
+?>
 <!-- Begin login -->
 <div class="row row-centered">
 	<div class="col-md-5 col-centered">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">Login</h3>
+				<h3 class="panel-title"><span class="
+glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Login</h3>
 			</div>
 			<div class="panel-body">
 <?php
+	if ($this->session->flashdata('msg_error')) {
+		echo "<p><font color=red>";
+		echo $this->session->flashdata('msg_error');
+		echo "</font></p>";
+	}
+
 	$attr = array(
 		'class' => 'form-horizontal',
 		'role' => 'form',
@@ -14,17 +27,38 @@
 	);
 	echo form_open('auth/dologin', $attr);
 ?>
-				<form class="form-horizontal" role="form">
 					<div class="form-group">
-						<label for="inputUsers" class="col-sm-3 control-label">ชื่อผู้ใช้</label>
+<?php 
+	echo form_label('ชื่อผู้ใช้', 'username', $attrLabel);
+?>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputUsers" placeholder="ชื่อผู้ใช้">
+<?php
+	echo form_input(array(
+		'id'=>'username',
+		'name'=>'username',
+		'value'=>set_value('username'),
+		'type'=>'text',
+		'class'=>'form-control',
+		'placeholder'=>'ชื่อผู้ใช้'));
+	echo form_error('username', '<span class="label label-danger">', '</span>');
+?>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-3 control-label">รหัสผ่าน</label>
+<?php 
+	echo form_label('รหัสผ่าน', 'password', $attrLabel);
+?>
 						<div class="col-sm-9">
-							<input type="password" class="form-control" id="inputPassword3" placeholder="รหัสผ่าน">
+<?php
+	echo form_input(array(
+		'id'=>'password',
+		'name'=>'password',
+		'value'=>set_value('password'),
+		'type'=>'password',
+		'class'=>'form-control',
+		'placeholder'=>'รหัสผ่าน'));
+	echo form_error('password', '<span class="label label-danger">', '</span>');
+?>
 						</div>
 					</div>
 					<!-- <div class="form-group">
@@ -39,7 +73,9 @@
 					<div class="form-group">
 						<div class="row row-centered">
 							<div class="col-sm-12">
-								<button type="submit" class="btn btn-default">เข้าสู่ระบบ</button>
+<?php
+	echo form_submit('submit', 'เข้าสู่ระบบ', 'class="btn btn-primary"');
+?>
 							</div>
 						</div>
 					</div>
@@ -47,20 +83,16 @@
 
 
 <?php
-	if ($this->session->flashdata('msg_error')) {
-		echo "<p><font color=red>";
-		echo $this->session->flashdata('msg_error');
-		echo "</font></p>";
-	}
-
+/*
 	echo form_open('auth/dologin').
 		form_label('ผู้ใช้งาน: ', 'username').
-		form_error('username', '<font color=red>', '</font>'.br()).
+		form_error('username', '<span class="label label-danger">', '</span>'.br()).
 		form_input('username', set_value('username')).br().
 		form_label('รหัสผ่าน: ', 'password').
 		form_error('password', '<font color=red>', '</font>'.br()).
 		form_password('password', set_value('password')).br().
 		form_submit('submit', 'เข้าสู่ระบบ');
+		*/
 ?>
 
 			</div>
