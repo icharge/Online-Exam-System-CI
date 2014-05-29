@@ -31,7 +31,7 @@ glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Login</h3>
 <?php 
 	echo form_label('ชื่อผู้ใช้', 'username', $attrLabel);
 ?>
-						<div class="col-sm-9">
+						<div class="col-sm-8">
 <?php
 	echo form_input(array(
 		'id'=>'username',
@@ -48,7 +48,7 @@ glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Login</h3>
 <?php 
 	echo form_label('รหัสผ่าน', 'password', $attrLabel);
 ?>
-						<div class="col-sm-9">
+						<div class="col-sm-8">
 <?php
 	echo form_input(array(
 		'id'=>'password',

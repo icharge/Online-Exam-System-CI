@@ -20,12 +20,12 @@ class Teacher extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('teacher/header_view');
-		$this->load->view('teacher/nav_view');
-		$this->load->view('teacher/beginbody_view');
-		$this->load->view('teacher/sidebar_view');
+		$this->load->view('teacher/t_header_view');
+		$this->load->view('teacher/t_nav_view');
+		$this->load->view('teacher/t_beginbody_view');
+		$this->load->view('teacher/t_sidebar_view');
 		$this->load->view('teacher/index_view');
-		$this->load->view('teacher/footer_view');
+		$this->load->view('teacher/t_footer_view');
 	}
 
 }

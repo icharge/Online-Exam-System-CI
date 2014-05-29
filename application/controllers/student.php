@@ -20,13 +20,13 @@ class Student extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('student/header_view');
-		$this->load->view('student/nav_view');
-		$this->load->view('student/beginbody_view');
+		$this->load->view('student/t_header_view');
+		$this->load->view('student/t_nav_view');
+		$this->load->view('student/t_beginbody_view');
 
 		echo "Student index";
 
-		$this->load->view('student/footer_view');
+		$this->load->view('student/t_footer_view');
 	}
 
 }

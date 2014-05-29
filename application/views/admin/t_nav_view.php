@@ -18,17 +18,12 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php 
 						echo $this->session->userdata('fname'); ?> <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
+							<li><?php echo anchor('main/viewprofile', 'ข้อมูลส่วนตัว');?></li>
 							<li class="divider"></li>
 							<li><?php echo anchor('auth/logout', 'ออกจากระบบ'); ?></li>
 						</ul>
 					</li>
-				</ul>				
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control col-lg-8" placeholder="Search">
-				</form>
+				</ul>
 			</div>
 		</div>
 	</div>

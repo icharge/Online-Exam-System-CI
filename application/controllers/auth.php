@@ -15,21 +15,21 @@ class Auth extends CI_Controller {
 
 	public function login()
 	{
-		$this->load->view('frontend/header_view');
-		$this->load->view('frontend/nav_view');
-		$this->load->view('frontend/beginbody_view');
+		$this->load->view('frontend/t_header_view');
+		$this->load->view('frontend/t_nav_view');
+		$this->load->view('frontend/t_beginbody_view');
 
 		$this->load->view('frontend/login_view');
 
-		$this->load->view('frontend/footer_view');
+		$this->load->view('frontend/t_footer_view');
 	}
 
 	public function dologin()
 	{
 		# Load View
-		$this->load->view('frontend/header_view');
-		$this->load->view('frontend/nav_view');
-		$this->load->view('frontend/beginbody_view');
+		$this->load->view('frontend/t_header_view');
+		$this->load->view('frontend/t_nav_view');
+		$this->load->view('frontend/t_beginbody_view');
 
 		# Login Process
 		$this->form_validation->set_rules('username', 'Username', 'required');
@@ -111,7 +111,7 @@ class Auth extends CI_Controller {
 		} else {
 			redirect('auth/login');
 		}
-		$this->load->view('frontend/footer_view');
+		$this->load->view('frontend/t_footer_view');
 	}
 
 	public function logout()
