@@ -23,6 +23,20 @@ $attrLabel = array(
 			<div class="alert alert-danger alert-dismissable">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			<strong>ผิดพลาด!</strong> '.$msg_error.'</div>';
+			echo "
+	<script>
+	Messenger.options = {
+		extraClasses: 'messenger-fixed messenger-on-top',
+		theme: 'block'
+	}
+	Messenger().post({
+		message: '$msg_error',
+		type: 'error',
+		hideAfter: 7,
+		showCloseButton: true
+});
+	</script>
+			";
 		}
 		$attr = array(
 			'class' => 'form-horizontal',

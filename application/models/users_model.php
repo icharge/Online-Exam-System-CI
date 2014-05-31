@@ -159,32 +159,26 @@ class Users_model extends CI_Model {
 		}
 	}
 
-	function addUser($table, $arrDat)
+	function addUser($table, $userData, $tableData)
 	{
 		# Prepare data
-		$username = $arrDat['username'];
-		$password = $arrDat['password'];
-		$passwordmd5 = md5($password);
-		$name = $arrDat['name'];
-		$surname = $arrDat['surname'];
+		// $username = $userData['username'];
+		// $password = $userData['password'];
+		// $passwordmd5 = md5($password);
+		// $name = $userData['name'];
+		// $surname = $userData['surname'];
 		//$pic;
-
-		$fields = array();
 
 		# Users Table first
 		# Transaction begin
 		$this->db->trans_begin();
 		# Insert Users
-		$query_user = $this->db
-			->set('username', $username)
-			->set('password', md5($arrDat['password']))
-			->set('role', "admin")
-			->insert('users');
+		$query_user = $this->db->insert('users', $userData);
 
 		# Get ID
 		$cause = array(
-			'username' => $username,
-			'password' => $passwordmd5
+			'username' => $userData['username'],
+			'password' => $userData['password']
 		);
 		$getId = $this->db
 			->limit(1)
@@ -192,11 +186,8 @@ class Users_model extends CI_Model {
 			->get_where('users', $cause)
 			->result_array()[0]['id'];
 		# Insert table
-		$query_admin = $this->db
-			->set('id', $getId)
-			->set('name', $name)
-			->set('lname', $surname)
-			->insert($table);
+		$tableData['id'] = $getId;
+		$query_admin = $this->db->insert($table, $tableData);
 		$this->db->trans_complete();
 		if ($this->db->trans_status())
 		{

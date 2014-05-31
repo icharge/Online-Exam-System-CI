@@ -77,27 +77,29 @@ class Admin extends CI_Controller {
 							if ($this->form_validation->run())
 							{
 								# Form check completed
-								$arrDat['username'] = $this->input->post('username');
-								$arrDat['password'] = $this->input->post('password');
-								$arrDat['name'] = $this->input->post('fname');
-								$arrDat['surname'] = $this->input->post('surname');
+								$userData['username'] = $this->input->post('username');
+								$userData['password'] = md5($this->input->post('password'));
+								$userData['role'] = "admin";
+								$adminData['name'] = $this->input->post('fname');
+								$adminData['lname'] = $this->input->post('surname');
+								
 								if ($this->input->post('password') != $this->input->post('passwordconfirm'))
 								{
 									$data['msg_error'] = 'รหัสผ่านไม่ตรงกัน';
 									$this->load->view('admin/adduser_admin_view', $data);
 								}
-								if ($this->Users->addUser("admins", $arrDat))
+								elseif ($this->Users->addUser("admins", $userData, $adminData))
 								{
 									# Added success
 									$this->session->set_flashdata('msg_info', 
-										'เพิ่ม '.$arrDat['username'].' เรียบร้อย');
+										'เพิ่ม '.$userData['username'].' เรียบร้อย');
 									
 									//$this->users();
 									redirect('admin/users');
 								} else {
 									# Failed
 									$this->session->set_flashdata('msg_error', 
-										'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$arrDat['username'].' ได้');
+										'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้');
 									//$this->users();
 									redirect('admin/users');
 								}
