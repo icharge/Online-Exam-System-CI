@@ -62,6 +62,88 @@ class Admin extends CI_Controller {
 				if ($arg1=='') $arg1="all";
 				$this->_userViewgroup($arg1);
 				break;
+			case 'adduser':
+				if ($this->input->post('submit'))
+				{
+					switch ($arg1) {
+						case 'admin':
+							$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
+							$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
+							$this->form_validation->set_rules('passwordconfirm', 'ยืนยันรหัสผ่าน', 'required');
+							$this->form_validation->set_rules('fname', 'ชื่อ', 'required');
+							$this->form_validation->set_rules('surname', 'นามสกุล', 'required');
+							$this->form_validation->set_message('required', 'คุณต้องกรอก %s');
+							//$this->form_validation->set_error_delimiters('<span style="color: red">', '</span>');
+							if ($this->form_validation->run())
+							{
+								# Form check completed
+								$arrDat['username'] = $this->input->post('username');
+								$arrDat['password'] = $this->input->post('password');
+								$arrDat['name'] = $this->input->post('fname');
+								$arrDat['surname'] = $this->input->post('surname');
+								if ($this->input->post('password') != $this->input->post('passwordconfirm'))
+								{
+									$data['msg_error'] = 'รหัสผ่านไม่ตรงกัน';
+									$this->load->view('admin/adduser_admin_view', $data);
+								}
+								if ($this->Users->addUser("admins", $arrDat))
+								{
+									# Added success
+									$this->session->set_flashdata('msg_info', 
+										'เพิ่ม '.$arrDat['username'].' เรียบร้อย');
+									
+									//$this->users();
+									redirect('admin/users');
+								} else {
+									# Failed
+									$this->session->set_flashdata('msg_error', 
+										'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$arrDat['username'].' ได้');
+									//$this->users();
+									redirect('admin/users');
+								}
+							}
+							else
+							{
+								
+								$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
+								$this->load->view('admin/adduser_admin_view', $data);
+								//redirect('admin/users/adduser/admin');
+							}
+
+							break;
+
+						case 'teacher':
+
+							break;
+
+						case 'student':
+
+							break;
+						
+						default:
+							# code...
+							break;
+					}
+				} else {
+					switch ($arg1) {
+						case 'admin':
+							$this->load->view('admin/adduser_admin_view');
+							break;
+
+						case 'teacher':
+
+							break;
+
+						case 'student':
+
+							break;
+						
+						default:
+							# code...
+							break;
+					}
+					
+				}
 			
 			default:
 				# code...
@@ -72,9 +154,13 @@ class Admin extends CI_Controller {
 
 	function _userViewgroup($arg='')
 	{
-		$data = array(
-			'group' => $arg
-		);
+		$data['group'] = $arg;
+		if ($arg=='all' || $arg=='admin')
+			$data['adminlist'] = $this->Users->getUsersByGroup('admin');
+		if ($arg=='all' || $arg=='teacher')
+			$data['teacherlist'] = $this->Users->getUsersByGroup('teacher');
+		if ($arg=='all' || $arg=='student')
+			$data['studentlist'] = $this->Users->getUsersByGroup('student');
 		$this->load->view('admin/users_view',$data);
 	}
 

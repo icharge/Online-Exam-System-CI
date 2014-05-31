@@ -46,13 +46,13 @@ class Auth extends CI_Controller {
 				{
 					case 'admin':
 						// Admin table ??
-						//$userinfo = $this->Users->_getUserInfo($username, $check)[0];
+						$userinfo = $this->Users->_getUserInfo($username, $check)[0];
 						$data = array(
 							'username' => $username,
-							'fullname' => $username,
-							'fname' => $username,
-							'lname' => "",
-							'role' => $check,
+							'fullname' => $userinfo['name']." ".$userinfo['lname'],
+							'fname' => $userinfo['name'],
+							'lname' => $userinfo['lname'],
+							'role' => $userinfo['role'],
 							'logged' => true
 						);
 						$this->session->set_userdata($data);
@@ -102,7 +102,6 @@ class Auth extends CI_Controller {
 					default:
 						$this->session->set_flashdata('msg_error', 'Error');
 						$this->load->view('frontend/login_view');
-						
 				}
 			} else {
 				$this->session->set_flashdata('msg_error', 'กรุณากรอกข้อมูลให้ครบ');

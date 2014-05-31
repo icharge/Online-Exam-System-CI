@@ -79,7 +79,7 @@ glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Login</h3>
 							</div>
 						</div>
 					</div>
-				</form>
+				<?php echo form_close(); ?>
 
 
 <?php

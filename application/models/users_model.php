@@ -21,7 +21,7 @@ class Users_model extends CI_Model {
 		$cause = array(
 			'username' => $username,
 			'password' => md5($password)
-		);
+			);
 		$query = $this->db
 			->limit(1)
 			->select('role')
@@ -38,42 +38,52 @@ class Users_model extends CI_Model {
 	{
 		switch ($role) {
 			case 'admin':
-				# code...
-				break;
+			$fields = array(
+				'users.id', 'role', 'username', 'name', 'lname', 
+				);
+			$cause = array('username' => $username);
+			$query = $this->db
+				->limit(1)
+				->select($fields)
+				->join('admins', 'admins.id = users.id', 'LEFT')
+				->get_where('users', $cause)
+				->result_array();
+			return $query;
+			break;
 			
 			case 'teacher':
-				$fields = array(
-					'users.id', 'role', 'username', 'name', 'lname', 
-					'faculty'
+			$fields = array(
+				'users.id', 'role', 'username', 'name', 'lname', 
+				'faculty'
 				);
-				$cause = array('username' => $username);
-				$query = $this->db
-					->limit(1)
-					->select($fields)
-					->join('teachers', 'teachers.id = users.id', 'LEFT')
-					->get_where('users', $cause)
-					->result_array();
-				return $query;
-				break;
+			$cause = array('username' => $username);
+			$query = $this->db
+				->limit(1)
+				->select($fields)
+				->join('teachers', 'teachers.id = users.id', 'LEFT')
+				->get_where('users', $cause)
+				->result_array();
+			return $query;
+			break;
 
 			case 'student':
-				$fields = array(
-					'users.id', 'role', 'username', 'name', 'lname', 
-					'birth', 'gender', 'year', 'faculty', 'branch'
+			$fields = array(
+				'users.id', 'role', 'username', 'name', 'lname', 
+				'birth', 'gender', 'year', 'faculty', 'branch'
 				);
-				$cause = array('username' => $username);
-				$query = $this->db
-					->limit(1)
-					->select($fields)
-					->join('students', 'students.id = users.id', 'LEFT')
-					->get_where('users', $cause)
-					->result_array();
-				return $query;
-				break;
+			$cause = array('username' => $username);
+			$query = $this->db
+				->limit(1)
+				->select($fields)
+				->join('students', 'students.id = users.id', 'LEFT')
+				->get_where('users', $cause)
+				->result_array();
+			return $query;
+			break;
 
 			default:
 				# code...
-				break;
+			break;
 		}
 
 		// Check error?
@@ -99,6 +109,104 @@ class Users_model extends CI_Model {
 		return $this->session->userdata('logged') == true ? true : false;
 	}
 
+	function getUsersByGroup($group)
+	{
+		switch ($group) {
+			case 'admin':
+			$fields = array(
+				'users.id', 'username', 'role', 'status'
+				);
+			$cause = array('role' => 'admin');
+			$query = $this->db
+				->select($fields)
+				->get_where('users',$cause)
+				->result_array();
+			return $query;
+			break;
+			
+			case 'teacher':
+			$fields = array(
+				'users.id', 'role', 'username', 'name', 'lname', 
+				'faculty', 'status'
+				);
+			$cause = array('role' => 'teacher');
+			$query = $this->db
+				->select($fields)
+				->join('teachers', 'teachers.id = users.id', 'LEFT')
+				->get_where('users',$cause)
+				->result_array();
+			return $query;
+			break;
+
+			case 'student':
+			$fields = array(
+				'users.id', 'role', 'username', 'name', 'lname', 
+				'birth', 'gender', 'year', 'faculty', 'branch',
+				'status'
+				);
+			$cause = array('role' => 'student');
+			$query = $this->db
+				->select($fields)
+				->join('students', 'students.id = users.id', 'LEFT')
+				->get_where('users',$cause)
+				->result_array();
+			return $query;
+			break;
+
+			default:
+				# code...
+			break;
+		}
+	}
+
+	function addUser($table, $arrDat)
+	{
+		# Prepare data
+		$username = $arrDat['username'];
+		$password = $arrDat['password'];
+		$passwordmd5 = md5($password);
+		$name = $arrDat['name'];
+		$surname = $arrDat['surname'];
+		//$pic;
+
+		$fields = array();
+
+		# Users Table first
+		# Transaction begin
+		$this->db->trans_begin();
+		# Insert Users
+		$query_user = $this->db
+			->set('username', $username)
+			->set('password', md5($arrDat['password']))
+			->set('role', "admin")
+			->insert('users');
+
+		# Get ID
+		$cause = array(
+			'username' => $username,
+			'password' => $passwordmd5
+		);
+		$getId = $this->db
+			->limit(1)
+			->select("id")
+			->get_where('users', $cause)
+			->result_array()[0]['id'];
+		# Insert table
+		$query_admin = $this->db
+			->set('id', $getId)
+			->set('name', $name)
+			->set('lname', $surname)
+			->insert($table);
+		$this->db->trans_complete();
+		if ($this->db->trans_status())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
 
 /* End of file users_model.php */
