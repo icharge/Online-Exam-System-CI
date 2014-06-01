@@ -4,22 +4,51 @@
 		<li><?php echo anchor('admin', 'หน้าแรก');?></li>
 		<li class="active">จัดการผู้ใช้</li>
 	</ol>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main <?php if(!$this->session->flashdata('noAnim')) echo "animate-fade-up";?>">
 	<div class="page-header">
 		<h1><span class="glyphicon glyphicon-user"></span> จัดการผู้ใช้ <small></small></h1>
 		<p>คุณสามารถจัดการผู้ใช้ทุกกลุ่มได้ เช่น ผู้ดูแล ผู้สอน และนักเรียนนักศึกษา</p>
 	</div>
 <?php
 	if ($this->session->flashdata('msg_info')) {
-		echo '
-		<div class="alert alert-success alert-dismissable">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<strong>เรียบร้อย!</strong> '.$this->session->flashdata('msg_info').'</div>';
+		// echo '
+		// <div class="alert alert-success alert-dismissable">
+		// <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		// <strong>เรียบร้อย!</strong> '.$this->session->flashdata('msg_info').'</div>';
+		echo "
+		<script>
+		Messenger.options = {
+			extraClasses: 'messenger-fixed messenger-on-top',
+			theme: 'bootstrap'
+		}
+		Messenger().post({
+			message: '".$this->session->flashdata('msg_info')."',
+			type: 'info',
+			hideAfter: 7,
+			showCloseButton: true
+		});
+		</script>";
+
 	}
 	if ($this->session->flashdata('msg_error')) {
 		echo '
 		<div class="alert alert-danger alert-dismissable">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		<strong>ผิดพลาด!</strong> '.$this->session->flashdata('msg_error').'</div>';
+		echo "
+		<script>
+		Messenger.options = {
+			extraClasses: 'messenger-fixed messenger-on-top',
+			theme: 'bootstrap'
+		}
+		Messenger().post({
+			message: '".$this->session->flashdata('msg_error')."',
+			type: 'danger',
+			hideAfter: 7,
+			showCloseButton: true
+		});
+		</script>";
 	}
 
 ?>
@@ -34,7 +63,7 @@
 			?>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row <?php if($this->session->flashdata('noAnim')) echo "animate-fade-up";?>">
 		<div class="col-md-12">
 			<?php
 			if (isset($adminlist)) {
@@ -87,7 +116,7 @@
 						<div class="panel-heading">
 							<span>ผู้สอน</span>
 							<div class="panel-btn btn-group pull-right">
-								<?php echo anchor('admin/users/adduser/admin', 'เพิ่ม', 'class="btn btn-sm btn-info"');?>
+								<?php echo anchor('admin/users/adduser/teacher', 'เพิ่ม', 'class="btn btn-sm btn-info"');?>
 								<button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
 									<span class="caret"></span>
 									<span class="sr-only">Toggle Dropdown</span>
@@ -138,7 +167,7 @@
 							<div class="panel-heading">
 								<span>นักเรียน</span>
 								<div class="panel-btn btn-group pull-right">
-									<?php echo anchor('admin/users/adduser/admin', 'เพิ่ม', 'class="btn btn-sm btn-info"');?>
+									<?php echo anchor('admin/users/adduser/student', 'เพิ่ม', 'class="btn btn-sm btn-info"');?>
 									<button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
 										<span class="caret"></span>
 										<span class="sr-only">Toggle Dropdown</span>

@@ -3,7 +3,7 @@ $attrLabel = array(
 	'class' => 'col-sm-3 control-label'
 	);
 
-	?>
+?>
 	<!-- Begin content -->
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<ol class="breadcrumb">
@@ -46,7 +46,7 @@ $attrLabel = array(
 			'role' => 'form',
 			'method' => 'post'
 			);
-		echo form_open('admin/users/adduser/admin', $attr);
+		echo form_open('admin/users/adduser/teacher', $attr);
 		?>
 		<div class="row row-centered">
 			<div class="col-md-8 col-centered">
@@ -157,6 +157,23 @@ $attrLabel = array(
 									'class'=>'form-control',
 									'placeholder'=>'นามสกุล'));
 								echo form_error('surname', '<span class="label label-danger">', '</span>');
+								?>
+							</div>
+						</div>
+						<div class="form-group<?php if(form_error('faculty')) echo ' has-error';?>">
+							<?php 
+							echo form_label('คณะ <span class="text-danger">*</span>', 'faculty', $attrLabel);
+							?>
+							<div class="col-sm-8">
+								<?php
+								echo form_input(array(
+									'id'=>'faculty',
+									'name'=>'faculty',
+									'value'=>set_value('faculty'),
+									'type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>'คณะ'));
+								echo form_error('faculty', '<span class="label label-danger">', '</span>');
 								?>
 							</div>
 						</div>

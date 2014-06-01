@@ -5,19 +5,29 @@
 
 ?>
 <!-- Begin login -->
-<div class="row row-centered">
+<div class="row row-centered animate-fade-up">
 	<div class="col-md-5 col-centered">
-		<div class="panel panel-primary">
+		<div class="panel panel-<?php if(!isset($msg_error)) echo "primary"; else echo "danger";?>">
 			<div class="panel-heading">
 				<h3 class="panel-title"><span class="
 glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Login</h3>
 			</div>
 			<div class="panel-body">
 <?php
-	if ($this->session->flashdata('msg_error')) {
-		echo "<p><font color=red>";
-		echo $this->session->flashdata('msg_error');
-		echo "</font></p>";
+	if (isset($msg_error)) {
+		echo "
+		<script>
+		Messenger.options = {
+			extraClasses: 'messenger-fixed messenger-on-top',
+			theme: 'bootstrap'
+		}
+		Messenger().post({
+			message: '".$msg_error."',
+			type: 'danger',
+			hideAfter: 7,
+			showCloseButton: true
+		});
+		</script>";
 	}
 
 	$attr = array(
@@ -27,7 +37,7 @@ glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Login</h3>
 	);
 	echo form_open('auth/dologin', $attr);
 ?>
-					<div class="form-group">
+					<div class="form-group<?php if(form_error('username')) echo ' has-error';?>">
 <?php 
 	echo form_label('ชื่อผู้ใช้', 'username', $attrLabel);
 ?>
@@ -44,7 +54,7 @@ glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Login</h3>
 ?>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group<?php if(form_error('password')) echo ' has-error';?>">
 <?php 
 	echo form_label('รหัสผ่าน', 'password', $attrLabel);
 ?>

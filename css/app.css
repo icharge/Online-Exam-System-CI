@@ -141,3 +141,126 @@ tr.course {
 .panel>.panel-heading>.panel-btn {
 	margin-top: -6px;
 }
+
+/*
+ * Messenger BOX (Shadow)
+ */
+div.messenger-message {
+	box-shadow: #464646 0px 7px 34px;
+}
+
+/*
+ * Animation
+ */
+.animate-fade-up {
+	-webkit-animation: 0.35s fade-up-enter;
+	-moz-animation: 0.35s fade-up-enter;
+	-o-animation: 0.35s fade-up-enter;
+	animation: 0.35s fade-up-enter;
+}
+@-webkit-keyframes fade-up-enter {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(20px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+@-moz-keyframes fade-up-enter {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(20px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+@-o-keyframes fade-up-enter {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(20px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+@keyframes fade-up-enter {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(20px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+.animate-fade-down {
+	-webkit-animation: 0.35s fade-down-enter;
+	-moz-animation: 0.35s fade-down-enter;
+	-o-animation: 0.35s fade-down-enter;
+	animation: 0.35s fade-down-enter;
+}
+@-webkit-keyframes fade-down-enter {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+@-moz-keyframes fade-down-enter {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+@-o-keyframes fade-down-enter {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+@keyframes fade-down-enter {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+/*
+ * End Animation
+ */
+

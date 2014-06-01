@@ -6,6 +6,7 @@
 		<li<?php echo $this->misc->listActive("log"); ?>><?php echo anchor('admin/log', '<span class="glyphicon glyphicon-list-alt"></span> ประวัติการใช้งาน');?></li>
 	</ul>
 	<ul class="nav nav-sidebar">
+		<li<?php echo $this->misc->listActive("faculty"); ?>><?php echo anchor('admin/faculty', 'จัดการคณะ');?></li>
 		<li<?php echo $this->misc->listActive("courses"); ?>><?php echo anchor('admin/courses', 'จัดการวิชา');?></li>
 		<li<?php echo $this->misc->listActive("users"); ?>><?php echo anchor('admin/users', '<span class="glyphicon glyphicon-user"></span> จัดการผู้ใช้');?></li>
 		<li<?php echo $this->misc->listActive("examswitch"); ?>><?php echo anchor('admin/examswitch', 'เปิดการสอบ');?></li>

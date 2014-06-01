@@ -3,7 +3,7 @@ $attrLabel = array(
 	'class' => 'col-sm-3 control-label'
 	);
 
-	?>
+?>
 	<!-- Begin content -->
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<ol class="breadcrumb">
@@ -46,7 +46,7 @@ $attrLabel = array(
 			'role' => 'form',
 			'method' => 'post'
 			);
-		echo form_open('admin/users/adduser/admin', $attr);
+		echo form_open('admin/users/adduser/student', $attr);
 		?>
 		<div class="row row-centered">
 			<div class="col-md-8 col-centered">
@@ -157,6 +157,90 @@ $attrLabel = array(
 									'class'=>'form-control',
 									'placeholder'=>'นามสกุล'));
 								echo form_error('surname', '<span class="label label-danger">', '</span>');
+								?>
+							</div>
+						</div>
+						<div class="form-group<?php if(form_error('birth')) echo ' has-error';?>">
+							<?php 
+							echo form_label('วันเกิด <span class="text-danger">*</span>', 'birth', $attrLabel);
+							?>
+							<div class="col-sm-8">
+								<?php
+								echo form_input(array(
+									'id'=>'birth',
+									'name'=>'birth',
+									'value'=>set_value('birth'),
+									'type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>'นามสกุล'));
+								echo form_error('birth', '<span class="label label-danger">', '</span>');
+								?>
+							</div>
+						</div>
+						<div class="form-group<?php if(form_error('gender')) echo ' has-error';?>">
+							<?php 
+							echo form_label('เพศ <span class="text-danger">*</span>', 'gender', $attrLabel);
+							?>
+							<div class="col-sm-8">
+								<div class="">
+									<label class="radio-inline">
+										<?php echo form_radio('gender', 'male', false)." ชาย";?>
+									</label>
+									<label class="radio-inline">
+										<?php echo form_radio('gender', 'female', false)." หญิง";?>
+									</label>
+								</div>
+								<?php echo form_error('gender', '<span class="label label-danger">', '</span>'); ?>
+							</div>
+						</div>
+						<div class="form-group<?php if(form_error('year')) echo ' has-error';?>">
+							<?php 
+							echo form_label('ปีการศึกษา <span class="text-danger">*</span>', 'year', $attrLabel);
+							?>
+							<div class="col-sm-8">
+								<?php
+								echo form_input(array(
+									'id'=>'year',
+									'name'=>'year',
+									'value'=>set_value('year'),
+									'type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>'ปีการศึกษา'));
+								echo form_error('year', '<span class="label label-danger">', '</span>');
+								?>
+							</div>
+						</div>
+						<div class="form-group<?php if(form_error('faculty')) echo ' has-error';?>">
+							<?php 
+							echo form_label('คณะ <span class="text-danger">*</span>', 'faculty', $attrLabel);
+							?>
+							<div class="col-sm-8">
+								<?php
+								echo form_input(array(
+									'id'=>'faculty',
+									'name'=>'faculty',
+									'value'=>set_value('faculty'),
+									'type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>'คณะ'));
+								echo form_error('faculty', '<span class="label label-danger">', '</span>');
+								?>
+							</div>
+						</div>
+						<div class="form-group<?php if(form_error('branch')) echo ' has-error';?>">
+							<?php 
+							echo form_label('สาขา <span class="text-danger">*</span>', 'branch', $attrLabel);
+							?>
+							<div class="col-sm-8">
+								<?php
+								echo form_input(array(
+									'id'=>'branch',
+									'name'=>'branch',
+									'value'=>set_value('branch'),
+									'type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>'สาขา'));
+								echo form_error('branch', '<span class="label label-danger">', '</span>');
 								?>
 							</div>
 						</div>

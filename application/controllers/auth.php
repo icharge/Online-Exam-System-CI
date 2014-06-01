@@ -32,9 +32,10 @@ class Auth extends CI_Controller {
 		$this->load->view('frontend/t_beginbody_view');
 
 		# Login Process
-		$this->form_validation->set_rules('username', 'Username', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_error_delimiters('<span style="color: red">', '</span>');
+		$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
+		$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
+		$this->form_validation->set_message('required', 'คุณต้องกรอก %s');
+		// $this->form_validation->set_error_delimiters('<span style="color: red">', '</span>');
 		if ($this->input->post('submit'))
 		{
 			$username = $this->input->post('username');
@@ -95,17 +96,18 @@ class Auth extends CI_Controller {
 						break;
 
 					case 'notfound':
-						$this->session->set_flashdata('msg_error', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
-						$this->load->view('frontend/login_view');
+						$data['msg_error'] = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
+						// $this->session->set_flashdata('msg_error', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+						$this->load->view('frontend/login_view', $data);
 						break;
 
 					default:
-						$this->session->set_flashdata('msg_error', 'Error');
-						$this->load->view('frontend/login_view');
+						$data['msg_error'] = 'Error';
+						$this->load->view('frontend/login_view', $data);
 				}
 			} else {
-				$this->session->set_flashdata('msg_error', 'กรุณากรอกข้อมูลให้ครบ');
-				$this->load->view('frontend/login_view');
+				$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
+				$this->load->view('frontend/login_view', $data);
 			}
 		} else {
 			redirect('auth/login');
