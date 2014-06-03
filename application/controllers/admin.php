@@ -167,9 +167,10 @@ class Admin extends CI_Controller {
 							$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
 							$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
 							$this->form_validation->set_rules('passwordconfirm', 'ยืนยันรหัสผ่าน', 'required');
+							$this->form_validation->set_rules('title', 'คำนำหน้า', 'required');
 							$this->form_validation->set_rules('fname', 'ชื่อ', 'required');
 							$this->form_validation->set_rules('surname', 'นามสกุล', 'required');
-							$this->form_validation->set_rules('birth', 'วันเกิด', 'required');
+							// $this->form_validation->set_rules('birth', 'วันเกิด', 'required');
 							$this->form_validation->set_rules('gender', 'เพศ', 'required');
 							$this->form_validation->set_rules('year', 'ปีการศึกษา', 'required');
 							$this->form_validation->set_rules('faculty', 'คณะ', 'required');
@@ -182,10 +183,11 @@ class Admin extends CI_Controller {
 								$userData['password'] = md5($this->input->post('password'));
 								$userData['role'] = "student";
 								$studentData['stu_id'] = $this->input->post('username');
+								$studentData['title'] = $this->input->post('title');
 								$studentData['name'] = $this->input->post('fname');
 								$studentData['lname'] = $this->input->post('surname');
 								$studentData['email'] = $this->input->post('email');
-								$studentData['birth'] = $this->input->post('birth');
+								// $studentData['birth'] = $this->input->post('birth');
 								$studentData['gender'] = $this->input->post('gender');
 								$studentData['year'] = $this->input->post('year');
 								$studentData['faculty'] = $this->input->post('faculty');

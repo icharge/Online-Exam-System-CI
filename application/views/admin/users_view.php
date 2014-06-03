@@ -173,6 +173,7 @@
 										<span class="sr-only">Toggle Dropdown</span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
+										<li><?php echo anchor('admin/importstudent', 'นำเข้า');?></li>
 										<li><?php echo anchor('admin/users/edituser', 'แก้ไข');?></li>
 										<li class="divider"></li>
 										<li><?php echo anchor('admin/users/deluser', 'ลบ');?></li>

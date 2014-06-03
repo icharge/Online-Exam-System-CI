@@ -141,8 +141,7 @@ class Users_model extends CI_Model {
 			case 'student':
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
-				'birth', 'gender', 'year', 'faculty', 'branch',
-				'status'
+				'gender', 'year', 'faculty', 'branch', 'status'
 				);
 			$cause = array('role' => 'student');
 			$query = $this->db
