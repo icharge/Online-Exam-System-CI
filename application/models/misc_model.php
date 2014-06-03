@@ -39,6 +39,25 @@ class Misc_model extends CI_Model {
 		}
 	}
 
+	function getRoleTextTh($strRole)
+	{
+		switch ($strRole) {
+			case 'admin':
+				return "ผู้ดูแลระบบ";
+				break;
+			case 'teacher':
+				return "ผู้สอน";
+				break;
+			case 'student':
+				return "ผู้เรียน";
+				break;
+			
+			default:
+				return "ไม่มี";
+				break;
+		}
+	}
+
 }
 
 /* End of file misc.php */
