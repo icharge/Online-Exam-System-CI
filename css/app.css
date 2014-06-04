@@ -141,6 +141,13 @@ tr.course {
 .panel>.panel-heading>.panel-btn {
 	margin-top: -6px;
 }
+.panel>.panel-body.search {
+	padding: 4px 15px;
+}
+
+.recperpage {
+	margin-top: 2px;
+}
 
 /*
  * Messenger BOX (Shadow)
