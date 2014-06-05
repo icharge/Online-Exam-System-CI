@@ -61,7 +61,7 @@ $attrLabel = array(
 					</div>
 					<div class="panel-body">
 						<div class="form-group<?php if(form_error('username')) echo ' has-error';?>">
-							<?php 
+							<?php
 							echo form_label('ชื่อผู้ใช้ <span class="text-danger">*</span>', 'username', $attrLabel);
 							?>
 							<div class="col-sm-8">

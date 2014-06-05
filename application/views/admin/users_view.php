@@ -86,24 +86,42 @@ if ($this->session->flashdata('msg_error')) {
 				</div>
 				<div class="panel-body search">
 					<div class="row">
+			<?php
+				$attr = array(
+				'class' => '',
+				'role' => 'search',
+				'method' => 'get'
+				);
+			echo form_open('admin/users/viewgroup/admin', $attr);
+			?>
 						<div class="col-xs-6">
 							<div class="recperpage">
 								<label>แสดงรายการ
-									<select size="1" name="perpage">
-										<option value="10" selected="selected">10</option>
-										<option value="25">25</option><option value="50">50</option>
-										<option value="100">100</option>
-									</select> ต่อหน้า
+							<?php
+								$attr_pp = array(
+									'10' => '10',
+									'25' => '25',
+									'50' => '50',
+									'100' => '100'
+								);
+								if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
+								else $perpage = '25';
+								//echo $perpage;
+								echo form_dropdown('perpage', $attr_pp, $perpage);
+
+							?> ต่อหน้า
+
 								</label>
 							</div>
 						</div>
 						<div class="col-xs-6 text-right">
 							<div class="dataTables_filter" id="example1_filter">
 								<label>ค้นหา: 
-									<input type="text" name="keyword">
+									<input type="text" name="q">
 								</label>
 							</div>
 						</div>
+						<?php form_close(); ?>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered">
