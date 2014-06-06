@@ -258,11 +258,11 @@ class Admin extends CI_Controller {
 	{
 		$data['group'] = $arg;
 		if ($arg=='all' || $arg=='admin')
-			$data['adminlist'] = $this->Users->getUsersByGroup('admin');
+			$data['adminlist'] = $this->Users->getUsersByGroup('admin',$this->input->get('q'));
 		if ($arg=='all' || $arg=='teacher')
-			$data['teacherlist'] = $this->Users->getUsersByGroup('teacher');
+			$data['teacherlist'] = $this->Users->getUsersByGroup('teacher',$this->input->get('q'));
 		if ($arg=='all' || $arg=='student')
-			$data['studentlist'] = $this->Users->getUsersByGroup('student');
+			$data['studentlist'] = $this->Users->getUsersByGroup('student',$this->input->get('q'));
 		$this->load->view('admin/users_view',$data);
 	}
 

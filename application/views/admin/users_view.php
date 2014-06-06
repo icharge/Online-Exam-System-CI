@@ -88,6 +88,7 @@ if ($this->session->flashdata('msg_error')) {
 					<div class="row">
 			<?php
 				$attr = array(
+				'name' => 'searchadmin',
 				'class' => '',
 				'role' => 'search',
 				'method' => 'get'
@@ -107,7 +108,10 @@ if ($this->session->flashdata('msg_error')) {
 								if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
 								else $perpage = '25';
 								//echo $perpage;
-								echo form_dropdown('perpage', $attr_pp, $perpage);
+								echo form_dropdown('perpage', 
+									$attr_pp, 
+									$perpage, 
+									'onchange="submitFrm(document.forms.searchadmin)"');
 
 							?> ต่อหน้า
 
@@ -117,11 +121,21 @@ if ($this->session->flashdata('msg_error')) {
 						<div class="col-xs-6 text-right">
 							<div class="dataTables_filter" id="example1_filter">
 								<label>ค้นหา: 
-									<input type="text" name="q">
+									<!-- <input type="text" name="q"> -->
+						<?php
+							echo form_input(array(
+								'id'=>'searchtxt',
+								'name'=>'q',
+								'type'=>'text',
+								'class'=>'',
+								'value'=>$this->input->get('q'),
+								'placeholder'=>''
+							));
+						?>
 								</label>
 							</div>
 						</div>
-						<?php form_close(); ?>
+						<?php echo form_close(); ?>
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered">
@@ -168,6 +182,59 @@ if ($this->session->flashdata('msg_error')) {
 							</ul>
 						</div>
 					</div>
+					<div class="panel-body search">
+					<div class="row">
+			<?php
+				$attr = array(
+					'name' => 'searchteacher',
+					'class' => '',
+					'role' => 'search',
+					'method' => 'get'
+				);
+			echo form_open('admin/users/viewgroup/teacher', $attr);
+			?>
+						<div class="col-xs-6">
+							<div class="recperpage">
+								<label>แสดงรายการ
+							<?php
+								$attr_pp = array(
+									'10' => '10',
+									'25' => '25',
+									'50' => '50',
+									'100' => '100'
+								);
+								if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
+								else $perpage = '25';
+								//echo $perpage;
+									echo form_dropdown('perpage', 
+									$attr_pp, 
+									$perpage, 
+									'onchange="submitFrm(document.forms.searchteacher)"');
+							?> ต่อหน้า
+
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6 text-right">
+							<div class="dataTables_filter" id="example1_filter">
+								<label>ค้นหา: 
+									<!-- <input type="text" name="q"> -->
+						<?php
+							echo form_input(array(
+								'id'=>'searchtxt',
+								'name'=>'q',
+								'type'=>'text',
+								'class'=>'',
+								'value'=>$this->input->get('q'),
+								'placeholder'=>''
+							));
+						?>
+								</label>
+							</div>
+						</div>
+						<?php echo form_close(); ?>
+					</div>
+				</div>
 					<table class="table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
@@ -220,6 +287,59 @@ if ($this->session->flashdata('msg_error')) {
 								</ul>
 							</div>
 						</div>
+						<div class="panel-body search">
+					<div class="row">
+			<?php
+				$attr = array(
+					'name' => 'searchstudent',
+					'class' => '',
+					'role' => 'search',
+					'method' => 'get'
+				);
+			echo form_open('admin/users/viewgroup/student', $attr);
+			?>
+						<div class="col-xs-6">
+							<div class="recperpage">
+								<label>แสดงรายการ
+							<?php
+								$attr_pp = array(
+									'10' => '10',
+									'25' => '25',
+									'50' => '50',
+									'100' => '100'
+								);
+								if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
+								else $perpage = '25';
+								//echo $perpage;
+								echo form_dropdown('perpage', 
+									$attr_pp, 
+									$perpage, 
+									'onchange="submitFrm(document.forms.searchstudent)"');
+							?> ต่อหน้า
+
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6 text-right">
+							<div class="dataTables_filter" id="example1_filter">
+								<label>ค้นหา: 
+									<!-- <input type="text" name="q"> -->
+						<?php
+							echo form_input(array(
+								'id'=>'searchtxt',
+								'name'=>'q',
+								'type'=>'text',
+								'class'=>'',
+								'value'=>$this->input->get('q'),
+								'placeholder'=>''
+							));
+						?>
+								</label>
+							</div>
+						</div>
+						<?php echo form_close(); ?>
+					</div>
+				</div>
 						<table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
@@ -260,4 +380,8 @@ if ($this->session->flashdata('msg_error')) {
 				</div>
 			</div>
 		</div>
+		<script>
+		function submitFrm(frm) {
+			frm.submit();
+		}</script>
 <!-- End content -->

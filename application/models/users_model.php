@@ -109,7 +109,7 @@ class Users_model extends CI_Model {
 		return $this->session->userdata('logged') == true ? true : false;
 	}
 
-	function getUsersByGroup($group)
+	function getUsersByGroup($group, $keyword='')
 	{
 		switch ($group) {
 			case 'admin':
@@ -119,8 +119,10 @@ class Users_model extends CI_Model {
 			$cause = array('role' => 'admin');
 			$query = $this->db
 				->select($fields)
+				->like("CONCAT(username,status)",$keyword,'both')
 				->get_where('users',$cause)
 				->result_array();
+			//die($this->db->last_query());
 			return $query;
 			break;
 			
@@ -133,6 +135,7 @@ class Users_model extends CI_Model {
 			$query = $this->db
 				->select($fields)
 				->join('teachers', 'teachers.id = users.id', 'LEFT')
+				->like("CONCAT(username,name,lname,faculty,status)",$keyword,'both')
 				->get_where('users',$cause)
 				->result_array();
 			return $query;
@@ -147,6 +150,7 @@ class Users_model extends CI_Model {
 			$query = $this->db
 				->select($fields)
 				->join('students', 'students.id = users.id', 'LEFT')
+				->like("CONCAT(username,name,lname,gender,year,faculty,branch,status)",$keyword,'both')
 				->get_where('users',$cause)
 				->result_array();
 			return $query;
