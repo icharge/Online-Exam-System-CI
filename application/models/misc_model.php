@@ -1,3 +1,4 @@
+
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Misc_model extends CI_Model {
@@ -7,7 +8,6 @@ class Misc_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		
 	}
 
 	function getClassName()
@@ -29,6 +29,17 @@ class Misc_model extends CI_Model {
 			return "";
 		}
 	}
+
+	function listCActive($page='')
+	{
+		if ($page == $this->getClassName())
+		{
+			return ' class="active"';
+		} else {
+			return "";
+		}
+	}
+
 	function btnActive($compare1,$compare2,$classAttr='btn btn-default')
 	{
 		if ($compare1 == $compare2)
@@ -55,6 +66,18 @@ class Misc_model extends CI_Model {
 			default:
 				return "ไม่มี";
 				break;
+		}
+	}
+
+	function getShortText($str,$len=100)
+	{
+		if (strlen($str) > $len)
+		{
+			return mb_substr($str, 0, $len, 'UTF-8').' ...';
+		}
+		else
+		{
+			return $str;
 		}
 	}
 

@@ -223,7 +223,7 @@ class Admin extends CI_Controller {
 							break;
 					}
 				} else {
-					# View data
+					# Add data
 					switch ($arg1) {
 						case 'admin':
 							$data['ptitle'] = "ผู้ดูแลระบบ";

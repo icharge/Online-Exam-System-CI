@@ -80,7 +80,7 @@ if ($this->session->flashdata('msg_error')) {
 						<ul class="dropdown-menu" role="menu">
 							<li><?php echo anchor('admin/users/edituser', 'แก้ไข');?></li>
 							<li class="divider"></li>
-							<li><?php echo anchor('admin/users/deluser', 'ลบ');?></li>
+							<!-- <li><?php echo anchor('admin/users/deluser', 'ลบ');?></li> -->
 						</ul>
 					</div>
 				</div>

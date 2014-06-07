@@ -38,6 +38,7 @@
 |
 */
 
+$route['admin/subjects'] = 'admin1/subjects';
 $route['default_controller'] = "main";
 $route['404_override'] = '';
 
