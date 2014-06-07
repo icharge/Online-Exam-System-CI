@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2014 at 04:28 AM
+-- Generation Time: Jun 07, 2014 at 01:10 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -34,17 +34,32 @@ CREATE TABLE IF NOT EXISTS `Admins` (
   `email` varchar(200) DEFAULT NULL,
   `pic` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `Admins`
 --
 
 INSERT INTO `Admins` (`admin_id`, `id`, `name`, `lname`, `email`, `pic`) VALUES
-(1, 1, 'นายเฝ้าคอย', 'รักษาการณ์', NULL, NULL),
+(1, 1, 'สตีฟ', 'แอปเปิล', NULL, NULL),
 (2, 5, 'qqq', 'eeee', NULL, NULL),
 (3, 6, 'นายโปรแกรม', 'บัคน้อย', NULL, NULL),
-(4, 7, 'amino', 'okok', NULL, NULL);
+(4, 7, 'amino', 'okok', NULL, NULL),
+(5, 23, 'วรพงษ์', 'คงประเสริฐ', 'penguin_poat@hotmail.com', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Branch`
+--
+
+CREATE TABLE IF NOT EXISTS `Branch` (
+  `branch_id` int(4) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `description` text,
+  `fac_id` int(4) NOT NULL,
+  PRIMARY KEY (`branch_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -66,8 +81,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('843d8e7cb5eb220ee8bd77e25e466236', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) App', 1401644686, 'a:8:{s:9:"user_data";s:0:"";s:8:"username";s:5:"admin";s:8:"fullname";s:61:"นายเฝ้าคอย รักษาการณ์";s:5:"fname";s:30:"นายเฝ้าคอย";s:5:"lname";s:30:"รักษาการณ์";s:4:"role";s:5:"admin";s:6:"logged";b:1;s:16:"flash:new:noAnim";b:1;}'),
-('da986286983ec8f135e33c1244d3b3bd', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) App', 1401633141, 'a:8:{s:9:"user_data";s:0:"";s:8:"username";s:5:"admin";s:8:"fullname";s:61:"นายเฝ้าคอย รักษาการณ์";s:5:"fname";s:30:"นายเฝ้าคอย";s:5:"lname";s:30:"รักษาการณ์";s:4:"role";s:5:"admin";s:6:"logged";b:1;s:16:"flash:new:noAnim";b:1;}');
+('13c7d31963a5a3fe07f0b5e95bfe21b2', '192.168.1.3', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1402067855, ''),
+('1c5f21a45e95b405dc16c37b8cbfea39', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) App', 1402067815, 'a:7:{s:9:"user_data";s:0:"";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -80,12 +95,10 @@ CREATE TABLE IF NOT EXISTS `Course` (
   `year` varchar(4) NOT NULL DEFAULT '',
   `tea_id` int(10) DEFAULT NULL,
   `pwd` varchar(20) DEFAULT NULL,
-  `name` varchar(60) NOT NULL,
-  `shortname` varchar(15) NOT NULL,
-  `description` text,
   `startdate` date DEFAULT NULL,
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `subject_id` int(5) NOT NULL,
   PRIMARY KEY (`course_id`,`year`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -93,9 +106,9 @@ CREATE TABLE IF NOT EXISTS `Course` (
 -- Dumping data for table `Course`
 --
 
-INSERT INTO `Course` (`course_id`, `year`, `tea_id`, `pwd`, `name`, `shortname`, `description`, `startdate`, `visible`, `enabled`) VALUES
-('291311', '2014', NULL, NULL, 'Object-Oriented Programming', 'OOP', 'ความเป็นมาของการเขียนโปรแกรมเชิงวัตถุ แนวคิดโปรแกรมเชิงวัตถุ คลาส ออปเจก และองค์ประกอบต่างๆ ของออปเจก วงจรชีวิตวัตถุ การสืบทอดคุณสมบัติ โพลีมอร์ฟิซึม การนำคลาสมาใช้งาน เหตุการณ์ต่างๆ ที่ใช้กับวัตถุ การใช้เอพีไอ การเชื่อมต่อฐานข้อมูล การจัดการความผิดปกติโดย Exception ภาคปฏิบัติใช้โปรแกรมเครื่องมือช่วยพัฒนาเพื่อทดลองเขียนโปรแกรมเชิงวัตถุประยุกต์ใช้ในงานธุรกิจ ด้วยภาษาที่กำหนด', '2014-04-26', 1, 1),
-('291436', '2014', NULL, '12345', 'IT Consultancy Method', 'ITCM', 'เครือข่ายทางธุรกิจขนาดเล็ก รวมถึงเครือข่ายไร้สาย การติดตั้งเราเตอร์และไฟร์วอล การสร้างเว็บไซต์ พาณิชย์อิเล็กทรอนิกส์ ความปลอดภัยของข้อมูล รวมถึงวิธีการสำรองข้อมูลและการกู้คืนข้อมูลที่เสียหาย ซอฟต์แวร์ต่างๆ เช่น โปรแกรมฐานข้อมูลและโปรแกรมการจัดการความสัมพันธ์กับลูกค้า เทคนิคทางธุรกิจที่เกี่ยวข้องกับการให้คำปรึกษาทางด้านธุรกิจ และลูกค้าสัมพันธ์ รวมไปถึง กฎหมายและหลักจริยธรรมที่เกี่ยวข้องกับการให้คำปรึกษาด้านระบบสารสนเทศ', '2014-05-04', 1, 1);
+INSERT INTO `Course` (`course_id`, `year`, `tea_id`, `pwd`, `startdate`, `visible`, `enabled`, `subject_id`) VALUES
+('291311', '2014', NULL, '12345', '2014-04-26', 1, 1, 1),
+('291436', '2014', NULL, '12345', '2014-05-04', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -106,7 +119,7 @@ INSERT INTO `Course` (`course_id`, `year`, `tea_id`, `pwd`, `name`, `shortname`,
 CREATE TABLE IF NOT EXISTS `Faculty` (
   `fac_id` int(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
-  `desc` text,
+  `description` text,
   PRIMARY KEY (`fac_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -119,13 +132,15 @@ CREATE TABLE IF NOT EXISTS `Faculty` (
 CREATE TABLE IF NOT EXISTS `Students` (
   `stu_id` varchar(10) NOT NULL,
   `id` int(8) NOT NULL,
+  `title` varchar(20) NOT NULL,
   `name` varchar(60) NOT NULL,
   `lname` varchar(60) NOT NULL,
   `birth` date DEFAULT NULL,
   `gender` enum('male','female') NOT NULL,
+  `idcard` varchar(13) DEFAULT NULL,
   `year` int(4) NOT NULL,
-  `faculty` varchar(50) NOT NULL,
-  `branch` varchar(50) NOT NULL,
+  `fac_id` varchar(50) NOT NULL,
+  `branch_id` varchar(50) NOT NULL,
   `email` varchar(200) DEFAULT NULL,
   `pic` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`stu_id`)
@@ -135,10 +150,23 @@ CREATE TABLE IF NOT EXISTS `Students` (
 -- Dumping data for table `Students`
 --
 
-INSERT INTO `Students` (`stu_id`, `id`, `name`, `lname`, `birth`, `gender`, `year`, `faculty`, `branch`, `email`, `pic`) VALUES
-('', 9, 'ธนภาค', 'จิระวิทิตชัย', '1992-10-18', 'male', 54, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', 'thanapak_09@hotmail.com', NULL),
-('54310104', 2, 'นรภัทร', 'นิ่มมณี', '1992-09-14', 'male', 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
-('54310409', 9, 'วรพงษ์', 'คงประเสริฐ', '1992-07-27', 'male', 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', 'penguin_poat@hotmail.com', NULL);
+INSERT INTO `Students` (`stu_id`, `id`, `title`, `name`, `lname`, `birth`, `gender`, `idcard`, `year`, `fac_id`, `branch_id`, `email`, `pic`) VALUES
+('54310104', 2, '', 'นรภัทร', 'นิ่มมณี', '1992-09-14', 'male', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
+('54310409', 9, '', 'วรพงษ์', 'คงประเสริฐ', '1992-07-27', 'male', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', 'penguin_poat@hotmail.com', NULL),
+('54310854', 9, '', 'ธนภาค', 'จิระวิทิตชัย', '1992-10-18', 'male', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', 'thanapak_09@hotmail.com', NULL),
+('57700188', 10, 'รับตรง', 'ธรลักษณ์', 'แก้วดี', NULL, 'male', '5770000000188', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('57700189', 11, 'รับตรง', 'นามเหมือน', 'แก้วทอง', NULL, 'male', '5770000000189', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('57700190', 12, 'รับตรง', 'นามไม่เหมือน', 'แก้วเงิน', NULL, 'male', '5770000000190', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('57700191', 13, 'รับตรง', 'สายชลดี', 'ภาพุ', NULL, 'male', '5770000000191', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('57700192', 14, 'รับตรง', 'พา', 'หากเหมือน', NULL, 'male', '5770000000192', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('57700193', 15, 'รับตรง', 'ขำ', 'ไม่เหมือน', NULL, 'male', '5770000000193', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('57700194', 16, 'รับตรง', 'ชายกลาง', 'ลาภผล', NULL, 'male', '5770000000194', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('57700195', 17, 'รับตรง', 'หญิง', 'ประสบ', NULL, 'male', '5770000000195', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('57700196', 18, 'รับตรง', 'มีมาก', 'เชิงชาย', NULL, 'male', '5770000000196', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('57700197', 19, 'รับตรง', 'ขม', 'สามผล', NULL, 'male', '5770000000197', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
+('57700198', 20, 'รับตรง', 'วลัยพร', 'นามมี', NULL, 'male', '5770000000198', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
+('57700199', 21, 'รับตรง', 'วาสนา', 'สวาดี', NULL, 'male', '5770000000199', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
+('57700200', 22, 'รับตรง', 'มั่นคง', 'กิมจอง', NULL, 'male', '5770000000200', 0, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -162,6 +190,29 @@ INSERT INTO `Student_Enroll_Detail` (`stu_id`, `course_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Subjects`
+--
+
+CREATE TABLE IF NOT EXISTS `Subjects` (
+  `subject_id` int(5) NOT NULL AUTO_INCREMENT,
+  `code` varchar(10) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `shortname` varchar(15) NOT NULL,
+  `description` text,
+  PRIMARY KEY (`subject_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `Subjects`
+--
+
+INSERT INTO `Subjects` (`subject_id`, `code`, `name`, `shortname`, `description`) VALUES
+(1, '291311', 'IT Consultancy Method', 'ITCM', 'เครือข่ายทางธุรกิจขนาดเล็ก รวมถึงเครือข่ายไร้สาย การติดตั้งเราเตอร์และไฟร์วอล การสร้างเว็บไซต์ พาณิชย์อิเล็กทรอนิกส์ ความปลอดภัยของข้อมูล รวมถึงวิธีการสำรองข้อมูลและการกู้คืนข้อมูลที่เสียหาย ซอฟต์แวร์ต่างๆ เช่น โปรแกรมฐานข้อมูลและโปรแกรมการจัดการความสัมพันธ์กับลูกค้า เทคนิคทางธุรกิจที่เกี่ยวข้องกับการให้คำปรึกษาทางด้านธุรกิจ และลูกค้าสัมพันธ์ รวมไปถึง กฎหมายและหลักจริยธรรมที่เกี่ยวข้องกับการให้คำปรึกษาด้านระบบสารสนเทศ'),
+(2, '291436', 'Object-Oriented Programming', 'OOP', 'ความเป็นมาของการเขียนโปรแกรมเชิงวัตถุ แนวคิดโปรแกรมเชิงวัตถุ คลาส ออปเจก และองค์ประกอบต่างๆ ของออปเจก วงจรชีวิตวัตถุ การสืบทอดคุณสมบัติ โพลีมอร์ฟิซึม การนำคลาสมาใช้งาน เหตุการณ์ต่างๆ ที่ใช้กับวัตถุ การใช้เอพีไอ การเชื่อมต่อฐานข้อมูล การจัดการความผิดปกติโดย Exception ภาคปฏิบัติใช้โปรแกรมเครื่องมือช่วยพัฒนาเพื่อทดลองเขียนโปรแกรมเชิงวัตถุประยุกต์ใช้ในงานธุรกิจ ด้วยภาษาที่กำหนด');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Teachers`
 --
 
@@ -170,20 +221,21 @@ CREATE TABLE IF NOT EXISTS `Teachers` (
   `id` int(8) NOT NULL,
   `name` varchar(60) NOT NULL,
   `lname` varchar(60) NOT NULL,
-  `faculty` varchar(50) NOT NULL,
+  `fac_id` varchar(50) NOT NULL,
   `email` varchar(200) DEFAULT NULL,
   `pic` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`tea_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `Teachers`
 --
 
-INSERT INTO `Teachers` (`tea_id`, `id`, `name`, `lname`, `faculty`, `email`, `pic`) VALUES
+INSERT INTO `Teachers` (`tea_id`, `id`, `name`, `lname`, `fac_id`, `email`, `pic`) VALUES
 (1, 4, 'ดร.สมบัติ', 'ฝอยทอง', 'วิทยาศาสตร์และศิลปศาสตร์', NULL, NULL),
 (2, 3, 'อ.อุไรวรรณ', 'บัวตูม', 'วิทยาศาสตร์และศิลปศาสตร์', NULL, NULL),
-(3, 8, 'อ.มหาลัย', 'ดีสุดล่า', 'วิทยาศาสตร์และศิลปศาสตร์', '', NULL);
+(3, 8, 'อ.มหาลัย', 'ดีสุดล่า', 'วิทยาศาสตร์และศิลปศาสตร์', '', NULL),
+(4, 9, 'อ.อรวรรณ', 'จิตะกาญจน์', 'วิทยาศาสตร์และศิลปศาสตร์', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -218,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `status` varchar(10) NOT NULL DEFAULT 'active',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `Users`
@@ -233,7 +285,21 @@ INSERT INTO `Users` (`id`, `username`, `password`, `role`, `status`) VALUES
 (6, 'admin2', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 'active'),
 (7, 'admin3', 'b73fdaa1fb7669da760b49600c45d9be', 'admin', 'active'),
 (8, 'teacher', '81dc9bdb52d04dc20036dbd8313ed055', 'teacher', 'active'),
-(9, '54310409', '24acdc4c49134bf71a9a05d1092bc4b7', 'student', 'active');
+(9, 'orawan', '81dc9bdb52d04dc20036dbd8313ed055', 'teacher', 'active'),
+(10, '57700188', '65350653c9baf66a82bd3eff3719e59c', 'student', 'active'),
+(11, '57700189', '0d4a6549dcb0ee35ecb006d7f88a8b2d', 'student', 'active'),
+(12, '57700190', '950e657b21be908c22477b92a55b362d', 'student', 'active'),
+(13, '57700191', '281c939e1a1effb80020d274e3081c5c', 'student', 'active'),
+(14, '57700192', 'ca2ce83788f3b73b90438e3de06897a2', 'student', 'active'),
+(15, '57700193', '7a727f46360a98be4658156ace52d893', 'student', 'active'),
+(16, '57700194', '3d9386dd7bc38e0420fd406f260e62aa', 'student', 'active'),
+(17, '57700195', 'e26414761bb8fc0b74b0c1c423bcfd87', 'student', 'active'),
+(18, '57700196', '6bf3de8a868cddc20513157179248624', 'student', 'active'),
+(19, '57700197', 'add7099ea46b393dbcea34a0d59b3826', 'student', 'active'),
+(20, '57700198', 'e597b2bc6e556a570aa57dc8c9504341', 'student', 'active'),
+(21, '57700199', 'b2e894fca115093e29131568c984a574', 'student', 'active'),
+(22, '57700200', '9a16c63a88acdda4057bd1516ace2d4f', 'student', 'active'),
+(23, 'post', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 'active');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

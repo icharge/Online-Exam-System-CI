@@ -255,7 +255,7 @@ if ($this->session->flashdata('msg_error')) {
 								<td><span class=\"label label-default\">*********</span></td>
 								<td>$item[name]</td>
 								<td>$item[lname]</td>
-								<td>$item[faculty]</td>
+								<td>$item[fac_id]</td>
 								<td>$item[status]</td>
 								</tr>
 								";
@@ -364,8 +364,8 @@ if ($this->session->flashdata('msg_error')) {
 									<td>";
 									echo ($item['gender']=="male")?"ชาย":"หญิง";
 									echo "</td>
-									<td>$item[faculty]</td>
-									<td>$item[branch]</td>
+									<td>$item[fac_id]</td>
+									<td>$item[branch_id]</td>
 									<td>$item[year]</td>
 									<td>$item[status]</td>
 									</tr>

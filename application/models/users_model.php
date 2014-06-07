@@ -54,7 +54,7 @@ class Users_model extends CI_Model {
 			case 'teacher':
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
-				'faculty'
+				'fac_id'
 				);
 			$cause = array('username' => $username);
 			$query = $this->db
@@ -69,7 +69,7 @@ class Users_model extends CI_Model {
 			case 'student':
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
-				'birth', 'gender', 'year', 'faculty', 'branch'
+				'birth', 'gender', 'year', 'fac_id', 'branch_id'
 				);
 			$cause = array('username' => $username);
 			$query = $this->db
@@ -129,13 +129,13 @@ class Users_model extends CI_Model {
 			case 'teacher':
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
-				'faculty', 'status'
+				'fac_id', 'status'
 				);
 			$cause = array('role' => 'teacher');
 			$query = $this->db
 				->select($fields)
 				->join('teachers', 'teachers.id = users.id', 'LEFT')
-				->like("CONCAT(username,name,lname,faculty,status)",$keyword,'both')
+				->like("CONCAT(username,name,lname,fac_id,status)",$keyword,'both')
 				->get_where('users',$cause)
 				->result_array();
 			return $query;
@@ -144,13 +144,13 @@ class Users_model extends CI_Model {
 			case 'student':
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
-				'gender', 'year', 'faculty', 'branch', 'status'
+				'gender', 'year', 'fac_id', 'branch_id', 'status'
 				);
 			$cause = array('role' => 'student');
 			$query = $this->db
 				->select($fields)
 				->join('students', 'students.id = users.id', 'LEFT')
-				->like("CONCAT(username,name,lname,gender,year,faculty,branch,status)",$keyword,'both')
+				->like("CONCAT(username,name,lname,gender,year,fac_id,branch_id,status)",$keyword,'both')
 				->get_where('users',$cause)
 				->result_array();
 			return $query;
