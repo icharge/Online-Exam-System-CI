@@ -47,7 +47,7 @@ class Auth extends CI_Controller {
 				{
 					case 'admin':
 						// Admin table ??
-						$userinfo = $this->Users->_getUserInfo($username, $check)[0];
+						$userinfo = $this->Users->_getUserInfo($username, $check);
 						$data = array(
 							'username' => $username,
 							'fullname' => $userinfo['name']." ".$userinfo['lname'],
@@ -61,7 +61,7 @@ class Auth extends CI_Controller {
 						break;
 					
 					case 'teacher':
-						$userinfo = $this->Users->_getUserInfo($username, $check)[0];
+						$userinfo = $this->Users->_getUserInfo($username, $check);
 						$data = array(
 							'id' => $userinfo['id'],
 							'username' => $username,
@@ -77,7 +77,7 @@ class Auth extends CI_Controller {
 						break;
 
 					case 'student':
-						$userinfo = $this->Users->_getUserInfo($username, $check)[0];
+						$userinfo = $this->Users->_getUserInfo($username, $check);
 						$data = array(
 							'username' => $username,
 							'fullname' => $userinfo['name']." ".$userinfo['lname'],

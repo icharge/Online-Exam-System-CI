@@ -146,7 +146,19 @@ tr.course {
 }
 
 .recperpage {
-	margin-top: 7px;
+	margin-top: 4px;
+}
+
+input#searchtxt {
+	height: 31px;
+	padding: 2px 4px;
+}
+.searchform label {
+	margin-top: 5px;
+}
+
+.table.rowclick > tbody > tr {
+	cursor: pointer;
 }
 
 /*

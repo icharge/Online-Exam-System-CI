@@ -1,4 +1,3 @@
-
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Misc_model extends CI_Model {
@@ -78,6 +77,36 @@ class Misc_model extends CI_Model {
 		else
 		{
 			return $str;
+		}
+	}
+
+
+	function getHref($uri = '')
+	{
+		if ( ! is_array($uri))
+		{
+			$site_url = ( ! preg_match('!^\w+://! i', $uri)) ? site_url($uri) : $uri;
+		}
+		else
+		{
+			$site_url = site_url($uri);
+		}
+		return $site_url;
+	}
+
+	function getErrorDesc($errno,$mode='')
+	{
+		switch ($errno) {
+			case 1062:
+				if ($mode=="user")
+					return "ชื่อผู้ใช้มีอยู่แล้ว ไม่สามารถซ้ำได้";
+				else
+					return "ข้อมูลซ้ำ";
+				break;
+			
+			default:
+				return "";
+				break;
 		}
 	}
 

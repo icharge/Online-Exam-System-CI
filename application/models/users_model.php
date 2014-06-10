@@ -47,7 +47,8 @@ class Users_model extends CI_Model {
 				->select($fields)
 				->join('admins', 'admins.id = users.id', 'LEFT')
 				->get_where('users', $cause)
-				->result_array();
+				->row_array();
+			//die($this->db->last_query());
 			return $query;
 			break;
 			
@@ -62,7 +63,7 @@ class Users_model extends CI_Model {
 				->select($fields)
 				->join('teachers', 'teachers.id = users.id', 'LEFT')
 				->get_where('users', $cause)
-				->result_array();
+				->row_array();
 			return $query;
 			break;
 
@@ -77,7 +78,7 @@ class Users_model extends CI_Model {
 				->select($fields)
 				->join('students', 'students.id = users.id', 'LEFT')
 				->get_where('users', $cause)
-				->result_array();
+				->row_array();
 			return $query;
 			break;
 
@@ -87,6 +88,69 @@ class Users_model extends CI_Model {
 		}
 
 		// Check error?
+	}
+
+	function getUserInfoById($id, $role)
+	{
+		switch ($role) {
+			case 'admin':
+			$fields = array(
+				'users.id', 'role', 'username', 'name', 'lname', 'email', 'pic', 'status'
+				);
+			$cause = array('users.id' => $id);
+			$query = $this->db
+				->limit(1)
+				->select($fields)
+				->join('admins', 'admins.id = users.id', 'LEFT')
+				->get_where('users', $cause)
+				->row_array();
+			//die($this->db->last_query());
+			return $query;
+			break;
+			
+			case 'teacher':
+			$fields = array(
+				'users.id', 'role', 'username', 'name', 'lname', 
+				'fac_id'
+				);
+			$cause = array('users.id' => $id);
+			$query = $this->db
+				->limit(1)
+				->select($fields)
+				->join('teachers', 'teachers.id = users.id', 'LEFT')
+				->get_where('users', $cause)
+				->row_array();
+			return $query;
+			break;
+
+			case 'student':
+			$fields = array(
+				'users.id', 'role', 'username', 'name', 'lname', 
+				'birth', 'gender', 'year', 'fac_id', 'branch_id'
+				);
+			$cause = array('users.id' => $id);
+			$query = $this->db
+				->limit(1)
+				->select($fields)
+				->join('students', 'students.id = users.id', 'LEFT')
+				->get_where('users', $cause)
+				->row_array();
+			return $query;
+			break;
+
+			default:
+				# code...
+			break;
+		}
+
+		// Check error?
+	}
+
+	function getUserRoleById($UID)
+	{
+		$cause = array('id'=>$UID);
+		$result = $this->db->select('role')->get_where('users',$cause)->row_array();
+		return $result['role'];
 	}
 
 	function _getClassName()
@@ -113,52 +177,53 @@ class Users_model extends CI_Model {
 	{
 		switch ($group) {
 			case 'admin':
-			$fields = array(
-				'users.id', 'username', 'role', 'status'
+				$fields = array(
+					'users.id', 'username', 'name', 'lname', 'email', 'pic', 'role', 'status',
 				);
-			$cause = array('role' => 'admin');
-			$query = $this->db
-				->select($fields)
-				->like("CONCAT(username,status)",$keyword,'both')
-				->get_where('users',$cause)
-				->result_array();
-			//die($this->db->last_query());
-			return $query;
-			break;
+				$cause = array('role' => 'admin');
+				$query = $this->db
+					->select($fields)
+					->join('admins', 'admins.id = users.id', 'LEFT')
+					->like("CONCAT(username,status)",$keyword,'both')
+					->get_where('users',$cause)
+					->result_array();
+				//die($this->db->last_query());
+				return $query;
+				break;
 			
 			case 'teacher':
-			$fields = array(
-				'users.id', 'role', 'username', 'name', 'lname', 
-				'fac_id', 'status'
+				$fields = array(
+					'users.id', 'role', 'username', 'name', 'lname', 
+					'fac_id', 'status'
 				);
-			$cause = array('role' => 'teacher');
-			$query = $this->db
-				->select($fields)
-				->join('teachers', 'teachers.id = users.id', 'LEFT')
-				->like("CONCAT(username,name,lname,fac_id,status)",$keyword,'both')
-				->get_where('users',$cause)
-				->result_array();
-			return $query;
-			break;
+				$cause = array('role' => 'teacher');
+				$query = $this->db
+					->select($fields)
+					->join('teachers', 'teachers.id = users.id', 'LEFT')
+					->like("CONCAT(username,name,lname,fac_id,status)",$keyword,'both')
+					->get_where('users',$cause)
+					->result_array();
+				return $query;
+				break;
 
 			case 'student':
-			$fields = array(
-				'users.id', 'role', 'username', 'name', 'lname', 
-				'gender', 'year', 'fac_id', 'branch_id', 'status'
+				$fields = array(
+					'users.id', 'role', 'username', 'name', 'lname', 
+					'gender', 'year', 'fac_id', 'branch_id', 'status'
 				);
-			$cause = array('role' => 'student');
-			$query = $this->db
-				->select($fields)
-				->join('students', 'students.id = users.id', 'LEFT')
-				->like("CONCAT(username,name,lname,gender,year,fac_id,branch_id,status)",$keyword,'both')
-				->get_where('users',$cause)
-				->result_array();
-			return $query;
-			break;
+				$cause = array('role' => 'student');
+				$query = $this->db
+					->select($fields)
+					->join('students', 'students.id = users.id', 'LEFT')
+					->like("CONCAT(username,name,lname,gender,year,fac_id,branch_id,status)",$keyword,'both')
+					->get_where('users',$cause)
+					->result_array();
+				return $query;
+				break;
 
 			default:
 				# code...
-			break;
+				break;
 		}
 	}
 
@@ -177,7 +242,8 @@ class Users_model extends CI_Model {
 		$this->db->trans_begin();
 		# Insert Users
 		$query_user = $this->db->insert('users', $userData);
-
+		$errno = $this->db->_error_number();
+		// die(var_dump($errno));
 		# Get ID
 		$cause = array(
 			'username' => $userData['username'],
@@ -187,18 +253,21 @@ class Users_model extends CI_Model {
 			->limit(1)
 			->select("id")
 			->get_where('users', $cause)
-			->result_array()[0]['id'];
+			->row_array()['id'];
 		# Insert table
 		$tableData['id'] = $getId;
 		$query_admin = $this->db->insert($table, $tableData);
+		
+
 		$this->db->trans_complete();
 		if ($this->db->trans_status())
 		{
-			return true;
+			return 0;
 		}
 		else
 		{
-			return false;
+			// die(var_dump($errno));
+			return $errno;
 		}
 	}
 }

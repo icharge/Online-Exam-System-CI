@@ -1,4 +1,21 @@
 <!-- Begin content -->
+<script>
+	$('body').on('mousedown', 'tr[href]', function(e){
+		var click = e.which;
+		var url = $(this).attr('href');
+		if(url){
+			if(click == 1){
+				window.location.href = url;
+			}
+			else if(click == 2){
+				window.open(url, '_blank');
+				window.focus();
+			}
+			return true;
+		}
+	});
+
+</script>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	<ol class="breadcrumb">
 		<li><?php echo anchor('admin', 'หน้าแรก');?></li>
@@ -8,7 +25,9 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main <?php if(!$this->session->flashdata('noAnim')) echo "animate-fade-up";?>">
 	<div class="page-header">
 		<h1><span class="glyphicon glyphicon-book"></span> จัดการวิชาในระบบ <small></small></h1>
-		<p>ข้อมูลพื้นฐานของรายวิชาที่มีการเรียนการสอน และอาจมีการจัดสอบ เปรียบเสมือนคำอธิบายวิชาเรียนนั้น ๆ ซึ่งคุณสามารถใช้ข้อมูลดังกล่าว เปิดวิชาที่สอบได้</p>
+		<div class="well well-sm">
+			<span>ข้อมูลพื้นฐานของรายวิชาที่มีการเรียนการสอน และอาจมีการจัดสอบ เปรียบเสมือนคำอธิบายวิชาเรียนนั้น ๆ ซึ่งคุณสามารถใช้ข้อมูลดังกล่าว เปิดวิชาที่สอบได้</span>
+		</div>
 	</div>
 	<?php
 	if ($this->session->flashdata('msg_info')) {
@@ -100,11 +119,11 @@ if ($this->session->flashdata('msg_error')) {
 						<?php
 						$attr = array(
 							'name' => 'searchsubject',
-							'class' => '',
+							'class' => 'form-inline searchform',
 							'role' => 'search',
 							'method' => 'get'
 							);
-						echo form_open('admin/subject', $attr);
+						echo form_open('admin/subjects', $attr);
 						?>
 						<div class="col-xs-6">
 							<div class="recperpage">
@@ -123,7 +142,6 @@ if ($this->session->flashdata('msg_error')) {
 										$attr_pp, 
 										$perpage, 
 										'onchange="submitFrm(document.forms.searchsubject)"');
-
 										?> ต่อหน้า
 
 									</label>
@@ -138,18 +156,18 @@ if ($this->session->flashdata('msg_error')) {
 											'id'=>'searchtxt',
 											'name'=>'q',
 											'type'=>'text',
-											'class'=>'',
+											'class'=>'form-control',
 											'value'=>$this->input->get('q'),
 											'placeholder'=>''
 											));
-											?>
+										?>
 										</label>
 									</div>
 								</div>
 								<?php echo form_close(); ?>
 							</div>
 						</div>
-						<table class="table table-striped table-hover table-bordered">
+						<table class="table table-striped table-hover table-bordered rowclick">
 							<thead>
 								<tr>
 									<th style="width: 79px;">รหัสวิชา</th>
@@ -160,10 +178,10 @@ if ($this->session->flashdata('msg_error')) {
 							</thead>
 							<tbody>
 								<?php
-									if (isset($subjectlist)) {
+									if (($subjectlist)) {
 										foreach ($subjectlist as $item) {
 											echo "
-											<tr>
+											<tr href=\"".$this->misc->getHref('admin/subjects/view')."/$item[code]\">
 											<td>$item[code]</td>
 											<td>$item[name]</td>
 											<td>$item[shortname]</td>

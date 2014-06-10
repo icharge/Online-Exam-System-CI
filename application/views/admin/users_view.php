@@ -1,4 +1,20 @@
 <!-- Begin content -->
+<script>
+	$('body').on('mousedown', 'tr[href]', function(e){
+		var click = e.which;
+		var url = $(this).attr('href');
+		if(url){
+			if(click == 1){
+				window.location.href = url;
+			}
+			else if(click == 2){
+				window.open(url, '_blank');
+				window.focus();
+			}
+			return true;
+		}
+	});
+</script>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	<ol class="breadcrumb">
 		<li><?php echo anchor('admin', 'หน้าแรก');?></li>
@@ -8,7 +24,9 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main <?php if(!$this->session->flashdata('noAnim')) echo "animate-fade-up";?>">
 	<div class="page-header">
 		<h1><span class="glyphicon glyphicon-user"></span> จัดการผู้ใช้ <small></small></h1>
-		<p>คุณสามารถจัดการผู้ใช้ทุกกลุ่มได้ เช่น ผู้ดูแล ผู้สอน และนักเรียนนักศึกษา</p>
+		<div class="well well-sm">
+			<span>คุณสามารถจัดการผู้ใช้ทุกกลุ่มได้ เช่น ผู้ดูแล ผู้สอน และนักเรียนนักศึกษา</span>
+		</div>
 	</div>
 	<?php
 	if ($this->session->flashdata('msg_info')) {
@@ -48,10 +66,28 @@ if ($this->session->flashdata('msg_error')) {
 		hideAfter: 7,
 		showCloseButton: true
 	});
-</script>";
+	</script>";
 }
 
 ?>
+<script>
+	$('body').on('mousedown', 'tr[href]', function(e){
+		var click = e.which;
+		var url = $(this).attr('href');
+		if(url){
+			if(click == 1){
+				window.location.href = url;
+			}
+			else if(click == 2){
+				window.open(url, '_blank');
+				window.focus();
+			}
+			return true;
+		}
+	});
+
+</script>
+
 <div class="well well-sm">
 	<label>เลือกดูจาก </label>
 	<div class="btn-group">
@@ -70,7 +106,7 @@ if ($this->session->flashdata('msg_error')) {
 			?>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<span>ผู้ดูแล</span>
+					<span><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;ผู้ดูแล</span>
 					<div class="panel-btn btn-group pull-right">
 						<?php echo anchor('admin/users/adduser/admin', 'เพิ่ม', 'class="btn btn-sm btn-info"');?>
 						<button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
@@ -138,21 +174,23 @@ if ($this->session->flashdata('msg_error')) {
 						<?php echo form_close(); ?>
 					</div>
 				</div>
-				<table class="table table-striped table-hover table-bordered">
+				<table class="table table-striped table-hover table-bordered rowclick">
 					<thead>
 						<tr>
-							<th>ชื่อผู้ใช้</th>
-							<th>รหัสผ่าน</th>
-							<th>สถานะ</th>
+							<th style="width: 110px;">ชื่อผู้ใช้</th>
+							<th style="width: 37%;">ชื่อ - สกุล</th>
+							<th style="width: 37%;">อีเมล์</th>
+							<th style="width: 110px;">สถานะ</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
 						foreach ($adminlist as $item) {
 							echo "
-							<tr>
+							<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
 							<td>$item[username]</td>
-							<td><span class=\"label label-default\">**************</span></td>
+							<td>$item[name] $item[lname]</td>
+							<td>$item[email]</td>
 							<td>$item[status]</td>
 							</tr>
 							";
@@ -168,7 +206,7 @@ if ($this->session->flashdata('msg_error')) {
 				?>
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<span>ผู้สอน</span>
+						<span><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;ผู้สอน</span>
 						<div class="panel-btn btn-group pull-right">
 							<?php echo anchor('admin/users/adduser/teacher', 'เพิ่ม', 'class="btn btn-sm btn-info"');?>
 							<button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
@@ -235,7 +273,7 @@ if ($this->session->flashdata('msg_error')) {
 						<?php echo form_close(); ?>
 					</div>
 				</div>
-					<table class="table table-striped table-hover table-bordered">
+					<table class="table table-striped table-hover table-bordered rowclick">
 						<thead>
 							<tr>
 								<th>ชื่อผู้ใช้</th>
@@ -250,7 +288,7 @@ if ($this->session->flashdata('msg_error')) {
 							<?php
 							foreach ($teacherlist as $item) {
 								echo "
-								<tr>
+								<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
 								<td>$item[username]</td>
 								<td><span class=\"label label-default\">*********</span></td>
 								<td>$item[name]</td>
@@ -272,7 +310,7 @@ if ($this->session->flashdata('msg_error')) {
 
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<span>นักเรียน</span>
+							<span><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;นักเรียน</span>
 							<div class="panel-btn btn-group pull-right">
 								<?php echo anchor('admin/users/adduser/student', 'เพิ่ม', 'class="btn btn-sm btn-info"');?>
 								<button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
@@ -340,7 +378,7 @@ if ($this->session->flashdata('msg_error')) {
 						<?php echo form_close(); ?>
 					</div>
 				</div>
-						<table class="table table-striped table-hover table-bordered">
+						<table class="table table-striped table-hover table-bordered rowclick">
 							<thead>
 								<tr>
 									<th>ชื่อผู้ใช้</th>
@@ -357,7 +395,7 @@ if ($this->session->flashdata('msg_error')) {
 								<?php
 								foreach ($studentlist as $item) {
 									echo "
-									<tr>
+									<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
 									<td>$item[username]</td>
 									<td><span class=\"label label-default\">*********</span></td>
 									<td>$item[name]&nbsp;&nbsp;$item[lname]</td>

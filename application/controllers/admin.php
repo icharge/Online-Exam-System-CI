@@ -92,7 +92,7 @@ class Admin extends CI_Controller {
 									$data['msg_error'] = 'รหัสผ่านไม่ตรงกัน';
 									$this->load->view('admin/adduser_admin_view', $data);
 								}
-								elseif ($this->Users->addUser("admins", $userData, $adminData))
+								elseif (($result = $this->Users->addUser("admins", $userData, $adminData))==0)
 								{
 									# Added success
 									$this->session->set_flashdata('msg_info', 
@@ -103,7 +103,7 @@ class Admin extends CI_Controller {
 								} else {
 									# Failed
 									$this->session->set_flashdata('msg_error', 
-										'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้');
+										'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้<br>'.$this->misc->getErrorDesc($result,'user'));
 									//$this->users();
 									redirect('admin/users');
 								}
@@ -198,17 +198,22 @@ class Admin extends CI_Controller {
 									$data['msg_error'] = 'รหัสผ่านไม่ตรงกัน';
 									$this->load->view('admin/adduser_student_view', $data);
 								}
-								elseif ($this->Users->addUser("students", $userData, $studentData))
+								else
 								{
-									# Added success
-									$this->session->set_flashdata('msg_info', 
-										'เพิ่ม '.$userData['username'].' เรียบร้อย');
-									redirect('admin/users');
-								} else {
-									# Failed
-									$this->session->set_flashdata('msg_error', 
-										'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้');
-									redirect('admin/users');
+									$result = $this->Users->addUser("students", $userData, $studentData);
+
+									if ($result == 0)
+									{
+										# Added success
+										$this->session->set_flashdata('msg_info', 
+											'เพิ่ม '.$userData['username'].' เรียบร้อย');
+										redirect('admin/users');
+									} else {
+										# Failed
+										$this->session->set_flashdata('msg_error', 
+											'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้<br>'.$result);
+										redirect('admin/users');
+									}
 								}
 							}
 							else
@@ -246,6 +251,31 @@ class Admin extends CI_Controller {
 					}
 					
 				}
+				break;
+			case 'view':
+				$role = $this->Users->getUserRoleById($arg1);
+				$data['userData'] = $this->Users->getUserInfoById($arg1,$role);
+				//die(var_dump($data));
+				switch ($role) {
+					case 'admin':
+						$this->load->view('admin/edituser_admin_view', $data);
+						break;
+					
+					case 'teacher':
+
+						break;
+
+					case 'student':
+
+						break;
+
+					default:
+						# code...
+						break;
+				}
+
+
+				break;
 			
 			default:
 				# code...

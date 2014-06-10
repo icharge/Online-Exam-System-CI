@@ -37,8 +37,12 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
+// $route['admin/subjects/test/(:any)'] = 'admin1/subjects/test/$1';
+// $route['admin/subjects/test'] = 'admin1/subjects/test';
+// $route['admin/subjects/view/(:num)'] = 'admin1/subjects/view/$1';
+$route['admin/subjects/(:any)'] = 'admin1/subjects/$1';
 $route['admin/subjects'] = 'admin1/subjects';
+
 $route['default_controller'] = "main";
 $route['404_override'] = '';
 
