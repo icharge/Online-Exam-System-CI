@@ -114,9 +114,7 @@ if ($this->session->flashdata('msg_error')) {
 							<span class="sr-only">Toggle Dropdown</span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
-							<li><?php echo anchor('admin/users/edituser', 'แก้ไข');?></li>
-							<li class="divider"></li>
-							<!-- <li><?php echo anchor('admin/users/deluser', 'ลบ');?></li> -->
+							<li class="disabled"><a>นำเข้า</a></li>
 						</ul>
 					</div>
 				</div>
@@ -214,9 +212,7 @@ if ($this->session->flashdata('msg_error')) {
 								<span class="sr-only">Toggle Dropdown</span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><?php echo anchor('admin/users/edituser', 'แก้ไข');?></li>
-								<li class="divider"></li>
-								<li><?php echo anchor('admin/users/deluser', 'ลบ');?></li>
+								<li class="disabled"><a>นำเข้า</a></li>
 							</ul>
 						</div>
 					</div>
@@ -277,7 +273,6 @@ if ($this->session->flashdata('msg_error')) {
 						<thead>
 							<tr>
 								<th>ชื่อผู้ใช้</th>
-								<th>รหัสผ่าน</th>
 								<th>ชื่อ</th>
 								<th>นามสกุล</th>
 								<th>คณะ</th>
@@ -290,7 +285,6 @@ if ($this->session->flashdata('msg_error')) {
 								echo "
 								<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
 								<td>$item[username]</td>
-								<td><span class=\"label label-default\">*********</span></td>
 								<td>$item[name]</td>
 								<td>$item[lname]</td>
 								<td>$item[fac_id]</td>
@@ -318,10 +312,10 @@ if ($this->session->flashdata('msg_error')) {
 									<span class="sr-only">Toggle Dropdown</span>
 								</button>
 								<ul class="dropdown-menu" role="menu">
-									<li><?php echo anchor('admin/importstudent', 'นำเข้า');?></li>
-									<li><?php echo anchor('admin/users/edituser', 'แก้ไข');?></li>
-									<li class="divider"></li>
-									<li><?php echo anchor('admin/users/deluser', 'ลบ');?></li>
+									<li><?php echo anchor('importstudent', 'นำเข้า');?></li>
+									<!-- <li><?php echo anchor('admin/users/edituser', 'แก้ไข');?></li>
+									<li class="divider"></li> -->
+									<!-- <li><?php echo anchor('admin/users/deluser', 'ลบ');?></li> -->
 								</ul>
 							</div>
 						</div>
@@ -382,7 +376,6 @@ if ($this->session->flashdata('msg_error')) {
 							<thead>
 								<tr>
 									<th>ชื่อผู้ใช้</th>
-									<th>รหัสผ่าน</th>
 									<th>ชื่อ - สกุล</th>
 									<th>เพศ</th>
 									<th>คณะ</th>
@@ -397,7 +390,6 @@ if ($this->session->flashdata('msg_error')) {
 									echo "
 									<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
 									<td>$item[username]</td>
-									<td><span class=\"label label-default\">*********</span></td>
 									<td>$item[name]&nbsp;&nbsp;$item[lname]</td>
 									<td>";
 									echo ($item['gender']=="male")?"ชาย":"หญิง";

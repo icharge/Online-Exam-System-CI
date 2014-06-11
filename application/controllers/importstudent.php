@@ -21,11 +21,16 @@ class Importstudent extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->view('admin/t_header_view');
+		$this->load->view('admin/t_nav_view');
+		$this->load->view('admin/t_beginbody_view');
+		$this->load->view('admin/t_sidebar_view');
+		$msg = "";
 		if (isset($_FILES['file'])) {
-
+			
 			$this->load->library('simplexlsx', array('filename' => $_FILES['file']['tmp_name']));
 
-			echo '<h1>Parsing Result</h1>';
+			// echo '<h1>Parsing Result</h1>';
 
 			list($cols,) = $this->simplexlsx->dimension();
 
@@ -46,26 +51,27 @@ class Importstudent extends CI_Controller {
 							'title' => (isset($r[1])) ? $r[1] : '',
 							'name' => (isset($r[2])) ? $r[2] : '',
 							'lname' => (isset($r[3])) ? $r[3] : '',
-							'faculty' => (isset($r[4])) ? $r[4] : '',
-							'branch' => (isset($r[5])) ? $r[5] : '',
+							'gender' => ($r[1]=="นาย")?'male':'female',
+							'fac_id' => (isset($r[4])) ? $r[4] : '',
+							'branch_id' => (isset($r[5])) ? $r[5] : '',
 							'idcard' => (isset($r[6])) ? $r[6] : '',
-							'title' => (isset($r[7])) ? $r[7] : ''
+							'year' => (isset($r[7])) ? $r[7] : ''
 						);
 						// array_push($studentData, $studentItem); 
 						$this->Users->addUser("students", $userData, $studentItem);
-						echo '<h1>Import completed</h1>';
+						$msg .= "<p>Import $studentItem[stu_id] $studentItem[title]$studentItem[name] $studentItem[lname] completed</p>";
 					}
 				}
 
 			}
 			// var_dump($studentData);
 		}
-
-		echo '<h1>Upload</h1>
-			<form method="post" enctype="multipart/form-data">
-			*.XLSX <input type="file" name="file"  />&nbsp;&nbsp;<input type="submit" value="Parse" />
-			</form>';
-
+		$data['result'] = $msg;
+		$this->load->view('admin/import_student', $data);
+		// echo '<form method="post" enctype="multipart/form-data">
+		// 	*.XLSX <input type="file" name="file"  />&nbsp;&nbsp;<input type="submit" value="Parse" />
+		// 	</form>';
+		$this->load->view('admin/t_footer_view');
 
 	}
 
