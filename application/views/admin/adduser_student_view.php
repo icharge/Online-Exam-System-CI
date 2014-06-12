@@ -172,7 +172,7 @@ $attrLabel = array(
 									'value'=>set_value('birth'),
 									'type'=>'text',
 									'class'=>'form-control',
-									'placeholder'=>'นามสกุล'));
+									'placeholder'=>'วันเกิด'));
 								echo form_error('birth', '<span class="label label-danger">', '</span>');
 								?>
 							</div>
