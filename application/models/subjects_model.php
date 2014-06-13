@@ -42,7 +42,13 @@ class Subjects_model extends CI_Model {
 
 	function updateSubject($subjectData, $subjectId)
 	{
-		return $this->db->update('subjects', $subjectData, array('subject_id'=>$subjectId));
+		// var_dump($subjectData);
+		// echo '<br>';
+		// var_dump($subjectId);
+		$query = $this->db->update('subjects', $subjectData, array('code'=>$subjectId));
+		// die(var_dump($query));
+		// die($this->db->last_query());
+		return $query;
 	}
 
 }

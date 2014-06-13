@@ -51,9 +51,9 @@ class Subjects extends CI_Controller {
 				$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
 				$this->load->view('admin/edit_subject_view', $data);
 			}
-			$this->load->view('admin/t_footer_view');
+			
 		}
-	
+		$this->load->view('admin/t_footer_view');
 	}
 
 	public function add()
@@ -120,13 +120,13 @@ class Subjects extends CI_Controller {
 		if ($this->form_validation->run())
 		{
 			# Form check completed
-			$subjectData['subject_id'] = $this->input->post('subject_id');
+			//$subjectData['subject_id'] = $subjectId;
 			$subjectData['code'] = $this->input->post('code');
 			$subjectData['name'] = $this->input->post('name');
 			$subjectData['shortname'] = $this->input->post('shortname');
 			$subjectData['description'] = $this->input->post('description');
-			
-			if ($this->subjects->updateSubject($subjectData, $subjectData['code']))
+			// die(var_dump($subjectData)); 
+			if ($this->subjects->updateSubject($subjectData, $subjectId))
 			{
 				# แก้ไข success
 				$this->session->set_flashdata('msg_info', 
