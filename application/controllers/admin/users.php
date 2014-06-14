@@ -55,7 +55,7 @@ class Users extends CI_Controller {
 		if ($this->input->post('submit'))
 		{
 			# on Submit
-			switch ($arg1) {
+			switch ($group) {
 				case 'admin':
 					$data['ptitle'] = "ผู้ดูแลระบบ";
 					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
@@ -217,7 +217,7 @@ class Users extends CI_Controller {
 			}
 		} else {
 			# Add data
-			switch ($arg1) {
+			switch ($group) {
 				case 'admin':
 					$data['ptitle'] = "ผู้ดูแลระบบ";
 					$this->load->view('admin/adduser_admin_view', $data);
