@@ -27,8 +27,7 @@ class Users extends CI_Controller {
 	function viewgroup($group='')
 	{
 		$this->load->view('admin/t_header_view');
-		$this->load->view('admin/t_nav_view');
-		$this->load->view('admin/t_beginbody_view');
+		$this->load->view('admin/t_headerbar_view');
 		$this->load->view('admin/t_sidebar_view');
 
 		$this->session->set_flashdata('noAnim', true);

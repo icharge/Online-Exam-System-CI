@@ -23,8 +23,7 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('admin/t_header_view');
-		$this->load->view('admin/t_nav_view');
-		$this->load->view('admin/t_beginbody_view');
+		$this->load->view('admin/t_headerbar_view');
 		$this->load->view('admin/t_sidebar_view');
 		$this->load->view('admin/dashboard_view');
 		$this->load->view('admin/t_footer_view');

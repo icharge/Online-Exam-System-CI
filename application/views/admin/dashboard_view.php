@@ -1,5 +1,5 @@
 <!-- Begin content -->
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<!-- <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	<ol class="breadcrumb">
 		<li class="active">หน้าแรก</li>
 	</ol>
@@ -16,5 +16,27 @@
 			
 		</p>
 	</div>
-</div>
+</div> -->
+
+<!-- Right side column. Contains the navbar and content of the page -->
+<aside class="right-side">                
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			Dashboard
+			<small>Control panel</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li class="active">Dashboard</li>
+		</ol>
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+
+
+	</section><!-- /.content -->
+</aside><!-- /.right-side -->
+
 <!-- End content -->
