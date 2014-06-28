@@ -237,7 +237,7 @@
 									<a href="#" class="btn btn-default btn-flat">ข้อมูลส่วนตัว</a>
 								</div>
 								<div class="pull-right">
-									<a href="#" class="btn btn-default btn-flat">ออกจากระบบ</a>
+									<?php echo anchor('auth/logout', 'ออกจากระบบ','class="btn btn-default btn-flat"'); ?>
 								</div>
 							</li>
 						</ul>
