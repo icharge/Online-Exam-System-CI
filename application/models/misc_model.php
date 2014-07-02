@@ -29,14 +29,47 @@ class Misc_model extends CI_Model {
 		}
 	}
 
-	function listCActive($page='')
+	function listCActive($page='',$useclass=true,$direction='')
 	{
-		if ($page == $this->getClassName())
+		$result = '';
+		
+		switch ($direction) {
+			case 'start':
+				$result = $this->startsWith($this->getClassName(),$page);
+				break;
+
+			case 'end':
+				$result = $this->endsWith($this->getClassName(),$page);
+				break;
+
+			default:
+				$result = ($page == $this->getClassName()?true:false);
+				break;
+		}
+
+		if ($result)
 		{
-			return ' class="active"';
+			return ($useclass?' class="active"':'active');
 		} else {
 			return "";
 		}
+	}
+
+	function listCActiveAry($items,$useclass=true)
+	{
+		if ($this->isInClass($items))
+		{
+			return ($useclass?' class="active"':'active');
+		}
+		else
+		{
+			return "";
+		}
+	}
+
+	function isInClass($items)
+	{
+		return in_array($this->getClassName(), $items);
 	}
 
 	function btnActive($compare1,$compare2,$classAttr='btn btn-default')
@@ -108,6 +141,21 @@ class Misc_model extends CI_Model {
 				return "";
 				break;
 		}
+	}
+
+	function startsWith($haystack, $needle)
+	{
+		$length = strlen($needle);
+		return (substr($haystack, 0, $length) === $needle);
+	}
+
+	function endsWith($haystack, $needle)
+	{
+		$length = strlen($needle);
+		if ($length == 0) {
+			return true;
+		}
+		return (substr($haystack, -$length) === $needle);
 	}
 
 }
