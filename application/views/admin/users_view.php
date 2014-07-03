@@ -1,20 +1,4 @@
 <!-- Begin content -->
-<script>
-	$('body').on('mousedown', 'tr[href]', function(e){
-		var click = e.which;
-		var url = $(this).attr('href');
-		if(url){
-			if(click == 1){
-				window.location.href = url;
-			}
-			else if(click == 2){
-				window.open(url, '_blank');
-				window.focus();
-			}
-			return true;
-		}
-	});
-</script>
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
@@ -24,7 +8,7 @@
 			<small>User Management</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> หน้าแรก</a></li>
+			<li><?php echo anchor('admin', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
 			<li class="active">จัดการผู้ใช้</li>
 		</ol>
 	</section>
@@ -78,23 +62,6 @@
 		}
 
 		?>
-		<script>
-			$('body').on('mousedown', 'tr[href]', function(e){
-				var click = e.which;
-				var url = $(this).attr('href');
-				if(url){
-					if(click == 1){
-						window.location.href = url;
-					}
-					else if(click == 2){
-						window.open(url, '_blank');
-						window.focus();
-					}
-					return true;
-				}
-			});
-
-		</script>
 
 		<div class="box">
 			<div class="box-body">
@@ -114,7 +81,7 @@
 				<?php
 				if (isset($adminlist)) {
 				?>
-				<div class="box box-primary nav-tabs-custom">
+				<div class="box box-danger nav-tabs-custom">
 					<ul class="nav nav-tabs pull-right">
 						<li class="dropdown pull-right">
 							<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
@@ -136,44 +103,46 @@
 							);
 						echo form_open('admin/users/viewgroup/admin', $attr);
 						?>
-						<div class="col-xs-6">
-							<div class="recperpage">
-								<label>แสดงรายการ
-							<?php
-								$attr_pp = array(
-									'10' => '10',
-									'25' => '25',
-									'50' => '50',
-									'100' => '100'
-								);
-								if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-								else $perpage = '25';
-								//echo $perpage;
-								echo form_dropdown('perpage', 
-									$attr_pp, 
-									$perpage, 
-									'onchange="submitFrm(document.forms.searchadmin)"');
-
-							?> ต่อหน้า
-
-								</label>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="recperpage">
+									<label>แสดงรายการ
+								<?php
+									$attr_pp = array(
+										'10' => '10',
+										'25' => '25',
+										'50' => '50',
+										'100' => '100'
+									);
+									if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
+									else $perpage = '25';
+									//echo $perpage;
+									echo form_dropdown('perpage', 
+										$attr_pp, 
+										$perpage, 
+										'onchange="submitFrm(document.forms.searchadmin)"');
+							
+								?> ต่อหน้า
+							
+									</label>
+								</div>
 							</div>
-						</div>
-						<div class="col-xs-6 text-right">
-							<div class="dataTables_filter" id="example1_filter">
-								<label>ค้นหา: 
-									<!-- <input type="text" name="q"> -->
-						<?php
-							echo form_input(array(
-								'id'=>'searchtxt',
-								'name'=>'q',
-								'type'=>'text',
-								'class'=>'',
-								'value'=>$this->input->get('q'),
-								'placeholder'=>''
-							));
-						?>
-								</label>
+							<div class="col-xs-6 text-right">
+								<div class="dataTables_filter" id="example1_filter">
+									<label>ค้นหา: 
+										<!-- <input type="text" name="q"> -->
+							<?php
+								echo form_input(array(
+									'id'=>'searchtxt',
+									'name'=>'q',
+									'type'=>'text',
+									'class'=>'',
+									'value'=>$this->input->get('q'),
+									'placeholder'=>''
+								));
+							?>
+									</label>
+								</div>
 							</div>
 						</div>
 						<?php echo form_close(); ?>
@@ -210,7 +179,7 @@
 				<?php
 				if (isset($teacherlist)) {
 				?>
-				<div class="box box-info nav-tabs-custom">
+				<div class="box box-primary nav-tabs-custom">
 					<ul class="nav nav-tabs  pull-right">
 						<li class="dropdown pull-right">
 							<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
@@ -232,101 +201,97 @@
 						);
 					echo form_open('admin/users/viewgroup/teacher', $attr);
 					?>
-						<div class="col-xs-6">
-							<div class="recperpage">
-								<label>แสดงรายการ
-							<?php
-								$attr_pp = array(
-									'10' => '10',
-									'25' => '25',
-									'50' => '50',
-									'100' => '100'
-								);
-								if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-								else $perpage = '25';
-								//echo $perpage;
-									echo form_dropdown('perpage', 
-									$attr_pp, 
-									$perpage, 
-									'onchange="submitFrm(document.forms.searchteacher)"');
-							?> ต่อหน้า
-
-								</label>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="recperpage">
+									<label>แสดงรายการ
+								<?php
+									$attr_pp = array(
+										'10' => '10',
+										'25' => '25',
+										'50' => '50',
+										'100' => '100'
+									);
+									if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
+									else $perpage = '25';
+									//echo $perpage;
+										echo form_dropdown('perpage', 
+										$attr_pp, 
+										$perpage, 
+										'onchange="submitFrm(document.forms.searchteacher)"');
+								?> ต่อหน้า
+							
+									</label>
+								</div>
 							</div>
-						</div>
-						<div class="col-xs-6 text-right">
-							<div class="dataTables_filter" id="example1_filter">
-								<label>ค้นหา: 
-									<!-- <input type="text" name="q"> -->
-						<?php
-							echo form_input(array(
-								'id'=>'searchtxt',
-								'name'=>'q',
-								'type'=>'text',
-								'class'=>'',
-								'value'=>$this->input->get('q'),
-								'placeholder'=>''
-							));
-						?>
-								</label>
+							<div class="col-xs-6 text-right">
+								<div class="dataTables_filter" id="example1_filter">
+									<label>ค้นหา: 
+										<!-- <input type="text" name="q"> -->
+							<?php
+								echo form_input(array(
+									'id'=>'searchtxt',
+									'name'=>'q',
+									'type'=>'text',
+									'class'=>'',
+									'value'=>$this->input->get('q'),
+									'placeholder'=>''
+								));
+							?>
+									</label>
+								</div>
 							</div>
 						</div>
 						<?php echo form_close(); ?>
 					</div>
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover rowclick">
-						<thead>
-							<tr>
-								<th>ชื่อผู้ใช้</th>
-								<th>ชื่อ</th>
-								<th>นามสกุล</th>
-								<th>คณะ</th>
-								<th>สถานะ</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							foreach ($teacherlist as $item) {
-								echo "
-								<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
-								<td>$item[username]</td>
-								<td>$item[name]</td>
-								<td>$item[lname]</td>
-								<td>$item[fac_id]</td>
-								<td>$item[status]</td>
+					<div class="box-body no-padding">
+						<table class="table table-striped table-hover rowclick">
+							<thead>
+								<tr>
+									<th>ชื่อผู้ใช้</th>
+									<th>ชื่อ</th>
+									<th>นามสกุล</th>
+									<th>คณะ</th>
+									<th>สถานะ</th>
 								</tr>
-								";
-							}
-							?>				
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								<?php
+								foreach ($teacherlist as $item) {
+									echo "
+									<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
+									<td>$item[username]</td>
+									<td>$item[name]</td>
+									<td>$item[lname]</td>
+									<td>$item[fac_id]</td>
+									<td>$item[status]</td>
+									</tr>
+									";
+								}
+								?>				
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</div>
-			<?php } ?>
+				<?php } ?>
 
-						<?php
-						if (isset($studentlist)) {
-							?>
-
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<span><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;นักเรียน</span>
-									<div class="panel-btn btn-group pull-right">
-										<?php echo anchor('admin/users/adduser/student', 'เพิ่ม', 'class="btn btn-sm btn-info"');?>
-										<button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
-											<span class="caret"></span>
-											<span class="sr-only">Toggle Dropdown</span>
-										</button>
-										<ul class="dropdown-menu" role="menu">
-											<li><?php echo anchor('importstudent', 'นำเข้า');?></li>
-											<!-- <li><?php echo anchor('admin/users/edituser', 'แก้ไข');?></li>
-											<li class="divider"></li> -->
-											<!-- <li><?php echo anchor('admin/users/deluser', 'ลบ');?></li> -->
-										</ul>
-									</div>
-								</div>
-								<div class="panel-body search">
-							<div class="row">
+				<?php
+				if (isset($studentlist)) {
+					?>
+					<div class="box box-info nav-tabs-custom">
+						<ul class="nav nav-tabs  pull-right">
+							<li class="dropdown pull-right">
+								<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
+								<ul class="dropdown-menu" role="menu">
+									<li><?php echo anchor('admin/users/adduser/student', 'เพิ่ม');?></li>
+									<li><?php echo anchor('admin/users/importstudent', 'นำเข้า');?></li>
+								</ul>
+							</li>
+							<li class="pull-left header">
+								<i class="fa fa-th"></i> นักเรียน
+							</li>
+						</ul>
+						<div class="tab-content">
 					<?php
 						$attr = array(
 							'name' => 'searchstudent',
@@ -336,86 +301,89 @@
 						);
 					echo form_open('admin/users/viewgroup/student', $attr);
 					?>
-								<div class="col-xs-6">
-									<div class="recperpage">
-										<label>แสดงรายการ
-									<?php
-										$attr_pp = array(
-											'10' => '10',
-											'25' => '25',
-											'50' => '50',
-											'100' => '100'
-										);
-										if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-										else $perpage = '25';
-										//echo $perpage;
-										echo form_dropdown('perpage', 
-											$attr_pp, 
-											$perpage, 
-											'onchange="submitFrm(document.forms.searchstudent)"');
-									?> ต่อหน้า
-
-										</label>
-									</div>
-								</div>
-								<div class="col-xs-6 text-right">
-									<div class="dataTables_filter" id="example1_filter">
-										<label>ค้นหา: 
-											<!-- <input type="text" name="q"> -->
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="recperpage">
+									<label>แสดงรายการ
 								<?php
-									echo form_input(array(
-										'id'=>'searchtxt',
-										'name'=>'q',
-										'type'=>'text',
-										'class'=>'',
-										'value'=>$this->input->get('q'),
-										'placeholder'=>''
-									));
-								?>
-										</label>
-									</div>
+									$attr_pp = array(
+										'10' => '10',
+										'25' => '25',
+										'50' => '50',
+										'100' => '100'
+									);
+									if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
+									else $perpage = '25';
+									//echo $perpage;
+									echo form_dropdown('perpage', 
+										$attr_pp, 
+										$perpage, 
+										'onchange="submitFrm(document.forms.searchstudent)"');
+								?> ต่อหน้า
+							
+									</label>
 								</div>
-								<?php echo form_close(); ?>
+							</div>
+							<div class="col-xs-6 text-right">
+								<div class="dataTables_filter" id="example1_filter">
+									<label>ค้นหา: 
+										<!-- <input type="text" name="q"> -->
+							<?php
+								echo form_input(array(
+									'id'=>'searchtxt',
+									'name'=>'q',
+									'type'=>'text',
+									'class'=>'',
+									'value'=>$this->input->get('q'),
+									'placeholder'=>''
+								));
+							?>
+									</label>
+								</div>
 							</div>
 						</div>
-								<table class="table table-striped table-hover table-bordered rowclick">
-									<thead>
-										<tr>
-											<th>ชื่อผู้ใช้</th>
-											<th>ชื่อ - สกุล</th>
-											<th>เพศ</th>
-											<th>คณะ</th>
-											<th>สาขา</th>
-											<th>ปีการศึกษา</th>
-											<th>สถานะ</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										foreach ($studentlist as $item) {
-											echo "
-											<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
-											<td>$item[username]</td>
-											<td>$item[name]&nbsp;&nbsp;$item[lname]</td>
-											<td>";
-											echo ($item['gender']=="male")?"ชาย":"หญิง";
-											echo "</td>
-											<td>$item[fac_id]</td>
-											<td>$item[branch_id]</td>
-											<td>$item[year]</td>
-											<td>$item[status]</td>
-											</tr>
-											";
-										}
-										?>				
-									</tbody>
-								</table>
-							</div>
-							<?php } ?>
-
+						<?php echo form_close(); ?>
+					</div>
+					<div class="box-body no-padding">
+						<table class="table table-striped table-hover rowclick">
+							<thead>
+								<tr>
+									<th>ชื่อผู้ใช้</th>
+									<th>ชื่อ - สกุล</th>
+									<th>เพศ</th>
+									<th>คณะ</th>
+									<th>สาขา</th>
+									<th>ปีการศึกษา</th>
+									<th>สถานะ</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								foreach ($studentlist as $item) {
+									echo "
+									<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
+									<td>$item[username]</td>
+									<td>$item[name]&nbsp;&nbsp;$item[lname]</td>
+									<td>";
+									echo ($item['gender']=="male")?"ชาย":"หญิง";
+									echo "</td>
+									<td>$item[fac_id]</td>
+									<td>$item[branch_id]</td>
+									<td>$item[year]</td>
+									<td>$item[status]</td>
+									</tr>
+									";
+								}
+								?>				
+								</tbody>
+							</table>
 						</div>
 					</div>
+					<?php } ?>
+
 				</div>
+			</div>
+		</div>
 				<script>
 				function submitFrm(frm) {
 					frm.submit();

@@ -33,6 +33,23 @@
 	<?php echo ($this->misc->getClassName()=="admin"?'<script src="vendor/js/AdminLTE/dashboard.js" type="text/javascript"></script>':'');?>
 	<!-- AdminLTE for demo purposes -->
 	<!-- <script src="vendor/js/AdminLTE/demo.js" type="text/javascript"></script> -->
+	<!-- TR Href -->
+	<script>
+		$('body').on('mousedown', 'tr[href]', function(e){
+			var click = e.which;
+			var url = $(this).attr('href');
+			if(url){
+				if(click == 1){
+					window.location.href = url;
+				}
+				else if(click == 2){
+					window.open(url, '_blank');
+					window.focus();
+				}
+				return true;
+			}
+		});
+	</script>
 	<!-- End Footer -->
 </body>
 </html>

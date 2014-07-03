@@ -1,26 +1,27 @@
 <?php
 $attrLabel = array(
 	'class' => 'col-sm-3 control-label'
-	);
-
-	?>
-	<!-- Begin content -->
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+);?>
+<!-- Begin content -->
+<!-- Right side column. Contains the navbar and content of the page -->
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			<span class="fa fa-plus-circle"></span> <?php echo $pagetitle;?>
+			<small><?php echo $pagesubtitle;?></small>
+		</h1>
 		<ol class="breadcrumb">
-			<li><?php echo anchor('admin', 'หน้าแรก');?></li>
+			<li><?php echo anchor('admin', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
 			<li><?php echo anchor('admin/users', 'จัดการผู้ใช้');?></li>
-			<li class="active">เพิ่มผู้ใช้</li>
+			<li class="active"><?php echo $pagetitle;?></li>
 		</ol>
-	</div>
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main animate-fade-up">
-		<div class="page-header">
-			<h1>เพิ่มผู้ใช้ <small><?php echo $ptitle; ?></small></h1>
-		</div>
-		<div class="row row-centered">
-			<div class="col-md-6 col-centered alert alert-info">
-				* จำเป็นต้องกรอก
-			</div>
-		</div>
+	</section>
+	<section class="content">
+		<h4 class="page-header">
+			<small></small>
+		</h4>
+
 		<?php
 		if (isset($msg_error)) {
 			// echo '
@@ -42,140 +43,124 @@ $attrLabel = array(
 			</script>";
 		}
 		$attr = array(
-			'class' => 'form-horizontal',
 			'role' => 'form',
 			'method' => 'post'
 			);
-		echo form_open('admin/users/adduser/admin', $attr);
+		echo form_open($formlink, $attr);
 		?>
-		<div class="row row-centered">
-			<div class="col-md-8 col-centered">
-				
+		<div class="row">
+			<div class="col-md-5 col-lg-6 col-lg-offset-3">
+				<div class="alert alert-info hidden-xs" style="min-width: 343px">
+					<i class="fa fa-info"></i>
+					<b>คำแนะนำ :</b> <b>เครื่องหมาย</b> <span class="text-danger">*</span>
+					จำเป็นต้องกรอกข้อมูล
+				</div>
+				<div class="alert alert-info visible-xs">
+					<i class="fa fa-info"></i>
+					<b>คำแนะนำ :</b> <b>เครื่องหมาย</b> <span class="text-danger">*</span>
+					จำเป็นต้องกรอกข้อมูล
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-md-6 col-lg-4 col-lg-offset-2">
 				<!-- Begin LoginInfo -->
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<span class="glyphicon glyphicon-th-list"></span>
-							&nbsp;&nbsp;การเข้าใช้งาน
+				<div class="box box-primary">
+					<div class="box-header">
+						<h3 class="box-title">
+							การระบุตัวตน
 						</h3>
 					</div>
-					<div class="panel-body">
+					<div class="box-body">
 						<div class="form-group<?php if(form_error('username')) echo ' has-error';?>">
 							<?php
-							echo form_label('ชื่อผู้ใช้ <span class="text-danger">*</span>', 'username', $attrLabel);
+							echo form_label('ชื่อผู้ใช้ <span class="text-danger">*</span>', 'username');
+							echo form_input(array(
+								'id'=>'username',
+								'name'=>'username',
+								'value'=>$userData['username'],
+								'type'=>'text',
+								'class'=>'form-control',
+								'placeholder'=>'ชื่อผู้ใช้'));
+							echo form_error('username', '<span class="label label-danger">', '</span>');
 							?>
-							<div class="col-sm-8">
-								<?php
-								echo form_input(array(
-									'id'=>'username',
-									'name'=>'username',
-									'value'=>set_value('username'),
-									'type'=>'text',
-									'class'=>'form-control',
-									'placeholder'=>'ชื่อผู้ใช้'));
-								echo form_error('username', '<span class="label label-danger">', '</span>');
-								?>
-							</div>
 						</div>
 						<div class="form-group<?php if(form_error('password')) echo ' has-error';?>">
 							<?php 
-							echo form_label('รหัสผ่าน <span class="text-danger">*</span>', 'password', $attrLabel);
+							echo form_label('รหัสผ่าน <span class="text-danger">*</span>', 'password');
+							echo form_input(array(
+								'id'=>'password',
+								'name'=>'password',
+								'type'=>'password',
+								'class'=>'form-control',
+								'placeholder'=>'รหัสผ่าน'));
+							echo form_error('password', '<span class="label label-danger">', '</span>');
 							?>
-							<div class="col-sm-8">
-								<?php
-								echo form_input(array(
-									'id'=>'password',
-									'name'=>'password',
-									'type'=>'password',
-									'class'=>'form-control',
-									'placeholder'=>'รหัสผ่าน'));
-								echo form_error('password', '<span class="label label-danger">', '</span>');
-								?>
-							</div>
 						</div>
 						<div class="form-group<?php if(form_error('passwordconfirm')) echo ' has-error';?>">
 							<?php 
-							echo form_label('ยืนยัน <span class="text-danger">*</span>', 'passwordconfirm', $attrLabel);
+							echo form_label('ยืนยัน <span class="text-danger">*</span>', 'passwordconfirm');
+							echo form_input(array(
+								'id'=>'passwordconfirm',
+								'name'=>'passwordconfirm',
+								'type'=>'password',
+								'class'=>'form-control',
+								'placeholder'=>'รหัสผ่านอีกครั้ง'));
+							echo form_error('passwordconfirm', '<span class="label label-danger">', '</span>');
 							?>
-							<div class="col-sm-8">
-								<?php
-								echo form_input(array(
-									'id'=>'passwordconfirm',
-									'name'=>'passwordconfirm',
-									'type'=>'password',
-									'class'=>'form-control',
-									'placeholder'=>'รหัสผ่านอีกครั้ง'));
-								echo form_error('passwordconfirm', '<span class="label label-danger">', '</span>');
-								?>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		<!-- End LoginInfo -->
 
 		<!-- Begin UserInfo -->
-		<div class="row row-centered">
-			<div class="col-md-8 col-centered">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<span class="glyphicon glyphicon-th-list"></span>
-							&nbsp;&nbsp;ข้อมูลส่วนตัว
+			<div class="col-sm-6 col-md-6 col-lg-4">
+				<div class="box box-primary">
+					<div class="box-header">
+						<h3 class="box-title">
+							ข้อมูลส่วนตัว
 						</h3>
 					</div>
-					<div class="panel-body">
+					<div class="box-body">
 						<div class="form-group<?php if(form_error('fname')) echo ' has-error';?>">
 							<?php 
-							echo form_label('ชื่อ <span class="text-danger">*</span>', 'fname', $attrLabel);
+							echo form_label('ชื่อ <span class="text-danger">*</span>', 'fname');
+							echo form_input(array(
+								'id'=>'fname',
+								'name'=>'fname',
+								'value'=>$userData['name'],
+								'type'=>'text',
+								'class'=>'form-control',
+								'placeholder'=>'ชื่อ'));
+							echo form_error('fname', '<span class="label label-danger">', '</span>');
 							?>
-							<div class="col-sm-8">
-								<?php
-								echo form_input(array(
-									'id'=>'fname',
-									'name'=>'fname',
-									'value'=>set_value('fname'),
-									'type'=>'text',
-									'class'=>'form-control',
-									'placeholder'=>'ชื่อ'));
-								echo form_error('fname', '<span class="label label-danger">', '</span>');
-								?>
-							</div>
 						</div>
 						<div class="form-group<?php if(form_error('surname')) echo ' has-error';?>">
 							<?php 
-							echo form_label('นามสกุล <span class="text-danger">*</span>', 'surname', $attrLabel);
+							echo form_label('นามสกุล <span class="text-danger">*</span>', 'surname');
+							echo form_input(array(
+								'id'=>'surname',
+								'name'=>'surname',
+								'value'=>$userData['lname'],
+								'type'=>'text',
+								'class'=>'form-control',
+								'placeholder'=>'นามสกุล'));
+							echo form_error('surname', '<span class="label label-danger">', '</span>');
 							?>
-							<div class="col-sm-8">
-								<?php
-								echo form_input(array(
-									'id'=>'surname',
-									'name'=>'surname',
-									'value'=>set_value('surname'),
-									'type'=>'text',
-									'class'=>'form-control',
-									'placeholder'=>'นามสกุล'));
-								echo form_error('surname', '<span class="label label-danger">', '</span>');
-								?>
-							</div>
 						</div>
 						<div class="form-group<?php if(form_error('email')) echo ' has-error';?>">
 							<?php 
-							echo form_label('อีเมล์', 'email', $attrLabel);
+							echo form_label('อีเมล์', 'email');
+							echo form_input(array(
+								'id'=>'email',
+								'name'=>'email',
+								'value'=>$userData['email'],
+								'type'=>'text',
+								'class'=>'form-control',
+								'placeholder'=>'อีเมล์'));
+							echo form_error('email', '<span class="label label-danger">', '</span>');
 							?>
-							<div class="col-sm-8">
-								<?php
-								echo form_input(array(
-									'id'=>'email',
-									'name'=>'email',
-									'value'=>set_value('email'),
-									'type'=>'text',
-									'class'=>'form-control',
-									'placeholder'=>'อีเมล์'));
-								echo form_error('email', '<span class="label label-danger">', '</span>');
-								?>
-							</div>
 						</div>
 					</div>
 				</div>

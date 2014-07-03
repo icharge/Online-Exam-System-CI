@@ -47,8 +47,7 @@ class Users extends CI_Controller {
 	function adduser($group='')
 	{
 		$this->load->view('admin/t_header_view');
-		$this->load->view('admin/t_nav_view');
-		$this->load->view('admin/t_beginbody_view');
+		$this->load->view('admin/t_headerbar_view');
 		$this->load->view('admin/t_sidebar_view');
 
 		if ($this->input->post('submit'))
@@ -56,7 +55,11 @@ class Users extends CI_Controller {
 			# on Submit
 			switch ($group) {
 				case 'admin':
-					$data['ptitle'] = "ผู้ดูแลระบบ";
+					$data['formlink'] = 'admin/users/adduser/admin';
+					$data['pagetitle'] = "เพิ่มผู้ใช้";
+					$data['pagesubtitle'] = "ผู้ดูแลระบบ";
+					$data['permtxt'] = "ผู้ดูแลระบบ";
+
 					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
 					$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
 					$this->form_validation->set_rules('passwordconfirm', 'ยืนยันรหัสผ่าน', 'required');
@@ -73,7 +76,7 @@ class Users extends CI_Controller {
 						$adminData['name'] = $this->input->post('fname');
 						$adminData['lname'] = $this->input->post('surname');
 						$adminData['email'] = $this->input->post('email');
-						
+						//$data['userData'] = array_merge($userData,$adminData);
 						if ($this->input->post('password') != $this->input->post('passwordconfirm'))
 						{
 							$data['msg_error'] = 'รหัสผ่านไม่ตรงกัน';
@@ -87,7 +90,9 @@ class Users extends CI_Controller {
 							
 							//$this->users();
 							redirect('admin/users');
-						} else {
+						}
+						else
+						{
 							# Failed
 							$this->session->set_flashdata('msg_error', 
 								'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้<br>'.$this->misc->getErrorDesc($result,'user'));
@@ -97,7 +102,13 @@ class Users extends CI_Controller {
 					}
 					else
 					{
-						
+						// Set user data form
+						$data['userData'] = array(
+							'username' => set_value('username'),
+							'name' => set_value('name'),
+							'lname' => set_value('surname'),
+							'email' => set_value('email'),
+						);
 						$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
 						$this->load->view('admin/adduser_admin_view', $data);
 					}
@@ -105,6 +116,7 @@ class Users extends CI_Controller {
 					break;
 
 				case 'teacher':
+					$data['formlink'] = 'admin/users/adduser/teacher';
 					$data['ptitle'] = "ผู้สอน";
 					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
 					$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
@@ -150,6 +162,7 @@ class Users extends CI_Controller {
 					break;
 
 				case 'student':
+					$data['formlink'] = 'admin/users/adduser/student';
 					$data['ptitle'] = "นักเรียน";
 					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
 					$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
@@ -218,16 +231,29 @@ class Users extends CI_Controller {
 			# Add data
 			switch ($group) {
 				case 'admin':
-					$data['ptitle'] = "ผู้ดูแลระบบ";
+					$data['formlink'] = 'admin/users/adduser/admin';
+					$data['pagetitle'] = "เพิ่มผู้ใช้";
+					$data['pagesubtitle'] = "ผู้ดูแลระบบ";
+					$data['permtxt'] = "ผู้ดูแลระบบ";
+
+					// Set user data form
+					$data['userData'] = array(
+						'username' => set_value('username'),
+						'name' => set_value('name'),
+						'lname' => set_value('surname'),
+						'email' => set_value('email'),
+					);
 					$this->load->view('admin/adduser_admin_view', $data);
 					break;
 
 				case 'teacher':
+					$data['formlink'] = 'admin/users/adduser/teacher';
 					$data['ptitle'] = "ผู้สอน";
 					$this->load->view('admin/adduser_teacher_view', $data);
 					break;
 
 				case 'student':
+					$data['formlink'] = 'admin/users/adduser/student';
 					$data['ptitle'] = "ผู้เรียน";
 					$this->load->view('admin/adduser_student_view', $data);
 					break;
@@ -244,8 +270,7 @@ class Users extends CI_Controller {
 	function view($uid='')
 	{
 		$this->load->view('admin/t_header_view');
-		$this->load->view('admin/t_nav_view');
-		$this->load->view('admin/t_beginbody_view');
+		$this->load->view('admin/t_headerbar_view');
 		$this->load->view('admin/t_sidebar_view');
 		
 		$role = $this->Users->getUserRoleById($uid);
@@ -253,7 +278,12 @@ class Users extends CI_Controller {
 		//die(var_dump($data));
 		switch ($role) {
 			case 'admin':
-				$this->load->view('admin/edituser_admin_view', $data);
+				$data['formlink'] = 'admin/users/view/'.$data['userData']['id'];
+				$data['pagetitle'] = "ข้อมูลผู้ใช้";
+				$data['pagesubtitle'] = $data['userData']['name'].' '.$data['userData']['lname'].' ('.$data['userData']['role'].')';
+				$data['permtxt'] = "ผู้ดูแลระบบ";
+
+				$this->load->view('admin/adduser_admin_view', $data);
 				break;
 			
 			case 'teacher':
