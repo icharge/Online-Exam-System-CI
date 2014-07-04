@@ -39,7 +39,6 @@ class Subjects extends CI_Controller {
 		}
 		else
 		{
-
 			if ($subjectId == '')
 			{
 				$data['subjectlist'] = $this->subjects->getSubjectList($this->input->get('q'));
@@ -50,7 +49,6 @@ class Subjects extends CI_Controller {
 				$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
 				$this->load->view('admin/edit_subject_view', $data);
 			}
-			
 		}
 		$this->load->view('admin/t_footer_view');
 	}
@@ -106,7 +104,6 @@ class Subjects extends CI_Controller {
 			$this->load->view('admin/add_subject_view');
 			$this->load->view('admin/t_footer_view');
 		}
-
 	}
 
 	public function edit($subjectId)

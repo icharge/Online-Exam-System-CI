@@ -60,11 +60,11 @@ class Users extends CI_Controller {
 					$data['pagesubtitle'] = "ผู้ดูแลระบบ";
 					$data['permtxt'] = "ผู้ดูแลระบบ";
 
-					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
+					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required|trim');
 					$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
 					$this->form_validation->set_rules('passwordconfirm', 'ยืนยันรหัสผ่าน', 'required');
-					$this->form_validation->set_rules('fname', 'ชื่อ', 'required');
-					$this->form_validation->set_rules('surname', 'นามสกุล', 'required');
+					$this->form_validation->set_rules('fname', 'ชื่อ', 'required|trim');
+					$this->form_validation->set_rules('surname', 'นามสกุล', 'required|trim');
 					$this->form_validation->set_message('required', 'คุณต้องกรอก %s');
 					//$this->form_validation->set_error_delimiters('<span style="color: red">', '</span>');
 					if ($this->form_validation->run())
@@ -80,7 +80,7 @@ class Users extends CI_Controller {
 						if ($this->input->post('password') != $this->input->post('passwordconfirm'))
 						{
 							$data['msg_error'] = 'รหัสผ่านไม่ตรงกัน';
-							$this->load->view('admin/adduser_admin_view', $data);
+							$this->load->view('admin/userfield_admin_view', $data);
 						}
 						elseif (($result = $this->Users->addUser("admins", $userData, $adminData))==0)
 						{
@@ -110,7 +110,7 @@ class Users extends CI_Controller {
 							'email' => set_value('email'),
 						);
 						$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
-						$this->load->view('admin/adduser_admin_view', $data);
+						$this->load->view('admin/userfield_admin_view', $data);
 					}
 
 					break;
@@ -118,11 +118,11 @@ class Users extends CI_Controller {
 				case 'teacher':
 					$data['formlink'] = 'admin/users/adduser/teacher';
 					$data['ptitle'] = "ผู้สอน";
-					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
+					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required|trim');
 					$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
 					$this->form_validation->set_rules('passwordconfirm', 'ยืนยันรหัสผ่าน', 'required');
-					$this->form_validation->set_rules('fname', 'ชื่อ', 'required');
-					$this->form_validation->set_rules('surname', 'นามสกุล', 'required');
+					$this->form_validation->set_rules('fname', 'ชื่อ', 'required|trim');
+					$this->form_validation->set_rules('surname', 'นามสกุล', 'required|trim');
 					$this->form_validation->set_rules('faculty', 'คณะ', 'required');
 					$this->form_validation->set_message('required', 'คุณต้องกรอก %s');
 					if ($this->form_validation->run())
@@ -164,15 +164,15 @@ class Users extends CI_Controller {
 				case 'student':
 					$data['formlink'] = 'admin/users/adduser/student';
 					$data['ptitle'] = "นักเรียน";
-					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
+					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required|trim');
 					$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required');
 					$this->form_validation->set_rules('passwordconfirm', 'ยืนยันรหัสผ่าน', 'required');
-					$this->form_validation->set_rules('title', 'คำนำหน้า', 'required');
-					$this->form_validation->set_rules('fname', 'ชื่อ', 'required');
-					$this->form_validation->set_rules('surname', 'นามสกุล', 'required');
+					$this->form_validation->set_rules('title', 'คำนำหน้า', 'required|trim');
+					$this->form_validation->set_rules('fname', 'ชื่อ', 'required|trim');
+					$this->form_validation->set_rules('surname', 'นามสกุล', 'required|trim');
 					// $this->form_validation->set_rules('birth', 'วันเกิด', 'required');
 					$this->form_validation->set_rules('gender', 'เพศ', 'required');
-					$this->form_validation->set_rules('year', 'ปีการศึกษา', 'required');
+					$this->form_validation->set_rules('year', 'ปีการศึกษา', 'required|trim');
 					$this->form_validation->set_rules('faculty', 'คณะ', 'required');
 					$this->form_validation->set_rules('branch', 'สาขา', 'required');
 					$this->form_validation->set_message('required', 'คุณต้องกรอก %s');
@@ -243,7 +243,7 @@ class Users extends CI_Controller {
 						'lname' => set_value('surname'),
 						'email' => set_value('email'),
 					);
-					$this->load->view('admin/adduser_admin_view', $data);
+					$this->load->view('admin/userfield_admin_view', $data);
 					break;
 
 				case 'teacher':
@@ -273,32 +273,114 @@ class Users extends CI_Controller {
 		$this->load->view('admin/t_headerbar_view');
 		$this->load->view('admin/t_sidebar_view');
 		
-		$role = $this->Users->getUserRoleById($uid);
-		$data['userData'] = $this->Users->getUserInfoById($uid,$role);
-		//die(var_dump($data));
-		switch ($role) {
-			case 'admin':
-				$data['formlink'] = 'admin/users/view/'.$data['userData']['id'];
-				$data['pagetitle'] = "ข้อมูลผู้ใช้";
-				$data['pagesubtitle'] = $data['userData']['name'].' '.$data['userData']['lname'].' ('.$data['userData']['role'].')';
-				$data['permtxt'] = "ผู้ดูแลระบบ";
+		if ($this->input->post('submit'))
+		{
+			$this->edit($uid);
+		}
+		else
+		{
+			$role = $this->Users->getUserRoleById($uid);
+			$data['userData'] = $this->Users->getUserInfoById($uid,$role);
+			$data['formlink'] = 'admin/users/view/'.$data['userData']['id'];
+			$data['pagetitle'] = "ข้อมูลผู้ใช้".' '.$data['userData']['name'].
+														' '.$data['userData']['lname'];
+			$data['pagesubtitle'] = ' ('.$this->misc->getRoleTextTh($data['userData']['role']).')';
 
-				$this->load->view('admin/adduser_admin_view', $data);
-				break;
-			
-			case 'teacher':
+			switch ($role) {
+				case 'admin':
+					$data['permtxt'] = "ผู้ดูแลระบบ";
+					$this->load->view('admin/userfield_admin_view', $data);
+					break;
+				
+				case 'teacher':
+					$data['permtxt'] = "ผู้สอน";
+					$this->load->view('admin/userfield_teacher_view', $data);
+					break;
 
-				break;
+				case 'student':
+					$data['permtxt'] = "ผู้เรียน";
+					$this->load->view('admin/userfield_student_view', $data);
+					break;
 
-			case 'student':
-
-				break;
-
-			default:
-				# code...
-				break;
+				default:
+					# code...
+					break;
+			}
 		}
 		$this->load->view('admin/t_footer_view');
+	}
+
+	function edit($uid)
+	{
+		$role = $this->Users->getUserRoleById($uid);
+		switch ($role) {
+			case 'admin':
+				$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
+				$this->form_validation->set_rules('fname', 'ชื่อ', 'required');
+				$this->form_validation->set_rules('surname', 'นามสกุล', 'required');
+				$this->form_validation->set_message('required', 'คุณต้องกรอก %s');
+				if ($this->form_validation->run())
+				{
+					# Form check completed
+					$userData['username'] = $this->input->post('username');
+					$userData['password'] = md5($this->input->post('password'));
+					$userData['role'] = "admin";
+					$adminData['name'] = $this->input->post('fname');
+					$adminData['lname'] = $this->input->post('surname');
+					$adminData['email'] = $this->input->post('email');
+					//$data['userData'] = array_merge($userData,$adminData);
+					if ($this->input->post('password') != $this->input->post('passwordconfirm'))
+					{
+						$data['msg_error'] = 'รหัสผ่านไม่ตรงกัน';
+						$this->load->view('admin/userfield_admin_view', $data);
+					}
+					elseif (($result = $this->Users->addUser("admins", $userData, $adminData))==0)
+					{
+						# Added success
+						$this->session->set_flashdata('msg_info', 
+							'เพิ่ม '.$userData['username'].' เรียบร้อย');
+						
+						//$this->users();
+						redirect('admin/users');
+					}
+					else
+					{
+						# Failed
+						$this->session->set_flashdata('msg_error', 
+							'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้<br>'.$this->misc->getErrorDesc($result,'user'));
+						//$this->users();
+						redirect('admin/users');
+					}
+				}
+				else
+				{
+					// Set user data form
+					$data['userData'] = array(
+						'username' => set_value('username'),
+						'name' => set_value('name'),
+						'lname' => set_value('surname'),
+						'email' => set_value('email'),
+					);
+					$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
+					$this->load->view('admin/userfield_admin_view', $data);
+				}
+				break;
+			
+			default:
+				
+				break;
+		
+		}
+		else
+		{
+			$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
+			$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
+			$data['subjectInfo']['code'] = $this->input->post('code');
+			$data['subjectInfo']['name'] = $this->input->post('name');
+			$data['subjectInfo']['shortname'] = $this->input->post('shortname');
+			$data['subjectInfo']['description'] = $this->input->post('description');
+			$this->load->view('admin/edit_subject_view', $data);
+		}
 	}
 }
 

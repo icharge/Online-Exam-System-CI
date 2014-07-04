@@ -1,5 +1,12 @@
-
 body {
+		padding-bottom: 20px;
+}
+
+.navbar {
+	min-width: 330px;
+}
+
+.padding-top {
 	padding-top: 80px;
 }
 

@@ -1,3 +1,3 @@
 		<!-- Begin Body -->
-		<div class="container">
+		<div class="container padding-top">
 			<div class="row anim">

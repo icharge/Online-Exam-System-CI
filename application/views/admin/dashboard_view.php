@@ -23,12 +23,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Dashboard
+			แผงควบคุม
 			<small>Control panel</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><?php echo anchor('admin', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
-			<li class="active">จัดการผู้ใช้</li>
+			<li class="active">แผงควบคุม</li>
 		</ol>
 	</section>
 

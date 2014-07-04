@@ -1,7 +1,3 @@
-<?php
-$attrLabel = array(
-	'class' => 'col-sm-3 control-label'
-);?>
 <!-- Begin content -->
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
@@ -46,7 +42,7 @@ $attrLabel = array(
 			'role' => 'form',
 			'method' => 'post'
 			);
-		echo form_open($formlink, $attr);
+		echo form_open('admin/users/adduser/teacher', $attr);
 		?>
 		<div class="row">
 			<div class="col-md-5 col-lg-6 col-lg-offset-3">
@@ -73,7 +69,7 @@ $attrLabel = array(
 					</div>
 					<div class="box-body">
 						<div class="form-group<?php if(form_error('username')) echo ' has-error';?>">
-							<?php
+							<?php 
 							echo form_label('ชื่อผู้ใช้ <span class="text-danger">*</span>', 'username');
 							echo form_input(array(
 								'id'=>'username',
@@ -149,13 +145,26 @@ $attrLabel = array(
 							echo form_error('surname', '<span class="label label-danger">', '</span>');
 							?>
 						</div>
+						<div class="form-group<?php if(form_error('faculty')) echo ' has-error';?>">
+							<?php 
+							echo form_label('คณะ <span class="text-danger">*</span>', 'faculty');
+							echo form_input(array(
+								'id'=>'faculty',
+								'name'=>'faculty',
+								'value'=>$userData['fac_id'],
+								'type'=>'text',
+								'class'=>'form-control',
+								'placeholder'=>'คณะ'));
+							echo form_error('faculty', '<span class="label label-danger">', '</span>');
+							?>
+						</div>
 						<div class="form-group<?php if(form_error('email')) echo ' has-error';?>">
 							<?php 
 							echo form_label('อีเมล์', 'email');
 							echo form_input(array(
 								'id'=>'email',
 								'name'=>'email',
-								'value'=>$userData['email'],
+								'value'=>(isset($userData['email'])?$userData['email']:''),
 								'type'=>'text',
 								'class'=>'form-control',
 								'placeholder'=>'อีเมล์'));

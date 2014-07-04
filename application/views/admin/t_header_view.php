@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="app">
+<html lang="en">
 <head>
 	<base href="<?php echo base_url(); ?>">
 	<meta charset="utf-8">
