@@ -1,7 +1,3 @@
-<?php
-$attrLabel = array(
-	'class' => 'col-sm-3 control-label'
-);?>
 <!-- Begin content -->
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
@@ -23,25 +19,6 @@ $attrLabel = array(
 		</h4>
 
 		<?php
-		if (isset($msg_error)) {
-			// echo '
-			// <div class="alert alert-danger alert-dismissable">
-			// <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			// <strong>ผิดพลาด!</strong> '.$msg_error.'</div>';
-			echo "
-			<script>
-			Messenger.options = {
-				extraClasses: 'messenger-fixed messenger-on-top',
-				theme: 'bootstrap'
-			}
-			Messenger().post({
-				message: '".$msg_error."',
-				type: 'danger',
-				hideAfter: 7,
-				showCloseButton: true
-			});
-			</script>";
-		}
 		$attr = array(
 			'role' => 'form',
 			'method' => 'post'
@@ -50,16 +27,38 @@ $attrLabel = array(
 		?>
 		<div class="row">
 			<div class="col-md-5 col-lg-6 col-lg-offset-3">
-				<div class="alert alert-info hidden-xs" style="min-width: 343px">
-					<i class="fa fa-info"></i>
-					<b>คำแนะนำ :</b> <b>เครื่องหมาย</b> <span class="text-danger">*</span>
-					จำเป็นต้องกรอกข้อมูล
-				</div>
-				<div class="alert alert-info visible-xs">
-					<i class="fa fa-info"></i>
-					<b>คำแนะนำ :</b> <b>เครื่องหมาย</b> <span class="text-danger">*</span>
-					จำเป็นต้องกรอกข้อมูล
-				</div>
+<?php
+if (isset($msg_error)) 
+{
+	echo <<<EOL
+<div class="alert alert-danger hidden-xs alert-dismissable" style="min-width: 343px">
+	<i class="fa fa-ban"></i>
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	<b>ผิดพลาด</b> : $msg_error
+</div>
+<div class="alert alert-danger visible-xs alert-dismissable">
+	<i class="fa fa-ban"></i>
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	<b>ผิดพลาด</b> : $msg_error
+</div>
+EOL;
+	}
+	else
+	{
+		echo <<<EOL
+<div class="alert alert-info hidden-xs" style="min-width: 343px">
+	<i class="fa fa-info"></i>
+	<b>คำแนะนำ :</b> <b>เครื่องหมาย</b> <span class="text-danger">*</span>
+	จำเป็นต้องกรอกข้อมูล
+</div>
+<div class="alert alert-info visible-xs">
+	<i class="fa fa-info"></i>
+	<b>คำแนะนำ :</b> <b>เครื่องหมาย</b> <span class="text-danger">*</span>
+	จำเป็นต้องกรอกข้อมูล
+</div>
+EOL;
+	}
+?>
 			</div>
 		</div>
 		<div class="row">
@@ -81,6 +80,7 @@ $attrLabel = array(
 								'value'=>$userData['username'],
 								'type'=>'text',
 								'class'=>'form-control',
+								'disabled'=>'disabled',
 								'placeholder'=>'ชื่อผู้ใช้'));
 							echo form_error('username', '<span class="label label-danger">', '</span>');
 							?>
@@ -170,7 +170,7 @@ $attrLabel = array(
 			<div class="row row-centered">
 				<div class="col-sm-12">
 					<?php
-					echo form_submit('submit', 'เพิ่มผู้ใช้', 'class="btn btn-primary"');
+					echo form_submit('submit', ($this->misc->getMethodName()=="adduser"?'เพิ่มผู้ใช้':'แก้ไขข้อมูล') , 'class="btn btn-primary"');
 					?>
 				</div>
 			</div>

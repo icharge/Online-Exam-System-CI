@@ -42,7 +42,7 @@
 			'role' => 'form',
 			'method' => 'post'
 			);
-		echo form_open('admin/users/adduser/student', $attr);
+		echo form_open($formlink, $attr);
 		?>
 		<div class="row">
 			<div class="col-md-5 col-lg-6 col-lg-offset-3">
@@ -77,6 +77,7 @@
 								'value'=>$userData['username'],
 								'type'=>'text',
 								'class'=>'form-control',
+								'disabled'=>'disabled',
 								'placeholder'=>'ชื่อผู้ใช้'));
 							echo form_error('username', '<span class="label label-danger">', '</span>');
 							?>
@@ -232,7 +233,7 @@
 			<div class="row row-centered">
 				<div class="col-sm-12">
 					<?php
-					echo form_submit('submit', 'เพิ่มผู้ใช้', 'class="btn btn-primary"');
+					echo form_submit('submit', ($this->misc->getMethodName()=="adduser"?'เพิ่มผู้ใช้':'แก้ไขข้อมูล'), 'class="btn btn-primary"');
 					?>
 				</div>
 			</div>

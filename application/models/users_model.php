@@ -111,7 +111,7 @@ class Users_model extends CI_Model {
 			case 'teacher':
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
-				'fac_id'
+				'email', 'fac_id'
 				);
 			$cause = array('users.id' => $id);
 			$query = $this->db
@@ -126,7 +126,8 @@ class Users_model extends CI_Model {
 			case 'student':
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
-				'birth', 'gender', 'year', 'fac_id', 'branch_id'
+				'birth', 'gender', 'year', 'fac_id', 'branch_id',
+				'email'
 				);
 			$cause = array('users.id' => $id);
 			$query = $this->db
@@ -258,7 +259,6 @@ class Users_model extends CI_Model {
 		$tableData['id'] = $getId;
 		$query_admin = $this->db->insert($table, $tableData);
 		
-
 		$this->db->trans_complete();
 		if ($this->db->trans_status())
 		{
@@ -267,6 +267,26 @@ class Users_model extends CI_Model {
 		else
 		{
 			// die(var_dump($errno));
+			return $errno;
+		}
+	}
+
+	function updateUser($table, $userData, $dataSet, $uid)
+	{
+		$this->db->trans_begin();
+		if (isset($userData)) 
+		{
+			$query = $this->db->update('users', $userData, array('id'=>$uid));
+			$errno = $this->db->_error_number();
+		}
+		$query = $this->db->update($table, $dataSet, array('id'=>$uid));
+		$this->db->trans_complete();
+		if ($this->db->trans_status())
+		{
+			return 0;
+		}
+		else
+		{
 			return $errno;
 		}
 	}
