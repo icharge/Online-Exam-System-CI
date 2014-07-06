@@ -157,7 +157,19 @@ class Misc_model extends CI_Model {
 		}
 		return (substr($haystack, -$length) === $needle);
 	}
-
+	
+	function doLog($action,$uid='')
+	{
+		$logData = array(
+			'uid' => ($uid!='')?$uid:($this->session->userdata('uid')!="")?$this->session->userdata('uid'):'-1',
+			'action' => $action,
+			'ipaddress' => $_SERVER['REMOTE_ADDR'],
+			'iphostname' => GetHostByName($_SERVER['REMOTE_ADDR']),
+			'iplocal' => isset($_SERVER['HTTP_X_FORWARDED_FOR'])?$_SERVER['HTTP_X_FORWARDED_FOR']:'',
+			'useragent' => $this->input->user_agent()
+		);
+		$this->db->insert('log_usage', $logData);
+	}
 }
 
 /* End of file misc.php */
