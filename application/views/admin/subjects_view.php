@@ -86,7 +86,7 @@ if ($this->session->flashdata('msg_error')) {
 							'method' => 'get'
 							);
 						echo form_open('admin/subjects', $attr); ?>
-							<div class="col-xs-6 col-sm-5">
+							<div class="col-xs-6 col-sm-5" style="z-index:500;">
 								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
 								<label><?php 
 									$options = array(
