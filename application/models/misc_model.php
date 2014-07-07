@@ -82,6 +82,11 @@ class Misc_model extends CI_Model {
 		}
 	}
 
+	function btnUserfield()
+	{
+		return $this->getMethodName()=="adduser"?'เพิ่มผู้ใช้':'แก้ไขข้อมูล';
+	}
+
 	function getRoleTextTh($strRole)
 	{
 		switch ($strRole) {

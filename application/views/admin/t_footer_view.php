@@ -35,6 +35,7 @@
 	<!-- <script src="vendor/js/AdminLTE/demo.js" type="text/javascript"></script> -->
 	<!-- TR Href -->
 	<script>
+	$(function() {
 		$('body').on('mousedown', 'tr[href]', function(e){
 			var click = e.which;
 			var url = $(this).attr('href');
@@ -49,6 +50,22 @@
 				return true;
 			}
 		});
+		//iCheck for checkbox and radio inputs
+		$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+				checkboxClass: 'icheckbox_minimal',
+				radioClass: 'iradio_minimal'
+		});
+		//Red color scheme for iCheck
+		$('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+				checkboxClass: 'icheckbox_minimal-red',
+				radioClass: 'iradio_minimal-red'
+		});
+		//Flat red color scheme for iCheck
+		$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+				checkboxClass: 'icheckbox_flat-red',
+				radioClass: 'iradio_flat-red'
+		});
+	});
 	</script>
 	<!-- End Footer -->
 </body>

@@ -90,7 +90,7 @@
 							</ul>
 						</li>
 						<li class="pull-left header">
-							<i class="fa fa-th"></i> ผู้ดูแล
+							<i class="glyphicon glyphicon-th"></i> ผู้ดูแล
 						</li>
 					</ul>
 					<div class="tab-content">
@@ -188,7 +188,7 @@
 							</ul>
 						</li>
 						<li class="pull-left header">
-							<i class="fa fa-th"></i> ผู้สอน
+							<i class="glyphicon glyphicon-th"></i> ผู้สอน
 						</li>
 					</ul>
 					<div class="tab-content">
@@ -268,7 +268,7 @@
 									</tr>
 									";
 								}
-								?>				
+								?>
 							</tbody>
 						</table>
 					</div>
@@ -288,7 +288,7 @@
 								</ul>
 							</li>
 							<li class="pull-left header">
-								<i class="fa fa-th"></i> นักเรียน
+								<i class="glyphicon glyphicon-th"></i> นักเรียน
 							</li>
 						</ul>
 						<div class="tab-content">

@@ -80,11 +80,20 @@ EOL;
 								'value'=>$userData['username'],
 								'type'=>'text',
 								'class'=>'form-control',
-								'disabled'=>'disabled',
+								$this->Users->Userfield()=>'',
 								'placeholder'=>'ชื่อผู้ใช้'));
 							echo form_error('username', '<span class="label label-danger">', '</span>');
 							?>
 						</div>
+						<?php
+						if($this->Users->isEditPage())
+						{
+							echo '<div class="callout callout-warning">
+								<h4>รหัสผ่าน</h4>
+								<p>หากไม่เปลี่ยนแปลง ให้ปล่อยว่าง</p>
+						</div>';
+						}
+						?>
 						<div class="form-group<?php if(form_error('password')) echo ' has-error';?>">
 							<?php 
 							echo form_label('รหัสผ่าน <span class="text-danger">*</span>', 'password');
@@ -170,7 +179,7 @@ EOL;
 			<div class="row row-centered">
 				<div class="col-sm-12">
 					<?php
-					echo form_submit('submit', ($this->misc->getMethodName()=="adduser"?'เพิ่มผู้ใช้':'แก้ไขข้อมูล') , 'class="btn btn-primary"');
+					echo form_submit('submit', $this->misc->btnUserfield(), 'class="btn btn-primary"');
 					?>
 				</div>
 			</div>

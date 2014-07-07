@@ -231,8 +231,8 @@ class Users extends CI_Controller {
 				case 'teacher':
 					$data['formlink'] = 'admin/users/adduser/teacher';
 					$data['pagetitle'] = "เพิ่มผู้ใช้";
-					$data['pagesubtitle'] = "ผู้ดูแลระบบ";
-					$data['permtxt'] = "ผู้ดูแลระบบ";
+					$data['pagesubtitle'] = "ผู้สอน";
+					$data['permtxt'] = "ผู้สอน";
 
 					// Set user data form
 					$data['userData'] = array(
@@ -246,8 +246,23 @@ class Users extends CI_Controller {
 
 				case 'student':
 					$data['formlink'] = 'admin/users/adduser/student';
-					$data['ptitle'] = "ผู้เรียน";
-					$this->load->view('admin/adduser_student_view', $data);
+					$data['pagetitle'] = "เพิ่มผู้ใช้";
+					$data['pagesubtitle'] = "ผู้เรียน";
+					$data['permtxt'] = "ผู้เรียน";
+
+					// Set user data form
+					$data['userData'] = array(
+						'username' => set_value('username'),
+						'name' => set_value('name'),
+						'lname' => set_value('surname'),
+						'birth' => set_value('birth'),
+						'gender' => set_value('gender'),
+						'year' => set_value('year'),
+						'fac_id' => set_value('faculty'),
+						'branch_id' => set_value('branch'),
+						'email' => set_value('email'),
+					);
+					$this->load->view('admin/userfield_student_view', $data);
 					break;
 				
 				default:

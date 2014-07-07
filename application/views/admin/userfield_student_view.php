@@ -77,11 +77,20 @@
 								'value'=>$userData['username'],
 								'type'=>'text',
 								'class'=>'form-control',
-								'disabled'=>'disabled',
+								$this->Users->Userfield()=>'',
 								'placeholder'=>'ชื่อผู้ใช้'));
 							echo form_error('username', '<span class="label label-danger">', '</span>');
 							?>
 						</div>
+						<?php
+						if($this->Users->isEditPage())
+						{
+							echo '<div class="callout callout-warning">
+								<h4>รหัสผ่าน</h4>
+								<p>หากไม่เปลี่ยนแปลง ให้ปล่อยว่าง</p>
+						</div>';
+						}
+						?>
 						<div class="form-group<?php if(form_error('password')) echo ' has-error';?>">
 							<?php 
 							echo form_label('รหัสผ่าน <span class="text-danger">*</span>', 'password');
@@ -163,12 +172,12 @@
 							<?php 
 							echo form_label('เพศ <span class="text-danger">*</span>', 'gender');
 							?>
-								<div class="">
+								<div>
 									<label class="radio-inline">
-										<?php echo form_radio('gender', 'male', ($userData['gender']=="male"?true:false))." ชาย";?>
+										<?php echo form_radio('gender', 'male', ($userData['gender']=="male"?true:false),'class="flat-red"')." ชาย";?>
 									</label>
 									<label class="radio-inline">
-										<?php echo form_radio('gender', 'female', ($userData['gender']=="female"?true:false))." หญิง";?>
+										<?php echo form_radio('gender', 'female', ($userData['gender']=="female"?true:false),'class="flat-red"')." หญิง";?>
 									</label>
 								</div>
 								<?php echo form_error('gender', '<span class="label label-danger">', '</span>'); ?>

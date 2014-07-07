@@ -160,3 +160,36 @@ div.messenger-message {
  * End Animation
  */
 
+/* Sidebar menu active border */
+ul.sidebar-menu > li, ul.sidebar-menu > li.treeview > ul.treeview-menu > li {
+	position: relative;
+}
+ul.sidebar-menu > li.active:not(.treeview)::after, 
+ul.sidebar-menu > li.treeview > ul.treeview-menu > li.active::after
+{
+	border-right: solid #09F 5px;
+	display: block;
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+}
+
+.nav-tabs-custom > .nav-tabs > li > a:hover {
+	background-color: #eee;
+}
+
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+	border-color: transparent;
+}
+
+/* Searchform button */
+form.searchform > div > div > span > .btn {
+	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+form.searchform > div > div > input[type=text]:focus + span > .btn {
+	border-color: #3c8dbc !important;
+}

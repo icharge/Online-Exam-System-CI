@@ -174,6 +174,16 @@ class Users_model extends CI_Model {
 		return $this->session->userdata('logged') == true ? true : false;
 	}
 
+	function Userfield()
+	{
+		return $this->misc->getMethodName()=="adduser"?'enabled':'disabled';
+	}
+
+	function isEditPage()
+	{
+		return $this->misc->getMethodName()=="view"?true:false;
+	}
+
 	function getUsersByGroup($group, $keyword='')
 	{
 		switch ($group) {

@@ -20,6 +20,8 @@
 	<link href="vendor/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
 	<!-- bootstrap wysihtml5 - text editor -->
 	<link href="vendor/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+	<!-- iCheck for checkboxes and radio inputs -->
+	<link href="vendor/css/iCheck/all.css" rel="stylesheet" type="text/css" />
 	<!-- Theme style -->
 	<link href="vendor/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 	<!-- My Style -->

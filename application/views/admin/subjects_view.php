@@ -1,34 +1,24 @@
 <!-- Begin content -->
-<script>
-	$('body').on('mousedown', 'tr[href]', function(e){
-		var click = e.which;
-		var url = $(this).attr('href');
-		if(url){
-			if(click == 1){
-				window.location.href = url;
-			}
-			else if(click == 2){
-				window.open(url, '_blank');
-				window.focus();
-			}
-			return true;
-		}
-	});
+<!-- Right side column. Contains the navbar and content of the page -->
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			<span class="glyphicon glyphicon-book"></span> จัดการวิชาในระบบ
+			<small>Subject Management</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><?php echo anchor('admin', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
+			<li class="active">จัดการวิชาในระบบ</li>
+		</ol>
+	</section>
 
-</script>
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-	<ol class="breadcrumb">
-		<li><?php echo anchor('admin', 'หน้าแรก');?></li>
-		<li class="active">จัดการวิชาในระบบ</li>
-	</ol>
-</div>
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main <?php if(!$this->session->flashdata('noAnim')) echo "animate-fade-up";?>">
-	<div class="page-header">
-		<h1><span class="glyphicon glyphicon-book"></span> จัดการวิชาในระบบ <small></small></h1>
-		<div class="well well-sm">
-			<span>ข้อมูลพื้นฐานของรายวิชาที่มีการเรียนการสอน และอาจมีการจัดสอบ เปรียบเสมือนคำอธิบายวิชาเรียนนั้น ๆ ซึ่งคุณสามารถใช้ข้อมูลดังกล่าว เปิดวิชาที่สอบได้</span>
-		</div>
-	</div>
+	<!-- Main content -->
+	<section class="content">
+		<h4 class="page-header">
+			<small>ข้อมูลพื้นฐานของรายวิชาที่มีการเรียนการสอน</small>
+		</h4>
+
 	<?php
 	if ($this->session->flashdata('msg_info')) {
 		// echo '
@@ -71,50 +61,22 @@ if ($this->session->flashdata('msg_error')) {
 }
 
 ?>
-<div class="well well-sm">
-	<label for="faculty">เลือกดูจาก </label>
-	<label><?php 
-		$options = array(
-			'all' => 'ทั้งหมด',
-			'วิทยาศาสตร์และศิลปศาสตร์' => 
-			array(
-				'all' => 'วิทยาศาสตร์และศิลปศาสตร (ทั้งหมด)',
-				'it' => 'เทคโนโลยีสารสนเทศ',
-				'at' => 'เทคโนโลยีการเกษตร',
-				'is' => 'ระบบสารสนเทศ',
-				'ba' => 'บริหารธุรกิจ',
-				'lbt' => 'การจัดการโลจิสติกส์และการค้าชายแดน'
-			),
-			'marine' => 'เทคโนโลยีทางทะเล',
-			'อัญมณี' => 
-			array(
-				'all' => 'อัญมณี (ทั้งหมด)',
-				'g1' => 'อัญมณีและเครื่องประดับ',
-				'g2' => 'ธุรกิจอัญมณีและเครื่องประดับ',
-				'g3' => 'ออกแบบเครื่องประดับ'
-			)
-		);
-		echo form_dropdown('faculty', $options, 'default', 'id="faculty" class="form-control"');
-
-	?></label>
-</div>
 <div class="row <?php if($this->session->flashdata('noAnim')) echo "animate-fade-up";?>">
 	<div class="col-md-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<span><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;วิชาในระบบ</span>
-					<div class="panel-btn btn-group pull-right">
-						<?php echo anchor('admin/subjects/add', 'เพิ่ม', 'class="btn btn-sm btn-info"');?>
-						<button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
-							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><?php echo anchor('admin/subjects/edit/', 'แก้ไข');?></li>
-						</ul>
-					</div>
-				</div>
-				<div class="panel-body search">
+		<div class="box box-info nav-tabs-custom">
+			<ul class="nav nav-tabs  pull-right">
+				<li class="dropdown pull-right">
+					<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><?php echo anchor('admin/subjects/add', 'เพิ่ม');?></li>
+					</ul>
+				</li>
+				<li class="pull-left header">
+					<i class="glyphicon glyphicon-th"></i> วิชาในระบบ
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="box-body">
 					<div class="row">
 						<?php
 						$attr = array(
@@ -123,85 +85,108 @@ if ($this->session->flashdata('msg_error')) {
 							'role' => 'search',
 							'method' => 'get'
 							);
-						echo form_open('admin/subjects', $attr);
-						?>
-						<div class="col-xs-6">
-							<div class="recperpage">
-								<label>แสดงรายการ
-									<?php
-									$attr_pp = array(
-										'10' => '10',
-										'25' => '25',
-										'50' => '50',
-										'100' => '100'
-										);
-									if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-									else $perpage = '25';
-								//echo $perpage;
-									echo form_dropdown('perpage', 
-										$attr_pp, 
-										$perpage, 
-										'onchange="submitFrm(document.forms.searchsubject)"');
-										?> ต่อหน้า
-
+						echo form_open('admin/subjects', $attr); ?>
+							<div class="col-xs-6 col-sm-5">
+								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
+								<label><?php 
+									$options = array(
+										'all' => 'ทั้งหมด',
+										'วิทยาศาสตร์และศิลปศาสตร์' => 
+										array(
+											'all' => 'วิทยาศาสตร์และศิลปศาสตร (ทั้งหมด)',
+											'it' => 'เทคโนโลยีสารสนเทศ',
+											'at' => 'เทคโนโลยีการเกษตร',
+											'is' => 'ระบบสารสนเทศ',
+											'ba' => 'บริหารธุรกิจ',
+											'lbt' => 'การจัดการโลจิสติกส์และการค้าชายแดน'
+										),
+										'marine' => 'เทคโนโลยีทางทะเล',
+										'อัญมณี' => 
+										array(
+											'all' => 'อัญมณี (ทั้งหมด)',
+											'g1' => 'อัญมณีและเครื่องประดับ',
+											'g2' => 'ธุรกิจอัญมณีและเครื่องประดับ',
+											'g3' => 'ออกแบบเครื่องประดับ'
+										)
+									);
+									echo form_dropdown('faculty', $options, 'default', 'id="faculty" class="form-control input-sm"');
+							?></label>
+							</div>
+							<div class="col-sm-7 ">
+								<div class="col-sm-6 col-md-6 text-right" style="padding-right: 0;">
+									<label>รายการ/หน้า</label>
+									<label>	
+										<?php
+										$attr_pp = array(
+											'10' => '10',
+											'25' => '25',
+											'50' => '50',
+											'100' => '100'
+											);
+										if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
+										else $perpage = '25';
+										echo form_dropdown('perpage', 
+											$attr_pp, 
+											$perpage, 
+											'class="form-control input-sm" onchange="submitFrm(document.forms.searchsubject)"');
+											?>
 									</label>
 								</div>
-							</div>
-							<div class="col-xs-6 text-right">
-								<div class="dataTables_filter" id="example1_filter">
-									<label>ค้นหา: 
-										<!-- <input type="text" name="q"> -->
-										<?php
-										echo form_input(array(
-											'id'=>'searchtxt',
-											'name'=>'q',
-											'type'=>'text',
-											'class'=>'form-control',
-											'value'=>$this->input->get('q'),
-											'placeholder'=>''
-											));
-										?>
-										</label>
-									</div>
+								<div class="input-group input-group-sm col-sm-6 col-lg-6 pull-right">
+									<?php
+									echo form_input(array(
+										'id'=>'searchtxt',
+										'name'=>'q',
+										'type'=>'text',
+										'class'=>'form-control input-sm',
+										'value'=>$this->input->get('q'),
+										'placeholder'=>'ค้นหา'
+										));
+									?>
+									<span class="input-group-btn">
+										<button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+									</span>
 								</div>
-								<?php echo form_close(); ?>
 							</div>
-						</div>
-						<table class="table table-striped table-hover table-bordered rowclick">
-							<thead>
-								<tr>
-									<th style="width: 79px;">รหัสวิชา</th>
-									<th style="width: 25%;">ชื่อ</th>
-									<th style="width: 88px;">ชื่อย่อ</th>
-									<th>คำอธิบาย</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-									if (($subjectlist)) {
-										foreach ($subjectlist as $item) {
-											echo "
-											<tr href=\"".$this->misc->getHref('admin/subjects/view')."/$item[code]\">
-											<td>$item[code]</td>
-											<td>$item[name]</td>
-											<td>$item[shortname]</td>
-											<td>".$this->misc->getShortText($item['description'])."</td>
-											</tr>
-											";
-										}
-									} else {
-										echo "<tr class='warning'><td colspan='4' class='text-center'>ไม่พบข้อมูล</td></tr>";
-									}
-									
-								?>				
-							</tbody>
-						</table>
+						<?php echo form_close();?>
 					</div>
+				</div>
+				<div class="box-body no-padding">
+					<table class="table table-striped table-hover rowclick">
+						<thead>
+							<tr>
+								<th style="width: 79px;">รหัสวิชา</th>
+								<th style="width: 25%;">ชื่อ</th>
+								<th style="width: 88px;">ชื่อย่อ</th>
+								<th>คำอธิบาย</th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+							if (($subjectlist)) {
+								foreach ($subjectlist as $item) {
+									echo "
+									<tr href=\"".$this->misc->getHref('admin/subjects/view')."/$item[code]\">
+									<td>$item[code]</td>
+									<td>$item[name]</td>
+									<td>$item[shortname]</td>
+									<td>".$this->misc->getShortText($item['description'])."</td>
+									</tr>
+									";
+								}
+							} else {
+								echo "<tr class='warning'><td colspan='4' class='text-center'>ไม่พบข้อมูล</td></tr>";
+							}
+							
+						?>				
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-		<script>
-		function submitFrm(frm) {
-			frm.submit();
-		}</script>
+	</div>
+	<script>
+	function submitFrm(frm) {
+		frm.submit();
+	}</script>
 <!-- End content -->
