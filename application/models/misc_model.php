@@ -7,6 +7,7 @@ class Misc_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('pagination');
 	}
 
 	function getClassName()
@@ -80,11 +81,6 @@ class Misc_model extends CI_Model {
 		} else {
 			return $classAttr;
 		}
-	}
-
-	function btnUserfield()
-	{
-		return $this->getMethodName()=="adduser"?'เพิ่มผู้ใช้':'แก้ไขข้อมูล';
 	}
 
 	function getRoleTextTh($strRole)
@@ -161,6 +157,44 @@ class Misc_model extends CI_Model {
 			return true;
 		}
 		return (substr($haystack, -$length) === $needle);
+	}
+
+	function PaginationInit($baseurl, $total=0, $perpage=25, $numlink=3)
+	{
+		if ($total == "") $total=0;
+		if ($perpage == "") $perpage=25;
+		$config['base_url'] = base_url().$this->config->item('index_page').'/'.$baseurl;
+		$config['total_rows'] = $total;
+		$config['per_page'] = $perpage;
+		$config['num_links'] = $numlink;
+		$config['use_page_numbers'] = TRUE;
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'p';
+		$config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = '«';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = '»';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_link'] = '›';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_link'] = '‹';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+
+		return $this->pagination->initialize($config);
+	}
+	function PageOffset($perpage, $page=1)
+	{
+		if ($page=='') $page = 1;
+		return ($page-1) * $perpage;
 	}
 	
 	function doLog($action,$uid='')

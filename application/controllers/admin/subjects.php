@@ -23,7 +23,14 @@ class Subjects extends CI_Controller {
 
 	public function index()
 	{
-		$this->view();
+		$this->load->view('admin/t_header_view');
+		$this->load->view('admin/t_headerbar_view');
+		$this->load->view('admin/t_sidebar_view');
+
+		$data['subjectlist'] = $this->subjects->getSubjectList($this->input->get('q'));
+		$this->load->view('admin/subjects_view', $data);
+		//$this->view();
+		$this->load->view('admin/t_footer_view');
 	}
 
 	public function view($subjectId='')
@@ -41,13 +48,15 @@ class Subjects extends CI_Controller {
 		{
 			if ($subjectId == '')
 			{
-				$data['subjectlist'] = $this->subjects->getSubjectList($this->input->get('q'));
-				$this->load->view('admin/subjects_view', $data);
+				redirect('admin/subjects');
 			}
 			else
 			{
 				$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
-				$this->load->view('admin/edit_subject_view', $data);
+				$data['formlink'] = 'admin/subjects/view/'.$data['subjectInfo']['code'];
+				$data['pagetitle'] = "รายละเอียดวิชา ".$data['subjectInfo']['code']." ".$data['subjectInfo']['name'];
+				$data['pagesubtitle'] = "";
+				$this->load->view('admin/field_subject_view', $data);
 			}
 		}
 		$this->load->view('admin/t_footer_view');
@@ -56,9 +65,18 @@ class Subjects extends CI_Controller {
 	public function add()
 	{
 		$this->load->view('admin/t_header_view');
-		$this->load->view('admin/t_nav_view');
-		$this->load->view('admin/t_beginbody_view');
+		$this->load->view('admin/t_headerbar_view');
 		$this->load->view('admin/t_sidebar_view');
+
+		$data['formlink'] = 'admin/subjects/add';
+		$data['pagetitle'] = "เพิ่มวิชา";
+		$data['pagesubtitle'] = "ในระบบ";
+		$data['subjectInfo'] = array(
+			'code' => set_value('code'),
+			'name' => set_value('name'),
+			'shortname' => set_value('shortname'),
+			'description' => set_value('description'),
+		);
 
 		if ($this->input->post('submit'))
 		{
@@ -91,17 +109,17 @@ class Subjects extends CI_Controller {
 			else
 			{
 				$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
-				$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
+				//$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
 				$data['subjectInfo']['code'] = $this->input->post('code');
 				$data['subjectInfo']['name'] = $this->input->post('name');
 				$data['subjectInfo']['shortname'] = $this->input->post('shortname');
 				$data['subjectInfo']['description'] = $this->input->post('description');
-				$this->load->view('admin/edit_subject_view', $data);
+				$this->load->view('admin/field_subject_view', $data);
 			}
 		}
 		else
 		{
-			$this->load->view('admin/add_subject_view');
+			$this->load->view('admin/field_subject_view', $data);
 			$this->load->view('admin/t_footer_view');
 		}
 	}
@@ -139,11 +157,15 @@ class Subjects extends CI_Controller {
 		{
 			$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
 			$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
+			$data['formlink'] = 'admin/subjects/view/'.$data['subjectInfo']['code'];
+			$data['pagetitle'] = "รายละเอียดวิชา ".$data['subjectInfo']['code']." ".$data['subjectInfo']['name'];
+			$data['pagesubtitle'] = "";
+			
 			$data['subjectInfo']['code'] = $this->input->post('code');
 			$data['subjectInfo']['name'] = $this->input->post('name');
 			$data['subjectInfo']['shortname'] = $this->input->post('shortname');
 			$data['subjectInfo']['description'] = $this->input->post('description');
-			$this->load->view('admin/edit_subject_view', $data);
+			$this->load->view('admin/field_subject_view', $data);
 		}
 	}
 

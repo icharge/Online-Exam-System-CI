@@ -242,7 +242,7 @@
 			<div class="row row-centered">
 				<div class="col-sm-12">
 					<?php
-					echo form_submit('submit', ($this->misc->getMethodName()=="adduser"?'เพิ่มผู้ใช้':'แก้ไขข้อมูล'), 'class="btn btn-primary"');
+					echo form_submit('submit', $this->Users->btnUserfield(), 'class="btn btn-primary"');
 					?>
 				</div>
 			</div>

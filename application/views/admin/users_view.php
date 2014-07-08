@@ -97,54 +97,50 @@
 						<?php
 							$attr = array(
 							'name' => 'searchadmin',
-							'class' => '',
+							'class' => 'searchform',
 							'role' => 'search',
 							'method' => 'get'
 							);
 						echo form_open('admin/users/viewgroup/admin', $attr);
 						?>
-						<div class="row">
-							<div class="col-xs-6">
-								<div class="recperpage">
-									<label>แสดงรายการ
-								<?php
-									$attr_pp = array(
-										'10' => '10',
-										'25' => '25',
-										'50' => '50',
-										'100' => '100'
-									);
-									if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-									else $perpage = '25';
-									//echo $perpage;
-									echo form_dropdown('perpage', 
-										$attr_pp, 
-										$perpage, 
-										'onchange="submitFrm(document.forms.searchadmin)"');
-							
-								?> ต่อหน้า
-							
+							<div class="col-xs-6 col-sm-5" style="z-index:500;"></div>
+							<div class="col-sm-7 ">
+								<div class="col-sm-6 col-md-6 text-right" style="padding-right: 0;">
+									<label>รายการ/หน้า</label>
+									<label>	
+										<?php
+										$attr_pp = array(
+											'10' => '10',
+											'25' => '25',
+											'50' => '50',
+											'100' => '100'
+											);
+										if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
+										else $perpage = '25';
+										echo form_dropdown('perpage', 
+											$attr_pp, 
+											$perpage, 
+											'class="form-control input-sm" onchange="submitFrm(document.forms.searchadmin)"');
+											?>
 									</label>
 								</div>
-							</div>
-							<div class="col-xs-6 text-right">
-								<div class="dataTables_filter" id="example1_filter">
-									<label>ค้นหา: 
-										<!-- <input type="text" name="q"> -->
-							<?php
-								echo form_input(array(
-									'id'=>'searchtxt',
-									'name'=>'q',
-									'type'=>'text',
-									'class'=>'',
-									'value'=>$this->input->get('q'),
-									'placeholder'=>''
-								));
-							?>
-									</label>
+								<div class="input-group input-group-sm col-sm-6 col-lg-6 pull-right">
+									<?php
+									echo form_hidden('p', $this->input->get('p'));
+									echo form_input(array(
+										'id'=>'searchtxt',
+										'name'=>'q',
+										'type'=>'text',
+										'class'=>'form-control input-sm',
+										'value'=>$this->input->get('q'),
+										'placeholder'=>'ค้นหา'
+										));
+									?>
+									<span class="input-group-btn">
+										<button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+									</span>
 								</div>
 							</div>
-						</div>
 						<?php echo form_close(); ?>
 					</div>
 					<div class="box-body no-padding">
@@ -173,6 +169,9 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="box-footer clearfix">
+						<?php echo $this->pagination->create_links();?>
+					</div>
 				</div>
 				<?php } ?>
 
@@ -195,53 +194,49 @@
 					<?php
 						$attr = array(
 							'name' => 'searchteacher',
-							'class' => '',
+							'class' => 'searchform',
 							'role' => 'search',
 							'method' => 'get'
 						);
 					echo form_open('admin/users/viewgroup/teacher', $attr);
 					?>
-						<div class="row">
-							<div class="col-xs-6">
-								<div class="recperpage">
-									<label>แสดงรายการ
-								<?php
-									$attr_pp = array(
-										'10' => '10',
-										'25' => '25',
-										'50' => '50',
-										'100' => '100'
-									);
-									if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-									else $perpage = '25';
-									//echo $perpage;
+						<div class="col-xs-6 col-sm-5" style="z-index:500;"></div>
+							<div class="col-sm-7 ">
+								<div class="col-sm-6 col-md-6 text-right" style="padding-right: 0;">
+									<label>รายการ/หน้า</label>
+									<label>	
+										<?php
+										$attr_pp = array(
+											'10' => '10',
+											'25' => '25',
+											'50' => '50',
+											'100' => '100'
+											);
+										if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
+										else $perpage = '25';
 										echo form_dropdown('perpage', 
-										$attr_pp, 
-										$perpage, 
-										'onchange="submitFrm(document.forms.searchteacher)"');
-								?> ต่อหน้า
-							
+											$attr_pp, 
+											$perpage, 
+											'class="form-control input-sm" onchange="submitFrm(document.forms.searchteacher)"');
+											?>
 									</label>
 								</div>
-							</div>
-							<div class="col-xs-6 text-right">
-								<div class="dataTables_filter" id="example1_filter">
-									<label>ค้นหา: 
-										<!-- <input type="text" name="q"> -->
-							<?php
-								echo form_input(array(
-									'id'=>'searchtxt',
-									'name'=>'q',
-									'type'=>'text',
-									'class'=>'',
-									'value'=>$this->input->get('q'),
-									'placeholder'=>''
-								));
-							?>
-									</label>
+								<div class="input-group input-group-sm col-sm-6 col-lg-6 pull-right">
+									<?php
+									echo form_input(array(
+										'id'=>'searchtxt',
+										'name'=>'q',
+										'type'=>'text',
+										'class'=>'form-control input-sm',
+										'value'=>$this->input->get('q'),
+										'placeholder'=>'ค้นหา'
+										));
+									?>
+									<span class="input-group-btn">
+										<button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+									</span>
 								</div>
 							</div>
-						</div>
 						<?php echo form_close(); ?>
 					</div>
 					<div class="box-body no-padding">
@@ -295,53 +290,49 @@
 					<?php
 						$attr = array(
 							'name' => 'searchstudent',
-							'class' => '',
+							'class' => 'searchform',
 							'role' => 'search',
 							'method' => 'get'
 						);
 					echo form_open('admin/users/viewgroup/student', $attr);
 					?>
-						<div class="row">
-							<div class="col-xs-6">
-								<div class="recperpage">
-									<label>แสดงรายการ
-								<?php
-									$attr_pp = array(
-										'10' => '10',
-										'25' => '25',
-										'50' => '50',
-										'100' => '100'
-									);
-									if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-									else $perpage = '25';
-									//echo $perpage;
-									echo form_dropdown('perpage', 
-										$attr_pp, 
-										$perpage, 
-										'onchange="submitFrm(document.forms.searchstudent)"');
-								?> ต่อหน้า
-							
+						<div class="col-xs-6 col-sm-5" style="z-index:500;"></div>
+							<div class="col-sm-7 ">
+								<div class="col-sm-6 col-md-6 text-right" style="padding-right: 0;">
+									<label>รายการ/หน้า</label>
+									<label>	
+										<?php
+										$attr_pp = array(
+											'10' => '10',
+											'25' => '25',
+											'50' => '50',
+											'100' => '100'
+											);
+										if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
+										else $perpage = '25';
+										echo form_dropdown('perpage', 
+											$attr_pp, 
+											$perpage, 
+											'class="form-control input-sm" onchange="submitFrm(document.forms.searchstudent)"');
+											?>
 									</label>
 								</div>
-							</div>
-							<div class="col-xs-6 text-right">
-								<div class="dataTables_filter" id="example1_filter">
-									<label>ค้นหา: 
-										<!-- <input type="text" name="q"> -->
-							<?php
-								echo form_input(array(
-									'id'=>'searchtxt',
-									'name'=>'q',
-									'type'=>'text',
-									'class'=>'',
-									'value'=>$this->input->get('q'),
-									'placeholder'=>''
-								));
-							?>
-									</label>
+								<div class="input-group input-group-sm col-sm-6 col-lg-6 pull-right">
+									<?php
+									echo form_input(array(
+										'id'=>'searchtxt',
+										'name'=>'q',
+										'type'=>'text',
+										'class'=>'form-control input-sm',
+										'value'=>$this->input->get('q'),
+										'placeholder'=>'ค้นหา'
+										));
+									?>
+									<span class="input-group-btn">
+										<button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+									</span>
 								</div>
 							</div>
-						</div>
 						<?php echo form_close(); ?>
 					</div>
 					<div class="box-body no-padding">
@@ -377,6 +368,9 @@
 								?>				
 								</tbody>
 							</table>
+						</div>
+						<div class="box-footer clearfix">
+							<?php //echo $this->pagination->create_links();?>
 						</div>
 					</div>
 					<?php } ?>

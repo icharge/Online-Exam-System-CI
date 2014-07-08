@@ -1,4 +1,4 @@
-<!-- Begin content -->
+Begin content -->
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
@@ -76,6 +76,7 @@ if ($this->session->flashdata('msg_error')) {
 				</li>
 			</ul>
 			<div class="tab-content">
+				<!-- Search Box -->
 				<div class="box-body">
 					<div class="row">
 						<?php
@@ -151,6 +152,7 @@ if ($this->session->flashdata('msg_error')) {
 						<?php echo form_close();?>
 					</div>
 				</div>
+				<!-- /Search box -->
 				<div class="box-body no-padding">
 					<table class="table table-striped table-hover rowclick">
 						<thead>
@@ -189,4 +191,4 @@ if ($this->session->flashdata('msg_error')) {
 	function submitFrm(frm) {
 		frm.submit();
 	}</script>
-<!-- End content -->
+<!-- End content

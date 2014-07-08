@@ -7,6 +7,7 @@ class Users extends CI_Controller {
 		parent::__construct();
 		$this->load->model('users_model', 'Users');
 		$this->load->model('misc_model', 'misc');
+		$this->load->library('pagination');
 
 		// Permissions List for this Class
 		$perm = array('admin');
@@ -34,11 +35,30 @@ class Users extends CI_Controller {
 		if ($group=='') $group="all";
 		$data['group'] = $group;
 		if ($group=='all' || $group=='admin')
-			$data['adminlist'] = $this->Users->getUsersByGroup('admin',$this->input->get('q'));
+		{
+			$data['total'] = $this->Users->countUsersByGroup('admin', $this->input->get('q'));
+			$data['adminlist'] = $this->Users->getUsersByGroup('admin', $this->input->get('q'),
+				$this->input->get('perpage'), 
+				$this->misc->PageOffset($this->input->get('perpage'),$this->input->get('p')));
+
+			$this->misc->PaginationInit(
+				'admin/users/viewgroup/admin?perpage='.
+				$this->input->get('perpage').'&q='.$this->input->get('q'),
+				$data['total'],$this->input->get('perpage'));
+
+		}
 		if ($group=='all' || $group=='teacher')
+		{
 			$data['teacherlist'] = $this->Users->getUsersByGroup('teacher',$this->input->get('q'));
+
+		}
 		if ($group=='all' || $group=='student')
+		{
+			$data['total'] = $this->Users->countUsersByGroup('admin', $this->input->get('q'));
 			$data['studentlist'] = $this->Users->getUsersByGroup('student',$this->input->get('q'));
+
+		}
+
 		$this->load->view('admin/users_view',$data);
 
 		$this->load->view('admin/t_footer_view');
@@ -492,7 +512,7 @@ class Users extends CI_Controller {
 	{
 		if ($str != $strcmp)
 		{
-			$this->form_validation->set_message('_password_check', 'รหัสไม่ตรงกัน');
+			$this->form_validation->set_message('_password_check', 'รหัสผ่านไม่ตรงกัน');
 			return FALSE;
 		}
 		else

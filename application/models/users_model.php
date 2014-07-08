@@ -184,22 +184,28 @@ class Users_model extends CI_Model {
 		return $this->misc->getMethodName()=="view"?true:false;
 	}
 
-	function getUsersByGroup($group, $keyword='')
+	function getUsersByGroup($group, $keyword='', $perpage=0, $offset=0)
 	{
+		settype($offset, "integer");
+		settype($perpage, "integer");
+		if ($perpage=='') $perpage=0;
+		if ($offset=='') $offset=0;
 		switch ($group) {
 			case 'admin':
 				$fields = array(
 					'users.id', 'username', 'name', 'lname', 'email', 'pic', 'role', 'status',
 				);
 				$cause = array('role' => 'admin');
+				if ($perpage > 0) $this->db->limit($perpage, $offset);
+				//die(var_dump($perpage).' '.var_dump($offset));
 				$query = $this->db
 					->select($fields)
 					->join('admins', 'admins.id = users.id', 'LEFT')
 					->like("CONCAT(username,status)",$keyword,'both')
-					->get_where('users',$cause)
-					->result_array();
+					->get_where('users',$cause);
+
 				//die($this->db->last_query());
-				return $query;
+				return $query->result_array();
 				break;
 			
 			case 'teacher':
@@ -230,6 +236,58 @@ class Users_model extends CI_Model {
 					->get_where('users',$cause)
 					->result_array();
 				return $query;
+				break;
+
+			default:
+				# code...
+				break;
+		}
+	}
+
+	function countUsersByGroup($group, $keyword='')
+	{
+		//$offset = $total / $perpage * ($page-1);
+		switch ($group) {
+			case 'admin':
+				$fields = array(
+					'count(users.id) as ucount'
+				);
+				$cause = array('role' => 'admin');
+				$query = $this->db
+					->select($fields)
+					->join('admins', 'admins.id = users.id', 'LEFT')
+					->like("CONCAT(username,status)",$keyword,'both')
+					->get_where('users',$cause)
+					->row_array();
+				return $query['ucount'];
+				break;
+			
+			case 'teacher':
+				$fields = array(
+					'count(users.id) as ucount'
+				);
+				$cause = array('role' => 'teacher');
+				$query = $this->db
+					->select($fields)
+					->join('teachers', 'teachers.id = users.id', 'LEFT')
+					->like("CONCAT(username,name,lname,fac_id,status)",$keyword,'both')
+					->get_where('users',$cause)
+					->row_array();
+				return $query['ucount'];
+				break;
+
+			case 'student':
+				$fields = array(
+					'count(users.id) as ucount'
+				);
+				$cause = array('role' => 'student');
+				$query = $this->db
+					->select($fields)
+					->join('students', 'students.id = users.id', 'LEFT')
+					->like("CONCAT(username,name,lname,gender,year,fac_id,branch_id,status)",$keyword,'both')
+					->get_where('users',$cause)
+					->row_array();
+				return $query['ucount'];
 				break;
 
 			default:
@@ -300,6 +358,14 @@ class Users_model extends CI_Model {
 			return $errno;
 		}
 	}
+
+	function btnUserfield()
+	{
+		return $this->_getMethodName()=="adduser"?'เพิ่มผู้ใช้':'แก้ไขข้อมูล';
+	}
+
+
+	
 }
 
 /* End of file users_model.php */
