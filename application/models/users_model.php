@@ -111,7 +111,7 @@ class Users_model extends CI_Model {
 			case 'teacher':
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
-				'fac_id'
+				'email', 'fac_id'
 				);
 			$cause = array('users.id' => $id);
 			$query = $this->db
@@ -126,7 +126,8 @@ class Users_model extends CI_Model {
 			case 'student':
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
-				'birth', 'gender', 'year', 'fac_id', 'branch_id'
+				'birth', 'gender', 'year', 'fac_id', 'branch_id',
+				'email'
 				);
 			$cause = array('users.id' => $id);
 			$query = $this->db
@@ -173,22 +174,38 @@ class Users_model extends CI_Model {
 		return $this->session->userdata('logged') == true ? true : false;
 	}
 
-	function getUsersByGroup($group, $keyword='')
+	function Userfield()
 	{
+		return $this->misc->getMethodName()=="adduser"?'enabled':'disabled';
+	}
+
+	function isEditPage()
+	{
+		return $this->misc->getMethodName()=="view"?true:false;
+	}
+
+	function getUsersByGroup($group, $keyword='', $perpage=0, $offset=0)
+	{
+		settype($offset, "integer");
+		settype($perpage, "integer");
+		if ($perpage=='') $perpage=0;
+		if ($offset=='') $offset=0;
 		switch ($group) {
 			case 'admin':
 				$fields = array(
 					'users.id', 'username', 'name', 'lname', 'email', 'pic', 'role', 'status',
 				);
 				$cause = array('role' => 'admin');
+				if ($perpage > 0) $this->db->limit($perpage, $offset);
+				//die(var_dump($perpage).' '.var_dump($offset));
 				$query = $this->db
 					->select($fields)
 					->join('admins', 'admins.id = users.id', 'LEFT')
 					->like("CONCAT(username,status)",$keyword,'both')
-					->get_where('users',$cause)
-					->result_array();
+					->get_where('users',$cause);
+
 				//die($this->db->last_query());
-				return $query;
+				return $query->result_array();
 				break;
 			
 			case 'teacher':
@@ -219,6 +236,58 @@ class Users_model extends CI_Model {
 					->get_where('users',$cause)
 					->result_array();
 				return $query;
+				break;
+
+			default:
+				# code...
+				break;
+		}
+	}
+
+	function countUsersByGroup($group, $keyword='')
+	{
+		//$offset = $total / $perpage * ($page-1);
+		switch ($group) {
+			case 'admin':
+				$fields = array(
+					'count(users.id) as ucount'
+				);
+				$cause = array('role' => 'admin');
+				$query = $this->db
+					->select($fields)
+					->join('admins', 'admins.id = users.id', 'LEFT')
+					->like("CONCAT(username,status)",$keyword,'both')
+					->get_where('users',$cause)
+					->row_array();
+				return $query['ucount'];
+				break;
+			
+			case 'teacher':
+				$fields = array(
+					'count(users.id) as ucount'
+				);
+				$cause = array('role' => 'teacher');
+				$query = $this->db
+					->select($fields)
+					->join('teachers', 'teachers.id = users.id', 'LEFT')
+					->like("CONCAT(username,name,lname,fac_id,status)",$keyword,'both')
+					->get_where('users',$cause)
+					->row_array();
+				return $query['ucount'];
+				break;
+
+			case 'student':
+				$fields = array(
+					'count(users.id) as ucount'
+				);
+				$cause = array('role' => 'student');
+				$query = $this->db
+					->select($fields)
+					->join('students', 'students.id = users.id', 'LEFT')
+					->like("CONCAT(username,name,lname,gender,year,fac_id,branch_id,status)",$keyword,'both')
+					->get_where('users',$cause)
+					->row_array();
+				return $query['ucount'];
 				break;
 
 			default:
@@ -258,7 +327,6 @@ class Users_model extends CI_Model {
 		$tableData['id'] = $getId;
 		$query_admin = $this->db->insert($table, $tableData);
 		
-
 		$this->db->trans_complete();
 		if ($this->db->trans_status())
 		{
@@ -270,6 +338,34 @@ class Users_model extends CI_Model {
 			return $errno;
 		}
 	}
+
+	function updateUser($table, $userData, $dataSet, $uid)
+	{
+		$this->db->trans_begin();
+		if (isset($userData)) 
+		{
+			$query = $this->db->update('users', $userData, array('id'=>$uid));
+			$errno = $this->db->_error_number();
+		}
+		$query = $this->db->update($table, $dataSet, array('id'=>$uid));
+		$this->db->trans_complete();
+		if ($this->db->trans_status())
+		{
+			return 0;
+		}
+		else
+		{
+			return $errno;
+		}
+	}
+
+	function btnUserfield()
+	{
+		return $this->_getMethodName()=="adduser"?'เพิ่มผู้ใช้':'แก้ไขข้อมูล';
+	}
+
+
+	
 }
 
 /* End of file users_model.php */

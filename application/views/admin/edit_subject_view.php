@@ -151,7 +151,7 @@
 			<div class="row row-centered">
 				<div class="col-sm-12">
 					<?php
-					echo form_submit('submit', 'บันทึก', 'class="btn btn-primary"');
+					echo form_submit('submit', $this->subjects->btnUserfield(), 'class="btn btn-primary"');
 					?>
 				</div>
 			</div>

@@ -1,73 +1,13 @@
 body {
+		padding-bottom: 20px;
+}
+
+.navbar {
+	min-width: 330px;
+}
+
+.padding-top {
 	padding-top: 80px;
-}
-
-tr.course {
-	cursor: pointer;
-}
-
-#content {
-	margin-top: 60px;
-}
-
-.navbar .label {
-	position: relative;
-	top: 11px;
-}
-
-.nav-list>li {
-	margin: 0px 5px;
-}
-
-.nav-list>li.nav-header {
-	font-weight: bold;
-}
-
-.nav-list>li>a {
-	padding: 5px 15px;
-	margin: 3px 0px;
-}
-
-.nav-list>li.active {
-	background-color: #3CC594;
-	border-radius: 4px;
-}
-
-.nav-list>li.active>a {
-	color: #fff;
-	background-color: #3CC594;
-	text-decoration: underline;
-	font-weight: bold;
-}
-
-.nav-list>li>a:hover {
-	background-color: #3CC594;
-	color: #fff;
-}
-.nav-list > li > a, .nav-list > li > a:active {
-	border-radius: 4px;
-}
-
-.top-row {
-	text-align: center;
-	margin: 10px 0;
-}
-
-.top-row a div {
-	font-size: 10px;
-	line-height: 12px;
-}
-
-.anim.ng-enter {
-	transition: opacity 1s;
-	opacity: 0.0;
-}
-
-.anim.ng-enter-active {
-	opacity: 1.0;
-}
-.anim.ng-leave {
-	display: none;
 }
 
 #loading {
@@ -92,69 +32,6 @@ tr.course {
 	text-align:left;
 	/* inline-block space fix */
 	margin-right:-4px;
-}
-
-
-/*
- * Sidebar (ADMIN) ??
- */
-.sidebar {
-	position: fixed;
-	top: 51px;
-	bottom: 0;
-	left: 0;
-	z-index: 1000;
-	display: block;
-	padding: 20px;
-	overflow-x: hidden;
-	overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-	background-color: #f5f5f5;
-	border-right: 1px solid #eee;
-}
-
-/* Sidebar navigation */
-.nav-sidebar {
-	margin-right: -21px; /* 20px padding + 1px border */
-	margin-bottom: 20px;
-	margin-left: -20px;
-}
-.nav-sidebar > li > a {
-	padding-right: 20px;
-	padding-left: 20px;
-}
-.nav-sidebar > .active > a {
-	color: #fff;
-	background-color: #18bc9c; /*#428bca;*/
-}
-.nav-sidebar > .active > a:hover {
-	color: #fff;
-	background-color: #13A286; /*#428bca;*/
-}
-
-/*
- * Main content (Admin) ??
- */
-.main {
-	padding-right: 40px;
-	padding-left: 40px;
-}
-.panel>.panel-heading>.panel-btn {
-	margin-top: -6px;
-}
-.panel>.panel-body.search {
-	padding: 4px 15px;
-}
-
-.recperpage {
-	margin-top: 4px;
-}
-
-input#searchtxt {
-	height: 31px;
-	padding: 2px 4px;
-}
-.searchform label {
-	margin-top: 5px;
 }
 
 .table.rowclick > tbody > tr {
@@ -283,3 +160,36 @@ div.messenger-message {
  * End Animation
  */
 
+/* Sidebar menu active border */
+ul.sidebar-menu > li, ul.sidebar-menu > li.treeview > ul.treeview-menu > li {
+	position: relative;
+}
+ul.sidebar-menu > li.active:not(.treeview)::after, 
+ul.sidebar-menu > li.treeview > ul.treeview-menu > li.active::after
+{
+	border-right: solid #09F 5px;
+	display: block;
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+}
+
+.nav-tabs-custom > .nav-tabs > li > a:hover {
+	background-color: #eee;
+}
+
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+	border-color: transparent;
+}
+
+/* Searchform button */
+form.searchform > div > div > span > .btn {
+	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+form.searchform > div > div > input[type=text]:focus + span > .btn {
+	border-color: #3c8dbc !important;
+}

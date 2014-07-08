@@ -10,6 +10,21 @@ class Subjects_model extends CI_Model {
 		
 	}
 
+	function getClassName()
+	{
+		return $this->router->class;
+	}
+
+	function getMethodName()
+	{
+		return $this->router->method;
+	}
+
+	function btnSaveText()
+	{
+		return $this->getMethodName()=="add"?'เพิ่มข้อมูล':'แก้ไขข้อมูล';
+	}
+
 	function getSubjectList($keyword='')
 	{
 		// $fields = array(
