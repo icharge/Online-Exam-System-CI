@@ -34,33 +34,49 @@ class Users extends CI_Controller {
 		$this->session->set_flashdata('noAnim', true);
 		if ($group=='') $group="all";
 		$data['group'] = $group;
+
+		// SET Default Per page
+		$data['perpage'] = '10';
+		if ($this->input->get('perpage')!='') $data['perpage'] = $this->input->get('perpage');
+
 		if ($group=='all' || $group=='admin')
 		{
 			$data['total'] = $this->Users->countUsersByGroup('admin', $this->input->get('q'));
 			$data['adminlist'] = $this->Users->getUsersByGroup('admin', $this->input->get('q'),
-				$this->input->get('perpage'), 
-				$this->misc->PageOffset($this->input->get('perpage'),$this->input->get('p')));
-
+				$data['perpage'], 
+				$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
 			$this->misc->PaginationInit(
 				'admin/users/viewgroup/admin?perpage='.
-				$this->input->get('perpage').'&q='.$this->input->get('q'),
-				$data['total'],$this->input->get('perpage'));
-
+				$data['perpage'].'&q='.$this->input->get('q'),
+				$data['total'],$data['perpage']);
+			$data['paginAdmin'] = $this->pagination->create_links();
 		}
 		if ($group=='all' || $group=='teacher')
 		{
-			$data['teacherlist'] = $this->Users->getUsersByGroup('teacher',$this->input->get('q'));
-
+			$data['total'] = $this->Users->countUsersByGroup('teacher', $this->input->get('q'));
+			$data['teacherlist'] = $this->Users->getUsersByGroup('teacher',$this->input->get('q'),
+				$data['perpage'], 
+				$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
+			$this->misc->PaginationInit(
+				'admin/users/viewgroup/teacher?perpage='.
+				$data['perpage'].'&q='.$this->input->get('q'),
+				$data['total'],$data['perpage']);
+			$data['paginTeacher'] = $this->pagination->create_links();
 		}
 		if ($group=='all' || $group=='student')
 		{
-			$data['total'] = $this->Users->countUsersByGroup('admin', $this->input->get('q'));
-			$data['studentlist'] = $this->Users->getUsersByGroup('student',$this->input->get('q'));
-
+			$data['total'] = $this->Users->countUsersByGroup('student', $this->input->get('q'));
+			$data['studentlist'] = $this->Users->getUsersByGroup('student',$this->input->get('q'),
+				$data['perpage'], 
+				$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
+			$this->misc->PaginationInit(
+				'admin/users/viewgroup/student?perpage='.
+				$data['perpage'].'&q='.$this->input->get('q'),
+				$data['total'],$data['perpage']);
+			$data['paginStudent'] = $this->pagination->create_links();
 		}
 
 		$this->load->view('admin/users_view',$data);
-
 		$this->load->view('admin/t_footer_view');
 	}
 

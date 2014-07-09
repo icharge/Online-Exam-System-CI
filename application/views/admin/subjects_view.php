@@ -125,7 +125,7 @@ if ($this->session->flashdata('msg_error')) {
 											'100' => '100'
 											);
 										if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-										else $perpage = '25';
+										//else $perpage = '25';
 										echo form_dropdown('perpage', 
 											$attr_pp, 
 											$perpage, 
@@ -183,6 +183,9 @@ if ($this->session->flashdata('msg_error')) {
 						?>				
 						</tbody>
 					</table>
+				</div>
+				<div class="box-footer clearfix">
+					<?php echo $pagin;?>
 				</div>
 			</div>
 		</div>

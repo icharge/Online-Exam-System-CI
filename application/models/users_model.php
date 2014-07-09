@@ -186,10 +186,10 @@ class Users_model extends CI_Model {
 
 	function getUsersByGroup($group, $keyword='', $perpage=0, $offset=0)
 	{
-		settype($offset, "integer");
-		settype($perpage, "integer");
 		if ($perpage=='') $perpage=0;
 		if ($offset=='') $offset=0;
+		settype($offset, "integer");
+		settype($perpage, "integer");
 		switch ($group) {
 			case 'admin':
 				$fields = array(
@@ -214,13 +214,14 @@ class Users_model extends CI_Model {
 					'fac_id', 'status'
 				);
 				$cause = array('role' => 'teacher');
+				if ($perpage > 0) $this->db->limit($perpage, $offset);
 				$query = $this->db
 					->select($fields)
 					->join('teachers', 'teachers.id = users.id', 'LEFT')
 					->like("CONCAT(username,name,lname,fac_id,status)",$keyword,'both')
-					->get_where('users',$cause)
-					->result_array();
-				return $query;
+					->get_where('users',$cause);
+
+				return $query->result_array();
 				break;
 
 			case 'student':
@@ -229,13 +230,14 @@ class Users_model extends CI_Model {
 					'gender', 'year', 'fac_id', 'branch_id', 'status'
 				);
 				$cause = array('role' => 'student');
+				if ($perpage > 0) $this->db->limit($perpage, $offset);
 				$query = $this->db
 					->select($fields)
 					->join('students', 'students.id = users.id', 'LEFT')
 					->like("CONCAT(username,name,lname,gender,year,fac_id,branch_id,status)",$keyword,'both')
-					->get_where('users',$cause)
-					->result_array();
-				return $query;
+					->get_where('users',$cause);
+
+				return $query->result_array();
 				break;
 
 			default:

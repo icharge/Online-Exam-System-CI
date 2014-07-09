@@ -19,6 +19,11 @@ body {
 	z-index: 1040;
 }
 
+/* CKEditor office2013 (Remove Shadow) */
+.cke_chrome {
+	box-shadow: none !important;
+}
+
 /*
  * Bootstrap centered columns
  */

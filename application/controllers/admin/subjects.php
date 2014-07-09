@@ -27,9 +27,24 @@ class Subjects extends CI_Controller {
 		$this->load->view('admin/t_headerbar_view');
 		$this->load->view('admin/t_sidebar_view');
 
-		$data['subjectlist'] = $this->subjects->getSubjectList($this->input->get('q'));
+		// SET Default Per page
+		$data['perpage'] = '10';
+		if ($this->input->get('perpage')!='') $data['perpage'] = $this->input->get('perpage');
+
+		$data['total'] = $this->subjects->countSubjectList($this->input->get('q'));
+		$data['subjectlist'] = $this->subjects->getSubjectList($this->input->get('q'),
+			$data['perpage'], 
+			$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
+
+		$this->misc->PaginationInit(
+			'admin/subjects?perpage='.
+			$data['perpage'].'&q='.$this->input->get('q'),
+			$data['total'],$data['perpage']);
+
+		$data['pagin'] = $this->pagination->create_links();
+
+		
 		$this->load->view('admin/subjects_view', $data);
-		//$this->view();
 		$this->load->view('admin/t_footer_view');
 	}
 

@@ -33,6 +33,11 @@
 	<?php echo ($this->misc->getClassName()=="admin"?'<script src="vendor/js/AdminLTE/dashboard.js" type="text/javascript"></script>':'');?>
 	<!-- AdminLTE for demo purposes -->
 	<!-- <script src="vendor/js/AdminLTE/demo.js" type="text/javascript"></script> -->
+	<?php
+		if (defined('useEditor')) echo '
+	<!-- CK Editor -->
+	<script src="vendor/js/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>';
+	?>
 	<!-- TR Href -->
 	<script>
 	$(function() {
@@ -65,6 +70,7 @@
 				checkboxClass: 'icheckbox_flat-red',
 				radioClass: 'iradio_flat-red'
 		});
+		<?php if(defined('useEditor')) echo "CKEDITOR.replace('editor');";?>
 	});
 	</script>
 	<!-- End Footer -->

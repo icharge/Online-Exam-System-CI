@@ -116,7 +116,7 @@
 											'100' => '100'
 											);
 										if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-										else $perpage = '25';
+										//else $perpage = '25';
 										echo form_dropdown('perpage', 
 											$attr_pp, 
 											$perpage, 
@@ -170,7 +170,7 @@
 						</table>
 					</div>
 					<div class="box-footer clearfix">
-						<?php echo $this->pagination->create_links();?>
+						<?php echo $paginAdmin;?>
 					</div>
 				</div>
 				<?php } ?>
@@ -213,7 +213,7 @@
 											'100' => '100'
 											);
 										if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-										else $perpage = '25';
+										//else $perpage = '25';
 										echo form_dropdown('perpage', 
 											$attr_pp, 
 											$perpage, 
@@ -267,6 +267,9 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="box-footer clearfix">
+						<?php echo $paginTeacher;?>
+					</div>
 				</div>
 				<?php } ?>
 
@@ -309,7 +312,7 @@
 											'100' => '100'
 											);
 										if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
-										else $perpage = '25';
+										//else $perpage = '25';
 										echo form_dropdown('perpage', 
 											$attr_pp, 
 											$perpage, 
@@ -370,7 +373,7 @@
 							</table>
 						</div>
 						<div class="box-footer clearfix">
-							<?php //echo $this->pagination->create_links();?>
+							<?php echo $paginStudent;?>
 						</div>
 					</div>
 					<?php } ?>
