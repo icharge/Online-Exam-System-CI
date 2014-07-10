@@ -172,7 +172,7 @@ if ($this->session->flashdata('msg_error')) {
 									<td>$item[code]</td>
 									<td>$item[name]</td>
 									<td>$item[shortname]</td>
-									<td>".$this->misc->getShortText($item['description'])."</td>
+									<td>".$this->misc->getShortText(strip_tags($item['description']))."</td>
 									</tr>
 									";
 								}

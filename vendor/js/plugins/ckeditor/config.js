@@ -38,4 +38,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Skin
 	config.skin = 'office2013';
+
+	// Lang
+	config.language = 'th';
 };
