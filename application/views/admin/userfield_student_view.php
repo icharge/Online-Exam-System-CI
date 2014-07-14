@@ -115,6 +115,26 @@
 							echo form_error('passwordconfirm', '<span class="label label-danger">', '</span>');
 							?>
 						</div>
+						<?php if($this->Users->isEditPage()) { ?>
+						<div class="callout callout-info">
+							<h4>สถานะ</h4>
+							<p>หมายถึงการเปิดหรือปิดการใช้งานผู้ใช้นี้</p>
+						</div>
+						<div class="form-group<?php if(form_error('status')) echo ' has-error';?>">
+							<?php 
+							echo form_label('สถานะ <span class="text-danger">*</span>', 'status');
+							?>
+								<div>
+									<label class="radio-inline">
+										<?php echo form_radio('status', 'active', ($userData['status']=="active"?true:false),'class="flat-red"')." เปิดใช้งาน";?>
+									</label>
+									<label class="radio-inline">
+										<?php echo form_radio('status', 'inactive', ($userData['status']=="inactive"?true:false),'class="flat-red"')." ปิดใช้งาน";?>
+									</label>
+								</div>
+								<?php echo form_error('status', '<span class="label label-danger">', '</span>'); ?>
+						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>

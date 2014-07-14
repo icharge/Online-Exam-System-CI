@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Subjects_model extends CI_Model {
+class Courses_model extends CI_Model {
 
 	public function __construct()
 	{
@@ -23,13 +23,12 @@ class Subjects_model extends CI_Model {
 		return $this->getMethodName()=="add"?'เพิ่มข้อมูล':'แก้ไขข้อมูล';
 	}
 
-	function getSubjectList($keyword='', $perpage=0, $offset=0)
+	function getCourseList($keyword='', $perpage=0, $offset=0)
 	{
-		// $fields = array(
-		// 	'users.id', 'username', 'role', 'status'
-		// );
-		// $cause = array('role' => 'admin');
-
+// SELECT course_id, year, tea_id, startdate, name, shortname, description, visible, enabled 
+// FROM Course c 
+// LEFT JOIN Subjects s on (c.subject_id = s.subject_id) 
+// WHERE 1
 		if ($perpage=='') $perpage=0;
 		if ($offset=='') $offset=0;
 		settype($offset, "integer");
@@ -39,13 +38,13 @@ class Subjects_model extends CI_Model {
 		$query = $this->db
 			// ->select($fields)
 			->like("CONCAT(code,name,shortname,description)",$keyword,'both')
-			->get('subjects')
+			->get('Courses')
 			->result_array();
 			// die($this->db->last_query());
 		return $query;
 	}
 
-	function countSubjectList($keyword='')
+	function countCourseList($keyword='')
 	{
 		$fields = array(
 			'count(*) as scount'
@@ -53,32 +52,32 @@ class Subjects_model extends CI_Model {
 		$query = $this->db
 			->select($fields)
 			->like("CONCAT(code,name,shortname,description)",$keyword,'both')
-			->get('subjects')
+			->get('Courses')
 			->row_array();
 		return $query['scount'];
 	}
 
-	function getSubjectById($subjectId)
+	function getCourseById($CourseId)
 	{
-		$cause = array('code' => $subjectId);
+		$cause = array('code' => $CourseId);
 		$query = $this->db
-			->get_where('subjects', $cause)
+			->get_where('Courses', $cause)
 			->result_array();
 		return $query[0];
 	}
 
-	function addSubject($subjectData)
+	function addCourse($CourseData)
 	{
-		$query = $this->db->insert('subjects', $subjectData);
+		$query = $this->db->insert('Courses', $CourseData);
 		return $query;
 	}
 
-	function updateSubject($subjectData, $subjectId)
+	function updateCourse($CourseData, $CourseId)
 	{
-		// var_dump($subjectData);
+		// var_dump($CourseData);
 		// echo '<br>';
-		// var_dump($subjectId);
-		$query = $this->db->update('subjects', $subjectData, array('code'=>$subjectId));
+		// var_dump($CourseId);
+		$query = $this->db->update('Courses', $CourseData, array('code'=>$CourseId));
 		// die(var_dump($query));
 		// die($this->db->last_query());
 		return $query;
@@ -86,5 +85,5 @@ class Subjects_model extends CI_Model {
 
 }
 
-/* End of file subjects_model.php */
-/* Location: ./application/models/subjects_model.php */
+/* End of file courses_model.php */
+/* Location: ./application/models/courses_model.php */

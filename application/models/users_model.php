@@ -111,7 +111,7 @@ class Users_model extends CI_Model {
 			case 'teacher':
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
-				'email', 'fac_id'
+				'email', 'fac_id', 'pic', 'status'
 				);
 			$cause = array('users.id' => $id);
 			$query = $this->db
@@ -127,7 +127,7 @@ class Users_model extends CI_Model {
 			$fields = array(
 				'users.id', 'role', 'username', 'name', 'lname', 
 				'birth', 'gender', 'year', 'fac_id', 'branch_id',
-				'email'
+				'email', 'pic', 'status'
 				);
 			$cause = array('users.id' => $id);
 			$query = $this->db
