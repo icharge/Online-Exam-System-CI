@@ -38,8 +38,8 @@ class Auth extends CI_Controller {
 		// $this->form_validation->set_error_delimiters('<span style="color: red">', '</span>');
 		if ($this->input->post('submit'))
 		{
-			$username = $this->input->post('username');
-			$password = $this->input->post('password');
+			$username = $this->input->post('username');(is_array($username)?$username=$username[0]:true);
+			$password = $this->input->post('password');(is_array($password)?$password=$password[0]:true);
 			if ($this->form_validation->run())
 			{
 				$check = $this->Users->_checkuser($username, $password);

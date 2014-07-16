@@ -17,6 +17,7 @@ class Users_model extends CI_Model {
 				->count_all_results('users');
 		return $result > 0 ? true : false;
 		*/
+		if (is_array($username) || is_array($password)) return "notfound";
 
 		$cause = array(
 			'username' => $username,
@@ -26,6 +27,7 @@ class Users_model extends CI_Model {
 			->limit(1)
 			->select('role')
 			->get_where('users', $cause);
+		if ($this->db->_error_number() > 0) return "notfound";
 		if ($query->num_rows() > 0) {
 			$ret = $query->result_array()[0]['role'];
 			return $ret;

@@ -126,7 +126,7 @@
 								</div>
 								<div class="input-group input-group-sm col-sm-6 col-lg-6 pull-right">
 									<?php
-									echo form_hidden('p', $this->input->get('p'));
+									//echo form_hidden('p', $this->input->get('p'));
 									echo form_input(array(
 										'id'=>'searchtxt',
 										'name'=>'q',

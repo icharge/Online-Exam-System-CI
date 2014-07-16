@@ -63,7 +63,7 @@ glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Login</h3>
 	echo form_input(array(
 		'id'=>'password',
 		'name'=>'password',
-		'value'=>set_value('password'),
+		//'value'=>set_value('password'),
 		'type'=>'password',
 		'class'=>'form-control',
 		'placeholder'=>'รหัสผ่าน'));
