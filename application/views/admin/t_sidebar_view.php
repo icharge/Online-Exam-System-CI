@@ -55,7 +55,7 @@
 					<li<?php echo $this->misc->listCActive("subjects");?>><?php echo anchor('admin/subjects', '<i class="fa fa-angle-double-right"></i> จัดการวิชา');?></li>
 				</ul>
 			</li>
-			<li class="treeview <?php echo $this->misc->listCActiveAry(array("examreport","scorereport","logreport"),false);?>">
+			<li class="treeview <?php echo $this->misc->listCActiveAry(array("courses","examswitch","examreset"),false);?>">
 				<a href="#">
 					<i class="fa fa-edit"></i> <span>จัดสอบ</span>
 					<i class="fa fa-angle-left pull-right"></i>

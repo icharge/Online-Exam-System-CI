@@ -37,8 +37,8 @@ class Courses_model extends CI_Model {
 		if ($perpage > 0) $this->db->limit($perpage, $offset);
 		$query = $this->db
 			// ->select($fields)
-			->like("CONCAT(code,name,shortname,description)",$keyword,'both')
-			->get('Courses')
+			->like("CONCAT(code,year,name,shortname,description)",$keyword,'both')
+			->get('courseslist_view')
 			->result_array();
 			// die($this->db->last_query());
 		return $query;
@@ -51,8 +51,8 @@ class Courses_model extends CI_Model {
 		);
 		$query = $this->db
 			->select($fields)
-			->like("CONCAT(code,name,shortname,description)",$keyword,'both')
-			->get('Courses')
+			->like("CONCAT(code,year,name,shortname,description)",$keyword,'both')
+			->get('courseslist_view')
 			->row_array();
 		return $query['scount'];
 	}

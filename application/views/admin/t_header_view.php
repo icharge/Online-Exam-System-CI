@@ -16,6 +16,8 @@
 	<link href="vendor/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
 	<!-- fullCalendar -->
 	<link href="vendor/css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
+	<!-- date picker -->
+	<link rel="stylesheet" href="vendor/css/datepicker.css">
 	<!-- Daterange picker -->
 	<link href="vendor/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
 	<!-- bootstrap wysihtml5 - text editor -->

@@ -7,7 +7,7 @@ class Courses extends CI_Controller {
 		parent::__construct();
 		$this->load->model('users_model', 'Users');
 		$this->load->model('misc_model', 'misc');
-		$this->load->library('pagination');
+		$this->load->model('courses_model', 'courses');
 
 		// Permissions List for this Class
 		$perm = array('admin');
@@ -30,20 +30,20 @@ class Courses extends CI_Controller {
 		$data['perpage'] = '10';
 		if ($this->input->get('perpage')!='') $data['perpage'] = $this->input->get('perpage');
 
-		$data['total'] = $this->subjects->countSubjectList($this->input->get('q'));
-		$data['subjectlist'] = $this->subjects->getSubjectList($this->input->get('q'),
+		$data['total'] = $this->courses->countCourseList($this->input->get('q'));
+		$data['courseslist'] = $this->courses->getCourseList($this->input->get('q'),
 			$data['perpage'], 
 			$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
 
 		$this->misc->PaginationInit(
-			'admin/subjects?perpage='.
+			'admin/courses?perpage='.
 			$data['perpage'].'&q='.$this->input->get('q'),
 			$data['total'],$data['perpage']);
 
 		$data['pagin'] = $this->pagination->create_links();
 
 		
-		$this->load->view('admin/subjects_view', $data);
+		$this->load->view('admin/courses_view', $data);
 		$this->load->view('admin/t_footer_view');
 	}
 

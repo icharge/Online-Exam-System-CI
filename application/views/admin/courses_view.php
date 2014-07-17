@@ -4,19 +4,19 @@ Begin content -->
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<span class="glyphicon glyphicon-book"></span> จัดการวิชาในระบบ
-			<small>Subject Management</small>
+			<span class="fa fa-rss"></span> จัดการวิชาที่เปิดสอบ
+			<small>Courses Management</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><?php echo anchor('admin', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
-			<li class="active">จัดการวิชาในระบบ</li>
+			<li class="active">จัดการวิชาที่เปิดสอบ</li>
 		</ol>
 	</section>
 
 	<!-- Main content -->
 	<section class="content">
 		<h4 class="page-header">
-			<small>ข้อมูลพื้นฐานของรายวิชาที่มีการเรียนการสอน</small>
+			<small>รายการวิชาที่เปิดสอบในขณะนี้</small>
 		</h4>
 
 	<?php
@@ -72,7 +72,7 @@ if ($this->session->flashdata('msg_error')) {
 					</ul>
 				</li>
 				<li class="pull-left header">
-					<i class="glyphicon glyphicon-th"></i> วิชาในระบบ
+					<i class="glyphicon glyphicon-th"></i> รายการวิชาที่เปิดสอบ
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -88,7 +88,7 @@ if ($this->session->flashdata('msg_error')) {
 							);
 						echo form_open('admin/subjects', $attr); ?>
 							<div class="col-xs-6 col-sm-5" style="z-index:500;">
-								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">คณะ-สาขา </label>
+								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
 								<label><?php 
 									$options = array(
 										'all' => 'ทั้งหมด',
@@ -112,6 +112,20 @@ if ($this->session->flashdata('msg_error')) {
 									);
 									echo form_dropdown('faculty', $options, 'default', 'id="faculty" class="form-control input-sm"');
 							?></label>
+								<label>
+									<?php
+									$attr_year = array(
+										'2014' => '2557',
+										'2013' => '2556',
+										'2012' => '2555',
+										'2011' => '2554'
+										);
+									echo form_dropdown('perpage', 
+										$attr_year, 
+										"2557", 
+										'class="form-control input-sm" onchange="submitFrm(document.forms.searchsubject)"');
+										?>
+								</label>
 							</div>
 							<div class="col-sm-7 ">
 								<div class="col-sm-6 col-md-6 text-right" style="padding-right: 0;">
@@ -157,7 +171,9 @@ if ($this->session->flashdata('msg_error')) {
 					<table class="table table-striped table-hover rowclick">
 						<thead>
 							<tr>
+								<th>สถานะ</th>
 								<th style="width: 79px;">รหัสวิชา</th>
+								<th style="width: 88px;">วันที่เริ่มสอบ</th>
 								<th style="width: 25%;">ชื่อ</th>
 								<th style="width: 88px;">ชื่อย่อ</th>
 								<th>คำอธิบาย</th>
@@ -165,11 +181,13 @@ if ($this->session->flashdata('msg_error')) {
 						</thead>
 						<tbody>
 						<?php
-							if (($subjectlist)) {
-								foreach ($subjectlist as $item) {
+							if (($courseslist)) {
+								foreach ($courseslist as $item) {
 									echo "
 									<tr href=\"".$this->misc->getHref('admin/subjects/view')."/$item[code]\">
+									<td>$item[status]</td>
 									<td>$item[code]</td>
+									<td>$item[startdate]</td>
 									<td>$item[name]</td>
 									<td>$item[shortname]</td>
 									<td>".$this->misc->getShortText(strip_tags($item['description']))."</td>

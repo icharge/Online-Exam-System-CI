@@ -21,6 +21,8 @@
 	<script src="vendor/js/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
 	<!-- jQuery Knob Chart -->
 	<script src="vendor/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
+	<!-- date-picker -->
+	<script src="vendor/js/bootstrap-datepicker.js"></script>
 	<!-- daterangepicker -->
 	<script src="vendor/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 	<!-- Bootstrap WYSIHTML5 -->
@@ -55,6 +57,9 @@
 				return true;
 			}
 		});
+
+		$('#datepicker').datepicker();
+
 		//iCheck for checkbox and radio inputs
 		$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
 				checkboxClass: 'icheckbox_minimal',
