@@ -34,6 +34,15 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
+	function getSubjectDesc($subject_id)
+	{
+		$query = $this->db
+			->select("description")
+			->get_where('subjects', array('subject_id'=>$subject_id))
+			->row_array();
+		return $query;
+	}
+
 	function getCourseList($keyword='', $perpage=0, $offset=0)
 	{
 // SELECT course_id, year, tea_id, startdate, name, shortname, description, visible, enabled 
@@ -58,7 +67,7 @@ class Courses_model extends CI_Model {
 	function buildCourseOptions()
 	{
 		$subjectList = $this->getSubjectList();
-		$options = array();
+		$options['-1'] = "-- เลือก --";
 		foreach ($subjectList as $item) {
 			$options[$item['subject_id']] = $item['code']." — ".$item['name'];
 		}

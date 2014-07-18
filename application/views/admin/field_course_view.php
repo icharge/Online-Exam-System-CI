@@ -68,7 +68,7 @@ EOL;
 				<div class="box box-primary">
 					<div class="box-header">
 						<h3 class="box-title">
-							ข้อมูลพื้นฐาน
+							รายละเอียดการเปิดสอบวิชา
 						</h3>
 					</div>
 					<div class="box-body">
@@ -76,46 +76,7 @@ EOL;
 							<?php 
 							echo form_label('วิชา <span class="text-danger">*</span>', 'subject_id');
 							$options = $this->courses->buildCourseOptions();
-							echo form_dropdown('faculty', $options, $courseInfo['subject_id'], 'id="faculty" class="form-control input-sm"');
-							?>
-						</div>
-						<div class="form-group<?php if(form_error('code')) echo ' has-error';?>">
-							<?php 
-							echo form_label('รหัสวิชา <span class="text-danger">*</span>', 'code');
-							echo form_input(array(
-								'id'=>'code',
-								'name'=>'code',
-								'value'=>$courseInfo['code'],
-								'type'=>'text',
-								'class'=>'form-control',
-								'placeholder'=>'รหัสวิชา'));
-							echo form_error('code', '<span class="label label-danger">', '</span>');
-							?>
-						</div>
-						<div class="form-group<?php if(form_error('name')) echo ' has-error';?>">
-							<?php 
-							echo form_label('ชื่อวิชา <span class="text-danger">*</span>', 'name');
-							echo form_input(array(
-								'id'=>'name',
-								'name'=>'name',
-								'value'=>$courseInfo['name'],
-								'type'=>'text',
-								'class'=>'form-control',
-								'placeholder'=>'ชื่อวิชา'));
-							echo form_error('name', '<span class="label label-danger">', '</span>');
-							?>
-						</div>
-						<div class="form-group<?php if(form_error('shortname')) echo ' has-error';?>">
-							<?php 
-							echo form_label('ชื่อย่อวิชา <span class="text-danger">*</span>', 'ชื่อย่อวิชา');
-							echo form_input(array(
-								'id'=>'shortname',
-								'name'=>'shortname',
-								'value'=>$courseInfo['shortname'],
-								'type'=>'text',
-								'class'=>'form-control',
-								'placeholder'=>'ชื่อย่อวิชา'));
-							echo form_error('shortname', '<span class="label label-danger">', '</span>');
+							echo form_dropdown('subjectid', $options, $courseInfo['subject_id'], 'id="subjectid" class="form-control"');
 							?>
 						</div>
 						<div class="form-group<?php if(form_error('description')) echo ' has-error';?>">

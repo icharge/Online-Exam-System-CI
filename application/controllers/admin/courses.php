@@ -2,6 +2,8 @@
 
 class Courses extends CI_Controller {
 
+	private $subjectDropdownScript;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -18,6 +20,29 @@ class Courses extends CI_Controller {
 		} else {
 			redirect('auth/login');
 		}
+
+		// Prepare JavaScript !!
+		$this->subjectDropdownScript = "
+$('#subjectid').change(function(){
+	if($(this).val() == '-1')
+	{
+		$('#courseDesc').html('<h4>...กรุณาเลือกวิชา...<h4>');
+	}
+	else
+	{
+		$('#courseDesc').html('<h4><b><i class=\"fa fa-spinner fa-spin\"></i> กำลังโหลด...</b></h4>');
+		var oxsysAPI = \"".$this->misc->getHref('admin/courses/callbackjson/getSubjectDesc/')."/\" + $(this).val();
+		$.getJSON( oxsysAPI, { format: \"json\" })
+			.done(function(data) {
+				$('#courseDesc').html(data.description);
+			})
+			.fail(function(jqxhr, textStatus, error) {
+				var err = textStatus + \", \" + error;
+				console.log(\"Request Failed: \"+err);
+			});
+	}
+});
+";
 	}
 
 	public function index()
@@ -68,12 +93,16 @@ class Courses extends CI_Controller {
 			{
 				$data['courseInfo'] = $this->courses->getCourseById($courseId);
 				$data['formlink'] = 'admin/course/view/'.$courseId;
-				$data['pagetitle'] = "รายละเอียดวิชา";
+				$data['pagetitle'] = "ข้อมูลการเปิดสอบ";
 				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];
 				$this->load->view('admin/field_course_view', $data);
 			}
 		}
-		$this->load->view('admin/t_footer_view');
+
+		$footdata['additionScript'] = array(
+			'subjectDropdownScript' => $this->subjectDropdownScript,
+		);
+		$this->load->view('admin/t_footer_view', $footdata);
 	}
 
 	public function add()
@@ -189,6 +218,28 @@ class Courses extends CI_Controller {
 		}
 	}
 
+	function callbackjson()
+	{
+		// JSON Callback with modes & arguments.
+
+		# Simulation loading...
+		sleep(1);
+
+		$this->output->set_header('Content-Type: application/json; charset=utf-8');
+		$arg_list = func_get_args();
+		switch ($arg_list[0]) {
+			case 'getSubjectDesc':
+				if (isset($arg_list[1]))
+					echo json_encode($this->courses->getSubjectDesc($arg_list[1]));
+				else
+					echo json_encode(array('error' => "No Subject_id"));
+				break;
+			
+			default:
+				echo json_encode(array('error' => "No Arguments"));
+				break;
+		}
+	}
 	
 }
 

@@ -76,6 +76,15 @@
 				radioClass: 'iradio_flat-red'
 		});
 		<?php if(defined('useEditor')) echo "CKEDITOR.replace('editor');";?>
+		<?php 
+			if(isset($additionScript)) 
+			{
+				echo "// Addition Scripts.\n";
+				foreach ($additionScript as $item) {
+					echo $item."\n";
+				}
+			}
+		?>
 	});
 	</script>
 	<!-- End Footer -->
