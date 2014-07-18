@@ -23,6 +23,17 @@ class Courses_model extends CI_Model {
 		return $this->getMethodName()=="add"?'เพิ่มข้อมูล':'แก้ไขข้อมูล';
 	}
 
+	function getSubjectList($status = '')
+	{
+		$query = $this->db
+			// ->select($fields)
+			->like("status",$status)
+			->get('subjects')
+			->result_array();
+			// die($this->db->last_query());
+		return $query;
+	}
+
 	function getCourseList($keyword='', $perpage=0, $offset=0)
 	{
 // SELECT course_id, year, tea_id, startdate, name, shortname, description, visible, enabled 
@@ -44,6 +55,16 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
+	function buildCourseOptions()
+	{
+		$subjectList = $this->getSubjectList();
+		$options = array();
+		foreach ($subjectList as $item) {
+			$options[$item['subject_id']] = $item['code']." — ".$item['name'];
+		}
+		return $options;
+	}
+
 	function countCourseList($keyword='')
 	{
 		$fields = array(
@@ -59,9 +80,9 @@ class Courses_model extends CI_Model {
 
 	function getCourseById($CourseId)
 	{
-		$cause = array('code' => $CourseId);
+		$cause = array('course_id' => $CourseId);
 		$query = $this->db
-			->get_where('Courses', $cause)
+			->get_where('courseslist_view', $cause)
 			->result_array();
 		return $query[0];
 	}

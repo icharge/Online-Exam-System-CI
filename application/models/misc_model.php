@@ -209,6 +209,41 @@ class Misc_model extends CI_Model {
 		);
 		$this->db->insert('log_usage', $logData);
 	}
+
+	function budDateToChrsDate($datee, $delimits = '-', $delimitt = '') {
+		if ($datee == "") return "";
+		if ($delimitt == '') $delimitt = $delimits;
+		list($d, $m, $y) = explode($delimits, $datee);
+		$y -= 543;
+			return $d . $delimitt . $m . $delimitt . $y;
+	}
+
+	function chrsDateToBudDate($datee, $delimits = '-', $delimitt = '') {
+		if ($datee == "") return "";
+		if ($delimitt == '') $delimitt = $delimits;
+		list($y, $m, $d) = explode($delimits, $datee);
+		$y += 543;
+			return $d . $delimitt . $m . $delimitt . $y;
+	}
+
+	function getFullDateTH($strdate)
+	{
+		$thai_day_arr=array("อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์");
+		$thai_month_arr=array(
+			"0" => "", "1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม",
+			"4" => "เมษายน", "5" => "พฤษภาคม", "6" => "มิถุนายน",
+			"7" => "กรกฎาคม", "8" => "สิงหาคม", "9" => "กันยายน",
+			"10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม"
+		);
+		$strdate = strtotime($strdate);
+		$ThaiDate = "วัน".$thai_day_arr[date("w",$strdate)];
+		$ThaiDate.= "ที่ ".date("j",$strdate);
+		$ThaiDate.= " ".$thai_month_arr[date("n",$strdate)];
+		$ThaiDate.= " พ.ศ.".(date("Yํ",$strdate)+543);
+		//$ThaiDate.= "  ".date("H:i",$strdate)." น.";
+		return $ThaiDate;
+	}
+
 }
 
 /* End of file misc.php */

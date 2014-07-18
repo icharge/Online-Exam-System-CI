@@ -47,7 +47,7 @@ class Courses extends CI_Controller {
 		$this->load->view('admin/t_footer_view');
 	}
 
-	public function view($subjectId='')
+	public function view($courseId='')
 	{
 		$this->session->set_flashdata('noAnim', true);
 		$this->load->view('admin/t_header_view');
@@ -56,21 +56,21 @@ class Courses extends CI_Controller {
 
 		if ($this->input->post('submit'))
 		{
-			$this->edit($subjectId);
+			$this->edit($courseId);
 		}
 		else
 		{
-			if ($subjectId == '')
+			if ($courseId == '')
 			{
-				redirect('admin/subjects');
+				redirect('admin/courses');
 			}
 			else
 			{
-				$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
-				$data['formlink'] = 'admin/subjects/view/'.$data['subjectInfo']['code'];
-				$data['pagetitle'] = "รายละเอียดวิชา ".$data['subjectInfo']['code']." ".$data['subjectInfo']['name'];
-				$data['pagesubtitle'] = "";
-				$this->load->view('admin/field_subject_view', $data);
+				$data['courseInfo'] = $this->courses->getCourseById($courseId);
+				$data['formlink'] = 'admin/course/view/'.$courseId;
+				$data['pagetitle'] = "รายละเอียดวิชา";
+				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];
+				$this->load->view('admin/field_course_view', $data);
 			}
 		}
 		$this->load->view('admin/t_footer_view');
@@ -123,7 +123,7 @@ class Courses extends CI_Controller {
 			else
 			{
 				$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
-				//$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
+				//$data['subjectInfo'] = $this->subjects->getSubjectById($courseId);
 				$data['subjectInfo']['code'] = $this->input->post('code');
 				$data['subjectInfo']['name'] = $this->input->post('name');
 				$data['subjectInfo']['shortname'] = $this->input->post('shortname');
@@ -138,7 +138,7 @@ class Courses extends CI_Controller {
 		}
 	}
 
-	public function edit($subjectId)
+	public function edit($courseId)
 	{
 		$this->form_validation->set_rules('code', 'รหัสวิชา', 'required');
 		$this->form_validation->set_rules('name', 'ชื่อวิชา', 'required');
@@ -148,7 +148,7 @@ class Courses extends CI_Controller {
 		if ($this->form_validation->run())
 		{
 			# Form check completed
-			//$subjectData['subject_id'] = $subjectId;
+			//$subjectData['subject_id'] = $courseId;
 			$subjectData['code'] = $this->input->post('code');
 			$subjectData['name'] = $this->input->post('name');
 			$subjectData['shortname'] = $this->input->post('shortname');
@@ -160,7 +160,7 @@ class Courses extends CI_Controller {
 
 			$subjectData['description'] = $clean_html;
 			// die(var_dump($subjectData)); 
-			if ($this->subjects->updateSubject($subjectData, $subjectId))
+			if ($this->subjects->updateSubject($subjectData, $courseId))
 			{
 				# แก้ไข success
 				$this->session->set_flashdata('msg_info', 
@@ -176,7 +176,7 @@ class Courses extends CI_Controller {
 		else
 		{
 			$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
-			$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
+			$data['subjectInfo'] = $this->subjects->getSubjectById($courseId);
 			$data['formlink'] = 'admin/subjects/view/'.$data['subjectInfo']['code'];
 			$data['pagetitle'] = "รายละเอียดวิชา ".$data['subjectInfo']['code']." ".$data['subjectInfo']['name'];
 			$data['pagesubtitle'] = "";

@@ -16,7 +16,7 @@ Begin content -->
 	<!-- Main content -->
 	<section class="content">
 		<h4 class="page-header">
-			<small>รายการวิชาที่เปิดสอบในขณะนี้</small>
+			<!-- <small>รายการวิชาที่เปิดสอบในขณะนี้</small> -->
 		</h4>
 
 	<?php
@@ -68,7 +68,7 @@ if ($this->session->flashdata('msg_error')) {
 				<li class="dropdown pull-right">
 					<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><?php echo anchor('admin/subjects/add', 'เพิ่ม');?></li>
+						<li><?php echo anchor('admin/courses/add', 'เพิ่ม');?></li>
 					</ul>
 				</li>
 				<li class="pull-left header">
@@ -86,7 +86,7 @@ if ($this->session->flashdata('msg_error')) {
 							'role' => 'search',
 							'method' => 'get'
 							);
-						echo form_open('admin/subjects', $attr); ?>
+						echo form_open('admin/courses', $attr); ?>
 							<div class="col-xs-6 col-sm-5" style="z-index:500;">
 								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
 								<label><?php 
@@ -184,10 +184,13 @@ if ($this->session->flashdata('msg_error')) {
 							if (($courseslist)) {
 								foreach ($courseslist as $item) {
 									echo "
-									<tr href=\"".$this->misc->getHref('admin/subjects/view')."/$item[code]\">
+									<tr href=\"".$this->misc->getHref('admin/courses/view')."/$item[course_id]\">
 									<td>$item[status]</td>
 									<td>$item[code]</td>
-									<td>$item[startdate]</td>
+									<td><span data-toggle=\"tooltip\" title=\"".
+									$this->misc->getFullDateTH($item['startdate'])."\">".
+									$this->misc->chrsDateToBudDate($item['startdate'],'-','/').
+									"</span></td>
 									<td>$item[name]</td>
 									<td>$item[shortname]</td>
 									<td>".$this->misc->getShortText(strip_tags($item['description']))."</td>

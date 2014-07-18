@@ -2,6 +2,11 @@ body {
 		padding-bottom: 20px;
 }
 
+.text-justify {
+	text-align: justify;
+	text-justify: newspaper;
+}
+
 .navbar {
 	min-width: 330px;
 }
