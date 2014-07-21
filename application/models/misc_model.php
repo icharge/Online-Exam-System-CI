@@ -226,6 +226,11 @@ class Misc_model extends CI_Model {
 			return $d . $delimitt . $m . $delimitt . $y;
 	}
 
+	function reformatDate($strdate, $mask="d/m/Y")
+	{
+		return date($mask, strtotime($strdate));
+	}
+
 	function getFullDateTH($strdate)
 	{
 		$thai_day_arr=array("อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์");
@@ -242,6 +247,18 @@ class Misc_model extends CI_Model {
 		$ThaiDate.= " พ.ศ.".(date("Yํ",$strdate)+543);
 		//$ThaiDate.= "  ".date("H:i",$strdate)." น.";
 		return $ThaiDate;
+	}
+
+	function buildYearOptions($range = '10')
+	{
+		$startYear = date("Y");
+		$year = $startYear;
+		for($i = 0;$i < $range;$i++)
+		{
+			$options[$year] = $year + 543;
+			$year--;
+		}
+		return $options;
 	}
 
 }

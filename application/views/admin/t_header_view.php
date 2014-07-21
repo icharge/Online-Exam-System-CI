@@ -18,6 +18,7 @@
 	<link href="vendor/css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
 	<!-- date picker -->
 	<link rel="stylesheet" href="vendor/css/datepicker.css">
+	<link rel="stylesheet" type="text/css" href="vendor/css/ui-lightness/jquery-ui-1.10.3.custom.css">
 	<!-- Daterange picker -->
 	<link href="vendor/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
 	<!-- bootstrap wysihtml5 - text editor -->

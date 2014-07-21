@@ -6,11 +6,15 @@
 	<!-- jQuery 2.0.2 -->
 	<script src="vendor/js/jquery.min.js"></script>
 	<!-- jQuery UI 1.10.3 -->
-	<script src="vendor/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+	<script src="vendor/js/jquery-ui.js" type="text/javascript"></script>
 	<!-- Bootstrap -->
 	<script src="vendor/js/bootstrap.min.js" type="text/javascript"></script>
+	<!-- InputMask -->
+	<script src="vendor/js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+	<script src="vendor/js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+	<script src="vendor/js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
 	<!-- Morris.js charts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="vendor/js/raphael-min.js"></script>
 	<script src="vendor/js/plugins/morris/morris.min.js" type="text/javascript"></script>
 	<!-- Sparkline -->
 	<script src="vendor/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
@@ -22,7 +26,9 @@
 	<!-- jQuery Knob Chart -->
 	<script src="vendor/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
 	<!-- date-picker -->
-	<script src="vendor/js/bootstrap-datepicker.js"></script>
+<!-- 	// <script src="vendor/js/bootstrap-datepicker.js"></script>
+	// <script src="vendor/js/bootstrap-datepicker-thai.js"></script>
+	// <script src="vendor/js/bootstrap-datepicker.th.js"></script> -->
 	<!-- daterangepicker -->
 	<script src="vendor/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 	<!-- Bootstrap WYSIHTML5 -->

@@ -40,6 +40,11 @@
   top: -6px;
   left: 7px;
 }
+
+.datepicker-days, .datepicker-months, .datepicker-years {
+  width: 196px;
+}
+
 .datepicker > div {
   display: none;
 }
@@ -111,7 +116,7 @@
 }
 .datepicker td span {
   display: block;
-  width: 47px;
+  width: 58px;
   height: 54px;
   line-height: 54px;
   float: left;

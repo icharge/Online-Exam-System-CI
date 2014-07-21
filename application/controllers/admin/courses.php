@@ -3,6 +3,7 @@
 class Courses extends CI_Controller {
 
 	private $subjectDropdownScript;
+	private $datePicker;
 
 	public function __construct()
 	{
@@ -41,8 +42,32 @@ $('#subjectid').change(function(){
 				console.log(\"Request Failed: \"+err);
 			});
 	}
-});
-";
+});";
+		$this->datePicker = "var tdate = $('#startdate').val().split(\"/\");
+			tdate = tdate[0]+'/'+tdate[1]+'/'+(parseInt(tdate[2],10)-543);
+			$( '#dp1p' ).datepicker({
+				onSelect: function(dateText, inst) {
+					var tdate = dateText.split(\"/\");
+					$('#startdate').val(tdate[0]+'/'+tdate[1]+'/'+(parseInt(tdate[2],10)+543) );
+				},
+				defaultDate: tdate,
+				dayNames: ['อาทิตย์','จันทร์','อังคาร',
+					'พุธ','พฤหัสบดี','ศุกร์','เสาร์'],
+				dayNamesMin: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],
+				monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม',
+					'เมษายน','พฤษภาคม','มิถุนายน',
+					'กรกฎาคม','สิงหาคม','กันยายน',
+					'ตุลาคม','พฤศจิกายน','ธันวาคม'],
+				monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.',
+					'พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.',
+					'พ.ย.','ธ.ค.'],
+				changeMonth: true,
+				changeYear: true,
+				dateFormat: \"dd/mm/yy\"
+			});";
+		/*'//Datemask dd/mm/yyyy
+//$("#startdate").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+$("#startdate").datepicker({language:\'th-th\',format:\'dd/mm/yyyy\'});';*/
 	}
 
 	public function index()
@@ -99,8 +124,10 @@ $('#subjectid').change(function(){
 			}
 		}
 
+		// Send additional script to footer
 		$footdata['additionScript'] = array(
 			'subjectDropdownScript' => $this->subjectDropdownScript,
+			'datePicker' => $this->datePicker,
 		);
 		$this->load->view('admin/t_footer_view', $footdata);
 	}

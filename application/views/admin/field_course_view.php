@@ -83,6 +83,36 @@ EOL;
 							<b>คำอธิบายวิชา</b>
 							<p id="courseDesc" class="text-justify"><?php echo $courseInfo['description'];?></p>
 						</div>
+						<div class="form-group<?php if(form_error('year')) echo ' has-error';?>">
+							<?php 
+							echo form_label('ปีการศึกษา <span class="text-danger">*</span>', 'year');
+							$options = $this->misc->buildYearOptions();
+							echo form_dropdown('year', $options, $courseInfo['year'], 'class="form-control"');
+							?>
+						</div>
+						<div class="form-group<?php if(form_error('startdate')) echo ' has-error';?>">
+							<?php 
+							echo form_label('วันที่เปิด <span class="text-danger">*</span>', 'startdate');
+							?>
+							<div class="input-group">
+								<div class="input-group-addon add-on" style="cursor: pointer">
+									<i class="fa fa-calendar"></i>
+								</div>
+								<div id="dp1p"></div>
+								<?php
+								echo form_input(array(
+									'id'=>'startdate',
+									'name'=>'startdate',
+									'value'=>$this->misc->chrsDateToBudDate($courseInfo['startdate'],"-","/"),
+									'type'=>'text',
+									'class'=>'form-control date',
+									'placeholder'=>'วันที่เปิด',
+									//'data-date-format'=>'dd/mm/yyyy',
+									'readonly'=>'readonly'));
+								echo form_error('startdate', '<span class="label label-danger">', '</span>');
+								?>
+							</div>
+						</div>
 					</div>
 				</div>
 				<!-- End BasicInfo -->

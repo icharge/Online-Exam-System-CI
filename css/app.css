@@ -203,3 +203,58 @@ form.searchform > div > div > span > .btn {
 form.searchform > div > div > input[type=text]:focus + span > .btn {
 	border-color: #3c8dbc !important;
 }
+
+/* Datepicker  (JQuery UI) */
+.ui-datepicker {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	width: 17em;
+	padding: .2em .2em 0;
+	display: none;
+}
+
+div.ui-datepicker-inline.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {
+	border-radius: 0px;
+	background: #fff;
+	border: solid 1px #ccc;
+	border-bottom: 0;
+}
+
+div.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all {
+	border-radius: 0;
+	background: #3c8dbc;
+	border: solid 1px #3c8dbc;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+	border: 1px solid #1D7AF1 !important;
+	background: #A1D7F6 !important;
+	color: #05A0C7 !important;
+}
+
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {
+	background-image: url(../vendor/css/ui-lightness/images/ui-icons_222222_256x240.png);
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+	border: 1px solid #2168D3 !important;
+	background: #4CCDFF !important;
+	color: #363636 !important;
+	font-weight: bold !important;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+	border: 1px solid #ccc;
+	background: none;
+	color: #363636;
+	text-decoration: underline;
+}
+
+.ui-datepicker-title > select {
+	height: 22px;
+}
+/* / Datepicker */
+input[type=text].date {
+	width: 262px;
+}
