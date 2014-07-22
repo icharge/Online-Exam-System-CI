@@ -25,3 +25,28 @@ TODO LIST
 - Courses list
 - Enroll system
 - XLS Importer
+
+
+
+
+
+JQuery detect blur
+
+$(window).on("blur focus", function(e) {
+	var prevType = $(this).data("prevType");
+
+	if (prevType != e.type) {   //  reduce double fire issues
+		switch (e.type) {
+			case "blur":
+				// do work
+				console.log("blur");
+				break;
+			case "focus":
+				// do work
+				console.log("focus");
+				break;
+		}
+	}
+
+	$(this).data("prevType", e.type);
+})

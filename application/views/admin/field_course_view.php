@@ -90,6 +90,26 @@ EOL;
 							echo form_dropdown('year', $options, $courseInfo['year'], 'class="form-control"');
 							?>
 						</div>
+						<div class="form-group<?php if(form_error('password')) echo ' has-error';?>">
+							<?php 
+							echo form_label('รหัสผ่าน', 'password');
+							if ($this->courses->isEditPage()) $pwdinfo = "รหัสผ่าน กรอกเพื่อเปลี่ยน ปล่อยว่างจะใช้รหัสผ่านเดิม";
+							else $pwdinfo = "่";
+							echo form_input(array(
+								'id'=>'password',
+								'name'=>'password',
+								'type'=>'password',
+								'class'=>'form-control '.($this->courses->isEditPage()?'jtooltip':''),
+								'title'=>$pwdinfo));
+							if ($this->courses->isEditPage())
+							{
+								echo '<label id="removepwdlbl" class="jtooltip" title="การกระทำนี้จะมีผลเมื่อแก้ไขข้อมูล">';
+								echo form_checkbox('removepass', '1', FALSE,'id="removepass" class="minimal-red"');
+								echo " ลบรหัสผ่าน</label>";
+							}
+							
+							?>
+						</div>
 						<div class="form-group<?php if(form_error('startdate')) echo ' has-error';?>">
 							<?php 
 							echo form_label('วันที่เปิด <span class="text-danger">*</span>', 'startdate');
@@ -112,6 +132,29 @@ EOL;
 								echo form_error('startdate', '<span class="label label-danger">', '</span>');
 								?>
 							</div>
+						</div>
+						<div class="form-group<?php if(form_error('visible')) echo ' has-error';?>">
+							<?php echo form_label('ตัวเลือกเพิ่มเติม'); ?><br>
+							<label>
+								<?php
+								echo form_checkbox('visible', 'visible', ($courseInfo['visible']=='1'?FALSE:TRUE),'class="minimal-red"');
+								?>
+								ซ่อนวิชา
+							</label>
+						</div>
+						<div class="form-group<?php if(form_error('status')) echo ' has-error';?>">
+							<?php 
+							echo form_label('สถานะ', 'status');
+							?>
+								<div>
+									<label class="radio-inline">
+										<?php echo form_radio('status', 'active', ($courseInfo['status']=="active"?true:false),'class="minimal-red"')." เปิดใช้งาน";?>
+									</label>
+									<label class="radio-inline">
+										<?php echo form_radio('status', 'inactive', ($courseInfo['status']=="inactive"?true:false),'class="minimal-red"')." ปิดใช้งาน";?>
+									</label>
+								</div>
+								<?php echo form_error('status', '<span class="label label-danger">', '</span>'); ?>
 						</div>
 					</div>
 				</div>

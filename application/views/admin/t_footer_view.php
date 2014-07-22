@@ -26,17 +26,19 @@
 	<!-- jQuery Knob Chart -->
 	<script src="vendor/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
 	<!-- date-picker -->
-<!-- 	// <script src="vendor/js/bootstrap-datepicker.js"></script>
-	// <script src="vendor/js/bootstrap-datepicker-thai.js"></script>
-	// <script src="vendor/js/bootstrap-datepicker.th.js"></script> -->
+<!-- <script src="vendor/js/bootstrap-datepicker.js"></script>
+	<script src="vendor/js/bootstrap-datepicker-thai.js"></script>
+	<script src="vendor/js/bootstrap-datepicker.th.js"></script> -->
 	<!-- daterangepicker -->
 	<script src="vendor/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 	<!-- Bootstrap WYSIHTML5 -->
 	<script src="vendor/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
 	<!-- iCheck -->
 	<script src="vendor/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+	<!-- jBox -->
+	<script src="vendor/js/jBox.js"></script>
 	<!-- AdminLTE App -->
-	<script src="vendor/js/AdminLTE/app.js" type="text/javascript"></script>
+<!-- <script src="vendor/js/AdminLTE/app.js" type="text/javascript"></script> -->
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<?php echo ($this->misc->getClassName()=="admin"?'<script src="vendor/js/AdminLTE/dashboard.js" type="text/javascript"></script>':'');?>
 	<!-- AdminLTE for demo purposes -->
@@ -81,6 +83,9 @@
 				checkboxClass: 'icheckbox_flat-red',
 				radioClass: 'iradio_flat-red'
 		});
+
+		$('.jtooltip').jBox('Tooltip', {theme: 'TooltipDark'});
+		
 		<?php if(defined('useEditor')) echo "CKEDITOR.replace('editor');";?>
 		<?php 
 			if(isset($additionScript)) 

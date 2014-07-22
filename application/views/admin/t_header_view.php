@@ -27,6 +27,9 @@
 	<link href="vendor/css/iCheck/all.css" rel="stylesheet" type="text/css" />
 	<!-- Theme style -->
 	<link href="vendor/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+	<!-- jBox style -->
+	<link href="vendor/css/jBox.css" rel="stylesheet">
+	<link href="vendor/css/jBox-themes/TooltipDark.css" rel="stylesheet">
 	<!-- My Style -->
 	<link href="css/app.css" rel="stylesheet" type="text/css" />
 

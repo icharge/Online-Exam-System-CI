@@ -23,6 +23,11 @@ class Courses_model extends CI_Model {
 		return $this->getMethodName()=="add"?'เพิ่มข้อมูล':'แก้ไขข้อมูล';
 	}
 
+	function isEditPage()
+	{
+		return $this->misc->getMethodName()=="view"?true:false;
+	}
+
 	function getSubjectList($status = '')
 	{
 		$query = $this->db
@@ -107,7 +112,7 @@ class Courses_model extends CI_Model {
 		// var_dump($CourseData);
 		// echo '<br>';
 		// var_dump($CourseId);
-		$query = $this->db->update('Courses', $CourseData, array('code'=>$CourseId));
+		$query = $this->db->update('Courses', $CourseData, array('course_id'=>$CourseId));
 		// die(var_dump($query));
 		// die($this->db->last_query());
 		return $query;

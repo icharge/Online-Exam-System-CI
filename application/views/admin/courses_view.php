@@ -187,7 +187,7 @@ if ($this->session->flashdata('msg_error')) {
 									<tr href=\"".$this->misc->getHref('admin/courses/view')."/$item[course_id]\">
 									<td>$item[status]</td>
 									<td>$item[code]</td>
-									<td><span data-toggle=\"tooltip\" title=\"".
+									<td><span class=\"jtooltip\" title=\"".
 									$this->misc->getFullDateTH($item['startdate'])."\">".
 									$this->misc->chrsDateToBudDate($item['startdate'],'-','/').
 									"</span></td>
