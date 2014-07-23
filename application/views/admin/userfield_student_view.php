@@ -194,10 +194,10 @@
 							?>
 								<div>
 									<label class="radio-inline">
-										<?php echo form_radio('gender', 'male', ($userData['gender']=="male"?true:false),'class="flat-red"')." ชาย";?>
+										<?php echo form_radio('gender', 'male', ($userData['gender']=="male"?true:false),'class="minimal-red"')." ชาย";?>
 									</label>
 									<label class="radio-inline">
-										<?php echo form_radio('gender', 'female', ($userData['gender']=="female"?true:false),'class="flat-red"')." หญิง";?>
+										<?php echo form_radio('gender', 'female', ($userData['gender']=="female"?true:false),'class="minimal-red"')." หญิง";?>
 									</label>
 								</div>
 								<?php echo form_error('gender', '<span class="label label-danger">', '</span>'); ?>

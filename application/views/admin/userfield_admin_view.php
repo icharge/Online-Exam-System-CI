@@ -129,10 +129,10 @@ EOL;
 							?>
 								<div>
 									<label class="radio-inline">
-										<?php echo form_radio('status', 'active', ($userData['status']=="active"?true:false),'class="flat-red"')." เปิดใช้งาน";?>
+										<?php echo form_radio('status', 'active', ($userData['status']=="active"?true:false),'class="minimal-red"')." เปิดใช้งาน";?>
 									</label>
 									<label class="radio-inline">
-										<?php echo form_radio('status', 'inactive', ($userData['status']=="inactive"?true:false),'class="flat-red"')." ปิดใช้งาน";?>
+										<?php echo form_radio('status', 'inactive', ($userData['status']=="inactive"?true:false),'class="minimal-red"')." ปิดใช้งาน";?>
 									</label>
 								</div>
 								<?php echo form_error('status', '<span class="label label-danger">', '</span>'); ?>

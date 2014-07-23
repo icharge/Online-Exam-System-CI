@@ -214,7 +214,7 @@ class Users extends CI_Controller {
 						$studentData['lname'] = $this->input->post('surname');
 						$studentData['email'] = $this->input->post('email');
 						$studentData['birth'] = $this->input->post('birth');
-						$studentData['gender'] = $this->input->post('gender');
+						$studentData['gender'] = ($this->input->post('gender')=="male"?"male":"female");
 						$studentData['year'] = $this->input->post('year');
 						$studentData['fac_id'] = $this->input->post('faculty');
 						$studentData['branch_id'] = $this->input->post('branch');
@@ -370,7 +370,7 @@ class Users extends CI_Controller {
 					# Form check completed
 					//$userData['username'] = $this->input->post('username');
 					if ($this->input->post('password')) $userData['password'] = md5($this->input->post('password'));
-					if ($this->input->post('status')) $userData['status'] = $this->input->post('status');
+					if ($this->input->post('status')) $userData['status'] = ($this->input->post('status')=="active"?"active":"inactive");
 					//$userData['role'] = "admin";
 					$adminData['name'] = $this->input->post('fname');
 					$adminData['lname'] = $this->input->post('surname');
@@ -418,7 +418,7 @@ class Users extends CI_Controller {
 				{
 					# Form check completed
 					if ($this->input->post('password')) $userData['password'] = md5($this->input->post('password'));
-					if ($this->input->post('status')) $userData['status'] = $this->input->post('status');
+					if ($this->input->post('status')) $userData['status'] = ($this->input->post('status')=="active"?"active":"inactive");
 					$teacherData['name'] = $this->input->post('fname');
 					$teacherData['lname'] = $this->input->post('surname');
 					$teacherData['email'] = $this->input->post('email');
@@ -472,14 +472,14 @@ class Users extends CI_Controller {
 				{
 					# Form check completed
 					if ($this->input->post('password')) $userData['password'] = md5($this->input->post('password'));
-					if ($this->input->post('status')) $userData['status'] = $this->input->post('status');
+					if ($this->input->post('status')) $userData['status'] = ($this->input->post('status')=="active"?"active":"inactive");
 					$studentData['stu_id'] = $this->input->post('username');
 					//$studentData['title'] = $this->input->post('title');
 					$studentData['name'] = $this->input->post('fname');
 					$studentData['lname'] = $this->input->post('surname');
 					$studentData['email'] = $this->input->post('email');
 					$studentData['birth'] = $this->input->post('birth');
-					$studentData['gender'] = $this->input->post('gender');
+					$studentData['gender'] = ($this->input->post('gender')=="male"?"male":"female");
 					$studentData['year'] = $this->input->post('year');
 					$studentData['fac_id'] = $this->input->post('faculty');
 					$studentData['branch_id'] = $this->input->post('branch');

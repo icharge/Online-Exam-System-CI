@@ -72,7 +72,7 @@ class Courses_model extends CI_Model {
 	function buildCourseOptions()
 	{
 		$subjectList = $this->getSubjectList();
-		$options['-1'] = "-- เลือก --";
+		$options[''] = "-- เลือก --";
 		foreach ($subjectList as $item) {
 			$options[$item['subject_id']] = $item['code']." — ".$item['name'];
 		}

@@ -261,6 +261,23 @@ class Misc_model extends CI_Model {
 		return $options;
 	}
 
+	function getActiveStatusIcon($str)
+	{
+		switch ($str) {
+			case 'active':
+				return '<i class="text-green fa fa-circle"></i>';
+				break;
+
+			case 'inactive':
+				return '<i class="fa fa-circle-o"></i>';
+				break;
+			
+			default:
+				break;
+		}
+		return "";
+	}
+
 }
 
 /* End of file misc.php */

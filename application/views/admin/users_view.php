@@ -147,10 +147,10 @@
 						<table class="table table-striped table-hover rowclick">
 							<thead>
 								<tr>
-									<th style="width: 110px;">ชื่อผู้ใช้</th>
-									<th style="width: 37%;">ชื่อ - สกุล</th>
+									<th style="width: 24px;">สถานะ</th>
+									<th style="width: 174px;">ชื่อผู้ใช้</th>
+									<th style="width: 34%;">ชื่อ - สกุล</th>
 									<th style="width: 37%;">อีเมล์</th>
-									<th style="width: 110px;">สถานะ</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -158,10 +158,10 @@
 								foreach ($adminlist as $item) {
 									echo "
 									<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
+									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status'])."</td>
 									<td>$item[username]</td>
 									<td>$item[name] $item[lname]</td>
 									<td>$item[email]</td>
-									<td>$item[status]</td>
 									</tr>
 									";
 								}
@@ -243,11 +243,11 @@
 						<table class="table table-striped table-hover rowclick">
 							<thead>
 								<tr>
+									<th style="width: 24px;">สถานะ</th>
 									<th>ชื่อผู้ใช้</th>
 									<th>ชื่อ</th>
 									<th>นามสกุล</th>
 									<th>คณะ</th>
-									<th>สถานะ</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -255,11 +255,11 @@
 								foreach ($teacherlist as $item) {
 									echo "
 									<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
+									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status'])."</td>
 									<td>$item[username]</td>
 									<td>$item[name]</td>
 									<td>$item[lname]</td>
 									<td>$item[fac_id]</td>
-									<td>$item[status]</td>
 									</tr>
 									";
 								}
@@ -342,13 +342,13 @@
 						<table class="table table-striped table-hover rowclick">
 							<thead>
 								<tr>
+									<th style="width: 24px;">สถานะ</th>
 									<th>ชื่อผู้ใช้</th>
 									<th>ชื่อ - สกุล</th>
 									<th>เพศ</th>
 									<th>คณะ</th>
 									<th>สาขา</th>
 									<th>ปีการศึกษา</th>
-									<th>สถานะ</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -356,6 +356,7 @@
 								foreach ($studentlist as $item) {
 									echo "
 									<tr href=\"".$this->misc->getHref('admin/users/view')."/$item[id]\">
+									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status'])."</td>
 									<td>$item[username]</td>
 									<td>$item[name]&nbsp;&nbsp;$item[lname]</td>
 									<td>";
@@ -364,7 +365,6 @@
 									<td>$item[fac_id]</td>
 									<td>$item[branch_id]</td>
 									<td>$item[year]</td>
-									<td>$item[status]</td>
 									</tr>
 									";
 								}

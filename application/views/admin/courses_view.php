@@ -1,4 +1,4 @@
-Begin content -->
+<!-- Begin content -->
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
@@ -87,7 +87,7 @@ if ($this->session->flashdata('msg_error')) {
 							'method' => 'get'
 							);
 						echo form_open('admin/courses', $attr); ?>
-							<div class="col-xs-6 col-sm-5" style="z-index:500;">
+							<div class="col-sm-6" style="z-index:500;">
 								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
 								<label><?php 
 									$options = array(
@@ -127,8 +127,8 @@ if ($this->session->flashdata('msg_error')) {
 										?>
 								</label>
 							</div>
-							<div class="col-sm-7 ">
-								<div class="col-sm-6 col-md-6 text-right" style="padding-right: 0;">
+							<div class="col-sm-6">
+								<div class="col-xs-6 col-sm-6 col-md-6 text-right" style="padding-right: 0;">
 									<label>รายการ/หน้า</label>
 									<label>	
 										<?php
@@ -147,7 +147,7 @@ if ($this->session->flashdata('msg_error')) {
 											?>
 									</label>
 								</div>
-								<div class="input-group input-group-sm col-sm-6 col-lg-6 pull-right">
+								<div class="input-group input-group-sm col-xs-6 col-sm-6 col-lg-6 pull-right">
 									<?php
 									echo form_input(array(
 										'id'=>'searchtxt',
@@ -176,7 +176,7 @@ if ($this->session->flashdata('msg_error')) {
 								<th style="width: 88px;">วันที่เริ่มสอบ</th>
 								<th style="width: 25%;">ชื่อ</th>
 								<th style="width: 88px;">ชื่อย่อ</th>
-								<th>คำอธิบาย</th>
+								<th class="hidden-xs">คำอธิบาย</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -185,7 +185,7 @@ if ($this->session->flashdata('msg_error')) {
 								foreach ($courseslist as $item) {
 									echo "
 									<tr href=\"".$this->misc->getHref('admin/courses/view')."/$item[course_id]\">
-									<td>$item[status]</td>
+									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status'])."</td>
 									<td>$item[code]</td>
 									<td><span class=\"jtooltip\" title=\"".
 									$this->misc->getFullDateTH($item['startdate'])."\">".
@@ -193,7 +193,7 @@ if ($this->session->flashdata('msg_error')) {
 									"</span></td>
 									<td>$item[name]</td>
 									<td>$item[shortname]</td>
-									<td>".$this->misc->getShortText(strip_tags($item['description']))."</td>
+									<td class=\"hidden-xs\">".$this->misc->getShortText(strip_tags($item['description']))."</td>
 									</tr>
 									";
 								}

@@ -9,7 +9,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><?php echo anchor('admin', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
-			<li><?php echo anchor('admin/subjects', 'จัดการวิชาในระบบ');?></li>
+			<li><?php echo anchor('admin/courses', 'จัดการวิชาที่เปิดสอบ');?></li>
 			<li class="active"><?php echo $pagetitle;?></li>
 		</ol>
 	</section>
@@ -72,16 +72,16 @@ EOL;
 						</h3>
 					</div>
 					<div class="box-body">
-						<div class="form-group<?php if(form_error('subject_id')) echo ' has-error';?>">
+						<div class="form-group<?php if(form_error('subjectid')) echo ' has-error';?>">
 							<?php 
-							echo form_label('วิชา <span class="text-danger">*</span>', 'subject_id');
+							echo form_label('วิชา <span class="text-danger">*</span>', 'subjectid');
 							$options = $this->courses->buildCourseOptions();
-							echo form_dropdown('subjectid', $options, $courseInfo['subject_id'], 'id="subjectid" class="form-control"');
+							echo form_dropdown('subjectid', $options, (isset($courseInfo['subject_id'])?$courseInfo['subject_id']:'default'), 'id="subjectid" class="form-control"');
 							?>
 						</div>
 						<div class="form-group<?php if(form_error('description')) echo ' has-error';?>">
 							<b>คำอธิบายวิชา</b>
-							<p id="courseDesc" class="text-justify"><?php echo $courseInfo['description'];?></p>
+							<p id="courseDesc" class="text-justify"><?php echo (isset($courseInfo['description'])?$courseInfo['description']:'');?></p>
 						</div>
 						<div class="form-group<?php if(form_error('year')) echo ' has-error';?>">
 							<?php 
@@ -123,21 +123,21 @@ EOL;
 								echo form_input(array(
 									'id'=>'startdate',
 									'name'=>'startdate',
-									'value'=>$this->misc->chrsDateToBudDate($courseInfo['startdate'],"-","/"),
+									'value'=>($courseInfo['startdate']!=""?$this->misc->chrsDateToBudDate($courseInfo['startdate'],"-","/"):$this->misc->chrsDateToBudDate(date("Y-m-d"),"-","/")),
 									'type'=>'text',
 									'class'=>'form-control date',
 									'placeholder'=>'วันที่เปิด',
 									//'data-date-format'=>'dd/mm/yyyy',
 									'readonly'=>'readonly'));
-								echo form_error('startdate', '<span class="label label-danger">', '</span>');
 								?>
 							</div>
+							<?php echo form_error('startdate', '<span class="label label-danger">', '</span>');?>
 						</div>
 						<div class="form-group<?php if(form_error('visible')) echo ' has-error';?>">
 							<?php echo form_label('ตัวเลือกเพิ่มเติม'); ?><br>
 							<label>
 								<?php
-								echo form_checkbox('visible', 'visible', ($courseInfo['visible']=='1'?FALSE:TRUE),'class="minimal-red"');
+								echo form_checkbox('visible', 'visible', (isset($courseInfo['visible'])?$courseInfo['visible']=='1'?FALSE:TRUE:FALSE),'class="minimal-red"');
 								?>
 								ซ่อนวิชา
 							</label>
@@ -148,10 +148,10 @@ EOL;
 							?>
 								<div>
 									<label class="radio-inline">
-										<?php echo form_radio('status', 'active', ($courseInfo['status']=="active"?true:false),'class="minimal-red"')." เปิดใช้งาน";?>
+										<?php echo form_radio('status', 'active', (isset($courseInfo['status'])?$courseInfo['status']=="active"?true:false:true),'class="minimal-red"')." เปิดใช้งาน";?>
 									</label>
 									<label class="radio-inline">
-										<?php echo form_radio('status', 'inactive', ($courseInfo['status']=="inactive"?true:false),'class="minimal-red"')." ปิดใช้งาน";?>
+										<?php echo form_radio('status', 'inactive', (isset($courseInfo['status'])?$courseInfo['status']=="inactive"?true:false:false),'class="minimal-red"')." ปิดใช้งาน";?>
 									</label>
 								</div>
 								<?php echo form_error('status', '<span class="label label-danger">', '</span>'); ?>

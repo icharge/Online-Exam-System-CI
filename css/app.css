@@ -47,6 +47,10 @@ body {
 .table.rowclick > tbody > tr {
 	cursor: pointer;
 }
+td.status {
+	vertical-align: middle !important;
+	text-align: center !important;
+}
 
 /*
  * Messenger BOX (Shadow)
@@ -219,6 +223,10 @@ div.ui-datepicker-inline.ui-datepicker.ui-widget.ui-widget-content.ui-helper-cle
 	background: #fff;
 	border: solid 1px #ccc;
 	border-bottom: 0;
+}
+
+.form-group.has-error .ui-datepicker-inline {
+	border-color: #f56954 !important;
 }
 
 div.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all {

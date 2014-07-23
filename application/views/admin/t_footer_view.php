@@ -38,7 +38,7 @@
 	<!-- jBox -->
 	<script src="vendor/js/jBox.js"></script>
 	<!-- AdminLTE App -->
-<!-- <script src="vendor/js/AdminLTE/app.js" type="text/javascript"></script> -->
+	<script src="vendor/js/AdminLTE/app.js" type="text/javascript"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<?php echo ($this->misc->getClassName()=="admin"?'<script src="vendor/js/AdminLTE/dashboard.js" type="text/javascript"></script>':'');?>
 	<!-- AdminLTE for demo purposes -->
