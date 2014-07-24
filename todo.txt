@@ -31,6 +31,7 @@ TODO LIST
 
 
 JQuery detect blur
+==================
 
 $(window).on("blur focus", function(e) {
 	var prevType = $(this).data("prevType");
@@ -50,3 +51,15 @@ $(window).on("blur focus", function(e) {
 
 	$(this).data("prevType", e.type);
 })
+
+
+CREDITS 3RD PARTY
+=================
+- Codeigniter | http://ellislab.com/codeigniter [EllisLab]
+- jQuery | http://jquery.com [jQuery Foundation]
+- Bootstrap | http://getbootstrap.com/ [Twitter (@mdo & @fat)]
+- Admin LTE - Amazing Admin Starter | http://www.bootstrapstage.com/admin-lte/ [almsaeedstudio]
+- reading XLS file using php | http://sourceforge.net/projects/xlsread/ [lxkarthi]
+- Simple XLSX: Parse and retrieve data from Excel XLS files | http://www.phpclasses.org/package/6279-PHP-Parse-and-retrieve-data-from-Excel-XLS-files.html [Sergey Shuchkin]
+- Dropzone.js | http://www.dropzonejs.com/ [Matias Meno]
+- CKEditor | http://ckeditor.com/ [CKSource (Frederico Kriabben)]
