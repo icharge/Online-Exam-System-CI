@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 06, 2014 at 08:27 PM
+-- Generation Time: Jul 28, 2014 at 03:14 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -44,7 +44,7 @@ INSERT INTO `admins` (`admin_id`, `id`, `name`, `lname`, `email`, `pic`) VALUES
 (1, 1, 'สตีฟ', 'แอปเปิล', 'steve@apple.com', NULL),
 (2, 5, 'นายโค้ด', 'พีเอชพี', 'code-php@hotmail.com', NULL),
 (3, 6, 'นายโปรแกรม', 'บัคน้อย', 'program_bug@oxs.com', NULL),
-(4, 7, 'amino', 'okok', NULL, NULL);
+(4, 7, 'amino', 'okok', 'xxx@hotmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -80,35 +80,51 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('2150d7dfa9272bb5b7adeac175599465', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) App', 1404670616, 'a:8:{s:9:"user_data";s:0:"";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;}'),
-('589e68549ca012dc23c13d19146daab2', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) App', 1404668060, '');
+('7b7ec98d60a91f5391ca24c145a74969', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1406551059, 'a:7:{s:9:"user_data";s:0:"";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Course`
+-- Table structure for table `Courses`
 --
 
-CREATE TABLE IF NOT EXISTS `Course` (
-  `course_id` varchar(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `Courses` (
+  `course_id` int(4) NOT NULL AUTO_INCREMENT,
   `year` varchar(4) NOT NULL DEFAULT '',
-  `tea_id` int(10) DEFAULT NULL,
   `pwd` varchar(20) DEFAULT NULL,
   `startdate` date DEFAULT NULL,
   `visible` tinyint(1) NOT NULL DEFAULT '1',
-  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `status` varchar(20) NOT NULL,
   `subject_id` int(5) NOT NULL,
-  PRIMARY KEY (`course_id`,`year`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`course_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `Course`
+-- Dumping data for table `Courses`
 --
 
-INSERT INTO `Course` (`course_id`, `year`, `tea_id`, `pwd`, `startdate`, `visible`, `enabled`, `subject_id`) VALUES
-('291311', '2014', NULL, '12345', '2014-04-26', 1, 1, 1),
-('291436', '2014', NULL, '12345', '2014-05-04', 1, 1, 2);
+INSERT INTO `Courses` (`course_id`, `year`, `pwd`, `startdate`, `visible`, `status`, `subject_id`) VALUES
+(1, '2014', NULL, '2014-07-22', 1, 'active', 1),
+(2, '2014', '12345', '2014-05-04', 1, 'active', 2),
+(3, '2014', NULL, '2014-07-24', 1, 'inactive', 5);
 
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `courseslist_view`
+--
+CREATE TABLE IF NOT EXISTS `courseslist_view` (
+`course_id` int(4)
+,`subject_id` int(5)
+,`code` varchar(10)
+,`year` varchar(4)
+,`startdate` date
+,`name` varchar(60)
+,`shortname` varchar(15)
+,`description` text
+,`visible` tinyint(1)
+,`status` varchar(20)
+);
 -- --------------------------------------------------------
 
 --
@@ -227,19 +243,21 @@ CREATE TABLE IF NOT EXISTS `Subjects` (
   `name` varchar(60) NOT NULL,
   `shortname` varchar(15) NOT NULL,
   `description` text,
+  `status` varchar(20) DEFAULT 'active',
   PRIMARY KEY (`subject_id`),
   UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `Subjects`
 --
 
-INSERT INTO `Subjects` (`subject_id`, `code`, `name`, `shortname`, `description`) VALUES
-(1, '291311', 'IT Consultancy Method', 'ITCM', 'เครือข่ายทางธุรกิจขนาดเล็ก รวมถึงเครือข่ายไร้สาย การติดตั้งเราเตอร์และไฟร์วอล การสร้างเว็บไซต์ พาณิชย์อิเล็กทรอนิกส์ ความปลอดภัยของข้อมูล รวมถึงวิธีการสำรองข้อมูลและการกู้คืนข้อมูลที่เสียหาย ซอฟต์แวร์ต่างๆ เช่น โปรแกรมฐานข้อมูลและโปรแกรมการจัดการความสัมพันธ์กับลูกค้า เทคนิคทางธุรกิจที่เกี่ยวข้องกับการให้คำปรึกษาทางด้านธุรกิจ และลูกค้าสัมพันธ์ รวมไปถึง กฎหมายและหลักจริยธรรมที่เกี่ยวข้องกับการให้คำปรึกษาด้านระบบสารสนเทศ'),
-(2, '291436', 'Object-Oriented Programming', 'OOP', 'ความเป็นมาของการเขียนโปรแกรมเชิงวัตถุ แนวคิดโปรแกรมเชิงวัตถุ คลาส ออปเจก และองค์ประกอบต่างๆ ของออปเจก วงจรชีวิตวัตถุ การสืบทอดคุณสมบัติ โพลีมอร์ฟิซึม การนำคลาสมาใช้งาน เหตุการณ์ต่างๆ ที่ใช้กับวัตถุ การใช้เอพีไอ การเชื่อมต่อฐานข้อมูล การจัดการความผิดปกติโดย Exception ภาคปฏิบัติใช้โปรแกรมเครื่องมือช่วยพัฒนาเพื่อทดลองเขียนโปรแกรมเชิงวัตถุประยุกต์ใช้ในงานธุรกิจ ด้วยภาษาที่กำหนด'),
-(3, '291472', 'Special Project 1', 'SP1', 'โครงงานปฏิบัติเพื่อการวิเคราะห์และออกแบบระบบงานคอมพิวเตอร์เพื่อช่วยแก้ปัญหาทางธุรกิจต่างๆ ที่น่าสนใจ และได้รับความเห็นชอบของอาจารย์ที่ปรึกษา โดยมุ่งเน้นให้นักศึกษาสามารถวิเคราะห์ปัญหาเพื่อจัดทำเป็นข้อกำหนดรายละเอียดซอฟต์แวร์ที่สามารถนำไปสู่การสร้างซอฟต์แวร์ทางธุรกิจได้'),
-(4, '291303', 'System Analysis and Design', 'SAD', 'แนวคิดระบบสารสนเทศและประเภทของระบบสารสนเทศในองค์การธุรกิจ วงจรการพัฒนาระบบ ระเบียบวิธีการ เครื่องมือในการวิเคราะห์ระบบ ผังงานระบบ ตารางการตัดสินใจ การกำหนดปัญหาและการศึกษาความเป็นไปได้ของระบบ การวิเคราะห์ความคุ้มค่าในการลงทุน การออกแบบข้อมูลนำเข้า การออกแบบการแสดงผลลัพธ์ของระบบ การออกแบบฐานข้อมูล การออกแบบกระบวนการประมวลผลระบบ และการจัดทำเอกสารคู่มือระบบ');
+INSERT INTO `Subjects` (`subject_id`, `code`, `name`, `shortname`, `description`, `status`) VALUES
+(1, '291311', 'IT Consultancy Method', 'ITCM', 'เครือข่ายทางธุรกิจขนาดเล็ก รวมถึงเครือข่ายไร้สาย การติดตั้งเราเตอร์และไฟร์วอล การสร้างเว็บไซต์ พาณิชย์อิเล็กทรอนิกส์ ความปลอดภัยของข้อมูล รวมถึงวิธีการสำรองข้อมูลและการกู้คืนข้อมูลที่เสียหาย ซอฟต์แวร์ต่างๆ เช่น โปรแกรมฐานข้อมูลและโปรแกรมการจัดการความสัมพันธ์กับลูกค้า เทคนิคทางธุรกิจที่เกี่ยวข้องกับการให้คำปรึกษาทางด้านธุรกิจ และลูกค้าสัมพันธ์ รวมไปถึง กฎหมายและหลักจริยธรรมที่เกี่ยวข้องกับการให้คำปรึกษาด้านระบบสารสนเทศ', 'active'),
+(2, '291436', 'Object-Oriented Programming', 'OOP', 'ความเป็นมาของการเขียนโปรแกรมเชิงวัตถุ แนวคิดโปรแกรมเชิงวัตถุ คลาส ออปเจก และองค์ประกอบต่างๆ ของออปเจก วงจรชีวิตวัตถุ การสืบทอดคุณสมบัติ โพลีมอร์ฟิซึม การนำคลาสมาใช้งาน เหตุการณ์ต่างๆ ที่ใช้กับวัตถุ การใช้เอพีไอ การเชื่อมต่อฐานข้อมูล การจัดการความผิดปกติโดย Exception ภาคปฏิบัติใช้โปรแกรมเครื่องมือช่วยพัฒนาเพื่อทดลองเขียนโปรแกรมเชิงวัตถุประยุกต์ใช้ในงานธุรกิจ ด้วยภาษาที่กำหนด', 'active'),
+(3, '291472', 'Special Project 1', 'SP1', 'โครงงานปฏิบัติเพื่อการวิเคราะห์และออกแบบระบบงานคอมพิวเตอร์เพื่อช่วยแก้ปัญหาทางธุรกิจต่างๆ ที่น่าสนใจ และได้รับความเห็นชอบของอาจารย์ที่ปรึกษา โดยมุ่งเน้นให้นักศึกษาสามารถวิเคราะห์ปัญหาเพื่อจัดทำเป็นข้อกำหนดรายละเอียดซอฟต์แวร์ที่สามารถนำไปสู่การสร้างซอฟต์แวร์ทางธุรกิจได้', 'active'),
+(4, '291303', 'System Analysis and Design', 'SAD', 'แนวคิดระบบสารสนเทศและประเภทของระบบสารสนเทศในองค์การธุรกิจ วงจรการพัฒนาระบบ ระเบียบวิธีการ เครื่องมือในการวิเคราะห์ระบบ ผังงานระบบ ตารางการตัดสินใจ การกำหนดปัญหาและการศึกษาความเป็นไปได้ของระบบ การวิเคราะห์ความคุ้มค่าในการลงทุน การออกแบบข้อมูลนำเข้า การออกแบบการแสดงผลลัพธ์ของระบบ การออกแบบฐานข้อมูล การออกแบบกระบวนการประมวลผลระบบ และการจัดทำเอกสารคู่มือระบบ', 'active'),
+(5, '1234', '1234n', 'ssss', '<h1><span style="background-color:rgb(255,255,0);"><strong>คำอธิบายวิชา ของ บลาๆๆๆ</strong></span></h1>\n\n<p><img alt="User Image" src="http://localhost/oxproject/img/avatar3.png" style="height:45px;width:45px;" /></p>\n\n<p>รูปภาพ</p>\n', 'active');
 
 -- --------------------------------------------------------
 
@@ -301,20 +319,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `status` varchar(10) NOT NULL DEFAULT 'active',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
-(1, 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'admin', 'active'),
+(1, 'admin', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 'active'),
 (2, '54310104', '81dc9bdb52d04dc20036dbd8313ed055', 'student', 'active'),
 (3, 'uraiwan', '81dc9bdb52d04dc20036dbd8313ed055', 'teacher', 'active'),
 (4, 'sombut', '81dc9bdb52d04dc20036dbd8313ed055', 'teacher', 'active'),
 (5, 'test2', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 'active'),
 (6, 'admin2', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 'active'),
-(7, 'admin3', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 'active'),
+(7, 'admin3', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 'inactive'),
 (8, 'teacher', '81dc9bdb52d04dc20036dbd8313ed055', 'teacher', 'active'),
 (9, 'orawan', '81dc9bdb52d04dc20036dbd8313ed055', 'teacher', 'active'),
 (10, '57700188', '65350653c9baf66a82bd3eff3719e59c', 'student', 'active'),
@@ -343,6 +361,15 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
 (33, '58700141', 'c0064bb3ef67639fb47b1d3632242c02', 'student', 'active'),
 (34, '58700156', '3b66eb863d7180d06c9bdca6e41e2981', 'student', 'active'),
 (35, '58700157', '97648f4805e0f8fdcd68eeb44cd08056', 'student', 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `courseslist_view`
+--
+DROP TABLE IF EXISTS `courseslist_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `courseslist_view` AS select `c`.`course_id` AS `course_id`,`s`.`subject_id` AS `subject_id`,`s`.`code` AS `code`,`c`.`year` AS `year`,`c`.`startdate` AS `startdate`,`s`.`name` AS `name`,`s`.`shortname` AS `shortname`,`s`.`description` AS `description`,`c`.`visible` AS `visible`,`c`.`status` AS `status` from (`courses` `c` left join `subjects` `s` on((`c`.`subject_id` = `s`.`subject_id`)));
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

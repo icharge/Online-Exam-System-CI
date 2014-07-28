@@ -47,16 +47,22 @@
 		?>
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-				<?php if ($msg_info!="") { ?>
+				<?php if (isset($msg_info)) { ?>
 				<div class="alert alert-success" style="min-width: 343px">
 					<i class="fa fa-check"></i>
 					<?=$msg_info?>
 				</div>
 				<?php } ?>
+				<?php if (isset($msg_err)) { ?>
+				<div class="alert alert-danger" style="min-width: 343px">
+					<i class="fa fa-ban"></i>
+					<?=$msg_err?>
+				</div>
+				<?php } ?>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+			<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 				<!-- Begin Uploadbox -->
 				<div class="box box-primary">
 					<div class="box-header">
