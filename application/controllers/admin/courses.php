@@ -5,6 +5,7 @@ class Courses extends CI_Controller {
 	private $subjectDropdownScript;
 	private $datePicker;
 	private $removePwd;
+	private $listview;
 
 	public function __construct()
 	{
@@ -83,6 +84,89 @@ $("#startdate").datepicker({language:\'th-th\',format:\'dd/mm/yyyy\'});';*/
 			$('#password').attr('disabled', $('#removepass').is(':checked'));
 		});";
 
+		$this->listview = "
+$('.add').click(function(){
+	//$('.all').prop(\"checked\",false);
+	$('.all').iCheck('uncheck');
+	var items = $(\"#list1 input:checked:not('.all')\").parent().parent();
+	var n = items.length;
+	if (n > 0) {
+		items.each(function(idx,item){
+			var choice = $(item);
+			choice.prop(\"checked\",false);
+			choice.parent().appendTo(\"#list2\");
+		});
+	}
+	else {
+		alert(\"Choose an item from list 1\");
+	}
+});
+
+$('.remove').click(function(){
+	//$('.all').prop(\"checked\",false);
+	$('.all').iCheck('uncheck');
+	var items = $(\"#list2 input:checked:not('.all')\").parent().parent();
+	items.each(function(idx,item){
+		var choice = $(item);
+		choice.prop(\"checked\",false);
+		choice.parent().appendTo(\"#list1\");
+	});
+});
+
+/* toggle all checkboxes in group */
+$('.all').click(function(e){
+	e.preventDefault();
+
+	var \$this = $(this);
+	// iCheck
+	if(\$this.is(\":checked\")) {
+		\$this.parents('.list-group').find(\"[type=checkbox]\").iCheck('uncheck');
+		//.prop(\"checked\",true);
+	}
+	else {
+		\$this.parents('.list-group').find(\"[type=checkbox]\").iCheck('check');
+		//.prop(\"checked\",false);
+			\$this.prop(\"checked\",false);
+	}
+});
+
+$('[type=checkbox]').click(function(e){
+	e.stopPropagation();
+});
+
+/* toggle checkbox when list group item is clicked */
+$('.list-group a').click(function(e){
+	e.preventDefault();
+	e.stopPropagation();
+
+	var \$this = $(this).find(\"[type=checkbox]\");
+
+	// For iCheck
+	$(\$this).iCheck('toggle');
+	
+	/*if(\$this.is(\":checked\")) {
+		\$this.prop(\"checked\",false);
+	}
+	else {
+		\$this.prop(\"checked\",true);
+	}*/
+
+	if (\$this.hasClass(\"all\")) {
+		\$this.trigger('click');
+	}
+});
+
+// iCheck
+$('.all > div > ins').click(function(e){
+	var \$this = $(this).siblings('[type=checkbox]');
+	if (\$this.hasClass(\"all\")) {
+		\$this.trigger('click');
+	}
+});
+
+
+";
+
 	}
 
 	private function getAddScripts()
@@ -91,6 +175,7 @@ $("#startdate").datepicker({language:\'th-th\',format:\'dd/mm/yyyy\'});';*/
 			'subjectDropdownScript' => $this->subjectDropdownScript,
 			'datePicker' => $this->datePicker,
 			'removePwd' => $this->removePwd,
+			'listview' => $this->listview,
 		);
 	}
 

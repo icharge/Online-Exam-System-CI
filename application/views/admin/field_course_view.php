@@ -110,6 +110,85 @@ EOL;
 							
 							?>
 						</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<h3 class="" contenteditable="false">เลือกอาจารย์ประจำวิชา</h3>
+							</div>
+							<div class="col-sm-4 col-sm-offset-1">
+								<div class="list-group" id="list1">
+									<a href="#" class="list-group-item active">
+										อาจารย์ทั้งหมด 
+										<div class="pull-right all">
+											<input title="toggle all" type="checkbox" class="all pull-right">
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										Second item
+										<div class="pull-right">
+											<input type="checkbox" class="pull-right">
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										Third item 
+										<div class="pull-right">
+											<input type="checkbox" class="pull-right">
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										More item
+										<div class="pull-right">
+											<input type="checkbox" class="pull-right">
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										Another 
+										<div class="pull-right">
+											<input type="checkbox" class="pull-right">
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button type="button" title="Send to list 2" class="btn btn-default center-block add">
+									<i class="glyphicon glyphicon-chevron-right"></i>
+								</button>
+								<button type="button" title="Send to list 1" class="btn btn-default center-block remove">
+									<i class="glyphicon glyphicon-chevron-left"></i>
+								</button>
+							</div>
+							<form name="usethis">
+								<div class="col-sm-4">
+									<a href="#"></a>
+									<div class="list-group" id="list2">
+										<a href="#" class="list-group-item active">
+											อาจารย์ที่เลือก
+											<div class="pull-right all">
+												<input title="toggle all" type="checkbox" class="all pull-right">
+											</div>
+										</a>
+										<a href="#" class="list-group-item">
+											Alpha
+											<div class="pull-right">
+												<input type="checkbox" class="pull-right">
+											</div>
+										</a>
+										<a href="#" class="list-group-item">
+											Charlie 
+											<div class="pull-right">
+												<input type="checkbox" class="pull-right">
+											</div>
+										</a>
+						
+										<a href="#" class="list-group-item">
+											Bravo
+											<div class="pull-right">
+												<input type="checkbox" class="pull-right">
+											</div>
+										</a>
+									</div>
+								</div>
+							</form>
+						</div>
 						<div class="form-group<?php if(form_error('startdate')) echo ' has-error';?>">
 							<?php 
 							echo form_label('วันที่เปิด <span class="text-danger">*</span>', 'startdate');
