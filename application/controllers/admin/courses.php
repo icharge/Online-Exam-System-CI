@@ -226,6 +226,7 @@ $('.all > div > ins').click(function(e){
 			else
 			{
 				$data['courseInfo'] = $this->courses->getCourseById($courseId);
+				$data['teacherListAvaliable'] = $this->courses->getTeacherlist($courseId);
 				$data['formlink'] = 'admin/courses/view/'.$courseId;
 				$data['pagetitle'] = "ข้อมูลการเปิดสอบ";
 				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];

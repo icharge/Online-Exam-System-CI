@@ -122,30 +122,16 @@ EOL;
 											<input title="toggle all" type="checkbox" class="all pull-right">
 										</div>
 									</a>
-									<a href="#" class="list-group-item">
-										Second item
-										<div class="pull-right">
+									<?php
+										foreach ($teacherListAvaliable as $item) {
+											echo '<a href="#" class="list-group-item">'.
+										$item['name'].' '.$item['lname'].
+										'<div class="pull-right">
 											<input type="checkbox" class="pull-right">
 										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										Third item 
-										<div class="pull-right">
-											<input type="checkbox" class="pull-right">
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										More item
-										<div class="pull-right">
-											<input type="checkbox" class="pull-right">
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										Another 
-										<div class="pull-right">
-											<input type="checkbox" class="pull-right">
-										</div>
-									</a>
+									</a>';
+										}
+									?>
 								</div>
 							</div>
 							<div class="col-md-2">

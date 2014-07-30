@@ -118,6 +118,32 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
+	function getTeacherlist($CourseId)
+	{
+		$cause = array('tcd.tea_id' => NULL);
+		$query = $this->db
+			->select('t.tea_id,name,lname,fac_id,email,pic')
+			->from('Teachers t')
+			->join('(SELECT tea_id FROM Teacher_Course_Detail WHERE course_id = '.$CourseId.') tcd', 't.tea_id = tcd.tea_id', 'left')
+			->where($cause);
+		$query = $this->db->get()->result_array();
+		// $sub = $this->subquery->start_subquery('join');
+		// $sub->select('tea_id')->from('Teacher_Course_Detail')->where('course_id', $CourseId);
+		//var_dump($query);die();
+		return $query;
+	}
+
+
+// SELECT t.tea_id, name, lname, fac_id, email, pic 
+// FROM Teachers t 
+// LEFT JOIN 
+// (
+//   SELECT tea_id FROM Teacher_Course_Detail WHERE course_id = 1
+// ) 
+// tcd on (t.tea_id = tcd.tea_id) 
+// WHERE tcd.tea_id IS null
+
+
 }
 
 /* End of file courses_model.php */
