@@ -20,6 +20,7 @@
 
 		<?php
 		$attr = array(
+			'name' => 'course',
 			'role' => 'form',
 			'method' => 'post'
 			);
@@ -127,7 +128,7 @@ EOL;
 											echo '<a href="#" class="list-group-item">'.
 										$item['name'].' '.$item['lname'].
 										'<div class="pull-right">
-											<input type="checkbox" class="pull-right">
+											<input name="" value="'.$item['tea_id'].'" type="checkbox" class="pull-right">
 										</div>
 									</a>';
 										}
@@ -142,38 +143,27 @@ EOL;
 									<i class="glyphicon glyphicon-chevron-left"></i>
 								</button>
 							</div>
-							<form name="usethis">
-								<div class="col-sm-4">
-									<a href="#"></a>
-									<div class="list-group" id="list2">
-										<a href="#" class="list-group-item active">
-											อาจารย์ที่เลือก
-											<div class="pull-right all">
-												<input title="toggle all" type="checkbox" class="all pull-right">
-											</div>
-										</a>
-										<a href="#" class="list-group-item">
-											Alpha
-											<div class="pull-right">
-												<input type="checkbox" class="pull-right">
-											</div>
-										</a>
-										<a href="#" class="list-group-item">
-											Charlie 
-											<div class="pull-right">
-												<input type="checkbox" class="pull-right">
-											</div>
-										</a>
-						
-										<a href="#" class="list-group-item">
-											Bravo
-											<div class="pull-right">
-												<input type="checkbox" class="pull-right">
-											</div>
-										</a>
-									</div>
+							<div class="col-sm-4">
+								<a href="#"></a>
+								<div class="list-group" id="list2">
+									<a href="#" class="list-group-item active">
+										อาจารย์ที่เลือก
+										<div class="pull-right all">
+											<input title="toggle all" type="checkbox" class="all pull-right">
+										</div>
+									</a>
+									<?php
+										foreach ($teacherListinCourse as $item) {
+											echo '<a href="#" class="list-group-item">'.
+										$item['name'].' '.$item['lname'].
+										'<div class="pull-right">
+											<input name="teaselected[]" value="'.$item['tea_id'].'" type="checkbox" class="pull-right">
+										</div>
+									</a>';
+										}
+									?>
 								</div>
-							</form>
+							</div>
 						</div>
 						<div class="form-group<?php if(form_error('startdate')) echo ' has-error';?>">
 							<?php 
@@ -222,19 +212,13 @@ EOL;
 								<?php echo form_error('status', '<span class="label label-danger">', '</span>'); ?>
 						</div>
 					</div>
-				</div>
-				<!-- End BasicInfo -->
-			</div>
-		</div>
-		
-
-		<div class="form-group">
-			<div class="row row-centered">
-				<div class="col-sm-12">
+					<div class="box-footer">
 					<?php
 					echo form_submit('submit', $this->courses->btnSaveText(), 'class="btn btn-primary"');
 					?>
+					</div>
 				</div>
+				<!-- End BasicInfo -->
 			</div>
 		</div>
 		<?php form_close(); ?>

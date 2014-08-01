@@ -88,7 +88,9 @@ $("#startdate").datepicker({language:\'th-th\',format:\'dd/mm/yyyy\'});';*/
 $('.add').click(function(){
 	//$('.all').prop(\"checked\",false);
 	$('.all').iCheck('uncheck');
-	var items = $(\"#list1 input:checked:not('.all')\").parent().parent();
+	var items = $(\"#list1 input:checked:not('.all')\");
+	items.attr('name', 'teaselected[]');
+	items = $(items).parent().parent();
 	var n = items.length;
 	if (n > 0) {
 		items.each(function(idx,item){
@@ -105,7 +107,9 @@ $('.add').click(function(){
 $('.remove').click(function(){
 	//$('.all').prop(\"checked\",false);
 	$('.all').iCheck('uncheck');
-	var items = $(\"#list2 input:checked:not('.all')\").parent().parent();
+	var items = $(\"#list2 input:checked:not('.all')\");
+	items.attr('name', '');
+	items = $(items).parent().parent();
 	items.each(function(idx,item){
 		var choice = $(item);
 		choice.prop(\"checked\",false);
@@ -164,6 +168,11 @@ $('.all > div > ins').click(function(e){
 	}
 });
 
+$('form[name=course]').submit(function(e) {
+	//e.preventDefault();
+	$(\"#list2 input:not('.all')\").iCheck('check');
+	$(this).submit();
+});
 
 ";
 
@@ -226,7 +235,8 @@ $('.all > div > ins').click(function(e){
 			else
 			{
 				$data['courseInfo'] = $this->courses->getCourseById($courseId);
-				$data['teacherListAvaliable'] = $this->courses->getTeacherlist($courseId);
+				$data['teacherListinCourse'] = $this->courses->getTeacherlist($courseId);
+				$data['teacherListAvaliable'] = $this->courses->getTeacherlist($courseId, 'exclude');
 				$data['formlink'] = 'admin/courses/view/'.$courseId;
 				$data['pagetitle'] = "ข้อมูลการเปิดสอบ";
 				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];
@@ -318,6 +328,13 @@ $('.all > div > ins').click(function(e){
 				$this->misc->budDateToChrsDate($this->input->post('startdate'),"/","-"),"Y-m-d");
 			$courseData['subject_id'] = $this->input->post('subjectid');
 			$courseData['status'] = ($this->input->post('status')=="active"?"active":"inactive");
+
+			$updateTeasRes = $this->courses->updateTeacherList($courseId,$this->input->post('teaselected'));
+			if ($updateTeasRes != 0) {
+				$this->session->set_flashdata('msg_error', 
+					'มีบางอย่างผิดพลาด ในการเพิ่มผู้สอน '.$updateTeasRes);
+				redirect('admin/courses');
+			}
 
 			# Remove password ??
 			if ($this->input->post('removepass') == "1")

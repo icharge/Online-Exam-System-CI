@@ -118,31 +118,58 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
-	function getTeacherlist($CourseId)
+	function getTeacherlist($CourseId, $mode='incourse')
 	{
-		$cause = array('tcd.tea_id' => NULL);
-		$query = $this->db
-			->select('t.tea_id,name,lname,fac_id,email,pic')
-			->from('Teachers t')
-			->join('(SELECT tea_id FROM Teacher_Course_Detail WHERE course_id = '.$CourseId.') tcd', 't.tea_id = tcd.tea_id', 'left')
-			->where($cause);
-		$query = $this->db->get()->result_array();
-		// $sub = $this->subquery->start_subquery('join');
-		// $sub->select('tea_id')->from('Teacher_Course_Detail')->where('course_id', $CourseId);
-		//var_dump($query);die();
-		return $query;
+		if ($mode=='incourse')
+		{
+			$cause = array('course_id' => $CourseId);
+			$query = $this->db
+				->select('t.tea_id,name,lname,fac_id,email,pic')
+				->from('Teachers t')
+				->join('Teacher_Course_Detail tcd', 't.tea_id = tcd.tea_id', 'left')
+				->where($cause);
+			$query = $this->db->get()->result_array();
+			return $query;
+		}
+		elseif ($mode=='exclude')
+		{
+			$cause = array('tcd.tea_id' => NULL);
+			$query = $this->db
+				->select('t.tea_id,name,lname,fac_id,email,pic')
+				->from('Teachers t')
+				->join('(SELECT tea_id FROM Teacher_Course_Detail WHERE course_id = '.$CourseId.') tcd', 't.tea_id = tcd.tea_id', 'left')
+				->where($cause);
+			$query = $this->db->get()->result_array();
+			// $sub = $this->subquery->start_subquery('join');
+			// $sub->select('tea_id')->from('Teacher_Course_Detail')->where('course_id', $CourseId);
+			//var_dump($query);die();
+			return $query;
+		}
 	}
 
+	function updateTeacherList($CourseId, $teasId)
+	{
+		$data = array();
+		for ($i=0; $i < sizeof($teasId); $i++) { 
+			$data[$i]['tea_id'] = $teasId[$i];
+			$data[$i]['course_id'] = $CourseId;
+		}
 
-// SELECT t.tea_id, name, lname, fac_id, email, pic 
-// FROM Teachers t 
-// LEFT JOIN 
-// (
-//   SELECT tea_id FROM Teacher_Course_Detail WHERE course_id = 1
-// ) 
-// tcd on (t.tea_id = tcd.tea_id) 
-// WHERE tcd.tea_id IS null
+		$this->db->trans_begin();
+		$this->db->delete('Teacher_Course_Detail', array('course_id' => $CourseId)); 
 
+		$qins = $this->db->insert_batch('Teacher_Course_Detail', $data);
+		$errno = $this->db->_error_number();
+		$this->db->trans_complete();
+		if ($this->db->trans_status())
+		{
+			return 0;
+		}
+		else
+		{
+			return $errno;
+		}
+	}
 
 }
 
