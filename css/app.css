@@ -48,7 +48,7 @@ body {
 	cursor: pointer;
 }
 td.status {
-	vertical-align: middle !important;
+	/*vertical-align: middle !important;*/
 	text-align: center !important;
 }
 

@@ -63,6 +63,8 @@ class Courses_model extends CI_Model {
 		$query = $this->db
 			// ->select($fields)
 			->like("CONCAT(code,year,name,shortname,description)",$keyword,'both')
+			->order_by('year','desc')
+			->order_by('code','asc')
 			->get('courseslist_view')
 			->result_array();
 			// die($this->db->last_query());
@@ -145,18 +147,35 @@ class Courses_model extends CI_Model {
 			//var_dump($query);die();
 			return $query;
 		}
+		elseif ($mode=='all')
+		{
+			$query = $this->db
+				->select('tea_id,name,lname,fac_id,email,pic')
+				->from('Teachers t');
+			$query = $this->db->get()->result_array();
+			return $query;
+		}
 	}
 
 	function updateTeacherList($CourseId, $teasId)
 	{
 		$data = array();
+
+		if ($teasId == null)
+		{
+			$this->db->delete('Teacher_Course_Detail', 
+				array('course_id' => $CourseId)); 
+			return 0;
+		}
+
 		for ($i=0; $i < sizeof($teasId); $i++) { 
 			$data[$i]['tea_id'] = $teasId[$i];
 			$data[$i]['course_id'] = $CourseId;
 		}
 
 		$this->db->trans_begin();
-		$this->db->delete('Teacher_Course_Detail', array('course_id' => $CourseId)); 
+		$this->db->delete('Teacher_Course_Detail', 
+			array('course_id' => $CourseId)); 
 
 		$qins = $this->db->insert_batch('Teacher_Course_Detail', $data);
 		$errno = $this->db->_error_number();

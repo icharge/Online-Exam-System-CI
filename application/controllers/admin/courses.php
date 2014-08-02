@@ -90,6 +90,7 @@ $('.add').click(function(){
 	$('.all').iCheck('uncheck');
 	var items = $(\"#list1 input:checked:not('.all')\");
 	items.attr('name', 'teaselected[]');
+	//$(items).iCheck('uncheck');
 	items = $(items).parent().parent();
 	var n = items.length;
 	if (n > 0) {
@@ -100,7 +101,7 @@ $('.add').click(function(){
 		});
 	}
 	else {
-		alert(\"Choose an item from list 1\");
+		alert(\"โปรดเลือกผู้สอน\");
 	}
 });
 
@@ -109,6 +110,7 @@ $('.remove').click(function(){
 	$('.all').iCheck('uncheck');
 	var items = $(\"#list2 input:checked:not('.all')\");
 	items.attr('name', '');
+	$(items).iCheck('uncheck');
 	items = $(items).parent().parent();
 	items.each(function(idx,item){
 		var choice = $(item);
@@ -263,6 +265,8 @@ $('form[name=course]').submit(function(e) {
 			'year' => set_value('year'),
 			'startdate' => set_value('startdate'),
 		);
+		$data['teacherListinCourse'] = array();
+		$data['teacherListAvaliable'] = $this->courses->getTeacherlist(null, 'all');
 
 		if ($this->input->post('submit'))
 		{

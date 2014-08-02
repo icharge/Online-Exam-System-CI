@@ -81,7 +81,7 @@ EOL;
 							?>
 						</div>
 						<div class="form-group<?php if(form_error('description')) echo ' has-error';?>">
-							<b>คำอธิบายวิชา</b>
+							<label>คำอธิบายวิชา</label>
 							<p id="courseDesc" class="text-justify"><?php echo (isset($courseInfo['description'])?$courseInfo['description']:'');?></p>
 						</div>
 						<div class="form-group<?php if(form_error('year')) echo ' has-error';?>">

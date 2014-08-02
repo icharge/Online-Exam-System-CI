@@ -172,8 +172,9 @@ if ($this->session->flashdata('msg_error')) {
 						<thead>
 							<tr>
 								<th>สถานะ</th>
-								<th style="width: 79px;">รหัสวิชา</th>
-								<th style="width: 88px;">วันที่เริ่มสอบ</th>
+								<th style="width: 70px;">รหัสวิชา</th>
+								<th style="width: 87px;">ปีการศึกษา</th>
+								<th style="width: 95px;">วันที่เริ่มสอบ</th>
 								<th style="width: 25%;">ชื่อ</th>
 								<th style="width: 88px;">ชื่อย่อ</th>
 								<th class="hidden-xs">คำอธิบาย</th>
@@ -187,6 +188,7 @@ if ($this->session->flashdata('msg_error')) {
 									<tr href=\"".$this->misc->getHref('admin/courses/view')."/$item[course_id]\">
 									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status'])."</td>
 									<td>$item[code]</td>
+									<td>$item[year]</td>
 									<td><span class=\"jtooltip\" title=\"".
 									$this->misc->getFullDateTH($item['startdate'])."\">".
 									$this->misc->chrsDateToBudDate($item['startdate'],'-','/').
