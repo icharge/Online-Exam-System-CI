@@ -17,7 +17,6 @@ class Admin extends CI_Controller {
 		} else {
 			redirect('auth/login');
 		}
-		
 	}
 
 	public function index()

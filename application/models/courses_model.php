@@ -71,6 +71,44 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
+	function getMyCourseList($teaid, $keyword='', $perpage=0, $offset=0)
+	{
+		if ($perpage=='') $perpage=0;
+		if ($offset=='') $offset=0;
+		settype($offset, "integer");
+		settype($perpage, "integer");
+
+		if ($perpage > 0) $this->db->limit($perpage, $offset);
+		$query = $this->db
+			->select('*')
+			->from('Teacher_Course_Detail')
+			->join('courseslist_view', 'Teacher_Course_Detail.course_id = courseslist_view.course_id', 'left')
+			->like("CONCAT(code,year,name,shortname,description)",$keyword,'both')
+			->where(array('tea_id'=>$teaid))
+			->order_by('year','desc')
+			->order_by('code','asc')
+			->get()
+			->result_array();
+			//die($this->db->last_query());
+		return $query;
+	}
+
+	function countMyCourseList($teaid, $keyword='')
+	{
+		$fields = array(
+			'count(*) as scount'
+		);
+		$query = $this->db
+			->select($fields)
+			->from('Teacher_Course_Detail')
+			->join('courseslist_view', 'Teacher_Course_Detail.course_id = courseslist_view.course_id', 'left')
+			->like("CONCAT(code,year,name,shortname,description)",$keyword,'both')
+			->where(array('tea_id'=>$teaid))
+			->get()
+			->row_array();
+		return $query['scount'];
+	}
+
 	function buildCourseOptions()
 	{
 		$subjectList = $this->getSubjectList();

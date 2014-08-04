@@ -192,7 +192,7 @@ EOL;
 							<?php echo form_label('ตัวเลือกเพิ่มเติม'); ?><br>
 							<label>
 								<?php
-								echo form_checkbox('visible', 'visible', (isset($courseInfo['visible'])?$courseInfo['visible']=='1'?FALSE:TRUE:FALSE),'class="minimal-red"');
+								echo form_checkbox('visible', 'hidden', (isset($courseInfo['visible'])?$courseInfo['visible']=='1'?FALSE:TRUE:FALSE),'class="minimal-red"');
 								?>
 								ซ่อนวิชา
 							</label>
@@ -212,7 +212,7 @@ EOL;
 								<?php echo form_error('status', '<span class="label label-danger">', '</span>'); ?>
 						</div>
 					</div>
-					<div class="box-footer">
+					<div class="box-footer text-right">
 					<?php
 					echo form_submit('submit', $this->courses->btnSaveText(), 'class="btn btn-primary"');
 					?>

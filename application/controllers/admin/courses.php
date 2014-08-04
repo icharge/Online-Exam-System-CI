@@ -283,6 +283,8 @@ $('form[name=course]').submit(function(e) {
 					$this->misc->budDateToChrsDate($this->input->post('startdate'),"/","-"),"Y-m-d");
 				$courseData['subject_id'] = $this->input->post('subjectid');
 				$courseData['status'] = ($this->input->post('status')=="active"?"active":"inactive");
+				$courseData['visible'] = ($this->input->post('visible')=="hidden"?"0":"1");
+
 				
 				if ($this->courses->addCourse($courseData))
 				{
@@ -332,6 +334,7 @@ $('form[name=course]').submit(function(e) {
 				$this->misc->budDateToChrsDate($this->input->post('startdate'),"/","-"),"Y-m-d");
 			$courseData['subject_id'] = $this->input->post('subjectid');
 			$courseData['status'] = ($this->input->post('status')=="active"?"active":"inactive");
+			$courseData['visible'] = ($this->input->post('visible')=="hidden"?"0":"1");
 
 			$updateTeasRes = $this->courses->updateTeacherList($courseId,$this->input->post('teaselected'));
 			if ($updateTeasRes != 0) {

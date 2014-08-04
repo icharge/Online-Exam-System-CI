@@ -6,6 +6,7 @@ class Teacher extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('users_model', 'Users');
+		$this->load->model('misc_model', 'misc');
 
 		// Permissions List for this Class
 		$perm = array('admin', 'teacher');
@@ -21,10 +22,9 @@ class Teacher extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('teacher/t_header_view');
-		$this->load->view('teacher/t_nav_view');
-		$this->load->view('teacher/t_beginbody_view');
+		$this->load->view('teacher/t_headerbar_view');
 		$this->load->view('teacher/t_sidebar_view');
-		$this->load->view('teacher/index_view');
+		$this->load->view('teacher/dashboard_view');
 		$this->load->view('teacher/t_footer_view');
 	}
 

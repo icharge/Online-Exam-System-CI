@@ -539,6 +539,37 @@ class Users extends CI_Controller {
 			return TRUE;
 		}
 	}
+
+	function import($group='student')
+	{
+		if (! ($group == 'admin' || $group == 'teacher' || $group == 'student'))
+		{
+			redirect('admin/users/import');
+			return;
+		}
+
+		$this->load->model('userimporter_model', 'uimporter');
+
+		$this->load->view('admin/t_header_view');
+		$this->load->view('admin/t_headerbar_view');
+		$this->load->view('admin/t_sidebar_view');
+
+		$data['pagetitle'] = "นำเข้าผู้ใช้งาน";
+		$data['pagesubtitle'] = $this->misc->getRoleTextTh($group);
+
+		if (isset($_FILES['file'])) {
+			$result = $this->uimporter->ImportUsersFromFile($_FILES['file']['tmp_name'], $group);
+			//$result = 0; # for Testing
+			if ($result === 0)
+				$data['msg_info'] = "รายชื่อถูกนำเข้าสู่ฐานข้อมูล เรียบร้อย !";
+			else
+				$data['msg_err'] = "เกิดข้อผิดพลาด $result";
+		}
+		$this->load->view('admin/usersimport_view', $data);
+		$this->load->view('admin/t_footer_view');
+
+	}
+
 }
 
 /* End of file users.php */

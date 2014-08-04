@@ -120,20 +120,15 @@ EOL;
 							?>
 						</div>
 					</div>
+					<div class="box-footer text-right">
+					<?php
+					echo form_submit('submit', $this->subjects->btnSaveText(), 'class="btn btn-primary"');
+					?>
+					</div>
 				</div>
 				<!-- End BasicInfo -->
 			</div>
 		</div>
 		
-
-		<div class="form-group">
-			<div class="row row-centered">
-				<div class="col-sm-12">
-					<?php
-					echo form_submit('submit', $this->subjects->btnSaveText(), 'class="btn btn-primary"');
-					?>
-				</div>
-			</div>
-		</div>
 		<?php form_close(); ?>
 <!-- End content -->

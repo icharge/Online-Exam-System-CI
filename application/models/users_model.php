@@ -41,7 +41,7 @@ class Users_model extends CI_Model {
 		switch ($role) {
 			case 'admin':
 			$fields = array(
-				'users.id', 'role', 'username', 'name', 'lname', 
+				'users.id', 'admin_id', 'role', 'username', 'name', 'lname', 
 				);
 			$cause = array('username' => $username);
 			$query = $this->db
@@ -56,7 +56,7 @@ class Users_model extends CI_Model {
 			
 			case 'teacher':
 			$fields = array(
-				'users.id', 'role', 'username', 'name', 'lname', 
+				'users.id', 'tea_id', 'role', 'username', 'name', 'lname', 
 				'fac_id'
 				);
 			$cause = array('username' => $username);
@@ -71,7 +71,7 @@ class Users_model extends CI_Model {
 
 			case 'student':
 			$fields = array(
-				'users.id', 'role', 'username', 'name', 'lname', 
+				'users.id', 'stu_id', 'role', 'username', 'name', 'lname', 
 				'birth', 'gender', 'year', 'fac_id', 'branch_id'
 				);
 			$cause = array('username' => $username);

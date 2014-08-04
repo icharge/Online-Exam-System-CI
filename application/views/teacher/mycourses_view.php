@@ -4,12 +4,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<span class="fa fa-rss"></span> จัดการวิชาที่เปิดสอบ
-			<small>Courses Management</small>
+			<span class="fa fa-rss"></span> วิชาของฉัน
+			<small>My courses</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><?php echo anchor('admin', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
-			<li class="active">จัดการวิชาที่เปิดสอบ</li>
+			<li><?php echo anchor('teacher', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
+			<li class="active">วิชาของฉัน</li>
 		</ol>
 	</section>
 
@@ -68,11 +68,11 @@ if ($this->session->flashdata('msg_error')) {
 				<li class="dropdown pull-right">
 					<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><?php echo anchor('admin/courses/add', 'เพิ่ม');?></li>
+						<li><?php echo anchor('teacher/reqcourse', 'ร้องขอวิชา');?></li>
 					</ul>
 				</li>
 				<li class="pull-left header">
-					<i class="glyphicon glyphicon-th"></i> รายการวิชาที่เปิดสอบ
+					<i class="glyphicon glyphicon-th"></i> รายการวิชาของฉัน
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -81,7 +81,7 @@ if ($this->session->flashdata('msg_error')) {
 					<div class="row">
 						<?php
 						$attr = array(
-							'name' => 'searchsubject',
+							'name' => 'mycourses',
 							'class' => 'form-inline searchform',
 							'role' => 'search',
 							'method' => 'get'
@@ -123,7 +123,7 @@ if ($this->session->flashdata('msg_error')) {
 									echo form_dropdown('perpage', 
 										$attr_year, 
 										"2557", 
-										'class="form-control input-sm" onchange="submitFrm(document.forms.searchsubject)"');
+										'class="form-control input-sm" onchange="submitFrm(document.forms.mycourses)"');
 										?>
 								</label>
 							</div>
@@ -143,7 +143,7 @@ if ($this->session->flashdata('msg_error')) {
 										echo form_dropdown('perpage', 
 											$attr_pp, 
 											$perpage, 
-											'class="form-control input-sm" onchange="submitFrm(document.forms.searchsubject)"');
+											'class="form-control input-sm" onchange="submitFrm(document.forms.mycourses)"');
 											?>
 									</label>
 								</div>
@@ -185,7 +185,7 @@ if ($this->session->flashdata('msg_error')) {
 							if (($courseslist)) {
 								foreach ($courseslist as $item) {
 									echo "
-									<tr href=\"".$this->misc->getHref('admin/courses/view')."/$item[course_id]\">
+									<tr href=\"".$this->misc->getHref('teacher/mycourses/view')."/$item[course_id]\">
 									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status']).
 									' '.$this->misc->getVisibilityStatusIcon($item['visible'])."</td>
 									<td>$item[code]</td>
@@ -201,7 +201,7 @@ if ($this->session->flashdata('msg_error')) {
 									";
 								}
 							} else {
-								echo "<tr class='warning'><td colspan='4' class='text-center'>ไม่พบข้อมูล</td></tr>";
+								echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
 							}
 							
 						?>				

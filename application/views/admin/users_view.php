@@ -282,7 +282,7 @@
 								<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
 								<ul class="dropdown-menu" role="menu">
 									<li><?php echo anchor('admin/users/adduser/student', 'เพิ่ม');?></li>
-									<li><?php echo anchor('admin/users/importstudent', 'นำเข้า');?></li>
+									<li><?php echo anchor('admin/users/import/student', 'นำเข้า');?></li>
 								</ul>
 							</li>
 							<li class="pull-left header">

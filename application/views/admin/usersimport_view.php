@@ -90,7 +90,7 @@
 							?>
 						</div>
 					</div>
-					<div class="box-footer">
+					<div class="box-footer text-right">
 					<?php
 					echo form_submit('submit', 'นำเข้าข้อมูล', 'class="btn btn-primary"');
 					?>

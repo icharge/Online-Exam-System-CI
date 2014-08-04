@@ -265,11 +265,34 @@ class Misc_model extends CI_Model {
 	{
 		switch ($str) {
 			case 'active':
-				return '<i class="text-green fa fa-circle"></i>';
+				return '<i class="text-green fa fa-circle jtooltip" title="เปิดใช้งาน"></i>';
 				break;
 
 			case 'inactive':
-				return '<i class="fa fa-circle-o"></i>';
+				return '<i class="fa fa-circle-o jtooltip" title="ปิดใช้งาน"></i>';
+				break;
+			
+			default:
+				break;
+		}
+		return "";
+	}
+
+	function getVisibilityStatusIcon($str)
+	{
+		switch ($str) {
+			case 'active':
+			case 'visible':
+			case 1:
+			case '1':
+				return '<i class="fa fa-eye jtooltip" title="ทุกคนมองเห็น"></i>';
+				break;
+
+			case 'inactive':
+			case 'invisible':
+			case 0:
+			case '0':
+				return '<i class="fa fa-eye-slash jtooltip" title="ซ่อน"></i>';
 				break;
 			
 			default:
