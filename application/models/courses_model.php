@@ -20,7 +20,7 @@ class Courses_model extends CI_Model {
 
 	function btnSaveText()
 	{
-		return $this->getMethodName()=="add"?'เพิ่มข้อมูล':'แก้ไขข้อมูล';
+		return $this->getMethodName()=="add"?'เพิ่มข้อมูล':'บันทึก';
 	}
 
 	function isEditPage()

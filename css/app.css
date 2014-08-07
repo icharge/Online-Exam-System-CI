@@ -266,3 +266,11 @@ div.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all {
 input[type=text].date {
 	width: 262px;
 }
+
+.nav-tabs-custom > .nav-tabs {
+	overflow: hidden;
+}
+
+.nav-tabs-custom > .nav-tabs > li {
+	margin-right: 1px;
+}
