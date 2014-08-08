@@ -43,6 +43,11 @@
 	<?php echo ($this->misc->getClassName()=="admin"?'<script src="vendor/js/AdminLTE/dashboard.js" type="text/javascript"></script>':'');?>
 	<!-- AdminLTE for demo purposes -->
 	<!-- <script src="vendor/js/AdminLTE/demo.js" type="text/javascript"></script> -->
+
+	<!-- PickList -->
+	<script src="vendor/js/jquery.ui.widget.js" type="text/javascript"></script>
+	<script src="vendor/js/jquery-picklist.js" type="text/javascript"></script>
+
 	<?php
 		if (defined('useEditor')) echo '
 	<!-- CK Editor -->
