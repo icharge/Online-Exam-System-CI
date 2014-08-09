@@ -126,13 +126,14 @@ $('.all').click(function(e){
 	var \$this = $(this);
 	// iCheck
 	if(\$this.is(\":checked\")) {
-		\$this.parents('.list-group').find(\"[type=checkbox]\").iCheck('uncheck');
+		var listgroup = \$this.parent().parent().parent().parent();
+		listgroup.next('.list-group').find(\"[type=checkbox]\").iCheck('uncheck');
 		//.prop(\"checked\",true);
 	}
 	else {
-		\$this.parents('.list-group').find(\"[type=checkbox]\").iCheck('check');
+		var listgroup = \$this.parent().parent().parent().parent();
+		listgroup.next('.list-group').find(\"[type=checkbox]\").iCheck('check');
 		//.prop(\"checked\",false);
-			\$this.prop(\"checked\",false);
 	}
 });
 
@@ -141,9 +142,9 @@ $('[type=checkbox]').click(function(e){
 });
 
 /* toggle checkbox when list group item is clicked */
-$('.list-group a').click(function(e){
+$('.list-group a, .listview a').click(function(e){
 	e.preventDefault();
-	e.stopPropagation();
+	//e.stopPropagation();
 
 	var \$this = $(this).find(\"[type=checkbox]\");
 
@@ -161,7 +162,19 @@ $('.list-group a').click(function(e){
 		\$this.trigger('click');
 	}
 });
+/*
+$('#list1 a').click(function(e) {
+	var findall = $(this).find('div.all');
+	if (! findall.hasClass('all'))
+		$('.add').trigger('click');
+});
 
+$('#list2 a').click(function(e) {
+	var findall = $(this).find('div.all');
+	if (! findall.hasClass('all'))
+		$('.remove').trigger('click');
+});
+*/
 // iCheck
 $('.all > div > ins').click(function(e){
 	var \$this = $(this).siblings('[type=checkbox]');

@@ -9,6 +9,8 @@
 	<script src="vendor/js/jquery-ui.js" type="text/javascript"></script>
 	<!-- Bootstrap -->
 	<script src="vendor/js/bootstrap.min.js" type="text/javascript"></script>
+	<!-- Bootstrap select -->
+	<script src="vendor/js/bootstrap-select.min.js" type="text/javascript"></script>
 	<!-- InputMask -->
 	<script src="vendor/js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
 	<script src="vendor/js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
@@ -70,6 +72,16 @@
 				return true;
 			}
 		});
+
+		$('select.input-sm').selectpicker({
+			style: 'btn-default btn-sm'
+		});
+
+		$('select.input-lg').selectpicker({
+			style: 'btn-default btn-lg'
+		});
+
+		$('select').selectpicker();
 
 		$('#datepicker').datepicker();
 

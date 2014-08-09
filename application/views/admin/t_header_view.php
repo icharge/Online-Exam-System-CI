@@ -6,6 +6,8 @@
 	<title>Online Examination System</title>
 	<!-- bootstrap 3.0.2 -->
 	<link href="vendor/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<!-- bootstrap select -->
+	<link href="vendor/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
 	<!-- font Awesome -->
 	<link href="vendor/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<!-- Ionicons -->

@@ -93,7 +93,7 @@
 							<i class="glyphicon glyphicon-th"></i> ผู้ดูแล
 						</li>
 					</ul>
-					<div class="tab-content">
+					<div class="row box-body">
 						<?php
 							$attr = array(
 							'name' => 'searchadmin',
@@ -190,7 +190,7 @@
 							<i class="glyphicon glyphicon-th"></i> ผู้สอน
 						</li>
 					</ul>
-					<div class="tab-content">
+					<div class="row box-body">
 					<?php
 						$attr = array(
 							'name' => 'searchteacher',
@@ -289,7 +289,7 @@
 								<i class="glyphicon glyphicon-th"></i> นักเรียน
 							</li>
 						</ul>
-						<div class="tab-content">
+						<div class="row box-body">
 					<?php
 						$attr = array(
 							'name' => 'searchstudent',
