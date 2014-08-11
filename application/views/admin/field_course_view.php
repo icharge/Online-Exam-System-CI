@@ -27,7 +27,7 @@
 		echo form_open($formlink, $attr);
 		?>
 		<div class="row">
-			<div class="col-md-5 col-lg-6 col-lg-offset-3">
+			<div class="col-md-6 col-lg-6 col-md-offset-3">
 <?php
 if (isset($msg_error)) 
 {
