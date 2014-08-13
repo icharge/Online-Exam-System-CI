@@ -2,6 +2,8 @@
 
 class Courses extends CI_Controller {
 
+	private $scriptList;
+
 	private $subjectDropdownScript;
 	private $datePicker;
 	private $removePwd;
@@ -191,16 +193,19 @@ $('form[name=course]').submit(function(e) {
 
 ";
 
-	}
-
-	private function getAddScripts()
-	{
-		return array(
+		$this->scriptList = array(
 			'subjectDropdownScript' => $this->subjectDropdownScript,
 			'datePicker' => $this->datePicker,
 			'removePwd' => $this->removePwd,
 			'listview' => $this->listview,
 		);
+
+
+	}
+
+	private function getAddScripts()
+	{
+		return $this->scriptList;
 	}
 
 	public function index()
@@ -250,8 +255,14 @@ $('form[name=course]').submit(function(e) {
 			else
 			{
 				$data['courseInfo'] = $this->courses->getCourseById($courseId);
+				// Load Teachers
 				$data['teacherListinCourse'] = $this->courses->getTeacherlist($courseId);
 				$data['teacherListAvaliable'] = $this->courses->getTeacherlist($courseId, 'exclude');
+				// Load Students
+				$data['studentListinCourse'] = $this->courses->getStudentlist($courseId);
+				$data['studentListAvaliable'] = $this->courses->getStudentlist($courseId, 'exclude');
+
+				// Set page desc
 				$data['formlink'] = 'admin/courses/view/'.$courseId;
 				$data['pagetitle'] = "ข้อมูลการเปิดสอบ";
 				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];

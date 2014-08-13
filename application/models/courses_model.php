@@ -228,6 +228,40 @@ class Courses_model extends CI_Model {
 		}
 	}
 
+	function getStudentlist($CourseId, $mode='incourse')
+	{
+		if ($mode=='incourse')
+		{
+			$cause = array('course_id' => $CourseId);
+			$query = $this->db
+				->select('stu.stu_id,title,name,lname,birth,gender,,idcard,year,fac_id,branch_id,email,pic')
+				->from('students stu')
+				->join('Student_Enroll stuen', 'stu.stu_id = stuen.stu_id', 'left')
+				->where($cause);
+			$query = $this->db->get()->result_array();
+			return $query;
+		}
+		elseif ($mode=='exclude')
+		{
+			$cause = array('stuen.stu_id' => NULL);
+			$query = $this->db
+				->select('stu.stu_id,title,name,lname,birth,gender,,idcard,year,fac_id,branch_id,email,pic')
+				->from('Students stu')
+				->join('(SELECT stu_id FROM Student_Enroll WHERE course_id = '.$CourseId.') stuen', 'stu.stu_id = stuen.stu_id', 'left')
+				->where($cause);
+			$query = $this->db->get()->result_array();
+			return $query;
+		}
+		elseif ($mode=='all')
+		{
+			$query = $this->db
+				->select('*')
+				->from('Students');
+			$query = $this->db->get()->result_array();
+			return $query;
+		}
+	}
+
 }
 
 /* End of file courses_model.php */

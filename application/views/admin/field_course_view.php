@@ -69,7 +69,8 @@ EOL;
 				<div class="box nav-tabs-custom" style="border: none;">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#basic" data-toggle="tab">พื้นฐาน</a></li>
-						<li><a href="#teacher" data-toggle="tab">ผู้สอน</a></li>
+						<li><a href="#teachers" data-toggle="tab">ผู้สอน</a></li>
+						<li><a href="#students" data-toggle="tab">นักเรียน</a></li>
 					</ul>
 					<!-- Tab Content 1 -->
 					<div class="tab-content">
@@ -162,7 +163,7 @@ EOL;
 							</div>
 						</div>
 						<!-- Teacher tab -->
-						<div class="box-body tab-pane" id="teacher">
+						<div class="box-body tab-pane" id="teachers">
 							<div class="row">
 								<div class="col-md-12 text-center">
 									<h3 class="" contenteditable="false">เลือกอาจารย์ประจำวิชา</h3>
@@ -230,6 +231,76 @@ EOL;
 									</div>
 								</div>
 							</div>	
+						</div>
+						<!-- Students tab -->
+						<div class="box-body tab-pane" id="students">
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<h3 class="" contenteditable="false">นักเรียนลงทะเบียนเข้าสอบ</h3>
+								</div>
+								<div class="col-sm-5">
+									<div class="panel panel-primary">
+										<div class="panel-heading listview">
+											<a href="#" class="list-group-item active">
+												นักเรียนทั้งหมด 
+												<div class="pull-right all">
+													<input title="toggle all" type="checkbox" class="all pull-right">
+												</div>
+											</a>
+										</div>
+										<div class="list-group" id="list1">
+											
+											<?php
+												foreach ($studentListAvaliable as $item) {
+													echo '<a href="#" class="list-group-item">'.
+												$item['name'].' '.$item['lname'].
+												'<div class="pull-right">
+													<input name="" value="'.$item['stu_id'].'" type="checkbox" class="pull-right">
+												</div>
+											</a>';
+												}
+											?>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2 btn-group-wrapper">
+									<div class="middle">
+										<div class="inner">
+											<button type="button" title="Send to list 2" class="btn btn-default center-block add">
+												<i class="glyphicon glyphicon-chevron-right"></i>
+											</button>
+											<button type="button" title="Send to list 1" class="btn btn-default center-block remove">
+												<i class="glyphicon glyphicon-chevron-left"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-5">
+									<div class="panel panel-primary">
+										<div class="panel-heading listview">
+											<a href="#" class="list-group-item active">
+												นักเรียนในวิชา 
+												<div class="pull-right all">
+													<input title="toggle all" type="checkbox" class="all pull-right">
+												</div>
+											</a>
+										</div>
+										<div class="list-group" id="list2">
+											<?php
+												foreach ($studentListinCourse as $item) {
+													echo 
+													'<a href="#" class="list-group-item">'.
+													$item['name'].' '.$item['lname'].
+													'<div class="pull-right">
+														<input name="stuselected[]" value="'.$item['stu_id'].'" type="checkbox" class="pull-right">
+														</div>
+													</a>';
+												}
+											?>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="box-footer text-right">
