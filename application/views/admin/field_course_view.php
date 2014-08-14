@@ -4,7 +4,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<span class="fa fa-plus-circle"></span> <?php echo $pagetitle;?>
+			<span class="fa fa-briefcase"></span> <?php echo $pagetitle;?>
 			<small></small>
 		</h1>
 		<ol class="breadcrumb">
