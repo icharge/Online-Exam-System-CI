@@ -28,12 +28,12 @@ class Courses extends CI_Controller {
 
 		// Prepare JavaScript !!
 		$this->subjectDropdownScript = "
-		
+
 			if ($('#subjectid').val() == '')
 			{
 				$('#courseDesc').html('<h4>...กรุณาเลือกวิชา...<h4>');
 			}
-		
+
 
 $('#subjectid').change(function(){
 	if($(this).val() == '')
@@ -152,7 +152,7 @@ $('.list-group a, .listview a').click(function(e){
 
 	// For iCheck
 	$(\$this).iCheck('toggle');
-	
+
 	/*if(\$this.is(\":checked\")) {
 		\$this.prop(\"checked\",false);
 	}
@@ -220,7 +220,7 @@ $('form[name=course]').submit(function(e) {
 
 		$data['total'] = $this->courses->countCourseList($this->input->get('q'));
 		$data['courseslist'] = $this->courses->getCourseList($this->input->get('q'),
-			$data['perpage'], 
+			$data['perpage'],
 			$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
 
 		$this->misc->PaginationInit(
@@ -230,7 +230,7 @@ $('form[name=course]').submit(function(e) {
 
 		$data['pagin'] = $this->pagination->create_links();
 
-		
+
 		$this->load->view('admin/courses_view', $data);
 		$this->load->view('admin/t_footer_view');
 	}
@@ -287,7 +287,7 @@ $('form[name=course]').submit(function(e) {
 		$data['courseInfo'] = array(
 			'subjectid' => set_value('subjectid'),
 			'year' => set_value('year'),
-			'startdate' => set_value('startdate'),
+			// 'startdate' => set_value('startdate'),
 		);
 		$data['teacherListinCourse'] = array();
 		$data['teacherListAvaliable'] = $this->courses->getTeacherlist(null, 'all');
@@ -296,29 +296,29 @@ $('form[name=course]').submit(function(e) {
 		{
 			$this->form_validation->set_rules('subjectid', 'รหัสวิชา', 'required');
 			$this->form_validation->set_rules('year', 'ปีการศึกษา', 'required');
-			$this->form_validation->set_rules('startdate', 'วันที่เริ่ม', 'required');
+			// $this->form_validation->set_rules('startdate', 'วันที่เริ่ม', 'required');
 			$this->form_validation->set_message('required', 'คุณต้องเลือก/กรอก %s');
 			if ($this->form_validation->run())
 			{
 				# Form check completed
 				$courseData['course_id'] = $courseId;
 				$courseData['year'] = $this->input->post('year');
-				$courseData['startdate'] = $this->misc->reformatDate(
-					$this->misc->budDateToChrsDate($this->input->post('startdate'),"/","-"),"Y-m-d");
+				// $courseData['startdate'] = $this->misc->reformatDate(
+				// 	$this->misc->budDateToChrsDate($this->input->post('startdate'),"/","-"),"Y-m-d");
 				$courseData['subject_id'] = $this->input->post('subjectid');
 				$courseData['status'] = ($this->input->post('status')=="active"?"active":"inactive");
 				$courseData['visible'] = ($this->input->post('visible')=="hidden"?"0":"1");
 
-				
+
 				if ($this->courses->addCourse($courseData))
 				{
 					# Add success
-					$this->session->set_flashdata('msg_info', 
+					$this->session->set_flashdata('msg_info',
 						'เปิดวิชาเรียบร้อย');
 					redirect('admin/courses');
 				} else {
 					# Failed
-					$this->session->set_flashdata('msg_error', 
+					$this->session->set_flashdata('msg_error',
 						'มีบางอย่างผิดพลาด ไม่สามารถวิชาได้');
 					redirect('admin/courses');
 				}
@@ -329,7 +329,7 @@ $('form[name=course]').submit(function(e) {
 				$data['courseInfo'] = array(
 					'subjectid' => set_value('subjectid'),
 					'year' => set_value('year'),
-					'startdate' => set_value('startdate'),
+					// 'startdate' => set_value('startdate'),
 				);
 				$this->load->view('admin/field_course_view', $data);
 			}
@@ -347,22 +347,22 @@ $('form[name=course]').submit(function(e) {
 	{
 		$this->form_validation->set_rules('subjectid', 'รหัสวิชา', 'required');
 		$this->form_validation->set_rules('year', 'ปีการศึกษา', 'required');
-		$this->form_validation->set_rules('startdate', 'วันที่เริ่ม', 'required');
+		// $this->form_validation->set_rules('startdate', 'วันที่เริ่ม', 'required');
 		$this->form_validation->set_message('required', 'คุณต้องเลือก/กรอก %s');
 		if ($this->form_validation->run())
 		{
 			# Form check completed
 			$courseData['course_id'] = $courseId;
 			$courseData['year'] = $this->input->post('year');
-			$courseData['startdate'] = $this->misc->reformatDate(
-				$this->misc->budDateToChrsDate($this->input->post('startdate'),"/","-"),"Y-m-d");
+			// $courseData['startdate'] = $this->misc->reformatDate(
+			// 	$this->misc->budDateToChrsDate($this->input->post('startdate'),"/","-"),"Y-m-d");
 			$courseData['subject_id'] = $this->input->post('subjectid');
 			$courseData['status'] = ($this->input->post('status')=="active"?"active":"inactive");
 			$courseData['visible'] = ($this->input->post('visible')=="hidden"?"0":"1");
 
 			$updateTeasRes = $this->courses->updateTeacherList($courseId,$this->input->post('teaselected'));
 			if ($updateTeasRes != 0) {
-				$this->session->set_flashdata('msg_error', 
+				$this->session->set_flashdata('msg_error',
 					'มีบางอย่างผิดพลาด ในการเพิ่มผู้สอน '.$updateTeasRes);
 				redirect('admin/courses');
 			}
@@ -372,19 +372,19 @@ $('form[name=course]').submit(function(e) {
 			{
 				$courseData['pwd'] = null;
 			}
-			elseif ($this->input->post('password')) 
+			elseif ($this->input->post('password'))
 				$courseData['pwd'] = $this->input->post('password');
 
-			// die(var_dump($courseData)); 
+			// die(var_dump($courseData));
 			if ($this->courses->updateCourse($courseData, $courseId))
 			{
 				# แก้ไข success
-				$this->session->set_flashdata('msg_info', 
+				$this->session->set_flashdata('msg_info',
 					'ปรับปรุงเรียบร้อย');
 				redirect('admin/courses');
 			} else {
 				# Failed
-				$this->session->set_flashdata('msg_error', 
+				$this->session->set_flashdata('msg_error',
 					'มีบางอย่างผิดพลาด ไม่สามารถปรับปรุงได้');
 				redirect('admin/courses');
 			}
@@ -416,13 +416,13 @@ $('form[name=course]').submit(function(e) {
 				else
 					echo json_encode(array('error' => "No Subject_id"));
 				break;
-			
+
 			default:
 				echo json_encode(array('error' => "No Arguments"));
 				break;
 		}
 	}
-	
+
 }
 
 /* End of file courses.php */

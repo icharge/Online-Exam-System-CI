@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-md-6 col-lg-6 col-md-offset-3">
 <?php
-if (isset($msg_error)) 
+if (isset($msg_error))
 {
 	echo <<<EOL
 <div class="alert alert-danger hidden-xs alert-dismissable" style="min-width: 343px">
@@ -64,7 +64,7 @@ EOL;
 		</div>
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				
+
 				<!-- Begin BasicInfo -->
 				<div class="box nav-tabs-custom" style="border: none;">
 					<ul class="nav nav-tabs">
@@ -76,7 +76,7 @@ EOL;
 					<div class="tab-content">
 						<div class="box-body tab-pane active" id="basic">
 							<div class="form-group<?php if(form_error('subjectid')) echo ' has-error';?>">
-								<?php 
+								<?php
 								echo form_label('วิชา <span class="text-danger">*</span>', 'subjectid');
 								$options = $this->courses->buildCourseOptions();
 								echo form_dropdown('subjectid', $options, (isset($courseInfo['subject_id'])?$courseInfo['subject_id']:'default'), 'id="subjectid" class="form-control"');
@@ -89,14 +89,14 @@ EOL;
 								</div>
 							</div>
 							<div class="form-group<?php if(form_error('year')) echo ' has-error';?>">
-								<?php 
+								<?php
 								echo form_label('ปีการศึกษา <span class="text-danger">*</span>', 'year');
 								$options = $this->misc->buildYearOptions();
 								echo form_dropdown('year', $options, $courseInfo['year'], 'class="form-control"');
 								?>
 							</div>
 							<div class="form-group<?php if(form_error('password')) echo ' has-error';?>">
-								<?php 
+								<?php
 								echo form_label('รหัสผ่าน', 'password');
 								if ($this->courses->isEditPage()) $pwdinfo = "รหัสผ่าน กรอกเพื่อเปลี่ยน ปล่อยว่างจะใช้รหัสผ่านเดิม";
 								else $pwdinfo = "่";
@@ -112,11 +112,12 @@ EOL;
 									echo form_checkbox('removepass', '1', FALSE,'id="removepass" class="minimal-red"');
 									echo " ลบรหัสผ่าน</label>";
 								}
-								
+
 								?>
 							</div>
+							<!--
 							<div class="form-group<?php if(form_error('startdate')) echo ' has-error';?>">
-								<?php 
+								<?php
 								echo form_label('วันที่เปิด <span class="text-danger">*</span>', 'startdate');
 								?>
 								<div class="input-group">
@@ -138,6 +139,7 @@ EOL;
 								</div>
 								<?php echo form_error('startdate', '<span class="label label-danger">', '</span>');?>
 							</div>
+							-->
 							<div class="form-group<?php if(form_error('visible')) echo ' has-error';?>">
 								<?php echo form_label('ตัวเลือกเพิ่มเติม'); ?><br>
 								<label>
@@ -148,7 +150,7 @@ EOL;
 								</label>
 							</div>
 							<div class="form-group<?php if(form_error('status')) echo ' has-error';?>">
-								<?php 
+								<?php
 								echo form_label('สถานะ', 'status');
 								?>
 									<div>
@@ -172,14 +174,14 @@ EOL;
 									<div class="panel panel-primary">
 										<div class="panel-heading listview">
 											<a href="#" class="list-group-item active">
-												อาจารย์ทั้งหมด 
+												อาจารย์ทั้งหมด
 												<div class="pull-right all">
 													<input title="toggle all" type="checkbox" class="all pull-right">
 												</div>
 											</a>
 										</div>
 										<div class="list-group" id="list1">
-											
+
 											<?php
 												foreach ($teacherListAvaliable as $item) {
 													echo '<a href="#" class="list-group-item">'.
@@ -209,7 +211,7 @@ EOL;
 									<div class="panel panel-primary">
 										<div class="panel-heading listview">
 											<a href="#" class="list-group-item active">
-												อาจารย์ที่เลือก 
+												อาจารย์ที่เลือก
 												<div class="pull-right all">
 													<input title="toggle all" type="checkbox" class="all pull-right">
 												</div>
@@ -218,7 +220,7 @@ EOL;
 										<div class="list-group" id="list2">
 											<?php
 												foreach ($teacherListinCourse as $item) {
-													echo 
+													echo
 													'<a href="#" class="list-group-item">'.
 													$item['name'].' '.$item['lname'].
 													'<div class="pull-right">
@@ -230,7 +232,7 @@ EOL;
 										</div>
 									</div>
 								</div>
-							</div>	
+							</div>
 						</div>
 						<!-- Students tab -->
 						<div class="box-body tab-pane" id="students">
@@ -242,14 +244,14 @@ EOL;
 									<div class="panel panel-primary">
 										<div class="panel-heading listview">
 											<a href="#" class="list-group-item active">
-												นักเรียนทั้งหมด 
+												นักเรียนทั้งหมด
 												<div class="pull-right all">
 													<input title="toggle all" type="checkbox" class="all pull-right">
 												</div>
 											</a>
 										</div>
 										<div class="list-group" id="list1">
-											
+
 											<?php
 												foreach ($studentListAvaliable as $item) {
 													echo '<a href="#" class="list-group-item">'.
@@ -279,7 +281,7 @@ EOL;
 									<div class="panel panel-primary">
 										<div class="panel-heading listview">
 											<a href="#" class="list-group-item active">
-												นักเรียนในวิชา 
+												นักเรียนในวิชา
 												<div class="pull-right all">
 													<input title="toggle all" type="checkbox" class="all pull-right">
 												</div>
@@ -288,7 +290,7 @@ EOL;
 										<div class="list-group" id="list2">
 											<?php
 												foreach ($studentListinCourse as $item) {
-													echo 
+													echo
 													'<a href="#" class="list-group-item">'.
 													$item['name'].' '.$item['lname'].
 													'<div class="pull-right">

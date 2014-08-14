@@ -5,7 +5,7 @@ class Courses_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 	}
 
 	function getClassName()
@@ -50,9 +50,9 @@ class Courses_model extends CI_Model {
 
 	function getCourseList($keyword='', $perpage=0, $offset=0)
 	{
-// SELECT course_id, year, tea_id, startdate, name, shortname, description, visible, enabled 
-// FROM Course c 
-// LEFT JOIN Subjects s on (c.subject_id = s.subject_id) 
+// SELECT course_id, year, tea_id, startdate, name, shortname, description, visible, enabled
+// FROM Course c
+// LEFT JOIN Subjects s on (c.subject_id = s.subject_id)
 // WHERE 1
 		if ($perpage=='') $perpage=0;
 		if ($offset=='') $offset=0;
@@ -201,19 +201,19 @@ class Courses_model extends CI_Model {
 
 		if ($teasId == null)
 		{
-			$this->db->delete('Teacher_Course_Detail', 
-				array('course_id' => $CourseId)); 
+			$this->db->delete('Teacher_Course_Detail',
+				array('course_id' => $CourseId));
 			return 0;
 		}
 
-		for ($i=0; $i < sizeof($teasId); $i++) { 
+		for ($i=0; $i < sizeof($teasId); $i++) {
 			$data[$i]['tea_id'] = $teasId[$i];
 			$data[$i]['course_id'] = $CourseId;
 		}
 
 		$this->db->trans_begin();
-		$this->db->delete('Teacher_Course_Detail', 
-			array('course_id' => $CourseId)); 
+		$this->db->delete('Teacher_Course_Detail',
+			array('course_id' => $CourseId));
 
 		$qins = $this->db->insert_batch('Teacher_Course_Detail', $data);
 		$errno = $this->db->_error_number();
@@ -234,7 +234,7 @@ class Courses_model extends CI_Model {
 		{
 			$cause = array('course_id' => $CourseId);
 			$query = $this->db
-				->select('stu.stu_id,title,name,lname,birth,gender,,idcard,year,fac_id,branch_id,email,pic')
+				->select('stu.stu_id,title,name,lname,birth,gender,idcard,year,fac_id,branch_id,email,pic')
 				->from('students stu')
 				->join('Student_Enroll stuen', 'stu.stu_id = stuen.stu_id', 'left')
 				->where($cause);
@@ -245,7 +245,7 @@ class Courses_model extends CI_Model {
 		{
 			$cause = array('stuen.stu_id' => NULL);
 			$query = $this->db
-				->select('stu.stu_id,title,name,lname,birth,gender,,idcard,year,fac_id,branch_id,email,pic')
+				->select('stu.stu_id,title,name,lname,birth,gender,idcard,year,fac_id,branch_id,email,pic')
 				->from('Students stu')
 				->join('(SELECT stu_id FROM Student_Enroll WHERE course_id = '.$CourseId.') stuen', 'stu.stu_id = stuen.stu_id', 'left')
 				->where($cause);
