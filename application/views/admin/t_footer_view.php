@@ -81,7 +81,7 @@
 			style: 'btn-default btn-lg'
 		});
 
-		$('select:not(size)').selectpicker();
+		$('select:not(.def)').selectpicker();
 
 		$('#datepicker').datepicker();
 

@@ -207,30 +207,69 @@ jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
 			});
 		});
 		$(select).data('options', options);
+
 		$(textbox).bind('change keyup', function() {
-			var options = $(select).empty().scrollTop(0).data('options');
+			//var options = $(select).empty().scrollTop(0).data('options');
+			var options = [];
+			$(select).find('option').each(function() {
+				if ($(this).attr('selected') === undefined)
+				{
+					options.push({
+						value: $(this).val(),
+						text: $(this).text(),
+						className: $(this).attr('class')
+					});
+				}
+			});
+
 			var search = $(this).val().trim();
 			var regex = new RegExp(search, \"gi\");
 
+			$('#studentList').pickList('removeAll');
+			var items = [];
 			$.each(options, function(i) {
 				var option = options[i];
 				if (option.text.match(regex) !== null) {
-					$(select).append(
-						$('<option>').text(option.text).val(option.value).addClass(option.className)
-					);
+					//$(select).append(
+					//	$('<option>').text(option.text).val(option.value).addClass(option.className)
+					//);
+					items.push({
+						value: option.value,
+						label: option.text,
+						selected: false
+					});
 				}
 			});
+			$('#studentList').pickList('showItems', items);
 			if (selectSingleMatch === true && $(select).children().length === 1) {
 				$(select).children().get(0).selected = true;
 			}
-			$(select).selectpicker('refresh');
 		});
 	});
 };
 
 $(function() {
-	$('#cid').filterByText($('#textbox'));
 
+	$('#studentList').pickList({
+		sourceListLabel: '<i class=\"fa fa-search\"></i><input id=\"textbox\" class=\"searchbox\" type=\"text\" autocomplete=\"off\" />',
+		targetListLabel: 'นักเรียนในวิชา',
+
+		mainClass: 'pickList col-sm-12',
+		listContainerClass: 'panel panel-primary',
+		listLabelClass: 'panel-heading',
+		listClass: 'pickList_list list-group',
+		listItemClass: 'pickList_listItem list-group-item',
+		addAllClass: 'btn btn-default center-block',
+		addClass: 'btn btn-default center-block',
+		removeAllClass: 'btn btn-default center-block',
+		removeClass: 'btn btn-default center-block',
+		addLabel: '<i class=\"glyphicon glyphicon-chevron-right\"></i>',
+		addAllLabel: '<i class=\"glyphicon glyphicon-chevron-right\"></i><i class=\"glyphicon glyphicon-chevron-right\"></i>',
+		removeLabel: '<i class=\"glyphicon glyphicon-chevron-left\"></i>',
+		removeAllLabel: '<i class=\"glyphicon glyphicon-chevron-left\"></i><i class=\"glyphicon glyphicon-chevron-left\"></i>'
+	});
+
+	$('#studentList').filterByText($('#textbox'));
 
 ";
 

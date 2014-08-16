@@ -110,7 +110,7 @@
 					});
 
 			var label = $("<div/>")
-					.text(self.options.sourceListLabel)
+					.html(self.options.sourceListLabel)
 					.addClass(self.options.listLabelClass)
 					.addClass(self.options.sourceListLabelClass);
 
@@ -223,7 +223,7 @@
 		_addItems: function(items)
 		{
 			var self = this;
-			
+
 			self._trigger("beforeAdd");
 
 			self.targetList.append( self._removeSelections(items) );
@@ -248,7 +248,7 @@
 		_removeItems: function(items)
 		{
 			var self = this;
-			
+
 			self._trigger("beforeRemove");
 
 			self.sourceList.append( self._removeSelections(items) );
@@ -308,7 +308,10 @@
 			var items = self.targetList.children();
 			self.sourceList.append( self._removeSelections(items) );
 
-			self.element.children().filter(":selected").removeAttr("selected");
+			self.element.children().filter(function() {
+				$(this).attr("selected", false);
+			});
+			//removeAttr("selected");
 
 			self._refresh();
 
@@ -569,6 +572,14 @@
 			self._refresh();
 		},
 
+		removeAll: function(item)
+		{
+			var self = this;
+			self.sourceList.empty();
+			//self.element.children().not(":selected").empty();
+
+		},
+
 		insertItems: function(items)
 		{
 			var self = this;
@@ -597,6 +608,31 @@
 			self.element.append(selectItems.join("\n"));
 			self.sourceList.append(sourceItems.join("\n"));
 			self.targetList.append(targetItems.join("\n"));
+
+			self._trigger("onChange");
+
+			self._refresh();
+		},
+
+		showItems: function(items)
+		{
+			var self = this;
+
+			var selectItems = [];
+			var sourceItems = [];
+
+			$(items).each(function()
+			{
+				var selectItem = self._createSelectItem(this);
+				var listItem = self._createListItem(this);
+
+				selectItems.push(selectItem);
+
+				sourceItems.push(listItem);
+			});
+
+
+			self.sourceList.append(sourceItems.join("\n"));
 
 			self._trigger("onChange");
 

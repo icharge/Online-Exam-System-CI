@@ -43,7 +43,7 @@ class Users extends CI_Controller {
 		{
 			$data['total'] = $this->Users->countUsersByGroup('admin', $this->input->get('q'));
 			$data['adminlist'] = $this->Users->getUsersByGroup('admin', $this->input->get('q'),
-				$data['perpage'], 
+				$data['perpage'],
 				$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
 			$this->misc->PaginationInit(
 				'admin/users/viewgroup/admin?perpage='.
@@ -55,7 +55,7 @@ class Users extends CI_Controller {
 		{
 			$data['total'] = $this->Users->countUsersByGroup('teacher', $this->input->get('q'));
 			$data['teacherlist'] = $this->Users->getUsersByGroup('teacher',$this->input->get('q'),
-				$data['perpage'], 
+				$data['perpage'],
 				$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
 			$this->misc->PaginationInit(
 				'admin/users/viewgroup/teacher?perpage='.
@@ -67,7 +67,7 @@ class Users extends CI_Controller {
 		{
 			$data['total'] = $this->Users->countUsersByGroup('student', $this->input->get('q'));
 			$data['studentlist'] = $this->Users->getUsersByGroup('student',$this->input->get('q'),
-				$data['perpage'], 
+				$data['perpage'],
 				$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
 			$this->misc->PaginationInit(
 				'admin/users/viewgroup/student?perpage='.
@@ -85,6 +85,8 @@ class Users extends CI_Controller {
 		$this->load->view('admin/t_header_view');
 		$this->load->view('admin/t_headerbar_view');
 		$this->load->view('admin/t_sidebar_view');
+
+		$data['pagetitle'] = "เพิ่มผู้ใช้";
 
 		if ($this->input->post('submit'))
 		{
@@ -116,16 +118,16 @@ class Users extends CI_Controller {
 						if (($result = $this->Users->addUser("admins", $userData, $adminData))==0)
 						{
 							# Added success
-							$this->session->set_flashdata('msg_info', 
+							$this->session->set_flashdata('msg_info',
 								'เพิ่ม '.$userData['username'].' เรียบร้อย');
-							
+
 							//$this->users();
 							redirect('admin/users');
 						}
 						else
 						{
 							# Failed
-							$this->session->set_flashdata('msg_error', 
+							$this->session->set_flashdata('msg_error',
 								'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้<br>'.$this->misc->getErrorDesc($result,'user'));
 							//$this->users();
 							redirect('admin/users');
@@ -148,7 +150,7 @@ class Users extends CI_Controller {
 
 				case 'teacher':
 					$data['formlink'] = 'admin/users/adduser/teacher';
-					$data['ptitle'] = "ผู้สอน";
+					$data['pagesubtitle'] = "ผู้สอน";
 					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required|trim');
 					$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required|callback__password_check['.$this->input->post('passwordconfirm').']');
 					$this->form_validation->set_rules('passwordconfirm', 'รหัสผ่าน', 'required|callback__password_check['.$this->input->post('password').']');
@@ -166,16 +168,16 @@ class Users extends CI_Controller {
 						$teacherData['lname'] = $this->input->post('surname');
 						$teacherData['email'] = $this->input->post('email');
 						$teacherData['fac_id'] = $this->input->post('faculty');
-						
+
 						if ($this->Users->addUser("teachers", $userData, $teacherData))
 						{
 							# Added success
-							$this->session->set_flashdata('msg_info', 
+							$this->session->set_flashdata('msg_info',
 								'เพิ่ม '.$userData['username'].' เรียบร้อย');
 							redirect('admin/users');
 						} else {
 							# Failed
-							$this->session->set_flashdata('msg_error', 
+							$this->session->set_flashdata('msg_error',
 								'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้');
 							redirect('admin/users');
 						}
@@ -189,11 +191,11 @@ class Users extends CI_Controller {
 
 				case 'student':
 					$data['formlink'] = 'admin/users/adduser/student';
-					$data['ptitle'] = "นักเรียน";
+					$data['pagesubtitle'] = "นักเรียน";
 					$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required|trim');
 					$this->form_validation->set_rules('password', 'รหัสผ่าน', 'required|callback__password_check['.$this->input->post('passwordconfirm').']');
 					$this->form_validation->set_rules('passwordconfirm', 'รหัสผ่าน', 'required|callback__password_check['.$this->input->post('password').']');
-					$this->form_validation->set_rules('title', 'คำนำหน้า', 'required|trim');
+					//$this->form_validation->set_rules('title', 'คำนำหน้า', 'required|trim');
 					$this->form_validation->set_rules('fname', 'ชื่อ', 'required|trim');
 					$this->form_validation->set_rules('surname', 'นามสกุล', 'required|trim');
 					$this->form_validation->set_rules('birth', 'วันเกิด', 'required');
@@ -209,7 +211,7 @@ class Users extends CI_Controller {
 						$userData['password'] = md5($this->input->post('password'));
 						$userData['role'] = "student";
 						$studentData['stu_id'] = $this->input->post('username');
-						$studentData['title'] = $this->input->post('title');
+						//$studentData['title'] = $this->input->post('title');
 						$studentData['name'] = $this->input->post('fname');
 						$studentData['lname'] = $this->input->post('surname');
 						$studentData['email'] = $this->input->post('email');
@@ -218,29 +220,41 @@ class Users extends CI_Controller {
 						$studentData['year'] = $this->input->post('year');
 						$studentData['fac_id'] = $this->input->post('faculty');
 						$studentData['branch_id'] = $this->input->post('branch');
-						
+
 						$result = $this->Users->addUser("students", $userData, $studentData);
 
 						if ($result == 0)
 						{
 							# Added success
-							$this->session->set_flashdata('msg_info', 
+							$this->session->set_flashdata('msg_info',
 								'เพิ่ม '.$userData['username'].' เรียบร้อย');
 							redirect('admin/users');
 						} else {
 							# Failed
-							$this->session->set_flashdata('msg_error', 
+							$this->session->set_flashdata('msg_error',
 								'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้<br>'.$result);
 							redirect('admin/users');
 						}
 					}
 					else
 					{
+						// Set user data form
+						$data['userData'] = array(
+							'username' => set_value('username'),
+							'name' => set_value('fname'),
+							'lname' => set_value('surname'),
+							'birth' => set_value('birth'),
+							'gender' => set_value('gender'),
+							'year' => set_value('year'),
+							'fac_id' => set_value('faculty'),
+							'branch_id' => set_value('branch'),
+							'email' => set_value('email'),
+						);
 						$data['msg_error'] = 'ตรวจสอบความถูกต้องของข้อมูล';
 						$this->load->view('admin/userfield_student_view', $data);
 					}
 					break;
-				
+
 				default:
 					# code...
 					break;
@@ -300,12 +314,12 @@ class Users extends CI_Controller {
 					);
 					$this->load->view('admin/userfield_student_view', $data);
 					break;
-				
+
 				default:
 					# code...
 					break;
 			}
-			
+
 		}
 		$this->load->view('admin/t_footer_view');
 	}
@@ -334,7 +348,7 @@ class Users extends CI_Controller {
 					$data['permtxt'] = "ผู้ดูแลระบบ";
 					$this->load->view('admin/userfield_admin_view', $data);
 					break;
-				
+
 				case 'teacher':
 					$data['permtxt'] = "ผู้สอน";
 					$this->load->view('admin/userfield_teacher_view', $data);
@@ -379,15 +393,15 @@ class Users extends CI_Controller {
 					if (($result = $this->Users->updateUser('admins', $userData, $adminData, $uid))==0)
 					{
 						# Added success
-						$this->session->set_flashdata('msg_info', 
+						$this->session->set_flashdata('msg_info',
 							'แก้ไข '.$userData['username'].' เรียบร้อย');
-						
+
 						redirect('admin/users');
 					}
 					else
 					{
 						# Failed
-						$this->session->set_flashdata('msg_error', 
+						$this->session->set_flashdata('msg_error',
 							'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้<br>'.$this->misc->getErrorDesc($result,'user'));
 						//$this->users();
 						redirect('admin/users');
@@ -427,15 +441,15 @@ class Users extends CI_Controller {
 					if (($result = $this->Users->updateUser('teachers', $userData, $teacherData, $uid))==0)
 					{
 						# Added success
-						$this->session->set_flashdata('msg_info', 
+						$this->session->set_flashdata('msg_info',
 							'แก้ไข '.$userData['username'].' เรียบร้อย');
-						
+
 						redirect('admin/users');
 					}
 					else
 					{
 						# Failed
-						$this->session->set_flashdata('msg_error', 
+						$this->session->set_flashdata('msg_error',
 							'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้<br>'.$this->misc->getErrorDesc($result,'user'));
 						//$this->users();
 						redirect('admin/users');
@@ -483,19 +497,19 @@ class Users extends CI_Controller {
 					$studentData['year'] = $this->input->post('year');
 					$studentData['fac_id'] = $this->input->post('faculty');
 					$studentData['branch_id'] = $this->input->post('branch');
-					
+
 					if (($result = $this->Users->updateUser('students', $userData, $studentData, $uid))==0)
 					{
 						# Added success
-						$this->session->set_flashdata('msg_info', 
+						$this->session->set_flashdata('msg_info',
 							'แก้ไข '.$userData['username'].' เรียบร้อย');
-						
+
 						redirect('admin/users');
 					}
 					else
 					{
 						# Failed
-						$this->session->set_flashdata('msg_error', 
+						$this->session->set_flashdata('msg_error',
 							'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$userData['username'].' ได้<br>'.$this->misc->getErrorDesc($result,'user'));
 						//$this->users();
 						redirect('admin/users');
@@ -522,9 +536,9 @@ class Users extends CI_Controller {
 				break;
 
 			default:
-				
+
 				break;
-		
+
 		}
 	}
 	function _password_check($str, $strcmp)

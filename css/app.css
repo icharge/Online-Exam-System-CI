@@ -193,7 +193,7 @@ div.messenger-message {
 ul.sidebar-menu > li, ul.sidebar-menu > li.treeview > ul.treeview-menu > li {
 	position: relative;
 }
-ul.sidebar-menu > li.active:not(.treeview)::after, 
+ul.sidebar-menu > li.active:not(.treeview)::after,
 ul.sidebar-menu > li.treeview > ul.treeview-menu > li.active::after
 {
 	border-right: solid #09F 5px;
@@ -315,12 +315,13 @@ input[type=text].date {
  */
 
 .pickList_sourceListContainer, .pickList_controlsContainer, .pickList_targetListContainer {
-	float: left; 
-	margin: 0.25em;
+	float: left;
+	/*margin: 0.25em;*/
 }
 
 .pickList_controlsContainer {
 	text-align: center;
+	margin: 0 18px;
 }
 
 .pickList_controlsContainer button {
@@ -334,9 +335,8 @@ input[type=text].date {
 	margin: 0;
 	padding: 0;
 	float: left;
-	width: 150px;
-	height: 75px;
-	border: 1px inset #eee;
+	width: 258px;
+	height: 204px;
 	overflow-y: auto;
 	cursor: default;
 }
@@ -366,6 +366,55 @@ input[type=text].date {
 
 .pickList_listItem .clear {
 	clear: both;
+}
+
+.pickList_sourceListLabel {
+	position: relative;
+}
+
+.pickList_sourceListLabel:after {
+	content: ".";
+	color: transparent;
+	position: absolute;
+	bottom: 9px;
+	right: 15px;
+	width: 206px;
+	border-bottom: 1px dotted #FFFFFF;
+	pointer-events: none;
+}
+
+.searchbox::-webkit-input-placeholder {
+	color: white;
+}
+
+.searchbox:-moz-placeholder {
+	color: white;
+}
+
+.searchbox::-moz-placeholder {
+	color: white;
+}
+
+.searchbox:-ms-input-placeholder {
+	color: white;
+}
+
+.searchbox {
+	width: 100%;
+	background: transparent;
+	border: 0;
+	padding: 0 0 0 22px;
+}
+
+.searchbox:focus {
+	outline: 0;
+}
+
+.pickList > div > div > .fa {
+	position: absolute;
+	height: 100%;
+	top: 13px;
+	pointer-events: none;
 }
 
 /*
