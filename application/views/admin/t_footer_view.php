@@ -81,7 +81,7 @@
 			style: 'btn-default btn-lg'
 		});
 
-		$('select').selectpicker();
+		$('select:not(size)').selectpicker();
 
 		$('#datepicker').datepicker();
 
@@ -102,10 +102,10 @@
 		});
 
 		$('.jtooltip').jBox('Tooltip', {theme: 'TooltipDark'});
-		
+
 		<?php if(defined('useEditor')) echo "CKEDITOR.replace('editor');";?>
-		<?php 
-			if(isset($additionScript)) 
+		<?php
+			if(isset($additionScript))
 			{
 				echo "// Addition Scripts.\n";
 				foreach ($additionScript as $item) {
