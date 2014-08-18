@@ -129,7 +129,7 @@
 				self._addItems( self.sourceList.children(".ui-selected") );
 			});
 
-			return container;
+			return $("<div/>").addClass("col-sm-5").append(container);
 		},
 
 		_buildTargetList: function()
@@ -170,7 +170,7 @@
 				self._removeItems( self.targetList.children(".ui-selected") );
 			});
 
-			return container;
+			return $("<div/>").addClass("col-sm-5").append(container);
 		},
 
 		_buildControls: function()
@@ -190,7 +190,7 @@
 					.append(self.removeButton)
 					.append(self.removeAllButton);
 
-			return self.controls;
+			return $("<div/>").addClass("col-sm-1").append(self.controls);
 		},
 
 		_populateLists: function()

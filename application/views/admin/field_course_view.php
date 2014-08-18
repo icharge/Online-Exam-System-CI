@@ -74,7 +74,7 @@ EOL;
 					</ul>
 					<!-- Tab Content 1 -->
 					<div class="tab-content">
-						<div class="box-body tab-pane" id="basic">
+						<div class="box-body tab-pane active" id="basic">
 							<div class="form-group<?php if(form_error('subjectid')) echo ' has-error';?>">
 								<?php
 								echo form_label('วิชา <span class="text-danger">*</span>', 'subjectid');
@@ -170,87 +170,41 @@ EOL;
 								<div class="col-md-12 text-center">
 									<h3 class="" contenteditable="false">เลือกอาจารย์ประจำวิชา</h3>
 								</div>
-								<div class="col-sm-5">
-									<div class="panel panel-primary">
-										<div class="panel-heading listview">
-											<a href="#" class="list-group-item active">
-												อาจารย์ทั้งหมด
-												<div class="pull-right all">
-													<input title="toggle all" type="checkbox" class="all pull-right">
-												</div>
-											</a>
-										</div>
-										<div class="list-group" id="list1">
+								<select name="teaselected[]" id="teacherList" class="def" size="10" multiple style="width:200px;height:300px">
+									<?php
+										foreach ($teacherListAvaliable as $item) {
+											echo
+											'<option value="'.$item['tea_id'].'">'.$item['name'].' '.$item['lname'].
+											'</option>';
+										}
+										foreach ($teacherListinCourse as $item) {
+											echo
+											'<option value="'.$item['tea_id'].'" selected="selected">'.$item['name'].' '.$item['lname'].
+											'</option>';
+										}
 
-											<?php
-												foreach ($teacherListAvaliable as $item) {
-													echo '<a href="#" class="list-group-item">'.
-												$item['name'].' '.$item['lname'].
-												'<div class="pull-right">
-													<input name="" value="'.$item['tea_id'].'" type="checkbox" class="pull-right">
-												</div>
-											</a>';
-												}
-											?>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-2 btn-group-wrapper">
-									<div class="middle">
-										<div class="inner">
-											<button type="button" title="Send to list 2" class="btn btn-default center-block add">
-												<i class="glyphicon glyphicon-chevron-right"></i>
-											</button>
-											<button type="button" title="Send to list 1" class="btn btn-default center-block remove">
-												<i class="glyphicon glyphicon-chevron-left"></i>
-											</button>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-5">
-									<div class="panel panel-primary">
-										<div class="panel-heading listview">
-											<a href="#" class="list-group-item active">
-												อาจารย์ที่เลือก
-												<div class="pull-right all">
-													<input title="toggle all" type="checkbox" class="all pull-right">
-												</div>
-											</a>
-										</div>
-										<div class="list-group" id="list2">
-											<?php
-												foreach ($teacherListinCourse as $item) {
-													echo
-													'<a href="#" class="list-group-item">'.
-													$item['name'].' '.$item['lname'].
-													'<div class="pull-right">
-														<input name="teaselected[]" value="'.$item['tea_id'].'" type="checkbox" class="pull-right">
-														</div>
-													</a>';
-												}
-											?>
-										</div>
-									</div>
-								</div>
+									?>
+								</select>
+
 							</div>
 						</div>
 						<!-- Students tab -->
-						<div class="box-body tab-pane active" id="students">
+						<div class="box-body tab-pane" id="students">
 							<div class="row">
-								<select id="studentList" class="def" size="10" style="width:200px;height:300px">
-										<?php
-											foreach ($studentListAvaliable as $item) {
-												echo
-												'<option value="'.$item['stu_id'].'">'.$item['name'].' '.$item['lname'].
-												'</option>';
-											}
-											foreach ($studentListinCourse as $item) {
-												echo
-												'<option value="'.$item['stu_id'].'">'.$item['name'].' '.$item['lname'].
-												'</option>';
-											}
+								<select name="stdselected[]" id="studentList" class="def" size="10" multiple style="width:200px;height:300px">
+									<?php
+										foreach ($studentListAvaliable as $item) {
+											echo
+											'<option value="'.$item['stu_id'].'">'.$item['name'].' '.$item['lname'].
+											'</option>';
+										}
+										foreach ($studentListinCourse as $item) {
+											echo
+											'<option value="'.$item['stu_id'].'" selected="selected">'.$item['name'].' '.$item['lname'].
+											'</option>';
+										}
 
-										?>
+									?>
 								</select>
 							</div>
 

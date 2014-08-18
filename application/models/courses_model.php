@@ -262,6 +262,39 @@ class Courses_model extends CI_Model {
 		}
 	}
 
+	function updateStudentList($CourseId, $stdId)
+	{
+		$data = array();
+
+		if ($stdId == null)
+		{
+			$this->db->delete('Student_Enroll',
+				array('course_id' => $CourseId));
+			return 0;
+		}
+
+		for ($i=0; $i < sizeof($stdId); $i++) {
+			$data[$i]['stu_id'] = $stdId[$i];
+			$data[$i]['course_id'] = $CourseId;
+		}
+
+		$this->db->trans_begin();
+		$this->db->delete('Student_Enroll',
+			array('course_id' => $CourseId));
+
+		$qins = $this->db->insert_batch('Student_Enroll', $data);
+		$errno = $this->db->_error_number();
+		$this->db->trans_complete();
+		if ($this->db->trans_status())
+		{
+			return 0;
+		}
+		else
+		{
+			return $errno;
+		}
+	}
+
 }
 
 /* End of file courses_model.php */

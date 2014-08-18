@@ -319,6 +319,10 @@ input[type=text].date {
 	/*margin: 0.25em;*/
 }
 
+.pickList_sourceListContainer, .pickList_targetListContainer {
+	width: 100%;
+}
+
 .pickList_controlsContainer {
 	text-align: center;
 	margin: 0 18px;
@@ -335,14 +339,14 @@ input[type=text].date {
 	margin: 0;
 	padding: 0;
 	float: left;
-	width: 258px;
+	width: 100%;
 	height: 204px;
 	overflow-y: auto;
 	cursor: default;
 }
 
 .pickList_selectedListItem {
-	background-color: #a3c8f5;
+	background-color: #DAEBFF;
 }
 
 .pickList_listLabel {
@@ -368,6 +372,10 @@ input[type=text].date {
 	clear: both;
 }
 
+.pickList_listItem.ui-state-highlight {
+	text-decoration: none;
+}
+
 .pickList_sourceListLabel {
 	position: relative;
 }
@@ -376,9 +384,8 @@ input[type=text].date {
 	content: ".";
 	color: transparent;
 	position: absolute;
-	bottom: 9px;
+	left: 38px;
 	right: 15px;
-	width: 206px;
 	border-bottom: 1px dotted #FFFFFF;
 	pointer-events: none;
 }
@@ -410,7 +417,7 @@ input[type=text].date {
 	outline: 0;
 }
 
-.pickList > div > div > .fa {
+.pickList .fa {
 	position: absolute;
 	height: 100%;
 	top: 13px;

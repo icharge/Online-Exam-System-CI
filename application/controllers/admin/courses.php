@@ -185,17 +185,9 @@ $('.all > div > ins').click(function(e){
 	}
 });
 
-$('form[name=course]').submit(function(e) {
-	//e.preventDefault();
-	$(\"#list2 input:not('.all')\").iCheck('check');
-	$(this).submit();
-});
-
-
-
 // filter select list options
 });
-jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
+jQuery.fn.filterByText = function(textbox, ListBox, selectSingleMatch) {
 	return this.each(function() {
 		var select = this;
 		var options = [];
@@ -225,7 +217,7 @@ jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
 			var search = $(this).val().trim();
 			var regex = new RegExp(search, \"gi\");
 
-			$('#studentList').pickList('removeAll');
+			$(ListBox).pickList('removeAll');
 			var items = [];
 			$.each(options, function(i) {
 				var option = options[i];
@@ -240,7 +232,7 @@ jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
 					});
 				}
 			});
-			$('#studentList').pickList('showItems', items);
+			$(ListBox).pickList('showItems', items);
 			if (selectSingleMatch === true && $(select).children().length === 1) {
 				$(select).children().get(0).selected = true;
 			}
@@ -250,8 +242,30 @@ jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
 
 $(function() {
 
+
+	$('#teacherList').pickList({
+		sourceListLabel: '<i class=\"fa fa-search\"></i><input id=\"teasearch\" class=\"searchbox\" type=\"text\" autocomplete=\"off\" />',
+		targetListLabel: 'อาจารย์วิชา',
+
+		mainClass: 'pickList col-sm-12',
+		listContainerClass: 'panel panel-primary',
+		listLabelClass: 'panel-heading',
+		listClass: 'pickList_list list-group',
+		listItemClass: 'pickList_listItem list-group-item',
+		addAllClass: 'btn btn-default center-block',
+		addClass: 'btn btn-default center-block',
+		removeAllClass: 'btn btn-default center-block',
+		removeClass: 'btn btn-default center-block',
+		addLabel: '<i class=\"glyphicon glyphicon-chevron-right\"></i>',
+		addAllLabel: '<i class=\"glyphicon glyphicon-chevron-right\"></i><i class=\"glyphicon glyphicon-chevron-right\"></i>',
+		removeLabel: '<i class=\"glyphicon glyphicon-chevron-left\"></i>',
+		removeAllLabel: '<i class=\"glyphicon glyphicon-chevron-left\"></i><i class=\"glyphicon glyphicon-chevron-left\"></i>'
+	});
+
+	$('#teacherList').filterByText($('#teasearch'), $('#teacherList') );
+
 	$('#studentList').pickList({
-		sourceListLabel: '<i class=\"fa fa-search\"></i><input id=\"textbox\" class=\"searchbox\" type=\"text\" autocomplete=\"off\" />',
+		sourceListLabel: '<i class=\"fa fa-search\"></i><input id=\"stdsearch\" class=\"searchbox\" type=\"text\" autocomplete=\"off\" />',
 		targetListLabel: 'นักเรียนในวิชา',
 
 		mainClass: 'pickList col-sm-12',
@@ -269,7 +283,14 @@ $(function() {
 		removeAllLabel: '<i class=\"glyphicon glyphicon-chevron-left\"></i><i class=\"glyphicon glyphicon-chevron-left\"></i>'
 	});
 
-	$('#studentList').filterByText($('#textbox'));
+	$('#studentList').filterByText($('#stdsearch'), $('#studentList') );
+
+	$('.searchbox').keydown(function(e) {
+		if (e.which == 13)
+		{
+			e.preventDefault();
+		}
+	});
 
 ";
 
@@ -444,6 +465,12 @@ $(function() {
 			if ($updateTeasRes != 0) {
 				$this->session->set_flashdata('msg_error',
 					'มีบางอย่างผิดพลาด ในการเพิ่มผู้สอน '.$updateTeasRes);
+				redirect('admin/courses');
+			}
+			$updateStdsRes = $this->courses->updateStudentList($courseId,$this->input->post('stdselected'));
+			if ($updateStdsRes != 0) {
+				$this->session->set_flashdata('msg_error',
+					'มีบางอย่างผิดพลาด ในการเพิ่มผู้สอน '.$updateStdsRes);
 				redirect('admin/courses');
 			}
 
