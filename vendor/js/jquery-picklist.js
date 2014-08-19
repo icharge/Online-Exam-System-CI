@@ -190,7 +190,7 @@
 					.append(self.removeButton)
 					.append(self.removeAllButton);
 
-			return $("<div/>").addClass("col-sm-1").append(self.controls);
+			return self.controls;
 		},
 
 		_populateLists: function()

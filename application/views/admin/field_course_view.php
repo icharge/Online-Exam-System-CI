@@ -71,6 +71,7 @@ EOL;
 						<li class="active"><a href="#basic" data-toggle="tab">พื้นฐาน</a></li>
 						<li><a href="#teachers" data-toggle="tab">ผู้สอน</a></li>
 						<li><a href="#students" data-toggle="tab">นักเรียน</a></li>
+						<li><a href="#papers" data-toggle="tab">ชุดข้อสอบ</a></li>
 					</ul>
 					<!-- Tab Content 1 -->
 					<div class="tab-content">
@@ -191,6 +192,9 @@ EOL;
 						<!-- Students tab -->
 						<div class="box-body tab-pane" id="students">
 							<div class="row">
+								<div class="col-md-12 text-center">
+									<h3 class="" contenteditable="false">ผู้ที่ลงเรียน <?php echo $courseInfo['code'] . ' ' . $courseInfo['name']; ?></h3>
+								</div>
 								<select name="stdselected[]" id="studentList" class="def" size="10" multiple style="width:200px;height:300px">
 									<?php
 										foreach ($studentListAvaliable as $item) {
@@ -207,10 +211,12 @@ EOL;
 									?>
 								</select>
 							</div>
-
-
-
 						</div>
+						<div class="box-body tab-pane" id="papers">
+							<h3>ชุดข้อสอบ</h3>
+						</div>
+
+
 					</div>
 					<div class="box-footer text-right">
 					<?php
