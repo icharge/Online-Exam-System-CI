@@ -89,10 +89,10 @@ if ($this->session->flashdata('msg_error')) {
 						echo form_open('admin/courses', $attr); ?>
 							<div class="col-sm-6" style="z-index:500;">
 								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
-								<label><?php 
+								<label><?php
 									$options = array(
 										'all' => 'ทั้งหมด',
-										'วิทยาศาสตร์และศิลปศาสตร์' => 
+										'วิทยาศาสตร์และศิลปศาสตร์' =>
 										array(
 											'all' => 'วิทยาศาสตร์และศิลปศาสตร (ทั้งหมด)',
 											'it' => 'เทคโนโลยีสารสนเทศ',
@@ -102,7 +102,7 @@ if ($this->session->flashdata('msg_error')) {
 											'lbt' => 'การจัดการโลจิสติกส์และการค้าชายแดน'
 										),
 										'marine' => 'เทคโนโลยีทางทะเล',
-										'อัญมณี' => 
+										'อัญมณี' =>
 										array(
 											'all' => 'อัญมณี (ทั้งหมด)',
 											'g1' => 'อัญมณีและเครื่องประดับ',
@@ -120,9 +120,9 @@ if ($this->session->flashdata('msg_error')) {
 										'2012' => '2555',
 										'2011' => '2554'
 										);
-									echo form_dropdown('perpage', 
-										$attr_year, 
-										"2557", 
+									echo form_dropdown('perpage',
+										$attr_year,
+										"2557",
 										'class="form-control input-sm" onchange="submitFrm(document.forms.mycourses)"');
 										?>
 								</label>
@@ -130,7 +130,7 @@ if ($this->session->flashdata('msg_error')) {
 							<div class="col-sm-6">
 								<div class="col-xs-6 col-sm-6 col-md-6 text-right" style="padding-right: 0;">
 									<label>รายการ/หน้า</label>
-									<label>	
+									<label>
 										<?php
 										$attr_pp = array(
 											'10' => '10',
@@ -140,9 +140,9 @@ if ($this->session->flashdata('msg_error')) {
 											);
 										if ($this->input->get('perpage')) $perpage = $this->input->get('perpage');
 										//else $perpage = '25';
-										echo form_dropdown('perpage', 
-											$attr_pp, 
-											$perpage, 
+										echo form_dropdown('perpage',
+											$attr_pp,
+											$perpage,
 											'class="form-control input-sm" onchange="submitFrm(document.forms.mycourses)"');
 											?>
 									</label>
@@ -174,7 +174,7 @@ if ($this->session->flashdata('msg_error')) {
 								<th>สถานะ</th>
 								<th style="width: 70px;">รหัสวิชา</th>
 								<th style="width: 87px;">ปีการศึกษา</th>
-								<th style="width: 95px;">วันที่เริ่มสอบ</th>
+								<th style="width: 95px;">...</th>
 								<th style="width: 25%;">ชื่อ</th>
 								<th style="width: 88px;">ชื่อย่อ</th>
 								<th class="hidden-xs">คำอธิบาย</th>
@@ -185,15 +185,12 @@ if ($this->session->flashdata('msg_error')) {
 							if (($courseslist)) {
 								foreach ($courseslist as $item) {
 									echo "
-									<tr href=\"".$this->misc->getHref('teacher/mycourses/view')."/$item[course_id]\">
+									<tr href=\"".$this->misc->getHref('teacher/courses/view')."/$item[course_id]\">
 									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status']).
 									' '.$this->misc->getVisibilityStatusIcon($item['visible'])."</td>
 									<td>$item[code]</td>
 									<td>".($item['year']+543)."</td>
-									<td><span class=\"jtooltip\" title=\"".
-									$this->misc->getFullDateTH($item['startdate'])."\">".
-									$this->misc->chrsDateToBudDate($item['startdate'],'-','/').
-									"</span></td>
+									<td>...</td>
 									<td>$item[name]</td>
 									<td>$item[shortname]</td>
 									<td class=\"hidden-xs\">".$this->misc->getShortText(strip_tags($item['description']))."</td>
@@ -203,8 +200,8 @@ if ($this->session->flashdata('msg_error')) {
 							} else {
 								echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
 							}
-							
-						?>				
+
+						?>
 						</tbody>
 					</table>
 				</div>
@@ -218,4 +215,4 @@ if ($this->session->flashdata('msg_error')) {
 	function submitFrm(frm) {
 		frm.submit();
 	}</script>
-<!-- End content
+<!-- End content -->

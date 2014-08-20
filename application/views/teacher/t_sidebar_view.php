@@ -40,16 +40,8 @@
 					<li<?php echo $this->misc->listCActive("reqcourse");?>><?php echo anchor('teacher/reqcourse', '<i class="fa fa-angle-double-right"></i> ร้องขอวิชาใหม่');?></li>
 				</ul>
 			</li>
-			<li class="treeview <?php echo $this->misc->listCActiveAry(array("examswitch","examreset"),false);?>">
-				<a href="#">
-					<i class="fa fa-edit"></i> <span>คลังข้อสอบ</span>
-					<i class="fa fa-angle-left pull-right"></i>
-				</a>
-				<ul class="treeview-menu">
-					<li<?php echo $this->misc->listCActive("courmmses");?>><?php echo anchor('teacher/courses', '<i class="fa fa-angle-double-right"></i> ---');?></li>
-					<li<?php echo $this->misc->listCActive("examswitch");?>><?php echo anchor('teacher/examswitch', '<i class="fa fa-angle-double-right"></i> ---');?></li>
-					<li<?php echo $this->misc->listCActive("examreset");?>><?php echo anchor('teacher/examreset', '<i class="fa fa-angle-double-right"></i> ---');?></li>
-			</ul>
+			<li<?php echo $this->misc->listCActive("qwarehouse");?>>
+				<?php echo anchor('teacher/qwarehouse', '<i class="fa fa-edit"></i> <span>คลังข้อสอบ</span>');?>
 			</li>
 		</ul>
 	</section>

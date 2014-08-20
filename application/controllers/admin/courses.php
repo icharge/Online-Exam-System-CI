@@ -2,12 +2,15 @@
 
 class Courses extends CI_Controller {
 
+	/* Scripts */
 	private $scriptList;
 
 	private $subjectDropdownScript;
 	private $datePicker;
 	private $removePwd;
 	private $listview;
+
+	private $role;
 
 	public function __construct()
 	{
@@ -17,7 +20,7 @@ class Courses extends CI_Controller {
 		$this->load->model('courses_model', 'courses');
 
 		// Permissions List for this Class
-		$perm = array('admin');
+		$perm = array($this->role.'', 'teacher');
 		// Check
 		if ($this->Users->_checkLogin())
 		{
@@ -25,6 +28,8 @@ class Courses extends CI_Controller {
 		} else {
 			redirect('auth/login');
 		}
+
+		$this->role = $this->session->userdata('role');
 
 		// Prepare JavaScript !!
 		$this->subjectDropdownScript = "
@@ -43,7 +48,7 @@ $('#subjectid').change(function(){
 	else
 	{
 		$('#courseDesc').html('<h4><b><i class=\"fa fa-spinner fa-spin\"></i> กำลังโหลด...</b></h4>');
-		var oxsysAPI = \"".$this->misc->getHref('admin/courses/callbackjson/getSubjectDesc/')."/\" + $(this).val();
+		var oxsysAPI = \"".$this->misc->getHref($this->role.'/courses/callbackjson/getSubjectDesc/')."/\" + $(this).val();
 		$.getJSON( oxsysAPI, { format: \"json\" })
 			.done(function(data) {
 				$('#courseDesc').html(data.description);
@@ -311,9 +316,9 @@ $(function() {
 
 	public function index()
 	{
-		$this->load->view('admin/t_header_view');
-		$this->load->view('admin/t_headerbar_view');
-		$this->load->view('admin/t_sidebar_view');
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
 
 		// SET Default Per page
 		$data['perpage'] = '10';
@@ -325,23 +330,23 @@ $(function() {
 			$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
 
 		$this->misc->PaginationInit(
-			'admin/courses?perpage='.
+			$this->role.'/courses?perpage='.
 			$data['perpage'].'&q='.$this->input->get('q'),
 			$data['total'],$data['perpage']);
 
 		$data['pagin'] = $this->pagination->create_links();
 
 
-		$this->load->view('admin/courses_view', $data);
-		$this->load->view('admin/t_footer_view');
+		$this->load->view($this->role.'/courses_view', $data);
+		$this->load->view($this->role.'/t_footer_view');
 	}
 
 	public function view($courseId='')
 	{
 		$this->session->set_flashdata('noAnim', true);
-		$this->load->view('admin/t_header_view');
-		$this->load->view('admin/t_headerbar_view');
-		$this->load->view('admin/t_sidebar_view');
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
 
 		if ($this->input->post('submit'))
 		{
@@ -351,7 +356,7 @@ $(function() {
 		{
 			if ($courseId == '')
 			{
-				redirect('admin/courses');
+				redirect($this->role.'/courses');
 			}
 			else
 			{
@@ -364,25 +369,25 @@ $(function() {
 				$data['studentListAvaliable'] = $this->courses->getStudentlist($courseId, 'exclude');
 
 				// Set page desc
-				$data['formlink'] = 'admin/courses/view/'.$courseId;
+				$data['formlink'] = $this->role.'/courses/view/'.$courseId;
 				$data['pagetitle'] = "ข้อมูลการเปิดสอบ";
 				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];
-				$this->load->view('admin/field_course_view', $data);
+				$this->load->view($this->role.'/field_course_view', $data);
 			}
 		}
 
 		// Send additional script to footer
 		$footdata['additionScript'] = $this->getAddScripts();
-		$this->load->view('admin/t_footer_view', $footdata);
+		$this->load->view($this->role.'/t_footer_view', $footdata);
 	}
 
 	public function add()
 	{
-		$this->load->view('admin/t_header_view');
-		$this->load->view('admin/t_headerbar_view');
-		$this->load->view('admin/t_sidebar_view');
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
 
-		$data['formlink'] = 'admin/courses/add';
+		$data['formlink'] = $this->role.'/courses/add';
 		$data['pagetitle'] = "เปิดสอบวิชาใหม่";
 		$data['pagesubtitle'] = "";
 		$data['courseInfo'] = array(
@@ -416,12 +421,12 @@ $(function() {
 					# Add success
 					$this->session->set_flashdata('msg_info',
 						'เปิดวิชาเรียบร้อย');
-					redirect('admin/courses');
+					redirect($this->role.'/courses');
 				} else {
 					# Failed
 					$this->session->set_flashdata('msg_error',
 						'มีบางอย่างผิดพลาด ไม่สามารถวิชาได้');
-					redirect('admin/courses');
+					redirect($this->role.'/courses');
 				}
 			}
 			else
@@ -432,16 +437,16 @@ $(function() {
 					'year' => set_value('year'),
 					// 'startdate' => set_value('startdate'),
 				);
-				$this->load->view('admin/field_course_view', $data);
+				$this->load->view($this->role.'/field_course_view', $data);
 			}
 		}
 		else
 		{
-			$this->load->view('admin/field_course_view', $data);
+			$this->load->view($this->role.'/field_course_view', $data);
 		}
 		// Send additional script to footer
 		$footdata['additionScript'] = $this->getAddScripts();
-		$this->load->view('admin/t_footer_view', $footdata);
+		$this->load->view($this->role.'/t_footer_view', $footdata);
 	}
 
 	public function edit($courseId)
@@ -465,13 +470,13 @@ $(function() {
 			if ($updateTeasRes != 0) {
 				$this->session->set_flashdata('msg_error',
 					'มีบางอย่างผิดพลาด ในการเพิ่มผู้สอน '.$updateTeasRes);
-				redirect('admin/courses');
+				redirect($this->role.'/courses');
 			}
 			$updateStdsRes = $this->courses->updateStudentList($courseId,$this->input->post('stdselected'));
 			if ($updateStdsRes != 0) {
 				$this->session->set_flashdata('msg_error',
 					'มีบางอย่างผิดพลาด ในการเพิ่มผู้สอน '.$updateStdsRes);
-				redirect('admin/courses');
+				redirect($this->role.'/courses');
 			}
 
 			# Remove password ??
@@ -488,22 +493,22 @@ $(function() {
 				# แก้ไข success
 				$this->session->set_flashdata('msg_info',
 					'ปรับปรุงเรียบร้อย');
-				redirect('admin/courses');
+				redirect($this->role.'/courses');
 			} else {
 				# Failed
 				$this->session->set_flashdata('msg_error',
 					'มีบางอย่างผิดพลาด ไม่สามารถปรับปรุงได้');
-				redirect('admin/courses');
+				redirect($this->role.'/courses');
 			}
 		}
 		else
 		{
 			$data['msg_error'] = 'กรุณากรอกข้อมูลให้ครบ';
 			$data['courseInfo'] = $this->courses->getCourseById($courseId);
-			$data['formlink'] = 'admin/courses/view/'.$courseId;
+			$data['formlink'] = $this->role.'/courses/view/'.$courseId;
 			$data['pagetitle'] = "ข้อมูลการเปิดสอบ";
 			$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];
-			$this->load->view('admin/field_course_view', $data);
+			$this->load->view($this->role.'/field_course_view', $data);
 		}
 	}
 

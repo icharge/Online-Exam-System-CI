@@ -4,63 +4,47 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<span class="fa fa-rss"></span> วิชาของฉัน
-			<small>My courses</small>
+			<span class="glyphicon glyphicon-send"></span> <?php echo $pagetitle;?>
+			<small><?php echo $pagesubtitle;?></small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><?php echo anchor('teacher', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
-			<li class="active">วิชาของฉัน</li>
+			<li><?php echo anchor('teacher/qwarehouse', 'คลังข้อสอบ');?></li>
+			<li class="active"><?php echo $pagetitle;?></li>
 		</ol>
 	</section>
-
-	<!-- Main content -->
 	<section class="content">
 		<h4 class="page-header">
-			<!-- <small>รายการวิชาที่เปิดสอบในขณะนี้</small> -->
+			<small></small>
 		</h4>
 
-	<?php
-	if ($this->session->flashdata('msg_info')) {
-		// echo '
-		// <div class="alert alert-success alert-dismissable">
-		// <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		// <strong>เรียบร้อย!</strong> '.$this->session->flashdata('msg_info').'</div>';
-		echo "
-		<script>
-		Messenger.options = {
-			extraClasses: 'messenger-fixed messenger-on-top',
-			theme: 'bootstrap'
+		<?php
+		if (isset($msg_error)) {
+			// echo '
+			// <div class="alert alert-danger alert-dismissable">
+			// <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			// <strong>ผิดพลาด!</strong> '.$msg_error.'</div>';
+			echo "
+			<script>
+			Messenger.options = {
+				extraClasses: 'messenger-fixed messenger-on-top',
+				theme: 'bootstrap'
+			}
+			Messenger().post({
+				message: '".$msg_error."',
+				type: 'danger',
+				hideAfter: 7,
+				showCloseButton: true
+			});
+			</script>";
 		}
-		Messenger().post({
-			message: '".$this->session->flashdata('msg_info')."',
-			type: 'info',
-			hideAfter: 7,
-			showCloseButton: true
-		});
-</script>";
-
-}
-if ($this->session->flashdata('msg_error')) {
-	echo '
-	<div class="alert alert-danger alert-dismissable">
-	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	<strong>ผิดพลาด!</strong> '.$this->session->flashdata('msg_error').'</div>';
-	echo "
-	<script>
-	Messenger.options = {
-		extraClasses: 'messenger-fixed messenger-on-top',
-		theme: 'bootstrap'
-	}
-	Messenger().post({
-		message: '".$this->session->flashdata('msg_error')."',
-		type: 'danger',
-		hideAfter: 7,
-		showCloseButton: true
-	});
-</script>";
-}
-
-?>
+		$attr = array(
+			'role' => 'form',
+			'method' => 'post'
+			);
+		//echo form_open($formlink, $attr);
+		echo '<form method="post" enctype="multipart/form-data">';
+		?>
 <div class="row <?php if($this->session->flashdata('noAnim')) echo "animate-fade-up";?>">
 	<div class="col-md-12">
 		<div class="box box-info nav-tabs-custom">
@@ -72,7 +56,7 @@ if ($this->session->flashdata('msg_error')) {
 					</ul>
 				</li>
 				<li class="pull-left header">
-					<i class="glyphicon glyphicon-th"></i> รายการวิชาของฉัน
+					<i class="glyphicon glyphicon-th"></i> ข้อสอบตามรายวิชา
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -86,47 +70,8 @@ if ($this->session->flashdata('msg_error')) {
 							'role' => 'search',
 							'method' => 'get'
 							);
-						echo form_open('admin/courses', $attr); ?>
-							<div class="col-sm-6" style="z-index:500;">
-								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
-								<label><?php
-									$options = array(
-										'all' => 'ทั้งหมด',
-										'วิทยาศาสตร์และศิลปศาสตร์' =>
-										array(
-											'all' => 'วิทยาศาสตร์และศิลปศาสตร (ทั้งหมด)',
-											'it' => 'เทคโนโลยีสารสนเทศ',
-											'at' => 'เทคโนโลยีการเกษตร',
-											'is' => 'ระบบสารสนเทศ',
-											'ba' => 'บริหารธุรกิจ',
-											'lbt' => 'การจัดการโลจิสติกส์และการค้าชายแดน'
-										),
-										'marine' => 'เทคโนโลยีทางทะเล',
-										'อัญมณี' =>
-										array(
-											'all' => 'อัญมณี (ทั้งหมด)',
-											'g1' => 'อัญมณีและเครื่องประดับ',
-											'g2' => 'ธุรกิจอัญมณีและเครื่องประดับ',
-											'g3' => 'ออกแบบเครื่องประดับ'
-										)
-									);
-									echo form_dropdown('faculty', $options, 'default', 'id="faculty" class="form-control input-sm"');
-							?></label>
-								<label>
-									<?php
-									$attr_year = array(
-										'2014' => '2557',
-										'2013' => '2556',
-										'2012' => '2555',
-										'2011' => '2554'
-										);
-									echo form_dropdown('perpage',
-										$attr_year,
-										"2557",
-										'class="form-control input-sm" onchange="submitFrm(document.forms.mycourses)"');
-										?>
-								</label>
-							</div>
+						echo form_open('teacher/qwarehouse', $attr); ?>
+							<div class="col-xs-6"></div>
 							<div class="col-sm-6">
 								<div class="col-xs-6 col-sm-6 col-md-6 text-right" style="padding-right: 0;">
 									<label>รายการ/หน้า</label>
@@ -185,7 +130,7 @@ if ($this->session->flashdata('msg_error')) {
 							if (($courseslist)) {
 								foreach ($courseslist as $item) {
 									echo "
-									<tr href=\"".$this->misc->getHref('teacher/mycourses/view')."/$item[course_id]\">
+									<tr href=\"".$this->misc->getHref('teacher/courses/view')."/$item[course_id]\">
 									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status']).
 									' '.$this->misc->getVisibilityStatusIcon($item['visible'])."</td>
 									<td>$item[code]</td>
@@ -215,4 +160,4 @@ if ($this->session->flashdata('msg_error')) {
 	function submitFrm(frm) {
 		frm.submit();
 	}</script>
-<!-- End content
+<!-- End content -->
