@@ -30,8 +30,20 @@ class Qwarehouse extends CI_Controller {
 
 		$data['pagetitle'] = "คลังข้อสอบ";
 		$data['pagesubtitle'] = "";
-
 		$data['perpage'] = 10;
+
+		$data['total'] = $this->qwh->countSubjectList($this->input->get('q'));
+		$data['subjectlist'] = $this->qwh->getSubjectList($this->input->get('q'),
+			$data['perpage'],
+			$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
+
+		$this->misc->PaginationInit(
+			'teacher/qwarehouse?perpage='.
+			$data['perpage'].'&q='.$this->input->get('q'),
+			$data['total'],$data['perpage']);
+
+		$data['pagin'] = $this->pagination->create_links();
+
 		$this->load->view('teacher/qwarehouse_view', $data);
 
 		$this->load->view('teacher/t_footer_view');
