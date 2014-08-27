@@ -10,6 +10,8 @@ class Courses extends CI_Controller {
 	private $removePwd;
 	private $listview;
 
+	private $role;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -26,6 +28,8 @@ class Courses extends CI_Controller {
 		} else {
 			redirect('auth/login');
 		}
+
+		$this->role = $this->session->userdata('role');
 
 		// Prepare JavaScript !!
 		$this->subjectDropdownScript = "
