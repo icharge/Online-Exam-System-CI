@@ -372,7 +372,7 @@ $(function() {
 				$data['formlink'] = $this->role.'/courses/view/'.$courseId;
 				$data['pagetitle'] = "ข้อมูลการเปิดสอบ";
 				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];
-				$this->load->view($this->role.'/field_course_view', $data);
+				$this->load->view('admin/field_course_view', $data);
 			}
 		}
 

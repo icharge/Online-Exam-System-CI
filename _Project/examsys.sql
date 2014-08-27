@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 27, 2014 at 06:33 AM
+-- Generation Time: Aug 27, 2014 at 08:56 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -19,6 +19,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `examsys`
 --
+
+DELIMITER $$
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `isHasQuestion`(`sub_id` INT) RETURNS varchar(20) CHARSET utf8
+    NO SQL
+BEGIN
+	DECLARE chapter INT;
+	SELECT chapter_id into @chapter from Chapter where subject_id = sub_id LIMIT 1;
+	-- SET chapter = FOUND_ROWS();
+	IF FOUND_ROWS() > 0 THEN
+		RETURN "true";
+    ELSE
+    	RETURN "false";
+    END IF;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -74,6 +93,13 @@ CREATE TABLE IF NOT EXISTS `Chapter` (
   PRIMARY KEY (`chapter_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Chapter`
+--
+
+INSERT INTO `Chapter` (`chapter_id`, `name`, `description`, `subject_id`) VALUES
+(1, 'ตอนที่ 1', NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -94,12 +120,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('0412784ab53dfbdd5c9698da01ad4231', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1408525685, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
-('04fa289dd0ee62a4ae84f17520b91620', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1408526941, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
-('2297637d73f25a7a484306103dc35932', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1408526326, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
-('6ace5f4b2f993cf15dd7fd8c0f05bd74', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1409113302, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
-('d74d5cfd9ec6a81c175a170f83bc1481', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1408526941, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
-('f77b2d8635cb9706dc80129d64f45826', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1409111238, '');
+('b31d104ef629bb2bdd0e2bfe221430dd', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1409120057, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 
