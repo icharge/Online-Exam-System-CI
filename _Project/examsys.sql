@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 28, 2014 at 03:14 PM
+-- Generation Time: Aug 27, 2014 at 06:33 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -63,6 +63,20 @@ CREATE TABLE IF NOT EXISTS `Branch` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Chapter`
+--
+
+CREATE TABLE IF NOT EXISTS `Chapter` (
+  `chapter_id` int(7) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `description` text,
+  `subject_id` int(5) NOT NULL,
+  PRIMARY KEY (`chapter_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ci_sessions`
 --
 
@@ -80,7 +94,12 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('7b7ec98d60a91f5391ca24c145a74969', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1406551059, 'a:7:{s:9:"user_data";s:0:"";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;}');
+('0412784ab53dfbdd5c9698da01ad4231', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1408525685, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('04fa289dd0ee62a4ae84f17520b91620', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1408526941, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('2297637d73f25a7a484306103dc35932', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1408526326, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('6ace5f4b2f993cf15dd7fd8c0f05bd74', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1409113302, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('d74d5cfd9ec6a81c175a170f83bc1481', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1408526941, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('f77b2d8635cb9706dc80129d64f45826', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1409111238, '');
 
 -- --------------------------------------------------------
 
@@ -92,7 +111,6 @@ CREATE TABLE IF NOT EXISTS `Courses` (
   `course_id` int(4) NOT NULL AUTO_INCREMENT,
   `year` varchar(4) NOT NULL DEFAULT '',
   `pwd` varchar(20) DEFAULT NULL,
-  `startdate` date DEFAULT NULL,
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   `status` varchar(20) NOT NULL,
   `subject_id` int(5) NOT NULL,
@@ -103,10 +121,10 @@ CREATE TABLE IF NOT EXISTS `Courses` (
 -- Dumping data for table `Courses`
 --
 
-INSERT INTO `Courses` (`course_id`, `year`, `pwd`, `startdate`, `visible`, `status`, `subject_id`) VALUES
-(1, '2014', NULL, '2014-07-22', 1, 'active', 1),
-(2, '2014', '12345', '2014-05-04', 1, 'active', 2),
-(3, '2014', NULL, '2014-07-24', 1, 'inactive', 5);
+INSERT INTO `Courses` (`course_id`, `year`, `pwd`, `visible`, `status`, `subject_id`) VALUES
+(1, '2014', NULL, 1, 'active', 1),
+(2, '2014', '12345', 1, 'active', 2),
+(3, '2014', NULL, 0, 'inactive', 4);
 
 -- --------------------------------------------------------
 
@@ -118,7 +136,6 @@ CREATE TABLE IF NOT EXISTS `courseslist_view` (
 ,`subject_id` int(5)
 ,`code` varchar(10)
 ,`year` varchar(4)
-,`startdate` date
 ,`name` varchar(60)
 ,`shortname` varchar(15)
 ,`description` text
@@ -157,6 +174,66 @@ CREATE TABLE IF NOT EXISTS `log_usage` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Question`
+--
+
+CREATE TABLE IF NOT EXISTS `Question` (
+  `question_id` int(10) NOT NULL,
+  `question` text NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `status` varchar(10) NOT NULL DEFAULT 'active',
+  `chapter_id` int(7) NOT NULL,
+  PRIMARY KEY (`question_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Question_boolean`
+--
+
+CREATE TABLE IF NOT EXISTS `Question_boolean` (
+  `id` int(10) NOT NULL,
+  `answer` varchar(20) NOT NULL,
+  `question_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Question_choice`
+--
+
+CREATE TABLE IF NOT EXISTS `Question_choice` (
+  `id` int(10) NOT NULL,
+  `choice1` text NOT NULL,
+  `choice2` text NOT NULL,
+  `choice3` text,
+  `choice4` text,
+  `choice5` text,
+  `choice6` text,
+  `answer` varchar(20) NOT NULL,
+  `question_id` int(7) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Question_numerical`
+--
+
+CREATE TABLE IF NOT EXISTS `Question_numerical` (
+  `id` int(10) NOT NULL,
+  `answer` varchar(20) NOT NULL,
+  `question_id` int(7) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Students`
 --
 
@@ -182,35 +259,34 @@ CREATE TABLE IF NOT EXISTS `Students` (
 --
 
 INSERT INTO `Students` (`stu_id`, `id`, `title`, `name`, `lname`, `birth`, `gender`, `idcard`, `year`, `fac_id`, `branch_id`, `email`, `pic`) VALUES
-('0', 2, 'นาย', 'นรภัทร', 'นิ่มมณี', '1992-09-14', 'male', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', 'charge_n@hotmail.com', NULL),
-('54310409', 9, 'นาย', 'วรพงษ์', 'คงประเสริฐ', '1992-07-27', 'male', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', 'penguin_poat@hotmail.com', NULL),
-('54310854', 9, 'นาย', 'ธนภาค', 'จิระวิทิตชัย', '1992-10-18', 'male', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', 'thanapak_09@hotmail.com', NULL),
-('57700188', 10, 'นาย', 'ธรลักษณ์', 'แก้วดี', NULL, 'male', '5770000000188', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
-('57700189', 11, 'นาย', 'นามเหมือน', 'แก้วทอง', NULL, 'male', '5770000000189', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
-('57700190', 12, 'นาย', 'นามไม่เหมือน', 'แก้วเงิน', NULL, 'male', '5770000000190', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
-('57700191', 13, 'นาย', 'สายชลดี', 'ภาพุ', NULL, 'male', '5770000000191', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
-('57700192', 14, 'นางสาว', 'พา', 'หากเหมือน', NULL, 'female', '5770000000192', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
-('57700193', 15, 'นาย', 'ขำ', 'ไม่เหมือน', NULL, 'male', '5770000000193', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
-('57700194', 16, 'นาย', 'ชายกลาง', 'ลาภผล', NULL, 'male', '5770000000194', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
-('57700195', 17, 'นางสาว', 'หญิง', 'ประสบ', NULL, 'female', '5770000000195', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
-('57700196', 18, 'นาย', 'มีมาก', 'เชิงชาย', NULL, 'male', '5770000000196', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
-('57700197', 19, 'นาย', 'ขม', 'สามผล', NULL, 'male', '5770000000197', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
-('57700198', 20, 'นางสาว', 'วลัยพร', 'นามมี', NULL, 'female', '5770000000198', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
-('57700199', 21, 'นางสาว', 'วาสนา', 'สวาดี', NULL, 'female', '5770000000199', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
-('57700200', 22, 'นาย', 'มั่นคง', 'กิมจอง', NULL, 'male', '5770000000200', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
-('58700101', 23, 'นาย', 'สมพงษ์', 'อยู่รอด', NULL, 'male', '1190704545660', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
-('58700105', 24, 'นาย', 'องอาจ', 'มานะศิล', NULL, 'male', '1154369903444', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
-('58700112', 25, 'นาย', 'พงศกร', 'งามเหลือ', NULL, 'male', '1145777764432', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
-('58700115', 26, 'นาย', 'กิตติชนม์', 'ไพศาลพานิช', NULL, 'male', '1188455446477', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
-('58700120', 27, 'นางสาว', 'ศศิกาญ', 'ไพโรจน์กิจ', NULL, 'female', '1178765643090', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'โลจิสติกและการค้าชายแดน', NULL, NULL),
-('58700121', 28, 'นาย', 'นพรุจ', 'สานแก้วค้า', NULL, 'male', '1199966744325', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'โลจิสติกและการค้าชายแดน', NULL, NULL),
-('58700127', 29, 'นาย', 'กิตตินัน', 'มากล้ำ', NULL, 'male', '1178890000756', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'โลจิสติกและการค้าชายแดน', NULL, NULL),
-('58700133', 30, 'นางสาว', 'บวรลักษณ์', 'จิตรงาม', NULL, 'female', '1111445470034', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
-('58700135', 31, 'นาย', 'ทวี', 'หอมหวน', NULL, 'male', '1163222789007', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
-('58700140', 32, 'นาย', 'ตะวัน', 'พานทอง', NULL, 'male', '1154367753409', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'เทคโนโลยีการเกษตร', NULL, NULL),
-('58700141', 33, 'นางสาว', 'พรกัญญา', 'กิจมานะ', NULL, 'female', '1145556094556', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'เทคโนโลยีการเกษตร', NULL, NULL),
-('58700156', 34, 'นางสาว', 'วาสนา', 'สวาดี', NULL, 'female', '1115570934226', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
-('58700157', 35, 'นาย', 'ติณนภพ', 'ณ อยุธา', NULL, 'male', '1110009226543', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL);
+('54310104', 2, 'นาย', 'นรภัทร', 'นิ่มมณี', '1992-09-14', 'male', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', 'charge_n@hotmail.com', NULL),
+('54311095', 63, '', 'นลินนิภา', 'โพธิ์มี', '1992-12-02', 'female', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', 'nalinnipa.pm@gmail.com', NULL),
+('57700188', 36, 'นาย', 'ธรลักษณ์', 'แก้วดี', NULL, 'male', '5770000000188', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('57700189', 37, 'นาย', 'นามเหมือน', 'แก้วทอง', NULL, 'male', '5770000000189', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('57700190', 38, 'นาย', 'นามไม่เหมือน', 'แก้วเงิน', NULL, 'male', '5770000000190', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('57700191', 39, 'นาย', 'สายชลดี', 'ภาพุ', NULL, 'male', '5770000000191', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('57700192', 40, 'นางสาว', 'พา', 'หากเหมือน', NULL, 'female', '5770000000192', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('57700193', 41, 'นาย', 'ขำ', 'ไม่เหมือน', NULL, 'male', '5770000000193', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('57700194', 42, 'นาย', 'ชายกลาง', 'ลาภผล', NULL, 'male', '5770000000194', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('57700195', 43, 'นางสาว', 'หญิง', 'ประสบ', NULL, 'female', '5770000000195', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('57700196', 44, 'นาย', 'มีมาก', 'เชิงชาย', NULL, 'male', '5770000000196', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('57700197', 45, 'นาย', 'ขม', 'สามผล', NULL, 'male', '5770000000197', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
+('57700198', 46, 'นางสาว', 'วลัยพร', 'นามมี', NULL, 'female', '5770000000198', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
+('57700199', 47, 'นางสาว', 'วาสนา', 'สวาดี', NULL, 'female', '5770000000199', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
+('57700200', 48, 'นาย', 'มั่นคง', 'กิมจอง', NULL, 'male', '5770000000200', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
+('58700101', 50, 'นาย', 'สมพงษ์', 'อยู่รอด', NULL, 'male', '1190704545660', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('58700105', 51, 'นาย', 'องอาจ', 'มานะศิล', NULL, 'male', '1154369903444', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('58700112', 52, 'นาย', 'พงศกร', 'งามเหลือ', NULL, 'male', '1145777764432', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('58700115', 53, 'นาย', 'กิตติชนม์', 'ไพศาลพานิช', NULL, 'male', '1188455446477', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
+('58700120', 54, 'นางสาว', 'ศศิกาญ', 'ไพโรจน์กิจ', NULL, 'female', '1178765643090', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'โลจิสติกและการค้าชายแดน', NULL, NULL),
+('58700121', 55, 'นาย', 'นพรุจ', 'สานแก้วค้า', NULL, 'male', '1199966744325', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'โลจิสติกและการค้าชายแดน', NULL, NULL),
+('58700127', 56, 'นาย', 'กิตตินัน', 'มากล้ำ', NULL, 'male', '1178890000756', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'โลจิสติกและการค้าชายแดน', NULL, NULL),
+('58700133', 57, 'นางสาว', 'บวรลักษณ์', 'จิตรงาม', NULL, 'female', '1111445470034', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('58700135', 58, 'นาย', 'ทวี', 'หอมหวน', NULL, 'male', '1163222789007', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางธุรกิจ', NULL, NULL),
+('58700140', 59, 'นาย', 'ตะวัน', 'พานทอง', NULL, 'male', '1154367753409', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'เทคโนโลยีการเกษตร', NULL, NULL),
+('58700141', 60, 'นางสาว', 'พรกัญญา', 'กิจมานะ', NULL, 'female', '1145556094556', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'เทคโนโลยีการเกษตร', NULL, NULL),
+('58700156', 61, 'นางสาว', 'วาสนา', 'สวาดี', NULL, 'female', '1115570934226', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
+('58700157', 62, 'นาย', 'ติณนภพ', 'ณ อยุธา', NULL, 'male', '1110009226543', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -229,7 +305,9 @@ CREATE TABLE IF NOT EXISTS `Student_Enroll` (
 --
 
 INSERT INTO `Student_Enroll` (`stu_id`, `course_id`) VALUES
-('54310104', '291311');
+('54310104', '1'),
+('57700197', '3'),
+('58700115', '3');
 
 -- --------------------------------------------------------
 
@@ -253,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `Subjects` (
 --
 
 INSERT INTO `Subjects` (`subject_id`, `code`, `name`, `shortname`, `description`, `status`) VALUES
-(1, '291311', 'IT Consultancy Method', 'ITCM', 'เครือข่ายทางธุรกิจขนาดเล็ก รวมถึงเครือข่ายไร้สาย การติดตั้งเราเตอร์และไฟร์วอล การสร้างเว็บไซต์ พาณิชย์อิเล็กทรอนิกส์ ความปลอดภัยของข้อมูล รวมถึงวิธีการสำรองข้อมูลและการกู้คืนข้อมูลที่เสียหาย ซอฟต์แวร์ต่างๆ เช่น โปรแกรมฐานข้อมูลและโปรแกรมการจัดการความสัมพันธ์กับลูกค้า เทคนิคทางธุรกิจที่เกี่ยวข้องกับการให้คำปรึกษาทางด้านธุรกิจ และลูกค้าสัมพันธ์ รวมไปถึง กฎหมายและหลักจริยธรรมที่เกี่ยวข้องกับการให้คำปรึกษาด้านระบบสารสนเทศ', 'active'),
+(1, '291311', 'IT Consultancy Method', 'ITCM', '<p>เครือข่ายทางธุรกิจขนาดเล็ก รวมถึงเครือข่ายไร้สาย การติดตั้งเราเตอร์และไฟร์วอล การสร้างเว็บไซต์ พาณิชย์อิเล็กทรอนิกส์ ความปลอดภัยของข้อมูล รวมถึงวิธีการสำรองข้อมูลและการกู้คืนข้อมูลที่เสียหาย ซอฟต์แวร์ต่างๆ เช่น โปรแกรมฐานข้อมูลและโปรแกรมการจัดการความสัมพันธ์กับลูกค้า เทคนิคทางธุรกิจที่เกี่ยวข้องกับการให้คำปรึกษาทางด้านธุรกิจ และลูกค้าสัมพันธ์ รวมไปถึง กฎหมายและหลักจริยธรรมที่เกี่ยวข้องกับการให้คำปรึกษาด้านระบบสารสนเทศ</p>\n', 'active'),
 (2, '291436', 'Object-Oriented Programming', 'OOP', 'ความเป็นมาของการเขียนโปรแกรมเชิงวัตถุ แนวคิดโปรแกรมเชิงวัตถุ คลาส ออปเจก และองค์ประกอบต่างๆ ของออปเจก วงจรชีวิตวัตถุ การสืบทอดคุณสมบัติ โพลีมอร์ฟิซึม การนำคลาสมาใช้งาน เหตุการณ์ต่างๆ ที่ใช้กับวัตถุ การใช้เอพีไอ การเชื่อมต่อฐานข้อมูล การจัดการความผิดปกติโดย Exception ภาคปฏิบัติใช้โปรแกรมเครื่องมือช่วยพัฒนาเพื่อทดลองเขียนโปรแกรมเชิงวัตถุประยุกต์ใช้ในงานธุรกิจ ด้วยภาษาที่กำหนด', 'active'),
 (3, '291472', 'Special Project 1', 'SP1', 'โครงงานปฏิบัติเพื่อการวิเคราะห์และออกแบบระบบงานคอมพิวเตอร์เพื่อช่วยแก้ปัญหาทางธุรกิจต่างๆ ที่น่าสนใจ และได้รับความเห็นชอบของอาจารย์ที่ปรึกษา โดยมุ่งเน้นให้นักศึกษาสามารถวิเคราะห์ปัญหาเพื่อจัดทำเป็นข้อกำหนดรายละเอียดซอฟต์แวร์ที่สามารถนำไปสู่การสร้างซอฟต์แวร์ทางธุรกิจได้', 'active'),
 (4, '291303', 'System Analysis and Design', 'SAD', 'แนวคิดระบบสารสนเทศและประเภทของระบบสารสนเทศในองค์การธุรกิจ วงจรการพัฒนาระบบ ระเบียบวิธีการ เครื่องมือในการวิเคราะห์ระบบ ผังงานระบบ ตารางการตัดสินใจ การกำหนดปัญหาและการศึกษาความเป็นไปได้ของระบบ การวิเคราะห์ความคุ้มค่าในการลงทุน การออกแบบข้อมูลนำเข้า การออกแบบการแสดงผลลัพธ์ของระบบ การออกแบบฐานข้อมูล การออกแบบกระบวนการประมวลผลระบบ และการจัดทำเอกสารคู่มือระบบ', 'active'),
@@ -283,7 +361,7 @@ CREATE TABLE IF NOT EXISTS `Teachers` (
 INSERT INTO `Teachers` (`tea_id`, `id`, `name`, `lname`, `fac_id`, `email`, `pic`) VALUES
 (1, 4, 'ดร.สมบัติ', 'ฝอยทอง', 'วิทยาศาสตร์และศิลปศาสตร์', 'sombut@buu.ac.th', NULL),
 (2, 3, 'อ.อุไรวรรณ', 'บัวตูม', 'วิทยาศาสตร์และศิลปศาสตร์', 'ajuraiwan@buu.ac.th', NULL),
-(3, 8, 'อ.ธารารัตน์', 'พวงสุวรรณ', 'วิทยาศาสตร์และศิลปศาสตร์', NULL, NULL),
+(3, 8, 'อ.ธารารัตน์', 'พวงสุวรรณ', 'วิทยาศาสตร์และศิลปศาสตร์', '', NULL),
 (4, 9, 'อ.อรวรรณ', 'จิตะกาญจน์', 'วิทยาศาสตร์และศิลปศาสตร์', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -294,7 +372,7 @@ INSERT INTO `Teachers` (`tea_id`, `id`, `name`, `lname`, `fac_id`, `email`, `pic
 
 CREATE TABLE IF NOT EXISTS `Teacher_Course_Detail` (
   `tea_id` int(10) NOT NULL,
-  `course_id` varchar(10) NOT NULL,
+  `course_id` int(4) NOT NULL,
   PRIMARY KEY (`tea_id`,`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -303,7 +381,10 @@ CREATE TABLE IF NOT EXISTS `Teacher_Course_Detail` (
 --
 
 INSERT INTO `Teacher_Course_Detail` (`tea_id`, `course_id`) VALUES
-(1, '291311');
+(1, 1),
+(1, 3),
+(2, 2),
+(3, 1);
 
 -- --------------------------------------------------------
 
@@ -319,7 +400,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `status` varchar(10) NOT NULL DEFAULT 'active',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=64 ;
 
 --
 -- Dumping data for table `users`
@@ -335,32 +416,33 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
 (7, 'admin3', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 'inactive'),
 (8, 'teacher', '81dc9bdb52d04dc20036dbd8313ed055', 'teacher', 'active'),
 (9, 'orawan', '81dc9bdb52d04dc20036dbd8313ed055', 'teacher', 'active'),
-(10, '57700188', '65350653c9baf66a82bd3eff3719e59c', 'student', 'active'),
-(11, '57700189', '0d4a6549dcb0ee35ecb006d7f88a8b2d', 'student', 'active'),
-(12, '57700190', '950e657b21be908c22477b92a55b362d', 'student', 'active'),
-(13, '57700191', '281c939e1a1effb80020d274e3081c5c', 'student', 'active'),
-(14, '57700192', 'ca2ce83788f3b73b90438e3de06897a2', 'student', 'active'),
-(15, '57700193', '7a727f46360a98be4658156ace52d893', 'student', 'active'),
-(16, '57700194', '3d9386dd7bc38e0420fd406f260e62aa', 'student', 'active'),
-(17, '57700195', 'e26414761bb8fc0b74b0c1c423bcfd87', 'student', 'active'),
-(18, '57700196', '6bf3de8a868cddc20513157179248624', 'student', 'active'),
-(19, '57700197', 'add7099ea46b393dbcea34a0d59b3826', 'student', 'active'),
-(20, '57700198', 'e597b2bc6e556a570aa57dc8c9504341', 'student', 'active'),
-(21, '57700199', 'b2e894fca115093e29131568c984a574', 'student', 'active'),
-(22, '57700200', '9a16c63a88acdda4057bd1516ace2d4f', 'student', 'active'),
-(23, '58700101', '67d2ce973dfe2aec3279d8e957cce9f9', 'student', 'active'),
-(24, '58700105', '9e5433b81ee5c5912cfe934b84b74e73', 'student', 'active'),
-(25, '58700112', '341f4eb75f1a53e1f6ddcc470f933e70', 'student', 'active'),
-(26, '58700115', 'd1bdc133b4784098c686b0c5ca1ea00d', 'student', 'active'),
-(27, '58700120', '1cc25c938d648d6e4fda4775c17413e0', 'student', 'active'),
-(28, '58700121', '9c51a68150d03bb11b475fc0973cd373', 'student', 'active'),
-(29, '58700127', '3a302f28028a573242054324089dc0ce', 'student', 'active'),
-(30, '58700133', '6592a2ca0cb86cdf8dcb15d9b5c7b0c3', 'student', 'active'),
-(31, '58700135', '3157f62f08435873f5e609a8b516e9e8', 'student', 'active'),
-(32, '58700140', '6e83bbdf1dad2c7afbc730a9a3f19609', 'student', 'active'),
-(33, '58700141', 'c0064bb3ef67639fb47b1d3632242c02', 'student', 'active'),
-(34, '58700156', '3b66eb863d7180d06c9bdca6e41e2981', 'student', 'active'),
-(35, '58700157', '97648f4805e0f8fdcd68eeb44cd08056', 'student', 'active');
+(36, '57700188', '65350653c9baf66a82bd3eff3719e59c', 'student', 'active'),
+(37, '57700189', '0d4a6549dcb0ee35ecb006d7f88a8b2d', 'student', 'active'),
+(38, '57700190', '950e657b21be908c22477b92a55b362d', 'student', 'active'),
+(39, '57700191', '281c939e1a1effb80020d274e3081c5c', 'student', 'active'),
+(40, '57700192', 'ca2ce83788f3b73b90438e3de06897a2', 'student', 'active'),
+(41, '57700193', '7a727f46360a98be4658156ace52d893', 'student', 'active'),
+(42, '57700194', '3d9386dd7bc38e0420fd406f260e62aa', 'student', 'active'),
+(43, '57700195', 'e26414761bb8fc0b74b0c1c423bcfd87', 'student', 'active'),
+(44, '57700196', '6bf3de8a868cddc20513157179248624', 'student', 'active'),
+(45, '57700197', 'add7099ea46b393dbcea34a0d59b3826', 'student', 'active'),
+(46, '57700198', 'e597b2bc6e556a570aa57dc8c9504341', 'student', 'active'),
+(47, '57700199', 'b2e894fca115093e29131568c984a574', 'student', 'active'),
+(48, '57700200', '9a16c63a88acdda4057bd1516ace2d4f', 'student', 'active'),
+(50, '58700101', '67d2ce973dfe2aec3279d8e957cce9f9', 'student', 'active'),
+(51, '58700105', '9e5433b81ee5c5912cfe934b84b74e73', 'student', 'active'),
+(52, '58700112', '341f4eb75f1a53e1f6ddcc470f933e70', 'student', 'active'),
+(53, '58700115', 'd1bdc133b4784098c686b0c5ca1ea00d', 'student', 'active'),
+(54, '58700120', '1cc25c938d648d6e4fda4775c17413e0', 'student', 'active'),
+(55, '58700121', '9c51a68150d03bb11b475fc0973cd373', 'student', 'active'),
+(56, '58700127', '3a302f28028a573242054324089dc0ce', 'student', 'active'),
+(57, '58700133', '6592a2ca0cb86cdf8dcb15d9b5c7b0c3', 'student', 'active'),
+(58, '58700135', '3157f62f08435873f5e609a8b516e9e8', 'student', 'active'),
+(59, '58700140', '6e83bbdf1dad2c7afbc730a9a3f19609', 'student', 'active'),
+(60, '58700141', 'c0064bb3ef67639fb47b1d3632242c02', 'student', 'active'),
+(61, '58700156', '3b66eb863d7180d06c9bdca6e41e2981', 'student', 'active'),
+(62, '58700157', '97648f4805e0f8fdcd68eeb44cd08056', 'student', 'active'),
+(63, '54311095', '81dc9bdb52d04dc20036dbd8313ed055', 'student', 'active');
 
 -- --------------------------------------------------------
 
@@ -369,7 +451,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
 --
 DROP TABLE IF EXISTS `courseslist_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `courseslist_view` AS select `c`.`course_id` AS `course_id`,`s`.`subject_id` AS `subject_id`,`s`.`code` AS `code`,`c`.`year` AS `year`,`c`.`startdate` AS `startdate`,`s`.`name` AS `name`,`s`.`shortname` AS `shortname`,`s`.`description` AS `description`,`c`.`visible` AS `visible`,`c`.`status` AS `status` from (`courses` `c` left join `subjects` `s` on((`c`.`subject_id` = `s`.`subject_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `courseslist_view` AS select `c`.`course_id` AS `course_id`,`s`.`subject_id` AS `subject_id`,`s`.`code` AS `code`,`c`.`year` AS `year`,`s`.`name` AS `name`,`s`.`shortname` AS `shortname`,`s`.`description` AS `description`,`c`.`visible` AS `visible`,`c`.`status` AS `status` from (`courses` `c` left join `subjects` `s` on((`c`.`subject_id` = `s`.`subject_id`)));
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
