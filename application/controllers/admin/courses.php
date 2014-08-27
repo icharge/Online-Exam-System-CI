@@ -10,8 +10,6 @@ class Courses extends CI_Controller {
 	private $removePwd;
 	private $listview;
 
-	private $role;
-
 	public function __construct()
 	{
 		parent::__construct();
@@ -20,7 +18,7 @@ class Courses extends CI_Controller {
 		$this->load->model('courses_model', 'courses');
 
 		// Permissions List for this Class
-		$perm = array($this->role.'', 'teacher');
+		$perm = array('admin', 'teacher');
 		// Check
 		if ($this->Users->_checkLogin())
 		{
@@ -28,8 +26,6 @@ class Courses extends CI_Controller {
 		} else {
 			redirect('auth/login');
 		}
-
-		$this->role = $this->session->userdata('role');
 
 		// Prepare JavaScript !!
 		$this->subjectDropdownScript = "
