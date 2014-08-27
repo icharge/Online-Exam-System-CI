@@ -55,8 +55,7 @@ EOL;
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#basic" data-toggle="tab">พื้นฐาน</a></li>
 						<li><a href="#chapter" data-toggle="tab">Chapter</a></li>
-						<li><a href="#students" data-toggle="tab">นักเรียน</a></li>
-						<li><a href="#papers" data-toggle="tab">ชุดข้อสอบ</a></li>
+						<li><a href="#questions" data-toggle="tab">โจทย์คำถาม</a></li>
 					</ul>
 					<!-- Tab Basic -->
 					<div class="tab-content">
@@ -97,10 +96,10 @@ EOL;
 							</div>
 						</div>
 						<!-- Students tab -->
-						<div class="box-body tab-pane" id="students">
+						<div class="box-body tab-pane" id="questions">
 							<div class="row">
 								<div class="col-md-12 text-center">
-									<h3 class="" contenteditable="false">ผู้ที่ลงเรียน <?php echo $courseInfo['code'] . ' ' . $courseInfo['name']; ?></h3>
+									<h3 class="">โจทย์คำถาม</h3>
 								</div>
 
 

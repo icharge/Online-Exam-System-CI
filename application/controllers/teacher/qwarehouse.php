@@ -24,8 +24,6 @@ class Qwarehouse extends CI_Controller {
 			redirect('auth/login');
 		}
 
-
-
 		$this->scriptList = array(
 
 		);
