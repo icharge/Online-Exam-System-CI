@@ -5,7 +5,7 @@ class Subjects_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 	}
 
 	function getClassName()
@@ -63,8 +63,9 @@ class Subjects_model extends CI_Model {
 		$cause = array('code' => $subjectId);
 		$query = $this->db
 			->get_where('subjects', $cause)
-			->result_array();
-		return $query[0];
+			->row_array();
+		//die(var_dump($query));
+		return $query;
 	}
 
 	function addSubject($subjectData)

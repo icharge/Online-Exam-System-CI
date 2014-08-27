@@ -64,6 +64,15 @@ class Qwarehouse_model extends CI_Model {
 		return $query['scount'];
 	}
 
+	function getChapterList($subject_id)
+	{
+		$cause = array('subject_id' => $subject_id);
+		$query = $this->db
+			->get_where('chapter', $cause)
+			->result_array();
+		return $query;
+	}
+
 }
 
 /* End of file qwarehouse_model.php */

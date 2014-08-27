@@ -18,7 +18,7 @@ class Subjects extends CI_Controller {
 		} else {
 			redirect('auth/login');
 		}
-		
+
 	}
 
 	public function index()
@@ -33,7 +33,7 @@ class Subjects extends CI_Controller {
 
 		$data['total'] = $this->subjects->countSubjectList($this->input->get('q'));
 		$data['subjectlist'] = $this->subjects->getSubjectList($this->input->get('q'),
-			$data['perpage'], 
+			$data['perpage'],
 			$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
 
 		$this->misc->PaginationInit(
@@ -43,7 +43,7 @@ class Subjects extends CI_Controller {
 
 		$data['pagin'] = $this->pagination->create_links();
 
-		
+
 		$this->load->view('admin/subjects_view', $data);
 		$this->load->view('admin/t_footer_view');
 	}
@@ -68,10 +68,19 @@ class Subjects extends CI_Controller {
 			else
 			{
 				$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
-				$data['formlink'] = 'admin/subjects/view/'.$data['subjectInfo']['code'];
-				$data['pagetitle'] = "รายละเอียดวิชา ".$data['subjectInfo']['code']." ".$data['subjectInfo']['name'];
-				$data['pagesubtitle'] = "";
-				$this->load->view('admin/field_subject_view', $data);
+				//die(var_dump($data['subjectInfo']));
+				if (empty($data['subjectInfo']))
+				{
+					show_404();
+				}
+				else
+				{
+					$data['formlink'] = 'admin/subjects/view/'.$data['subjectInfo']['code'];
+					$data['pagetitle'] = "รายละเอียดวิชา ".$data['subjectInfo']['code']." ".$data['subjectInfo']['name'];
+					$data['pagesubtitle'] = "";
+					$this->load->view('admin/field_subject_view', $data);
+				}
+
 			}
 		}
 		$this->load->view('admin/t_footer_view');
@@ -107,16 +116,16 @@ class Subjects extends CI_Controller {
 				$subjectData['name'] = $this->input->post('name');
 				$subjectData['shortname'] = $this->input->post('shortname');
 				$subjectData['description'] = $this->input->post('description');
-				
+
 				if ($this->subjects->addSubject($subjectData))
 				{
 					# Add success
-					$this->session->set_flashdata('msg_info', 
+					$this->session->set_flashdata('msg_info',
 						'ปรับปรุง <b>'.$subjectData['code'].' '.$subjectData['name'].'</b> เรียบร้อย');
 					redirect('admin/subjects');
 				} else {
 					# Failed
-					$this->session->set_flashdata('msg_error', 
+					$this->session->set_flashdata('msg_error',
 						'มีบางอย่างผิดพลาด ไม่สามารถเพิ่ม '.$subjectData['code'].' '.$subjectData['name'].' ได้');
 					redirect('admin/subjects');
 				}
@@ -160,16 +169,16 @@ class Subjects extends CI_Controller {
 			$clean_html = $purifier->purify($this->input->post('description'));
 
 			$subjectData['description'] = $clean_html;
-			// die(var_dump($subjectData)); 
+			// die(var_dump($subjectData));
 			if ($this->subjects->updateSubject($subjectData, $subjectId))
 			{
 				# แก้ไข success
-				$this->session->set_flashdata('msg_info', 
+				$this->session->set_flashdata('msg_info',
 					'ปรับปรุง <b>'.$subjectData['code'].' '.$subjectData['name'].'</b> เรียบร้อย');
 				redirect('admin/subjects');
 			} else {
 				# Failed
-				$this->session->set_flashdata('msg_error', 
+				$this->session->set_flashdata('msg_error',
 					'มีบางอย่างผิดพลาด ไม่สามารถปรับปรุง '.$subjectData['code'].' '.$subjectData['name'].' ได้');
 				redirect('admin/subjects');
 			}
@@ -181,7 +190,7 @@ class Subjects extends CI_Controller {
 			$data['formlink'] = 'admin/subjects/view/'.$data['subjectInfo']['code'];
 			$data['pagetitle'] = "รายละเอียดวิชา ".$data['subjectInfo']['code']." ".$data['subjectInfo']['name'];
 			$data['pagesubtitle'] = "";
-			
+
 			$data['subjectInfo']['code'] = $this->input->post('code');
 			$data['subjectInfo']['name'] = $this->input->post('name');
 			$data['subjectInfo']['shortname'] = $this->input->post('shortname');

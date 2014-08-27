@@ -128,7 +128,7 @@
 							if (($subjectlist)) {
 								foreach ($subjectlist as $item) {
 									echo "
-									<tr href=\"".$this->misc->getHref('teacher/qwarehouse/view')."/$item[subject_id]\">
+									<tr href=\"".$this->misc->getHref('teacher/qwarehouse/view')."/$item[code]\">
 									<td class=\"status\">".$this->qwh->getSubjectStatus($item['hasQuestion']).
 									"</td>
 									<td>$item[code]</td>
