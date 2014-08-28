@@ -4,6 +4,7 @@ class Qwarehouse extends CI_Controller {
 
 	/* Scripts */
 	private $scriptList;
+	private $chapterManage;
 
 	public function __construct()
 	{
@@ -24,7 +25,24 @@ class Qwarehouse extends CI_Controller {
 			redirect('auth/login');
 		}
 
+		$this->chapterManage = '
+	$("#chapterName").keydown(function(e) {
+		if (e.which == 13)
+		{
+			$("#chapterAdd").trigger("click");
+			e.preventDefault();
+		}
+	});
+
+	$("#chapterAdd").click(function(e) {
+		e.preventDefault();
+		console.log($("#chapterName").val());
+		$("#chapterName").val("");
+	});
+';
+
 		$this->scriptList = array(
+			'chapterManage' => $this->chapterManage,
 
 		);
 	}
@@ -34,6 +52,33 @@ class Qwarehouse extends CI_Controller {
 		return $this->scriptList;
 	}
 
+	function callbackjson()
+	{
+		// JSON Callback with modes & arguments.
+
+		# Simulation loading...
+		sleep(1);
+
+		$this->output->set_header('Content-Type: application/json; charset=utf-8');
+		$arg_list = func_get_args();
+		switch ($arg_list[0]) {
+			case 'getChapter':
+				if (isset($arg_list[1]))
+					echo json_encode($this->qwh->getChapterList($arg_list[1]));
+				else
+					echo json_encode(array('error' => "No Subject_id"));
+				break;
+
+			case 'addChapter':
+				if (isset($arg_list[1]))
+
+				break;
+
+			default:
+				echo json_encode(array('error' => "No Arguments"));
+				break;
+		}
+	}
 
 	public function index()
 	{

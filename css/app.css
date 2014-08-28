@@ -445,3 +445,11 @@ input[type=text].date {
 .btn-group-wrapper .middle .inner {
 	margin: 50px auto;
 }
+
+.list-group .input-group-btn:last-child>.btn {
+	border-top-right-radius: 0;
+}
+
+.list-group-item {
+	border: 1px solid #ccc;
+}

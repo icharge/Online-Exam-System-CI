@@ -83,19 +83,31 @@ EOL;
 						<div class="box-body tab-pane" id="chapter">
 							<div class="row">
 								<div class="col-md-12 text-center">
-									<h3 class="">บท/ตอน (Chapter)</h3>
+									<h3 class="">บทของข้อสอบ</h3>
 								</div>
-								<ul>
-									<?php
-										foreach ($chapterList as $item) {
-											echo "<li>$item[name]</li>";
-										}
-									?>
-								</ul>
+								<div class="col-md-8 col-md-offset-2">
+									<div class="list-group">
+										<?php
+											foreach ($chapterList as $item) {
+												echo "<a href=\"\" class=\"list-group-item\">
+												<span class=\"badge\">2</span>
+												<h4 class=\"list-group-item-heading\">$item[name]</h4>
+												<div class=\"item-group-item-text\">$item[description]</div>
+												</a>";
+											}
+										?>
+										<div class="input-group">
+											<input id="chapterName" class="form-control" placeholder="เพิ่ม บท/ตอน">
+											<div class="input-group-btn">
+												<button id="chapterAdd" class="btn btn-success"><i class="fa fa-plus"></i></button>
+											</div>
+										</div>
+									</div>
 
+								</div>
 							</div>
 						</div>
-						<!-- Students tab -->
+						<!-- Questions tab -->
 						<div class="box-body tab-pane" id="questions">
 							<div class="row">
 								<div class="col-md-12 text-center">
@@ -113,7 +125,7 @@ EOL;
 					</div>
 					<div class="box-footer text-right">
 					<?php
-					echo form_submit('submit', $this->courses->btnSaveText(), 'class="btn btn-primary"');
+					//echo form_submit('submit', $this->courses->btnSaveText(), 'class="btn btn-primary"');
 					?>
 					</div>
 				</div>
