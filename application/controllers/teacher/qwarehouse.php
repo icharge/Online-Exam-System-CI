@@ -52,77 +52,81 @@ class Qwarehouse extends CI_Controller {
 		$("#chapterName").attr("disabled", "disabled");
 		$("#chapterName").parent().removeClass("has-error");
 
-		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/addChapter/").'/'.
-		$this->uri->segment(4) .'/" + $.trim($("#chapterName").val());
+		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/addChapter/").'/";
+		var myData = {"subject_id":"'.$this->uri->segment(4).'","chapterName":$.trim($(\'#chapterName\').val())};
+		//myData.push({"name":"subject_id", "value":"'.$this->uri->segment(4).'"});
+		//myData.push({"name":"chapterName", "value":$.trim($(\'#chapterName\').val())});
 
-		$.getJSON( oxsysAPI, { format: "json" })
-			.done(function(data) {
-				console.log("sent " + $("#chapterName").val() + " to " + oxsysAPI);
-				console.log("received : " + data.return);
+		$.ajax({
+			type: "POST",
+			url: oxsysAPI,
+			data: myData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json"
+		})
+		.done(function(data) {
+			console.log("sent " + $("#chapterName").val() + " to " + oxsysAPI);
+			console.log("received : " + data.return);
 
-				if (data.error != "") {
-					$("#chapterAdd").removeAttr("disabled")
-						.addClass("btn-danger")
-						.find("i")
-							.addClass("fa-plus")
-							.removeClass("fa-spinner fa-spin");
-					$("#chapterName").removeAttr("disabled").focus().parent().addClass("has-error");
-					var jbox = new jBox(\'Modal\', {
-						width: 350,
-						height: 100,
-						title: \'ข้อผิดพลาด\',
-						overlay: true,
-						content: data.error,
-					});
-					jbox.open();
-				}
-				else
-				{
-					var itemlist = \'<a href="" class="list-group-item">\'+
-													\'<span class=\"badge\"></span>\'+
-													\'<h4 class="list-group-item-heading">\' + data.msg + \'</h4>\'+
-													\'<div class="item-group-item-text"></div>\'+
-													\'</a>\';
-
-					$("#chapterList").append(itemlist);
-
-
-					$("#chapterAdd").removeAttr("disabled")
-						.addClass("btn-success")
-						.find("i")
-							.addClass("fa-plus")
-							.removeClass("fa-spinner fa-spin");
-					$("#chapterName").attr("disabled", "disabled");
-					$("#chapterName").parent().removeClass("has-error");
-					$("#chapterName").removeAttr("disabled").focus();
-					$("#chapterName").val("");
-				}
-			})
-			.fail(function(jqxhr, textStatus, error) {
-				var err = textStatus + ", " + error;
-				console.log("Request Failed: "+err);
-
+			if (data.error != "") {
 				$("#chapterAdd").removeAttr("disabled")
 					.addClass("btn-danger")
 					.find("i")
 						.addClass("fa-plus")
 						.removeClass("fa-spinner fa-spin");
 				$("#chapterName").removeAttr("disabled").focus().parent().addClass("has-error");
-
 				var jbox = new jBox(\'Modal\', {
 					width: 350,
 					height: 100,
 					title: \'ข้อผิดพลาด\',
 					overlay: true,
-					content: \'ไม่สามารถเพิ่มบทได้ กรุณาตรวจสอบความถูกต้อง\',
+					content: data.error,
 				});
 				jbox.open();
+			}
+			else
+			{
+				var itemlist = \'<a href="" class="list-group-item">\'+
+												\'<span class=\"badge\"></span>\'+
+												\'<h4 class="list-group-item-heading">\' + data.msg + \'</h4>\'+
+												\'<div class="item-group-item-text"></div>\'+
+												\'</a>\';
 
+				$("#chapterList").append(itemlist);
+
+
+				$("#chapterAdd").removeAttr("disabled")
+					.addClass("btn-success")
+					.find("i")
+						.addClass("fa-plus")
+						.removeClass("fa-spinner fa-spin");
+				$("#chapterName").attr("disabled", "disabled");
+				$("#chapterName").parent().removeClass("has-error");
+				$("#chapterName").removeAttr("disabled").focus();
+				$("#chapterName").val("");
+			}
+		})
+		.fail(function(jqxhr, textStatus, error) {
+			var err = textStatus + ", " + error;
+			console.log("Request Failed: "+err);
+
+			$("#chapterAdd").removeAttr("disabled")
+				.addClass("btn-danger")
+				.find("i")
+					.addClass("fa-plus")
+					.removeClass("fa-spinner fa-spin");
+			$("#chapterName").removeAttr("disabled").focus().parent().addClass("has-error");
+
+			var jbox = new jBox(\'Modal\', {
+				width: 350,
+				height: 100,
+				title: \'ข้อผิดพลาด\',
+				overlay: true,
+				content: \'ไม่สามารถเพิ่มบทได้ กรุณาตรวจสอบความถูกต้อง\',
 			});
+			jbox.open();
 
-
-		console.log($("#chapterName").val());
-
+		});
 	});
 
 
@@ -144,7 +148,7 @@ class Qwarehouse extends CI_Controller {
 		// JSON Callback with modes & arguments.
 
 		# Simulation loading...
-		sleep(1);
+		//sleep(1);
 
 		$this->output->set_header('Content-Type: application/json; charset=utf-8');
 		$arg_list = func_get_args();
@@ -157,18 +161,20 @@ class Qwarehouse extends CI_Controller {
 				break;
 
 			case 'addChapter':
-				if (isset($arg_list[1]))
+				$subject_id = $this->input->post('subject_id');
+				$chapterName = $this->input->post('chapterName');
+				if ($subject_id != "")
 				{
-					if (isset($arg_list[2]))
+					if ($chapterName != "")
 					{
-						$subject_data = $this->subjects->getSubjectById($arg_list[1]);
+						$subject_data = $this->subjects->getSubjectById($subject_id);
 						if (!empty($subject_data)) {
 							$subject_id = $subject_data['subject_id'];
-							$ret = $this->qwh->addChapter($subject_id, trim(urldecode($arg_list[2])));
+							$ret = $this->qwh->addChapter($subject_id, trim(urldecode($chapterName)));
 							//$ret = 0; // Testing
 							if ($ret == 0)
 							{
-								echo json_encode(array('msg' => trim(urldecode($arg_list[2])), 'return' => "Success", 'error' => ""));
+								echo json_encode(array('msg' => trim(urldecode($chapterName)), 'return' => "Success", 'error' => ""));
 							}
 							else
 								echo json_encode(array('error' => $ret));

@@ -97,6 +97,7 @@ EOL;
 											}
 										?>
 									</div>
+
 									<div class="input-group">
 										<input id="chapterName" class="form-control" placeholder="">
 										<div class="input-group-btn">
