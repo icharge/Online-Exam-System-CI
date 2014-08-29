@@ -22,7 +22,12 @@ class Qwarehouse extends CI_Controller {
 		{
 			if ( ! $this->Users->_checkRole($perm)) redirect('main');
 		} else {
-			redirect('auth/login');
+			if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+				echo json_encode(array('error' => "Session expire, please re-login."));
+				die();
+			}
+			else
+				redirect('auth/login');
 		}
 
 		$this->chapterManage = '
@@ -36,9 +41,91 @@ class Qwarehouse extends CI_Controller {
 
 	$("#chapterAdd").click(function(e) {
 		e.preventDefault();
+
+		if ($.trim($("#chapterName").val()) == "") return;
+
+		$(this).attr("disabled", "disabled")
+			.removeClass("btn-success").removeClass("btn-danger")
+			.find("i")
+				.removeClass("fa-plus")
+				.addClass("fa-spinner fa-spin");
+		$("#chapterName").attr("disabled", "disabled");
+		$("#chapterName").parent().removeClass("has-error");
+
+		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/addChapter/").'/'.
+		$this->uri->segment(4) .'/" + $.trim($("#chapterName").val());
+
+		$.getJSON( oxsysAPI, { format: "json" })
+			.done(function(data) {
+				console.log("sent " + $("#chapterName").val() + " to " + oxsysAPI);
+				console.log("received : " + data.return);
+
+				if (data.error != "") {
+					$("#chapterAdd").removeAttr("disabled")
+						.addClass("btn-danger")
+						.find("i")
+							.addClass("fa-plus")
+							.removeClass("fa-spinner fa-spin");
+					$("#chapterName").removeAttr("disabled").focus().parent().addClass("has-error");
+					var jbox = new jBox(\'Modal\', {
+						width: 350,
+						height: 100,
+						title: \'ข้อผิดพลาด\',
+						overlay: true,
+						content: data.error,
+					});
+					jbox.open();
+				}
+				else
+				{
+					var itemlist = \'<a href="" class="list-group-item">\'+
+													\'<span class=\"badge\"></span>\'+
+													\'<h4 class="list-group-item-heading">\' + data.msg + \'</h4>\'+
+													\'<div class="item-group-item-text"></div>\'+
+													\'</a>\';
+
+					$("#chapterList").append(itemlist);
+
+
+					$("#chapterAdd").removeAttr("disabled")
+						.addClass("btn-success")
+						.find("i")
+							.addClass("fa-plus")
+							.removeClass("fa-spinner fa-spin");
+					$("#chapterName").attr("disabled", "disabled");
+					$("#chapterName").parent().removeClass("has-error");
+					$("#chapterName").removeAttr("disabled").focus();
+					$("#chapterName").val("");
+				}
+			})
+			.fail(function(jqxhr, textStatus, error) {
+				var err = textStatus + ", " + error;
+				console.log("Request Failed: "+err);
+
+				$("#chapterAdd").removeAttr("disabled")
+					.addClass("btn-danger")
+					.find("i")
+						.addClass("fa-plus")
+						.removeClass("fa-spinner fa-spin");
+				$("#chapterName").removeAttr("disabled").focus().parent().addClass("has-error");
+
+				var jbox = new jBox(\'Modal\', {
+					width: 350,
+					height: 100,
+					title: \'ข้อผิดพลาด\',
+					overlay: true,
+					content: \'ไม่สามารถเพิ่มบทได้ กรุณาตรวจสอบความถูกต้อง\',
+				});
+				jbox.open();
+
+			});
+
+
 		console.log($("#chapterName").val());
-		$("#chapterName").val("");
+
 	});
+
+
 ';
 
 		$this->scriptList = array(
@@ -71,7 +158,29 @@ class Qwarehouse extends CI_Controller {
 
 			case 'addChapter':
 				if (isset($arg_list[1]))
-
+				{
+					if (isset($arg_list[2]))
+					{
+						$subject_data = $this->subjects->getSubjectById($arg_list[1]);
+						if (!empty($subject_data)) {
+							$subject_id = $subject_data['subject_id'];
+							$ret = $this->qwh->addChapter($subject_id, trim(urldecode($arg_list[2])));
+							//$ret = 0; // Testing
+							if ($ret == 0)
+							{
+								echo json_encode(array('msg' => trim(urldecode($arg_list[2])), 'return' => "Success", 'error' => ""));
+							}
+							else
+								echo json_encode(array('error' => $ret));
+						}
+						else
+							json_encode(array('error' => "Subject not found"));
+					}
+					else
+						echo json_encode(array('error' => "No Name"));
+				}
+				else
+					echo json_encode(array('error' => "No Subject_id"));
 				break;
 
 			default:

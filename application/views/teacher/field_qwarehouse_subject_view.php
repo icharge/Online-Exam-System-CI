@@ -86,24 +86,23 @@ EOL;
 									<h3 class="">บทของข้อสอบ</h3>
 								</div>
 								<div class="col-md-8 col-md-offset-2">
-									<div class="list-group">
+									<div id="chapterList" class="list-group">
 										<?php
 											foreach ($chapterList as $item) {
 												echo "<a href=\"\" class=\"list-group-item\">
-												<span class=\"badge\">2</span>
+												<span class=\"badge\"></span>
 												<h4 class=\"list-group-item-heading\">$item[name]</h4>
 												<div class=\"item-group-item-text\">$item[description]</div>
 												</a>";
 											}
 										?>
-										<div class="input-group">
-											<input id="chapterName" class="form-control" placeholder="เพิ่ม บท/ตอน">
-											<div class="input-group-btn">
-												<button id="chapterAdd" class="btn btn-success"><i class="fa fa-plus"></i></button>
-											</div>
+									</div>
+									<div class="input-group">
+										<input id="chapterName" class="form-control" placeholder="">
+										<div class="input-group-btn">
+											<button id="chapterAdd" class="btn btn-success"><i class="fa fa-plus"></i></button>
 										</div>
 									</div>
-
 								</div>
 							</div>
 						</div>

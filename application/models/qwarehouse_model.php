@@ -73,6 +73,16 @@ class Qwarehouse_model extends CI_Model {
 		return $query;
 	}
 
+	function addChapter($subject_id, $chapterName)
+	{
+		$data = array(
+			'name' => $chapterName,
+			'subject_id' => $subject_id,
+		);
+		$chins = $this->db->insert('Chapter', $data);
+		return $this->db->_error_number();
+	}
+
 }
 
 /* End of file qwarehouse_model.php */
