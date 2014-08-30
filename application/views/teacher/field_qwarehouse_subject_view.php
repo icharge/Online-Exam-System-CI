@@ -83,23 +83,36 @@ EOL;
 						<div class="box-body tab-pane" id="chapter">
 							<div class="row">
 								<div class="col-md-12 text-center">
-									<h3 class="">บทของข้อสอบ</h3>
+									<h3 class="">บทของเนื้อหาข้อสอบ</h3>
 								</div>
-								<div class="col-md-8 col-md-offset-2">
-									<div id="chapterList" class="list-group">
+							</div>
+							<div class="row">
+								<div class="col-lg-4 col-md-12">
+									<div class="callout callout-info">
+										<h4>คำแนะนำ</h4>
+										<p class="text-justify">ส่วนนี้มีไว้เพื่อจัดกลุ่มของแต่ละข้อสอบ หรือโจทย์คำถาม เพื่อให้ง่ายต่อการนำไปใช้ภายหลัง</p>
+									</div>
+								</div>
+								<div class="col-lg-8 col-md-12 pull-right">
+									<ul id="chapterList" class="list-group">
 										<?php
 											foreach ($chapterList as $item) {
-												echo "<a href=\"\" class=\"list-group-item\">
+												echo "<li class=\"list-group-item\">
 												<span class=\"badge\"></span>
+												<div class=\"optionlinks\">
+													<a href=\"#\" class=\"text-danger\">
+														<i class=\"glyphicon glyphicon-remove\"></i>
+													</a>
+												</div>
 												<h4 class=\"list-group-item-heading\">$item[name]</h4>
 												<div class=\"item-group-item-text\">$item[description]</div>
-												</a>";
+												</li>";
 											}
 										?>
-									</div>
+									</ul>
 
 									<div class="input-group">
-										<input id="chapterName" class="form-control" placeholder="">
+										<input id="chapterName" class="form-control" maxlength="40" placeholder="">
 										<div class="input-group-btn">
 											<button id="chapterAdd" class="btn btn-success"><i class="fa fa-plus"></i></button>
 										</div>

@@ -86,14 +86,15 @@ class Qwarehouse extends CI_Controller {
 			}
 			else
 			{
-				var itemlist = \'<a href="" class="list-group-item">\'+
+				var itemlist = $(\'<a class="list-group-item">\'+
 												\'<span class=\"badge\"></span>\'+
 												\'<h4 class="list-group-item-heading">\' + data.msg + \'</h4>\'+
 												\'<div class="item-group-item-text"></div>\'+
-												\'</a>\';
+												\'</a>\');
 
 				$("#chapterList").append(itemlist);
-
+				itemlist.hide();
+				itemlist.slideDown();
 
 				$("#chapterAdd").removeAttr("disabled")
 					.addClass("btn-success")
