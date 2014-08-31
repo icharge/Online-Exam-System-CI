@@ -10,8 +10,8 @@ Project จบ
 ทฤษฏี
 การทำงาน
 ขอบเขตการพัฒนางาน กลุ่มผู้ใช้งานของระบบสอบ   หน้าที่อะไร
-เรื่องฟังก์ชั่นของระบบ  
-ลักษณะของข้อสอบ  
+เรื่องฟังก์ชั่นของระบบ
+ลักษณะของข้อสอบ
 
 ระบบ
 การพัฒนา โปรแกรม อธิบาย MVC
@@ -127,3 +127,4 @@ CREDITS 3RD PARTY
 - Simple XLSX: Parse and retrieve data from Excel XLS files | http://www.phpclasses.org/package/6279-PHP-Parse-and-retrieve-data-from-Excel-XLS-files.html [Sergey Shuchkin]
 - Dropzone.js | http://www.dropzonejs.com/ [Matias Meno]
 - CKEditor | http://ckeditor.com/ [CKSource (Frederico Kriabben)]
+- JBox | http://stephanwagner.me/jBox [Stephan Wagner]

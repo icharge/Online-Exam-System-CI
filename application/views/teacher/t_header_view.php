@@ -8,6 +8,8 @@
 	<link href="vendor/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<!-- bootstrap select -->
 	<link href="vendor/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+	<!-- Bootstrap editable -->
+	<link href="vendor/css/bootstrap-editable.css" rel="stylesheet">
 	<!-- font Awesome -->
 	<link href="vendor/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<!-- Ionicons -->

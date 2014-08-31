@@ -39,7 +39,7 @@ class Qwarehouse extends CI_Controller {
 		}
 	});
 
-	$("#chapterAdd").click(function(e) {
+	$("#chapterAdd").on("click", function(e) {
 		e.preventDefault();
 
 		if ($.trim($("#chapterName").val()) == "") return;
@@ -86,11 +86,19 @@ class Qwarehouse extends CI_Controller {
 			}
 			else
 			{
-				var itemlist = $(\'<a class="list-group-item">\'+
+				var itemlist = $(\'<li class="list-group-item" data-chapter-id="\' + data.id + \'">\'+
 												\'<span class=\"badge\"></span>\'+
+												\'<div class=\"optionlinks\">\'+
+													\'<a href=\"#edit\">\'+
+														\'<i class=\"fa fa-edit\"></i>\'+
+													\'</a>\'+
+													\'<a href=\"#remove\" class=\"text-danger\">\'+
+														\'<i class=\"glyphicon glyphicon-remove\"></i>\'+
+													\'</a>\'+
+												\'</div>\'+
 												\'<h4 class="list-group-item-heading">\' + data.msg + \'</h4>\'+
 												\'<div class="item-group-item-text"></div>\'+
-												\'</a>\');
+												\'</li>\');
 
 				$("#chapterList").append(itemlist);
 				itemlist.hide();
@@ -105,6 +113,19 @@ class Qwarehouse extends CI_Controller {
 				$("#chapterName").parent().removeClass("has-error");
 				$("#chapterName").removeAttr("disabled").focus();
 				$("#chapterName").val("");
+
+				// Attach new selector
+				$("#chapterList .list-group-item:last-child .list-group-item-heading").editable(editoptions);
+				$("#chapterList .list-group-item:last-child .list-group-item-heading").on("shown", function(e, editable) {
+					var par = $(this).parent();
+					par.find(".optionlinks").hide();
+					par.find(".badge").hide();
+				});
+				$("#chapterList .list-group-item:last-child .list-group-item-heading").on("hidden", function(e, reason) {
+					var par = $(this).parent();
+					par.find(".optionlinks").removeAttr("style");
+					par.find(".badge").removeAttr("style");
+				});
 			}
 		})
 		.fail(function(jqxhr, textStatus, error) {
@@ -130,6 +151,97 @@ class Qwarehouse extends CI_Controller {
 		});
 	});
 
+	$.fn.editable.defaults.mode = "inline";
+	var editoptions = {
+		type: "text",
+		name: "name",
+		pk: function() {
+			var id = $(this).parent().attr("data-chapter-id");
+			return id;
+		},
+		url: "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/renChapter/").'/",
+		tpl: \'<input type="text" style="width: 100%">\',
+
+	};
+
+	$("#chapterList .list-group-item .list-group-item-heading").editable(editoptions);
+
+	$("#chapterList .list-group-item .list-group-item-heading").on("shown", function(e, editable) {
+		var par = $(this).parent();
+		par.find(".optionlinks").hide();
+		par.find(".badge").hide();
+	});
+
+	$("#chapterList .list-group-item .list-group-item-heading").on("hidden", function(e, reason) {
+		var par = $(this).parent();
+		par.find(".optionlinks").removeAttr("style");
+		par.find(".badge").removeAttr("style");
+	});
+
+	$("#chapterList").delegate(".optionlinks a[href=\'#edit\']", "click", function(e) {
+		e.preventDefault();
+		$(this).parent().parent().find(".list-group-item-heading").editable("show", true);
+		return false;
+	});
+
+	var delElement;
+	function delFunc(delElem) {
+		delElement = delElem;
+		var id = $(delElem).attr("data-chapter-id");
+		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/delChapter/").'/";
+		var myData = {"id":id};
+
+		$(delElem).addClass("disabled").find(".optionlinks").hide().find(".badge").hide();
+		$(delElem).find(".list-group-item-heading").editable("disable");
+
+		$.ajax({
+			type: "POST",
+			url: oxsysAPI,
+			data: myData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json"
+		})
+		.done(function(data) {
+			if (data.error != "") {
+				var jbox = new jBox(\'Modal\', {
+					width: 350,
+					height: 100,
+					title: \'ข้อผิดพลาด\',
+					overlay: true,
+					content: data.msg,
+				});
+				jbox.open();
+				$(delElement).removeClass("disabled").find(".optionlinks").removeAttr("style").find(".badge").removeAttr("style");
+				$(delElement).find(".list-group-item-heading").editable("enable");
+			}
+			else
+			{
+				delElem.slideUp(400, function() { $(this).remove(); });
+			}
+
+		})
+		.fail(function(jqxhr, textStatus, error) {
+			var err = textStatus + ", " + error;
+			console.log("Request Failed: "+err);
+
+			var jbox = new jBox(\'Modal\', {
+				width: 350,
+				height: 100,
+				title: \'ข้อผิดพลาด\',
+				overlay: true,
+				content: \'ไม่สามารถเพิ่มบทได้ กรุณาตรวจสอบความถูกต้อง\',
+			});
+			jbox.open();
+
+			$(delElement).removeClass("disabled").find(".optionlinks").removeAttr("style").find(".badge").removeAttr("style");
+			$(delElement).find(".list-group-item-heading").editable("enable");
+		});
+	};
+	$("#chapterList").delegate(".optionlinks a[href=\'#remove\']", "click", function(e) {
+		e.preventDefault();
+		delFunc($(this).parent().parent());
+		return false;
+	});
 
 ';
 
@@ -162,8 +274,8 @@ class Qwarehouse extends CI_Controller {
 				break;
 
 			case 'addChapter':
-				$subject_id = $this->input->post('subject_id');
-				$chapterName = $this->input->post('chapterName');
+				$subject_id = trim($this->input->post('subject_id'));
+				$chapterName = trim($this->input->post('chapterName'));
 				if ($subject_id != "")
 				{
 					if ($chapterName != "")
@@ -173,12 +285,18 @@ class Qwarehouse extends CI_Controller {
 							$subject_id = $subject_data['subject_id'];
 							$ret = $this->qwh->addChapter($subject_id, trim(urldecode($chapterName)));
 							//$ret = 0; // Testing
-							if ($ret == 0)
+							if ($ret['errno'] == 0)
 							{
-								echo json_encode(array('msg' => trim(urldecode($chapterName)), 'return' => "Success", 'error' => ""));
+								echo json_encode(
+									array(
+										'msg' => trim(urldecode($chapterName)),
+										'id' => $ret['id'],
+										'return' => "Success",
+										'error' => $ret['errno'],
+								));
 							}
 							else
-								echo json_encode(array('error' => $ret));
+								echo json_encode($ret);
 						}
 						else
 							json_encode(array('error' => "Subject not found"));
@@ -188,6 +306,51 @@ class Qwarehouse extends CI_Controller {
 				}
 				else
 					echo json_encode(array('error' => "No Subject_id"));
+				break;
+
+			case 'renChapter':
+				$chapter_id = trim($this->input->post('pk'));
+				$chapterName = trim($this->input->post('value'));
+				if ($chapter_id != "")
+				{
+					if ($chapterName != "")
+					{
+						$ret = $this->qwh->renChapter($chapter_id, urldecode($chapterName));
+						if ($ret == 0)
+						{
+							echo json_encode(
+								array(
+									'msg' => trim(urldecode($chapterName)),
+									'return' => "Success",
+									'error' => "")
+								);
+						}
+						else
+							echo json_encode(array('error' => $ret));
+					}
+					else
+						echo json_encode(array('error' => "No Name"));
+				}
+				else
+					echo json_encode(array('error' => "No Chapter_id"));
+				break;
+
+			case 'delChapter':
+				$chapter_id = trim($this->input->post('id'));
+				if ($chapter_id != "") {
+					$ret = $this->qwh->delChapter($chapter_id);
+					if ($ret['errno'] == 0 && $ret['result'] == "deleted") {
+						echo json_encode(
+							array(
+								'return' => "Success",
+								'error' => "",
+						));
+					}
+					else echo json_encode($ret);
+				}
+				else
+					echo json_encode(array('error' => "No Chapter_id"));
+
 				break;
 
 			default:

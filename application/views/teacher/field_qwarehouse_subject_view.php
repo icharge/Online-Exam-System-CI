@@ -97,10 +97,13 @@ EOL;
 									<ul id="chapterList" class="list-group">
 										<?php
 											foreach ($chapterList as $item) {
-												echo "<li class=\"list-group-item\">
+												echo "<li class=\"list-group-item\" data-chapter-id=\"$item[chapter_id]\">
 												<span class=\"badge\"></span>
 												<div class=\"optionlinks\">
-													<a href=\"#\" class=\"text-danger\">
+													<a href=\"#edit\">
+														<i class=\"fa fa-edit\"></i>
+													</a>
+													<a href=\"#remove\" class=\"text-danger\">
 														<i class=\"glyphicon glyphicon-remove\"></i>
 													</a>
 												</div>

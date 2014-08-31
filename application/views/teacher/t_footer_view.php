@@ -11,6 +11,8 @@
 	<script src="vendor/js/bootstrap.min.js" type="text/javascript"></script>
 	<!-- Bootstrap select -->
 	<script src="vendor/js/bootstrap-select.min.js" type="text/javascript"></script>
+	<!-- Bootstrap editable -->
+	<script src="vendor/js/bootstrap-editable.min.js" type="text/javascript"></script>
 	<!-- InputMask -->
 	<script src="vendor/js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
 	<script src="vendor/js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>

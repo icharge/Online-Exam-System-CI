@@ -464,3 +464,7 @@ input[type=text].date {
 .list-group-item:hover .optionlinks {
 	display: block;
 }
+
+.editable-click {
+	border-bottom: none;
+}
