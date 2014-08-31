@@ -52,7 +52,10 @@ class Qwarehouse extends CI_Controller {
 		$("#chapterName").attr("disabled", "disabled");
 		$("#chapterName").parent().removeClass("has-error");
 
-		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/addChapter/").'/";
+		if (!Date.now) {
+			Date.now = function() { return new Date().getTime(); };
+		}
+		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/addChapter/").'/?ts="+Date.now();
 		var myData = {"subject_id":"'.$this->uri->segment(4).'","chapterName":$.trim($(\'#chapterName\').val())};
 		//myData.push({"name":"subject_id", "value":"'.$this->uri->segment(4).'"});
 		//myData.push({"name":"chapterName", "value":$.trim($(\'#chapterName\').val())});
@@ -188,7 +191,11 @@ class Qwarehouse extends CI_Controller {
 	function delFunc(delElem) {
 		delElement = delElem;
 		var id = $(delElem).attr("data-chapter-id");
-		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/delChapter/").'/";
+
+		if (!Date.now) {
+			Date.now = function() { return new Date().getTime(); };
+		}
+		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/delChapter/").'/?ts=" + Date.now();
 		var myData = {"id":id};
 
 		$(delElem).addClass("disabled").find(".optionlinks").hide().find(".badge").hide();
