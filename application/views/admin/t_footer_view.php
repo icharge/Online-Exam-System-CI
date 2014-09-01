@@ -103,7 +103,6 @@
 
 		$('.jtooltip').jBox('Tooltip', {theme: 'TooltipDark'});
 
-		<?php if(defined('useEditor')) echo "CKEDITOR.replace('editor');";?>
 		<?php
 			if(isset($additionScript))
 			{

@@ -468,3 +468,16 @@ input[type=text].date {
 .editable-click {
 	border-bottom: none;
 }
+
+#questionsList .iradio_minimal-red {
+	top: 4px;
+}
+
+#questionsList .radio {
+	height: 38px;
+}
+
+#questionsList label.choice {
+	padding-left: 0;
+	display: block;
+}

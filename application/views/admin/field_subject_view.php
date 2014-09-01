@@ -28,7 +28,7 @@
 		<div class="row">
 			<div class="col-md-5 col-lg-6 col-lg-offset-3">
 <?php
-if (isset($msg_error)) 
+if (isset($msg_error))
 {
 	echo <<<EOL
 <div class="alert alert-danger hidden-xs alert-dismissable" style="min-width: 343px">
@@ -63,7 +63,7 @@ EOL;
 		</div>
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				
+
 				<!-- Begin BasicInfo -->
 				<div class="box box-primary">
 					<div class="box-header">
@@ -73,7 +73,7 @@ EOL;
 					</div>
 					<div class="box-body">
 						<div class="form-group<?php if(form_error('code')) echo ' has-error';?>">
-							<?php 
+							<?php
 							echo form_label('รหัสวิชา <span class="text-danger">*</span>', 'code');
 							echo form_input(array(
 								'id'=>'code',
@@ -86,7 +86,7 @@ EOL;
 							?>
 						</div>
 						<div class="form-group<?php if(form_error('name')) echo ' has-error';?>">
-							<?php 
+							<?php
 							echo form_label('ชื่อวิชา <span class="text-danger">*</span>', 'name');
 							echo form_input(array(
 								'id'=>'name',
@@ -99,7 +99,7 @@ EOL;
 							?>
 						</div>
 						<div class="form-group<?php if(form_error('shortname')) echo ' has-error';?>">
-							<?php 
+							<?php
 							echo form_label('ชื่อย่อวิชา <span class="text-danger">*</span>', 'ชื่อย่อวิชา');
 							echo form_input(array(
 								'id'=>'shortname',
@@ -112,11 +112,10 @@ EOL;
 							?>
 						</div>
 						<div class="form-group<?php if(form_error('description')) echo ' has-error';?>">
-							<?php 
+							<?php
 							echo form_label('คำอธิบายวิชา', 'ชื่อย่อวิชา');
 							echo form_textarea('description', $subjectInfo['description'], 'id="editor" class="form-control"');
 							// echo form_error('description', '<span class="label label-danger">', '</span>');
-							define('useEditor', true);
 							?>
 						</div>
 					</div>
@@ -129,6 +128,6 @@ EOL;
 				<!-- End BasicInfo -->
 			</div>
 		</div>
-		
+
 		<?php form_close(); ?>
 <!-- End content -->

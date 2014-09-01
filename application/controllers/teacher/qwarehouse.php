@@ -5,6 +5,7 @@ class Qwarehouse extends CI_Controller {
 	/* Scripts */
 	private $scriptList;
 	private $chapterManage;
+	private $questionManage;
 
 	public function __construct()
 	{
@@ -252,10 +253,19 @@ class Qwarehouse extends CI_Controller {
 
 ';
 
+		$this->questionManage = '
+	function applyCKE() {
+		//var qElem = $("#question");
+		CKEDITOR.replace("question");
+	};
+	applyCKE();
+';
+
 		$this->scriptList = array(
 			'chapterManage' => $this->chapterManage,
-
+			'questionManage' => $this->questionManage,
 		);
+		define('useEditor', true);
 	}
 
 	private function getAddScripts()

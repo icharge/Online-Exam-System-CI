@@ -2,6 +2,10 @@
 
 class Subjects extends CI_Controller {
 
+	/* Scripts */
+	private $scriptList;
+	private $ckeditor;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -19,6 +23,17 @@ class Subjects extends CI_Controller {
 			redirect('auth/login');
 		}
 
+		$this->ckeditor = "CKEDITOR.replace('editor');";
+
+		$this->scriptList = array(
+			'ckeditor' => $this->ckeditor,
+		);
+		define('useEditor', true);
+	}
+
+	private function getAddScripts()
+	{
+		return $this->scriptList;
 	}
 
 	public function index()
@@ -83,7 +98,9 @@ class Subjects extends CI_Controller {
 
 			}
 		}
-		$this->load->view('admin/t_footer_view');
+		// Send additional script to footer
+		$footdata['additionScript'] = $this->getAddScripts();
+		$this->load->view('admin/t_footer_view', $footdata);
 	}
 
 	public function add()
@@ -144,7 +161,9 @@ class Subjects extends CI_Controller {
 		else
 		{
 			$this->load->view('admin/field_subject_view', $data);
-			$this->load->view('admin/t_footer_view');
+			// Send additional script to footer
+			$footdata['additionScript'] = $this->getAddScripts();
+			$this->load->view('admin/t_footer_view', $footdata);
 		}
 	}
 

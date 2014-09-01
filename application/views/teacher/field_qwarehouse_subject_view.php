@@ -48,13 +48,13 @@ EOL;
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-10 col-md-offset-1">
 
 				<!-- Begin box -->
 				<div class="box nav-tabs-custom" style="border: none;">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#basic" data-toggle="tab">พื้นฐาน</a></li>
-						<li><a href="#chapter" data-toggle="tab">Chapter</a></li>
+						<li><a href="#chapter" data-toggle="tab">Chapters</a></li>
 						<li><a href="#questions" data-toggle="tab">โจทย์คำถาม</a></li>
 					</ul>
 					<!-- Tab Basic -->
@@ -83,7 +83,7 @@ EOL;
 						<div class="box-body tab-pane" id="chapter">
 							<div class="row">
 								<div class="col-md-12 text-center">
-									<h3 class="">บทของเนื้อหาข้อสอบ</h3>
+									<h3 class="">Chapters</h3>
 								</div>
 							</div>
 							<div class="row">
@@ -127,17 +127,223 @@ EOL;
 						<div class="box-body tab-pane" id="questions">
 							<div class="row">
 								<div class="col-md-12 text-center">
-									<h3 class="">โจทย์คำถาม</h3>
+									<h3 class=""></h3>
 								</div>
-
+								<div class="col-sm-4">
+									<h4>บท / ตอน</h4>
+									<ul id="chapterListq" class="list-group">
+										<?php
+											foreach ($chapterList as $item) {
+												echo "<a class=\"list-group-item\" data-chapter-id=\"$item[chapter_id]\">
+												<span class=\"badge\"></span>
+												<h4 class=\"list-group-item-heading\">$item[name]</h4>
+												<div class=\"item-group-item-text\">$item[description]</div>
+												</a>";
+											}
+										?>
+									</ul>
+								</div>
+								<div class="col-sm-8">
+									<h4>โจทย์คำถาม</h4>
+									<div id="questionsList">
+										<div class="box nav-tabs-custom question-item">
+											<ul class="nav nav-tabs">
+												<li class="pull-left header">
+													<i class="fa fa-th"></i> New question
+												</li>
+												<li class="pull-right">
+													<a href="#" class="text-muted"><i class="fa fa-gear"></i></a>
+												</li>
+											</ul>
+											<div class="box-body">
+												<form name="qnew" class="form-inline form-question-item">
+													<div class="form-group<?php if(form_error('question')) echo ' has-error';?>">
+														<?php
+														echo form_label('โจทย์ <span class="text-danger">*</span>', 'question');
+														echo form_textarea('question', "", 'id="question" class="form-control"');
+														// echo form_input(array(
+														// 	'id'=>'question',
+														// 	'name'=>'question',
+														// 	'value'=>"",
+														// 	'type'=>'text',
+														// 	'class'=>'form-control',
+														// 	));
+														echo form_error('question', '<span class="label label-danger">', '</span>');
+														?>
+													</div>
+													<div class="form-group">
+														<?php echo form_label('ประเภท', 'qtype');
+															$options = array(
+																'choice' => "เลือกตอบ",
+																'numeric' => "ตอบตัวเลข",
+																'boolean' => "ถูก-ผิด",
+															);
+															echo form_dropdown('qtype', $options, 'default', 'id="qtype" class="form-control"');
+														?>
+													</div>
+													<div class="form-group<?php if(form_error('correct')) echo ' has-error';?>">
+														<?php
+														echo form_label('ตัวเลือก <span class="text-danger">*</span>', 'correct');
+														?>
+														<div class="radio">
+															<div class="col-xs-1 no-padding">
+																<label>
+																	<?php
+																		echo form_radio('correct', '1', false,'class="minimal-red"')." ";
+																	?>
+																</label>
+															</div>
+															<div class="col-xs-11 no-padding">
+																<div class="form-inline">
+																	<label id="c1" class="choice">ก.
+																		<?php
+																			echo form_input(array(
+																				'id'=>'ans1',
+																				'name'=>'ans1',
+																				'value'=>"",
+																				'type'=>'text',
+																				'class'=>'form-control',
+																				'style'=>'width: 92%;'
+																			));
+																		?>
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="radio">
+															<div class="col-xs-1 no-padding">
+																<label>
+																	<?php
+																		echo form_radio('correct', '2', false,'class="minimal-red"')." ";
+																	?>
+																</label>
+															</div>
+															<div class="col-xs-11 no-padding">
+																<div class="form-inline">
+																	<label id="c2" class="choice">ข.
+																		<?php
+																			echo form_input(array(
+																				'id'=>'ans2',
+																				'name'=>'ans2',
+																				'value'=>"",
+																				'type'=>'text',
+																				'class'=>'form-control',
+																				'style'=>'width: 92%;'
+																			));
+																		?>
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="radio">
+															<div class="col-xs-1 no-padding">
+																<label>
+																	<?php
+																		echo form_radio('correct', '3', false,'class="minimal-red"')." ";
+																	?>
+																</label>
+															</div>
+															<div class="col-xs-11 no-padding">
+																<div class="form-inline">
+																	<label id="c3" class="choice">ค.
+																		<?php
+																			echo form_input(array(
+																				'id'=>'ans3',
+																				'name'=>'ans3',
+																				'value'=>"",
+																				'type'=>'text',
+																				'class'=>'form-control',
+																				'style'=>'width: 92%;'
+																			));
+																		?>
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="radio">
+															<div class="col-xs-1 no-padding">
+																<label>
+																	<?php
+																		echo form_radio('correct', '4', false,'class="minimal-red"')." ";
+																	?>
+																</label>
+															</div>
+															<div class="col-xs-11 no-padding">
+																<div class="form-inline">
+																	<label id="c4" class="choice">ง.
+																		<?php
+																			echo form_input(array(
+																				'id'=>'ans4',
+																				'name'=>'ans4',
+																				'value'=>"",
+																				'type'=>'text',
+																				'class'=>'form-control',
+																				'style'=>'width: 92%;'
+																			));
+																		?>
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="radio">
+															<div class="col-xs-1 no-padding">
+																<label>
+																	<?php
+																		echo form_radio('correct', '5', false,'class="minimal-red"')." ";
+																	?>
+																</label>
+															</div>
+															<div class="col-xs-11 no-padding">
+																<div class="form-inline">
+																	<label id="c5" class="choice">จ.
+																		<?php
+																			echo form_input(array(
+																				'id'=>'ans5',
+																				'name'=>'ans5',
+																				'value'=>"",
+																				'type'=>'text',
+																				'class'=>'form-control',
+																				'style'=>'width: 92%;'
+																			));
+																		?>
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="radio">
+															<div class="col-xs-1 no-padding">
+																<label>
+																	<?php
+																		echo form_radio('correct', '6', false,'class="minimal-red"')." ";
+																	?>
+																</label>
+															</div>
+															<div class="col-xs-11 no-padding">
+																<div class="form-inline">
+																	<label id="c6" class="choice">ฉ.
+																		<?php
+																			echo form_input(array(
+																				'id'=>'ans6',
+																				'name'=>'ans6',
+																				'value'=>"",
+																				'type'=>'text',
+																				'class'=>'form-control',
+																				'style'=>'width: 92%;'
+																			));
+																		?>
+																	</label>
+																</div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
 
 							</div>
 						</div>
-						<div class="box-body tab-pane" id="papers">
-							<h3>ชุดข้อสอบ</h3>
-						</div>
-
-
 					</div>
 					<div class="box-footer text-right">
 					<?php
