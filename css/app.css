@@ -481,3 +481,8 @@ input[type=text].date {
 	padding-left: 0;
 	display: block;
 }
+
+#questionsList .clabel {
+	display: inline-block;
+	width: 18px;
+}

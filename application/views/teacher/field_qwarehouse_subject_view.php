@@ -193,9 +193,10 @@ EOL;
 																	?>
 																</label>
 															</div>
-															<div class="col-xs-11 no-padding">
+															<div class="col-xs-11">
 																<div class="form-inline">
-																	<label id="c1" class="choice">ก.
+																	<label id="c1" class="choice">
+																		<span class="clabel">ก.</span>
 																		<?php
 																			echo form_input(array(
 																				'id'=>'ans1',
@@ -218,9 +219,10 @@ EOL;
 																	?>
 																</label>
 															</div>
-															<div class="col-xs-11 no-padding">
+															<div class="col-xs-11">
 																<div class="form-inline">
-																	<label id="c2" class="choice">ข.
+																	<label id="c2" class="choice">
+																		<span class="clabel">ข.</span>
 																		<?php
 																			echo form_input(array(
 																				'id'=>'ans2',
@@ -243,9 +245,10 @@ EOL;
 																	?>
 																</label>
 															</div>
-															<div class="col-xs-11 no-padding">
+															<div class="col-xs-11">
 																<div class="form-inline">
-																	<label id="c3" class="choice">ค.
+																	<label id="c3" class="choice">
+																		<span class="clabel">ค.</span>
 																		<?php
 																			echo form_input(array(
 																				'id'=>'ans3',
@@ -268,9 +271,10 @@ EOL;
 																	?>
 																</label>
 															</div>
-															<div class="col-xs-11 no-padding">
+															<div class="col-xs-11">
 																<div class="form-inline">
-																	<label id="c4" class="choice">ง.
+																	<label id="c4" class="choice">
+																		<span class="clabel">ง.</span>
 																		<?php
 																			echo form_input(array(
 																				'id'=>'ans4',
@@ -293,9 +297,10 @@ EOL;
 																	?>
 																</label>
 															</div>
-															<div class="col-xs-11 no-padding">
+															<div class="col-xs-11">
 																<div class="form-inline">
-																	<label id="c5" class="choice">จ.
+																	<label id="c5" class="choice">
+																		<span class="clabel">จ.</span>
 																		<?php
 																			echo form_input(array(
 																				'id'=>'ans5',
@@ -318,9 +323,10 @@ EOL;
 																	?>
 																</label>
 															</div>
-															<div class="col-xs-11 no-padding">
+															<div class="col-xs-11">
 																<div class="form-inline">
-																	<label id="c6" class="choice">ฉ.
+																	<label id="c6" class="choice">
+																		<span class="clabel">ฉ.</span>
 																		<?php
 																			echo form_input(array(
 																				'id'=>'ans6',
