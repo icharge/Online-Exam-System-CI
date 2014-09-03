@@ -7,3 +7,6 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
+
+vendor/js/plugins/ckeditor/plugins/uploads/*
+!vendor/js/plugins/ckeditor/plugins/uploads/index.html
