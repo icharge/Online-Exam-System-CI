@@ -269,10 +269,10 @@ class Qwarehouse extends CI_Controller {
 		var editor = CKEDITOR.instances[instance];
 		if ( editor ) {
 			editor.on("focus", function (event) {
-				$(".cke_top, .cke_bottom").show();
+				$(".cke_top, .cke_bottom").slideDown(100);
 			});
 			editor.on("blur", function (event) {
-				$(".cke_top, .cke_bottom").hide();
+				$(".cke_top, .cke_bottom").slideUp(100);
 			});
 			editor.on("instanceReady", function (event) {
 				$(".cke_top, .cke_bottom").hide();
@@ -280,6 +280,25 @@ class Qwarehouse extends CI_Controller {
 		}
 	}
 
+	$(".question-type:not(#choice)").hide();
+	$("select#qtype").change(function() {
+		$(".question-type").slideUp();
+		switch($(this).val()) {
+			case "choice":
+				$("#choice").slideDown();
+				break;
+			case "numeric":
+				$("#numeric").slideDown();
+				break;
+			case "boolean":
+				$("#boolean").slideDown();
+				break;
+		}
+	});
+
+	$("#addQuestion").click(function(e) {
+		alert("Clicked");
+	});
 
 ';
 

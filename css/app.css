@@ -482,6 +482,12 @@ input[type=text].date {
 	display: block;
 }
 
+#questionsList label.boolean {
+	padding-left: 0;
+	padding-top: 6px;
+	display: block;
+}
+
 #questionsList .clabel {
 	display: inline-block;
 	width: 18px;
