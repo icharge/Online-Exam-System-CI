@@ -254,11 +254,33 @@ class Qwarehouse extends CI_Controller {
 ';
 
 		$this->questionManage = '
+
 	function applyCKE() {
 		//var qElem = $("#question");
-		CKEDITOR.replace("question");
+		CKEDITOR.replace("question", {
+			customConfig: "config_q.js",
+			extraPlugins: "richcombo,panelbutton,font,justify,colorbutton,uicolor,imageresize",
+			"filebrowserImageUploadUrl": "'.base_url().'vendor/js/plugins/ckeditor/plugins/imgupload.php"
+		});
 	};
 	applyCKE();
+
+	for (instance in CKEDITOR.instances) {
+		var editor = CKEDITOR.instances[instance];
+		if ( editor ) {
+			editor.on("focus", function (event) {
+				$(".cke_top, .cke_bottom").show();
+			});
+			editor.on("blur", function (event) {
+				$(".cke_top, .cke_bottom").hide();
+			});
+			editor.on("instanceReady", function (event) {
+				$(".cke_top, .cke_bottom").hide();
+			});
+		}
+	}
+
+
 ';
 
 		$this->scriptList = array(
