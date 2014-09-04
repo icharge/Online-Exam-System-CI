@@ -469,26 +469,26 @@ input[type=text].date {
 	border-bottom: none;
 }
 
-#questionsList .iradio_minimal-red {
+#newQuestion .iradio_minimal-red {
 	top: 4px;
 }
 
-#questionsList .radio {
+#newQuestion .radio {
 	height: 38px;
 }
 
-#questionsList label.choice {
+#newQuestion label.choice {
 	padding-left: 0;
 	display: block;
 }
 
-#questionsList label.boolean {
+#newQuestion label.boolean {
 	padding-left: 0;
 	padding-top: 6px;
 	display: block;
 }
 
-#questionsList .clabel {
+#newQuestion .clabel {
 	display: inline-block;
 	width: 18px;
 }

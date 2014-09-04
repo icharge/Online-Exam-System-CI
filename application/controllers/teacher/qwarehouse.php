@@ -381,8 +381,6 @@ class Qwarehouse extends CI_Controller {
 			var err = textStatus + ", " + error;
 			console.log("Request Failed: "+err);
 
-
-
 			var jbox = new jBox(\'Modal\', {
 				width: 350,
 				height: 100,
@@ -393,6 +391,15 @@ class Qwarehouse extends CI_Controller {
 			jbox.open();
 			btnAddState("normal");
 		});
+	});
+
+	// Select Chapter for Question
+	$("#chapterListq .list-group-item").click(function(e) {
+		$(this).siblings().removeClass("active");
+		$(this).addClass("active");
+
+		var chapter_id = $(this).attr("data-chapter-id");
+
 	});
 
 ';
@@ -654,6 +661,24 @@ class Qwarehouse extends CI_Controller {
 						throw new Exception("No question type", 1);
 
 						break;
+				}
+				$insert_trans = $this->qwh->addQuestion($chapter_id, $questionData, $questionDataDetail);
+				if ($insert_trans['errno'] == 0)
+				{
+					echo json_encode(array(
+						'id' => $insert_trans['id'],
+						'error' => "",
+						'errno' => ""
+					));
+				}
+				else
+				{
+					// Error transaction !
+					echo json_encode(array(
+						'id' => '',
+						'error' => "Cant insert",
+						'errno' => $insert_trans['errno']
+					));
 				}
 
 				break;

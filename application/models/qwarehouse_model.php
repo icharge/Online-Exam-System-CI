@@ -175,7 +175,53 @@ class Qwarehouse_model extends CI_Model {
 
 	function addQuestion($chapter_id, $dataQuestion, $dataQuestionDetail)
 	{
+		$hasError = false;
+		$newqdid = -1;
+		$dataQuestion['chapter_id'] = $chapter_id;
+		$this->db->trans_begin();
+			$qins = $this->db->insert('Questions', $dataQuestion);
+			$newid = $this->db->insert_id();
+			$errno = $this->db->_error_number();
 
+			$dataQuestionDetail['question_id'] = $newid;
+
+			switch ($dataQuestion['type']) {
+				case 'choice':
+					$qdins = $this->db->insert('Question_choice', $dataQuestionDetail);
+					$newqdid = $this->db->insert_id();
+					break;
+
+				case 'numeric':
+					$qdins = $this->db->insert('Question_numerical', $dataQuestionDetail);
+					$newqdid = $this->db->insert_id();
+					break;
+
+				case 'boolean':
+					$qdins = $this->db->insert('Question_boolean', $dataQuestionDetail);
+					$newqdid = $this->db->insert_id();
+					break;
+
+				case 'matching': // No Implement code !!!!
+					$qdins = $this->db->insert('Question_matching', $dataQuestionDetail);
+					$newqdid = $this->db->insert_id();
+					break;
+
+				default:
+					$hasError = true;
+					$this->db->trans_rollback();
+					return array(
+						'result' => 'failed',
+						'errno' => $errno
+					);
+					break;
+			}
+		if (! $hasError) $this->db->trans_commit();
+
+		return array(
+			'result' => 'completed',
+			'id' => $newqdid,
+			'errno' => $errno
+		);
 	}
 
 }

@@ -145,11 +145,11 @@ EOL;
 								</div>
 								<div class="col-sm-8">
 									<h4>โจทย์คำถาม</h4>
-									<div id="questionsList">
+									<div id="newQuestion">
 										<div class="box nav-tabs-custom question-item">
 											<ul class="nav nav-tabs">
 												<li class="pull-left header">
-													<i class="fa fa-th"></i> New question
+													<i class="fa fa-th"></i> เพิ่มโจทย์ใหม่
 												</li>
 												<li class="pull-right">
 													<a href="#" class="text-muted"><i class="fa fa-gear"></i></a>
@@ -158,7 +158,7 @@ EOL;
 											<div class="box-body">
 												<!-- Form wrapper -->
 												<form id="qnew" name="qnew" class="form-inline form-question-item">
-													<div class="form-group<?php if(form_error('question')) echo ' has-error';?>">
+													<div class="form-group">
 														<?php
 														echo form_label('โจทย์ <span class="text-danger">*</span>', 'question');
 														echo form_textarea('question', "", 'id="question" class="form-control"');
@@ -169,7 +169,6 @@ EOL;
 														// 	'type'=>'text',
 														// 	'class'=>'form-control',
 														// 	));
-														echo form_error('question', '<span class="label label-danger">', '</span>');
 														?>
 													</div>
 													<div class="form-group">
@@ -183,7 +182,7 @@ EOL;
 														?>
 													</div>
 													<div id="choice" class="question-type">
-														<div class="form-group<?php if(form_error('correct')) echo ' has-error';?>">
+														<div class="form-group">
 															<?php
 															echo form_label('ตัวเลือก <span class="text-danger">*</span>', 'correct');
 															?>
@@ -360,7 +359,7 @@ EOL;
 														</div>
 													</div>
 													<div id="boolean" class="question-type">
-														<div class="form-group<?php if(form_error('correct')) echo ' has-error';?>">
+														<div class="form-group">
 															<?php
 															echo form_label('ถูก / ผิด <span class="text-danger">*</span>', 'correct');
 															?>
@@ -412,6 +411,9 @@ EOL;
 											?>
 											</div>
 										</div>
+									</div>
+									<div id="questionList">
+
 									</div>
 								</div>
 							</div>
