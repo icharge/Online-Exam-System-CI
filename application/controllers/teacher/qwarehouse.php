@@ -58,8 +58,6 @@ class Qwarehouse extends CI_Controller {
 		}
 		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/addChapter/").'/?ts="+Date.now();
 		var myData = {"subject_id":"'.$this->uri->segment(4).'","chapterName":$.trim($(\'#chapterName\').val())};
-		//myData.push({"name":"subject_id", "value":"'.$this->uri->segment(4).'"});
-		//myData.push({"name":"chapterName", "value":$.trim($(\'#chapterName\').val())});
 
 		$.ajax({
 			type: "POST",
@@ -276,6 +274,7 @@ class Qwarehouse extends CI_Controller {
 			});
 			editor.on("instanceReady", function (event) {
 				$(".cke_top, .cke_bottom").hide();
+				$(".cke_contents").css("height","126px");
 			});
 		}
 	}
@@ -296,8 +295,103 @@ class Qwarehouse extends CI_Controller {
 		}
 	});
 
+	function btnAddState(s) {
+		var btn = $("#addQuestion");
+		if (s == "load")
+		{
+			btn.removeClass("btn-primary").attr("disabled","disabled")
+			.find("i").removeClass("fa-plus").addClass("fa-spinner fa-spin");
+		}
+		else if(s == "normal")
+		{
+			btn.addClass("btn-primary").removeAttr("disabled")
+			.find("i").removeClass("fa-spinner fa-spin").addClass("fa-plus");
+		}
+	};
+
 	$("#addQuestion").click(function(e) {
-		alert("Clicked");
+		btnAddState("load");
+		if (!Date.now) {
+			Date.now = function() { return new Date().getTime(); };
+		}
+		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/addQuestion/").'/?ts="+Date.now();
+		var chapter_id = $("#chapterListq").find(".active").attr("data-chapter-id");
+		if (chapter_id == undefined)
+		{
+			var jbox = new jBox(\'Modal\', {
+				width: 350,
+				height: 100,
+				title: \'ข้อผิดพลาด\',
+				overlay: true,
+				content: "ต้องเลือก Chapter ก่อน"
+			});
+			jbox.open();
+			btnAddState("normal");
+			return false;
+		}
+
+		var questionData = encodeURIComponent($.trim(CKEDITOR.instances.question.getData()));
+		var qtype = encodeURIComponent($.trim($("#qtype").val()));
+		var myData = "chapter_id=" + chapter_id + "&qtype=" + qtype + "&question=" + questionData;
+		switch (qtype) {
+			case "choice":
+				myData += "&correct=" + encodeURIComponent($.trim($("input[name=correct]:checked").val()));
+				myData += "&ans1="+encodeURIComponent($.trim($("#ans1").val()))+"&ans2="+encodeURIComponent($.trim($("#ans2").val()))+"&ans3="+encodeURIComponent($.trim($("#ans3").val()))+'.
+										'"&ans4="+encodeURIComponent($.trim($("#ans4").val()))+"&ans5="+encodeURIComponent($.trim($("#ans5").val()))+"&ans6="+encodeURIComponent($.trim($("#ans6").val()));
+
+				break;
+			case "numeric":
+				myData += "&correct=" + encodeURIComponent($.trim($("#correct-numeric").val()));
+				break;
+			case "boolean":
+				myData += "&correct=" + encodeURIComponent($.trim($("input[name=correct]:checked").val()));
+				break;
+		}
+
+		$.ajax({
+			type: "POST",
+			url: oxsysAPI,
+			data: myData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json"
+		})
+		.done(function(data) {
+			console.log("sent " + myData + " to " + oxsysAPI);
+			console.log("received : " + data.return);
+
+			if (data.error != "") {
+
+				var jbox = new jBox(\'Modal\', {
+					width: 350,
+					height: 100,
+					title: \'ข้อผิดพลาด\',
+					overlay: true,
+					content: data.error,
+				});
+				jbox.open();
+			}
+			else
+			{
+				console.log("sent");
+			}
+			btnAddState("normal");
+		})
+		.fail(function(jqxhr, textStatus, error) {
+			var err = textStatus + ", " + error;
+			console.log("Request Failed: "+err);
+
+
+
+			var jbox = new jBox(\'Modal\', {
+				width: 350,
+				height: 100,
+				title: \'ข้อผิดพลาด\',
+				overlay: true,
+				content: \'ไม่สามารถเพิ่มบทได้ กรุณาตรวจสอบความถูกต้อง\',
+			});
+			jbox.open();
+			btnAddState("normal");
+		});
 	});
 
 ';

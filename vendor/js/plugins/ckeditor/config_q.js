@@ -35,8 +35,6 @@ CKEDITOR.editorConfig = function( config ) {
 	// Lang
 	config.language = 'th';
 
-	config.heigth = '128px';
-
 	config.font_names = 'Arial/Arial, Helvetica, sans-serif;' +
 	'Angsana New/Angsana New, Angsana UPC;' +
 	'Comic Sans MS/Comic Sans MS, cursive;' +
