@@ -282,6 +282,7 @@ class Qwarehouse extends CI_Controller {
 	$(".question-type:not(#choice)").hide();
 	$("select#qtype").change(function() {
 		$(".question-type").slideUp();
+		$("input[type=radio]").iCheck("uncheck")
 		switch($(this).val()) {
 			case "choice":
 				$("#choice").slideDown();
@@ -336,8 +337,8 @@ class Qwarehouse extends CI_Controller {
 		switch (qtype) {
 			case "choice":
 				myData += "&correct=" + encodeURIComponent($.trim($("input[name=correct]:checked").val()));
-				myData += "&ans1="+encodeURIComponent($.trim($("#ans1").val()))+"&ans2="+encodeURIComponent($.trim($("#ans2").val()))+"&ans3="+encodeURIComponent($.trim($("#ans3").val()))+'.
-										'"&ans4="+encodeURIComponent($.trim($("#ans4").val()))+"&ans5="+encodeURIComponent($.trim($("#ans5").val()))+"&ans6="+encodeURIComponent($.trim($("#ans6").val()));
+				myData += "&choice1="+encodeURIComponent($.trim($("#choice1").val()))+"&choice2="+encodeURIComponent($.trim($("#choice2").val()))+"&choice3="+encodeURIComponent($.trim($("#choice3").val()))+'.
+										'"&choice4="+encodeURIComponent($.trim($("#choice4").val()))+"&choice5="+encodeURIComponent($.trim($("#choice5").val()))+"&choice6="+encodeURIComponent($.trim($("#choice6").val()));
 
 				break;
 			case "numeric":
@@ -363,7 +364,7 @@ class Qwarehouse extends CI_Controller {
 
 				var jbox = new jBox(\'Modal\', {
 					width: 350,
-					height: 100,
+					//height: 100,
 					title: \'ข้อผิดพลาด\',
 					overlay: true,
 					content: data.error,
@@ -387,7 +388,7 @@ class Qwarehouse extends CI_Controller {
 				height: 100,
 				title: \'ข้อผิดพลาด\',
 				overlay: true,
-				content: \'ไม่สามารถเพิ่มบทได้ กรุณาตรวจสอบความถูกต้อง\',
+				content: error,
 			});
 			jbox.open();
 			btnAddState("normal");
@@ -502,6 +503,158 @@ class Qwarehouse extends CI_Controller {
 				}
 				else
 					echo json_encode(array('error' => "No Chapter_id"));
+
+				break;
+
+			// Questions
+			case 'addQuestion':
+				$chapter_id = trim($this->input->post('chapter_id'));
+				$question_type = trim($this->input->post('qtype'));
+				$answer = trim($this->input->post('correct'));
+				$choices[0] = trim($this->input->post('choice1'));
+				$choices[1] = trim($this->input->post('choice2'));
+				$choices[2] = trim($this->input->post('choice3'));
+				$choices[3] = trim($this->input->post('choice4'));
+				$choices[4] = trim($this->input->post('choice5'));
+				$choices[5] = trim($this->input->post('choice6'));
+
+				// HTMLPurifier (Question)
+				require_once 'application/libraries/htmlpurifier/HTMLPurifier.auto.php';
+				$purifier = new HTMLPurifier();
+				$question = $purifier->purify($this->input->post('question'));
+
+
+				// Self Validating Input Data
+				$msgerr = "ไม่สามารถเพิ่มได้ เนื่องจากข้อผิดพลาดังต่อไปนี้<br><ul>";
+				$errObj = array();
+
+				if ($chapter_id == "" || !is_numeric($chapter_id))
+				{
+					$msgerr .= "<li>ไม่พบข้อมูล Chapter ID หรือไม่ถูกต้อง</li>";
+				}
+				if ($question_type == "" || ( ! in_array(
+																					$question_type,
+																					array('choice','numeric','boolean','matching')
+																				)
+																		)
+					)
+				{
+					$msgerr .= "<li>ไม่พบข้อมูล Question type หรือไม่ถูกต้อง</li>";
+					$errObj['qtype'] = 1;
+				}
+				if (trim(strip_tags($question)) == "")
+				{
+					$msgerr .= "<li>ต้องมีโจทย์คำถามสำหรับผู้ทำข้อสอบ</li>";
+					$errObj['question'] = 1;
+				}
+				if ($answer == "")
+				{
+					$msgerr .= "<li>ต้องมี คำตอบที่ถูกต้อง</li>";
+					$errObj['correct'] = 1;
+				}
+
+				switch ($question_type) {
+					case 'choice':
+						if (count(array_filter($choices)) < 2)
+						{
+							$msgerr .= "<li>ปรนัย : ต้องมีตัวเลือกอย่างน้อย 2 ข้อ</li>";
+							$errObj['choices'] = 1;
+						}
+						if ($answer != "" || is_numeric($answer))
+						{
+							if ($choices[intval($answer) - 1] == "" || !isset($choices[intval($answer) - 1]))
+							{
+								$msgerr .= "<li>ปรนัย : ตัวเลือกที่ถูกต้อง ไม่ได้ใส่คำตอบ !</li>";
+								$errObj['choices'] = 1;
+								$errObj['choice'.$answer] = 1;
+							}
+						}
+						else
+						{
+							$msgerr .= "<li>ปรนัย : ต้องเลือกคำตอบที่ถูกต้อง</li>";
+							$errObj['choices'] = 1;
+						}
+						break;
+					case 'numeric':
+						// is_numeric() ????
+						// $answer == ""
+						if (!is_numeric($answer))
+						{
+							$msgerr .= "<li>เติมตัวเลข : ต้องระบุคำตอบที่ถูกต้องด้วยตัวเลข</li>";
+							$errObj['correct'] = 1;
+						}
+						break;
+					case 'boolean':
+						if ( !in_array(strtolower($answer), array('t','f')) )
+						{
+							$msgerr .= "<li>ถูก / ผิด : เลือกคำตอบที่ถูกต้องเป็น ถูก หรือ ผิด</li>";
+							$errObj['correct'] = 1;
+						}
+						break;
+
+					default:
+						$msgerr .= "<li>เงื่อนไข Question type ไม่ถูกต้อง</li>";
+						break;
+				}
+
+				$msgerr .= "</ul>";
+
+				if ($msgerr != "ไม่สามารถเพิ่มได้ เนื่องจากข้อผิดพลาดังต่อไปนี้<br><ul></ul>")
+				{
+					echo json_encode(array(
+						'error' => $msgerr,
+						'objects' => $errObj
+					));
+					die();
+				}
+				// END Self Validating Data
+
+
+				$questionData = array(
+					'question' => $question,
+					'type' => $question_type,
+					'status' => "active",
+					'chapter_id' => $chapter_id
+				);
+				$questionDataDetail = array();
+				switch ($question_type) {
+					case 'choice':
+						$questionDataDetail = array(
+							'choice1' => $choices[0],
+							'choice2' => $choices[1],
+							'choice3' => $choices[2],
+							'choice4' => $choices[3],
+							'choice5' => $choices[4],
+							'choice6' => $choices[5],
+							'answer' => $answer,
+							'question_id' => ""
+						);
+						break;
+
+					case 'numeric':
+						$questionDataDetail = array(
+							'answer' => $answer,
+							'question_id' => ""
+						);
+						break;
+
+					case 'boolean':
+						$questionDataDetail = array(
+							'answer' => $answer,
+							'question_id' => ""
+						);
+						break;
+
+					// No Implement yet
+					case 'matching':
+						throw new Exception("Case No implement yet", 1);
+						break;
+
+					default:
+						throw new Exception("No question type", 1);
+
+						break;
+				}
 
 				break;
 

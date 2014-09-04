@@ -173,6 +173,11 @@ class Qwarehouse_model extends CI_Model {
 		return $this->db->_error_number();
 	}
 
+	function addQuestion($chapter_id, $dataQuestion, $dataQuestionDetail)
+	{
+
+	}
+
 }
 
 /* End of file qwarehouse_model.php */

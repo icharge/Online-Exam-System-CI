@@ -173,11 +173,11 @@ EOL;
 														?>
 													</div>
 													<div class="form-group">
-														<?php echo form_label('ประเภท', 'qtype');
+														<?php echo form_label('ประเภทข้อสอบ', 'qtype');
 															$options = array(
-																'choice' => "เลือกตอบ",
-																'numeric' => "ตอบตัวเลข",
-																'boolean' => "ถูก-ผิด",
+																'choice' => "ปรนัย",
+																'numeric' => "เติมคำตอบด้วยตัวเลข",
+																'boolean' => "ถูก / ผิด",
 															);
 															echo form_dropdown('qtype', $options, 'default', 'id="qtype" class="form-control"');
 														?>
@@ -201,8 +201,8 @@ EOL;
 																			<span class="clabel">ก.</span>
 																			<?php
 																				echo form_input(array(
-																					'id'=>'ans1',
-																					'name'=>'ans1',
+																					'id'=>'choice1',
+																					'name'=>'choice1',
 																					'value'=>"",
 																					'type'=>'text',
 																					'class'=>'form-control',
@@ -227,8 +227,8 @@ EOL;
 																			<span class="clabel">ข.</span>
 																			<?php
 																				echo form_input(array(
-																					'id'=>'ans2',
-																					'name'=>'ans2',
+																					'id'=>'choice2',
+																					'name'=>'choice2',
 																					'value'=>"",
 																					'type'=>'text',
 																					'class'=>'form-control',
@@ -253,8 +253,8 @@ EOL;
 																			<span class="clabel">ค.</span>
 																			<?php
 																				echo form_input(array(
-																					'id'=>'ans3',
-																					'name'=>'ans3',
+																					'id'=>'choice3',
+																					'name'=>'choice3',
 																					'value'=>"",
 																					'type'=>'text',
 																					'class'=>'form-control',
@@ -279,8 +279,8 @@ EOL;
 																			<span class="clabel">ง.</span>
 																			<?php
 																				echo form_input(array(
-																					'id'=>'ans4',
-																					'name'=>'ans4',
+																					'id'=>'choice4',
+																					'name'=>'choice4',
 																					'value'=>"",
 																					'type'=>'text',
 																					'class'=>'form-control',
@@ -305,8 +305,8 @@ EOL;
 																			<span class="clabel">จ.</span>
 																			<?php
 																				echo form_input(array(
-																					'id'=>'ans5',
-																					'name'=>'ans5',
+																					'id'=>'choice5',
+																					'name'=>'choice5',
 																					'value'=>"",
 																					'type'=>'text',
 																					'class'=>'form-control',
@@ -331,8 +331,8 @@ EOL;
 																			<span class="clabel">ฉ.</span>
 																			<?php
 																				echo form_input(array(
-																					'id'=>'ans6',
-																					'name'=>'ans6',
+																					'id'=>'choice6',
+																					'name'=>'choice6',
 																					'value'=>"",
 																					'type'=>'text',
 																					'class'=>'form-control',
@@ -362,7 +362,7 @@ EOL;
 													<div id="boolean" class="question-type">
 														<div class="form-group<?php if(form_error('correct')) echo ' has-error';?>">
 															<?php
-															echo form_label('ถูกผิด <span class="text-danger">*</span>', 'correct');
+															echo form_label('ถูก / ผิด <span class="text-danger">*</span>', 'correct');
 															?>
 															<div class="radio">
 																<div class="col-xs-1 no-padding">

@@ -132,7 +132,13 @@ class Subjects extends CI_Controller {
 				$subjectData['code'] = $this->input->post('code');
 				$subjectData['name'] = $this->input->post('name');
 				$subjectData['shortname'] = $this->input->post('shortname');
-				$subjectData['description'] = $this->input->post('description');
+
+				// HTMLPurifier
+				require_once 'application/libraries/htmlpurifier/HTMLPurifier.auto.php';
+				$purifier = new HTMLPurifier();
+				$clean_html = $purifier->purify($this->input->post('description'));
+
+				$subjectData['description'] = $clean_html;
 
 				if ($this->subjects->addSubject($subjectData))
 				{
