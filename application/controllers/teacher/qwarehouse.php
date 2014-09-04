@@ -525,7 +525,7 @@ class Qwarehouse extends CI_Controller {
 
 
 				// Self Validating Input Data
-				$msgerr = "ไม่สามารถเพิ่มได้ เนื่องจากข้อผิดพลาดังต่อไปนี้<br><ul>";
+				$msgerr = "ไม่สามารถเพิ่มได้ เนื่องจากข้อผิดพลาดดังต่อไปนี้<br><ul>";
 				$errObj = array();
 
 				if ($chapter_id == "" || !is_numeric($chapter_id))
@@ -599,7 +599,7 @@ class Qwarehouse extends CI_Controller {
 
 				$msgerr .= "</ul>";
 
-				if ($msgerr != "ไม่สามารถเพิ่มได้ เนื่องจากข้อผิดพลาดังต่อไปนี้<br><ul></ul>")
+				if ($msgerr != "ไม่สามารถเพิ่มได้ เนื่องจากข้อผิดพลาดดังต่อไปนี้<br><ul></ul>")
 				{
 					echo json_encode(array(
 						'error' => $msgerr,
