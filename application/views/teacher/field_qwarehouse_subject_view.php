@@ -134,7 +134,7 @@ EOL;
 									<ul id="chapterListq" class="list-group">
 										<?php
 											foreach ($chapterList as $item) {
-												echo "<a class=\"list-group-item\" data-chapter-id=\"$item[chapter_id]\">
+												echo "<a href=\"#\" class=\"list-group-item\" data-chapter-id=\"$item[chapter_id]\">
 												<span class=\"badge\"></span>
 												<h4 class=\"list-group-item-heading\">$item[name]</h4>
 												<div class=\"item-group-item-text\">$item[description]</div>
@@ -149,11 +149,11 @@ EOL;
 										<div class="box nav-tabs-custom question-item">
 											<ul class="nav nav-tabs">
 												<li class="pull-left header">
-													<i class="fa fa-th"></i> เพิ่มโจทย์ใหม่
+													<i class="fa fa-clipboard"></i> เพิ่มโจทย์ใหม่
 												</li>
-												<li class="pull-right">
+												<!-- <li class="pull-right">
 													<a href="#" class="text-muted"><i class="fa fa-gear"></i></a>
-												</li>
+												</li> -->
 											</ul>
 											<div class="box-body">
 												<!-- Form wrapper -->
@@ -401,6 +401,14 @@ EOL;
 											</div>
 											<div class="box-footer text-right">
 											<?php
+												$button = array(
+													'id' => 'closeNewQuestion',
+													'type' => 'button',
+													'content' => 'ยกเลิก',
+													'class' => 'btn btn-default'
+												);
+												echo form_button($button);
+
 												$button = array(
 													'id' => 'addQuestion',
 													'type' => 'button',

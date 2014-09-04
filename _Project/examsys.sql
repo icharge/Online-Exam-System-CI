@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 27, 2014 at 08:56 AM
+-- Generation Time: Sep 04, 2014 at 08:57 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -82,23 +82,24 @@ CREATE TABLE IF NOT EXISTS `Branch` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Chapter`
+-- Table structure for table `chapter`
 --
 
-CREATE TABLE IF NOT EXISTS `Chapter` (
-  `chapter_id` int(7) NOT NULL,
+CREATE TABLE IF NOT EXISTS `chapter` (
+  `chapter_id` int(7) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `description` text,
   `subject_id` int(5) NOT NULL,
   PRIMARY KEY (`chapter_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `Chapter`
+-- Dumping data for table `chapter`
 --
 
-INSERT INTO `Chapter` (`chapter_id`, `name`, `description`, `subject_id`) VALUES
-(1, 'ตอนที่ 1', NULL, 1);
+INSERT INTO `chapter` (`chapter_id`, `name`, `description`, `subject_id`) VALUES
+(4, 'บทที่ 1', NULL, 1),
+(5, 'บทที่ 2', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,9 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('b31d104ef629bb2bdd0e2bfe221430dd', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1409120057, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
+('50a0d52ff3a34df5f336b966b14ba4a3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1409824850, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('a5d13e9730a00155ae1f71cce55d0ff4', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1409833002, ''),
+('b5800e57d758125920cba4a016f6a541', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1409857012, '');
 
 -- --------------------------------------------------------
 
@@ -195,17 +198,30 @@ CREATE TABLE IF NOT EXISTS `log_usage` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Question`
+-- Table structure for table `Questions`
 --
 
-CREATE TABLE IF NOT EXISTS `Question` (
-  `question_id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `Questions` (
+  `question_id` int(10) NOT NULL AUTO_INCREMENT,
   `question` text NOT NULL,
   `type` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'active',
   `chapter_id` int(7) NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `Questions`
+--
+
+INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `chapter_id`) VALUES
+(4, '<p><span style="font-size:28px;"><u><strong>Test</strong></u></span></p>', 'choice', 'active', 4),
+(6, '<p><span style="font-size:28px;"><u><strong>Test2</strong></u></span></p>', 'choice', 'active', 4),
+(7, '<p><span style="font-size:28px;"><u><strong>Test3</strong></u></span></p>', 'choice', 'active', 4),
+(8, '<p><span style="font-size:28px;"><strong><u>ทดสอบ 4</u></strong></span></p>', 'numeric', 'active', 4),
+(9, '<p><span style="font-size:28px;"><strong><u>ทดสอบ 5</u></strong></span></p>', 'boolean', 'active', 4),
+(10, '<p><span style="font-size:28px;"><strong><u>ทดสอบ 5</u></strong></span></p>', 'boolean', 'active', 4),
+(11, '<p><strong>ABC</strong></p>', 'boolean', 'active', 5);
 
 -- --------------------------------------------------------
 
@@ -214,11 +230,20 @@ CREATE TABLE IF NOT EXISTS `Question` (
 --
 
 CREATE TABLE IF NOT EXISTS `Question_boolean` (
-  `id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `answer` varchar(20) NOT NULL,
   `question_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `Question_boolean`
+--
+
+INSERT INTO `Question_boolean` (`id`, `answer`, `question_id`) VALUES
+(1, 't', 9),
+(2, 'f', 10),
+(3, 't', 11);
 
 -- --------------------------------------------------------
 
@@ -227,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `Question_boolean` (
 --
 
 CREATE TABLE IF NOT EXISTS `Question_choice` (
-  `id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `choice1` text NOT NULL,
   `choice2` text NOT NULL,
   `choice3` text,
@@ -237,7 +262,16 @@ CREATE TABLE IF NOT EXISTS `Question_choice` (
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `Question_choice`
+--
+
+INSERT INTO `Question_choice` (`id`, `choice1`, `choice2`, `choice3`, `choice4`, `choice5`, `choice6`, `answer`, `question_id`) VALUES
+(1, 'AAA', 'BBB', 'CCC', 'DDD', '', '', '2', 4),
+(2, 'AAA', 'BBB', 'CCC', 'DDD', '', '', '2', 6),
+(3, 'AAA', 'BBB', 'CCC', 'DDD', '', '', '2', 7);
 
 -- --------------------------------------------------------
 
@@ -246,11 +280,18 @@ CREATE TABLE IF NOT EXISTS `Question_choice` (
 --
 
 CREATE TABLE IF NOT EXISTS `Question_numerical` (
-  `id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `Question_numerical`
+--
+
+INSERT INTO `Question_numerical` (`id`, `answer`, `question_id`) VALUES
+(1, '2.5', 8);
 
 -- --------------------------------------------------------
 
@@ -327,6 +368,7 @@ CREATE TABLE IF NOT EXISTS `Student_Enroll` (
 
 INSERT INTO `Student_Enroll` (`stu_id`, `course_id`) VALUES
 ('54310104', '1'),
+('57700197', '1'),
 ('57700197', '3'),
 ('58700115', '3');
 

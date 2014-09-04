@@ -12,6 +12,10 @@ button.btn.dropdown-toggle.selectpicker {
 	border-color: #ccc;
 }
 
+.box-footer .btn {
+	margin-left: 8px;
+}
+
 .text-justify {
 	text-align: justify;
 	text-justify: newspaper;
@@ -491,4 +495,13 @@ input[type=text].date {
 #newQuestion .clabel {
 	display: inline-block;
 	width: 18px;
+}
+
+#newQuestion .nav.nav-tabs,
+#newQuestion .nav.nav-tabs > * {
+	cursor: pointer;
+}
+
+.cke_combo__font .cke_combo_text {
+	width: 130px !important;
 }

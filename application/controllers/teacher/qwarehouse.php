@@ -252,6 +252,23 @@ class Qwarehouse extends CI_Controller {
 ';
 
 		$this->questionManage = '
+	function clearInput() {
+		$("#newQuestion input[type=text]").val("");
+		$("#newQuestion select#qtype").selectpicker("val", "choice");
+		$("#newQuestion input[type=radio]").iCheck("uncheck");
+		CKEDITOR.instances.question.setData("");
+	};
+
+	$("#newQuestion .box-body, #newQuestion .box-footer").hide();
+
+	$("#newQuestion .nav-tabs").click(function(e){
+		$("#newQuestion .box-body, #newQuestion .box-footer").slideDown();
+	});
+
+	$("#closeNewQuestion").click(function(e) {
+		clearInput();
+		$("#newQuestion .box-body, #newQuestion .box-footer").slideUp();
+	});
 
 	function applyCKE() {
 		//var qElem = $("#question");
@@ -376,6 +393,8 @@ class Qwarehouse extends CI_Controller {
 				console.log("sent");
 			}
 			btnAddState("normal");
+			clearInput();
+			$("#newQuestion .box-body, #newQuestion .box-footer").slideUp();
 		})
 		.fail(function(jqxhr, textStatus, error) {
 			var err = textStatus + ", " + error;
@@ -395,6 +414,7 @@ class Qwarehouse extends CI_Controller {
 
 	// Select Chapter for Question
 	$("#chapterListq .list-group-item").click(function(e) {
+		e.preventDefault();
 		$(this).siblings().removeClass("active");
 		$(this).addClass("active");
 
