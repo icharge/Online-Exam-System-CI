@@ -146,7 +146,7 @@ EOL;
 								<div class="col-sm-8">
 									<h4>โจทย์คำถาม</h4>
 									<div id="newQuestion">
-										<div class="box nav-tabs-custom question-item">
+										<div class="box box-warning nav-tabs-custom question-item">
 											<ul class="nav nav-tabs">
 												<li class="pull-left header">
 													<i class="fa fa-clipboard"></i> เพิ่มโจทย์ใหม่
@@ -421,7 +421,9 @@ EOL;
 										</div>
 									</div>
 									<div id="questionList">
+										<?php
 
+										?>
 									</div>
 								</div>
 							</div>

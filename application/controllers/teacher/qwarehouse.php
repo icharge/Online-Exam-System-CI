@@ -391,10 +391,11 @@ class Qwarehouse extends CI_Controller {
 			else
 			{
 				console.log("sent");
+				clearInput();
+				$("#newQuestion .box-body, #newQuestion .box-footer").slideUp();
 			}
 			btnAddState("normal");
-			clearInput();
-			$("#newQuestion .box-body, #newQuestion .box-footer").slideUp();
+
 		})
 		.fail(function(jqxhr, textStatus, error) {
 			var err = textStatus + ", " + error;
