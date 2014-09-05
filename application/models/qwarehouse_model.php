@@ -184,7 +184,6 @@ class Qwarehouse_model extends CI_Model {
 			$errno = $this->db->_error_number();
 
 			$dataQuestionDetail['question_id'] = $newid;
-
 			switch ($dataQuestion['type']) {
 				case 'choice':
 					$qdins = $this->db->insert('Question_choice', $dataQuestionDetail);
@@ -216,15 +215,14 @@ class Qwarehouse_model extends CI_Model {
 					break;
 			}
 		if (! $hasError) $this->db->trans_commit();
-
 		return array(
 			'result' => 'completed',
-			'id' => $newqdid,
+			'id' => $newid,
 			'errno' => $errno
 		);
 	}
 
-	function QuestionList($keyword='', $perpage=0, $offset=0)
+	function QuestionList($keyword='',$chapter_id, $perpage=0, $offset=0)
 	{
 		if ($perpage=='') $perpage=0;
 		if ($offset=='') $offset=0;
@@ -232,10 +230,11 @@ class Qwarehouse_model extends CI_Model {
 		settype($perpage, "integer");
 
 		if ($perpage > 0) $this->db->limit($perpage, $offset);
+		$this->db->order_by('question_id','desc');
 		$query = $this->db
 			// ->select($fields)
-			->like("CONCAT(code,name,shortname,description)",$keyword,'both')
-			->get('')
+			->like("CONCAT(question)",$keyword,'both')
+			->get_where('question_list', array('chapter_id'=>$chapter_id))
 			->result_array();
 			// die($this->db->last_query());
 		return $query;

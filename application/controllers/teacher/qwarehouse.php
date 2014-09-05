@@ -350,7 +350,7 @@ class Qwarehouse extends CI_Controller {
 
 		var questionData = encodeURIComponent($.trim(CKEDITOR.instances.question.getData()));
 		var qtype = encodeURIComponent($.trim($("#qtype").val()));
-		var myData = "chapter_id=" + chapter_id + "&qtype=" + qtype + "&question=" + questionData;
+		var myData = "chapter_id=" + chapter_id + "&qtype=" + qtype + "&question=" + questionData + "&chapter_name=" + $("#chapterListq").find(".active").text();
 		switch (qtype) {
 			case "choice":
 				myData += "&correct=" + encodeURIComponent($.trim($("input[name=correct]:checked").val()));
@@ -392,7 +392,11 @@ class Qwarehouse extends CI_Controller {
 			{
 				console.log("sent");
 				clearInput();
+				$(".question-notfound").remove();
 				$("#newQuestion .box-body, #newQuestion .box-footer").slideUp();
+				var respHtml = $(data.html);
+				$("#questionList").prepend(respHtml);
+				respHtml.hide().slideDown();
 			}
 			btnAddState("normal");
 
@@ -419,8 +423,39 @@ class Qwarehouse extends CI_Controller {
 		$(this).siblings().removeClass("active");
 		$(this).addClass("active");
 
+		$(".questionLoading").slideDown();
+		$("#questionList").slideUp();
 		var chapter_id = $(this).attr("data-chapter-id");
+		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/getQuestionList/").'/?ts="+Date.now();
+		var myData = "chapter_id="+chapter_id;
+		$.ajax({
+			type: "POST",
+			url: oxsysAPI,
+			data: myData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json"
+		})
+		.done(function(data) {
+			console.log("sent " + myData + " to " + oxsysAPI);
+			console.log("received : " + data.return);
+			console.log("sent");
+			$("#questionList").html(data.html).slideDown();
+			$(".questionLoading").slideUp();
+		})
+		.fail(function(jqxhr, textStatus, error) {
+			var err = textStatus + ", " + error;
+			console.log("Request Failed: "+err);
 
+			var jbox = new jBox(\'Modal\', {
+				width: 350,
+				height: 100,
+				title: \'ข้อผิดพลาด\',
+				overlay: true,
+				content: error,
+			});
+			jbox.open();
+			$(".questionLoading").slideUp();
+		});
 	});
 
 ';
@@ -686,8 +721,38 @@ class Qwarehouse extends CI_Controller {
 				$insert_trans = $this->qwh->addQuestion($chapter_id, $questionData, $questionDataDetail);
 				if ($insert_trans['errno'] == 0)
 				{
+
+					$data = array_merge($questionData, $questionDataDetail);
+					$data['question_id'] = $insert_trans['id'];
+					$data['chapter_name'] = $this->input->post('chapter_name');
+					switch ($question_type) {
+						case 'choice':
+							$data['answer_choice'] = $data['answer'];
+							break;
+
+						case 'numeric':
+							$data['answer_numeric'] = $data['answer'];
+							break;
+
+						case 'boolean':
+							$data['answer_boolean'] = $data['answer'];
+							break;
+
+						// No Implement yet
+						case 'matching':
+							throw new Exception("Case No implement yet", 1);
+							break;
+
+						default:
+							throw new Exception("No question type", 1);
+							break;
+					}
+					// var_dump($data);
+					// die();
+					$html = $this->load->view('teacher/question_item_view', $data, true);
 					echo json_encode(array(
 						'id' => $insert_trans['id'],
+						'html' => $html,
 						'error' => "",
 						'errno' => ""
 					));
@@ -702,6 +767,32 @@ class Qwarehouse extends CI_Controller {
 					));
 				}
 
+				break;
+
+			case 'getQuestionList':
+				$chapter_id = $this->input->post('chapter_id');
+				$question_id = $this->input->post('question_id');
+				$questionList = $this->qwh->QuestionList('',$chapter_id);
+				if (!empty($questionList))
+				{
+					$html = "";
+					foreach ($questionList as $row) {
+						$html .= $this->load->view('teacher/question_item_view', $row, true);
+					}
+					echo json_encode(array(
+						'html' => $html,
+						'error' => "",
+						'errno' => ""
+					));
+				}
+				else
+				{
+					echo json_encode(array(
+						'html' => $this->load->view('teacher/question_notfound_view', null, true),
+						'error' => "ไม่มีข้อมูล",
+						'errno' => "1"
+					));
+				}
 				break;
 
 			default:
@@ -781,6 +872,7 @@ class Qwarehouse extends CI_Controller {
 		$footdata['additionScript'] = $this->getAddScripts();
 		$this->load->view('teacher/t_footer_view', $footdata);
 	}
+
 
 }
 

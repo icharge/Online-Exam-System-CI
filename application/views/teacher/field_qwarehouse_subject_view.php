@@ -421,9 +421,9 @@ EOL;
 										</div>
 									</div>
 									<div id="questionList">
-										<?php
-
-										?>
+									</div>
+									<div class="questionLoading" style="display: none;">
+										<span><i class="fa fa-spinner fa-spin"></i> กำลังโหลด...</span>
 									</div>
 								</div>
 							</div>
