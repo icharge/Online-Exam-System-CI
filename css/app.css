@@ -12,6 +12,10 @@ button.btn.dropdown-toggle.selectpicker {
 	border-color: #ccc;
 }
 
+.box-footer {
+	cursor: default;
+}
+
 .box-footer .btn {
 	margin-left: 8px;
 }

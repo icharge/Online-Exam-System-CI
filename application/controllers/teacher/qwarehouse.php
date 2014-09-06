@@ -257,7 +257,23 @@ class Qwarehouse extends CI_Controller {
 		$("#newQuestion select#qtype").selectpicker("val", "choice");
 		$("#newQuestion input[type=radio]").iCheck("uncheck");
 		CKEDITOR.instances.question.setData("");
+		CKEDITOR.instances.question.editable();
 	};
+
+	$("a[href=#questions]").click(function(e){
+		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/getChapterList/").'/?ts="+Date.now();
+		var myData = {"subject_id":"'.$this->uri->segment(4).'"};
+		$.ajax({
+			type: "POST",
+			url: oxsysAPI,
+			data: myData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json"
+		})
+		.done(function(data) {
+			$("#chapterListq").html(data.html);
+		})
+	});
 
 	$("#newQuestion .box-body, #newQuestion .box-footer").hide();
 
@@ -277,6 +293,7 @@ class Qwarehouse extends CI_Controller {
 			extraPlugins: "richcombo,panelbutton,font,justify,colorbutton,uicolor,imageresize",
 			"filebrowserImageUploadUrl": "'.base_url().'vendor/js/plugins/ckeditor/plugins/imgupload.php"
 		});
+		CKEDITOR.instances.question.editable();
 	};
 	applyCKE();
 
@@ -418,7 +435,7 @@ class Qwarehouse extends CI_Controller {
 	});
 
 	// Select Chapter for Question
-	$("#chapterListq .list-group-item").click(function(e) {
+	$("#chapterListq").delegate(".list-group-item", "click", function(e) {
 		e.preventDefault();
 		$(this).siblings().removeClass("active");
 		$(this).addClass("active");
@@ -436,11 +453,14 @@ class Qwarehouse extends CI_Controller {
 			dataType: "json"
 		})
 		.done(function(data) {
-			console.log("sent " + myData + " to " + oxsysAPI);
-			console.log("received : " + data.return);
-			console.log("sent");
-			$("#questionList").html(data.html).slideDown();
-			$(".questionLoading").slideUp();
+			setTimeout(function() {
+				console.log("sent " + myData + " to " + oxsysAPI);
+
+				var respHtml = $(data.html);
+				$("#questionList").html(respHtml).slideDown();
+				$(".questionLoading").slideUp();
+				$(".jtooltip").jBox("Tooltip", {theme: "TooltipDark"});
+			}, 500, data);
 		})
 		.fail(function(jqxhr, textStatus, error) {
 			var err = textStatus + ", " + error;
@@ -487,6 +507,28 @@ class Qwarehouse extends CI_Controller {
 					echo json_encode($this->qwh->getChapterList($arg_list[1]));
 				else
 					echo json_encode(array('error' => "No Subject_id"));
+				break;
+
+			case 'getChapterList':
+				$subject_data = $this->subjects->getSubjectById($this->input->post('subject_id'));
+				$subject_id = $subject_data['subject_id'];
+				$chapterList = $this->qwh->getChapterList($subject_id);
+				$html = "";
+				if (!empty($chapterList))
+				{
+					foreach ($chapterList as $item) {
+						$html .= "<a href=\"#\" class=\"list-group-item\" data-chapter-id=\"$item[chapter_id]\">
+						<span class=\"badge\"></span>
+						<h4 class=\"list-group-item-heading\">$item[name]</h4>
+						<div class=\"item-group-item-text\">$item[description]</div>
+						</a>";
+					}
+				}
+
+				echo json_encode(array(
+					'html' => $html
+				));
+
 				break;
 
 			case 'addChapter':
