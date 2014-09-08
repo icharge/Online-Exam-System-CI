@@ -255,10 +255,15 @@ class Qwarehouse extends CI_Controller {
 	function clearInput() {
 		$("#newQuestion input[type=text]").val("");
 		$("#newQuestion select#qtype").selectpicker("val", "choice");
+		$("#newQuestion select#qstatus").selectpicker("val", "active");
 		$("#newQuestion input[type=radio]").iCheck("uncheck");
 		CKEDITOR.instances.question.setData("");
 		CKEDITOR.instances.question.editable();
 	};
+
+	$(".chapterListGroup").scrollToFixed({
+		marginTop: $(".chapterListGroup").outerHeight()+50,
+	});
 
 	$("a[href=#questions]").click(function(e){
 		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/getChapterList/").'/?ts="+Date.now();
@@ -367,7 +372,9 @@ class Qwarehouse extends CI_Controller {
 
 		var questionData = encodeURIComponent($.trim(CKEDITOR.instances.question.getData()));
 		var qtype = encodeURIComponent($.trim($("#qtype").val()));
-		var myData = "chapter_id=" + chapter_id + "&qtype=" + qtype + "&question=" + questionData + "&chapter_name=" + $("#chapterListq").find(".active").text();
+		var myData = "chapter_id=" + chapter_id + "&qtype=" + qtype + "&question=" + questionData + '.
+								'"&chapter_name=" + encodeURIComponent($("#chapterListq").find(".active").text()) + '.
+								'"&status=" + encodeURIComponent($("#qstatus").val());
 		switch (qtype) {
 			case "choice":
 				myData += "&correct=" + encodeURIComponent($.trim($("input[name=correct]:checked").val()));
@@ -414,6 +421,7 @@ class Qwarehouse extends CI_Controller {
 				var respHtml = $(data.html);
 				$("#questionList").prepend(respHtml);
 				respHtml.hide().slideDown();
+				$(".jtooltip").jBox("Tooltip", {theme: "TooltipDark"});
 			}
 			btnAddState("normal");
 
@@ -714,12 +722,25 @@ class Qwarehouse extends CI_Controller {
 				}
 				// END Self Validating Data
 
+				$qstatus = "";
+				switch (strtolower($this->input->post('status'))) {
+					case 'active':
+					case 'inactive':
+					case 'draft':
+						$qstatus = strtolower($this->input->post('status'));
+						break;
+
+					default:
+						$qstatus = "active";
+						break;
+				}
 
 				$questionData = array(
 					'question' => $question,
 					'type' => $question_type,
-					'status' => "active",
-					'chapter_id' => $chapter_id
+					'status' => $qstatus,
+					'chapter_id' => $chapter_id,
+					'created_by_id' => $this->session->userdata('id')
 				);
 				$questionDataDetail = array();
 				switch ($question_type) {
@@ -767,6 +788,8 @@ class Qwarehouse extends CI_Controller {
 					$data = array_merge($questionData, $questionDataDetail);
 					$data['question_id'] = $insert_trans['id'];
 					$data['chapter_name'] = $this->input->post('chapter_name');
+					$data['created_time'] = date('Y-m-d H:i:s');
+					$data['created_by'] = $this->session->userdata('fullname');
 					switch ($question_type) {
 						case 'choice':
 							$data['answer_choice'] = $data['answer'];

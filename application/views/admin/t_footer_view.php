@@ -7,6 +7,8 @@
 	<script src="vendor/js/jquery.min.js"></script>
 	<!-- jQuery UI 1.10.3 -->
 	<script src="vendor/js/jquery-ui.js" type="text/javascript"></script>
+	<!-- ScrollToFixed -->
+	<script src="vendor/js/scrolltofixed.min.js" type="text/javascript"></script>
 	<!-- Bootstrap -->
 	<script src="vendor/js/bootstrap.min.js" type="text/javascript"></script>
 	<!-- Bootstrap select -->

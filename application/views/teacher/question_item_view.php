@@ -67,7 +67,18 @@
 	</div>
 	<div class="box-footer">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-12 text-right">
+				<span class="text-muted">สร้างเมื่อ <?php
+	list($date, $time) = explode(' ', $created_time);
+	$fullthdate = $this->misc->getFullDateTH($date);
+	$date = $this->misc->chrsDateToBudDate($date,"-","/");
+
+	echo "<span class=\"jtooltip\" title=\"$fullthdate\">$date $time</span>";
+				?> โดย <?php echo $created_by ; ?></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-right">
 				<?php
 					switch ($status) {
 						case 'active':
@@ -87,9 +98,6 @@
 							break;
 					}
 				?>
-			</div>
-			<div class="col-md-8 text-right">
-				<span class="text-muted">สร้างเมื่อ ... โดย ...</span>
 			</div>
 		</div>
 	</div>

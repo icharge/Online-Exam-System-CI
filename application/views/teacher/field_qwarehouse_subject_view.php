@@ -130,20 +130,22 @@ EOL;
 									<h3 class=""></h3>
 								</div>
 								<div class="col-sm-4">
-									<h4>บท / ตอน</h4>
-									<ul id="chapterListq" class="list-group">
-										<?php
-											foreach ($chapterList as $item) {
-												echo "<a href=\"#\" class=\"list-group-item\" data-chapter-id=\"$item[chapter_id]\">
-												<span class=\"badge\"></span>
-												<h4 class=\"list-group-item-heading\">$item[name]</h4>
-												<div class=\"item-group-item-text\">$item[description]</div>
-												</a>";
-											}
-										?>
-									</ul>
+									<div class="chapterListGroup">
+										<h4>บท / ตอน</h4>
+										<ul id="chapterListq" class="list-group">
+											<?php
+												foreach ($chapterList as $item) {
+													echo "<a href=\"#\" class=\"list-group-item\" data-chapter-id=\"$item[chapter_id]\">
+													<span class=\"badge\"></span>
+													<h4 class=\"list-group-item-heading\">$item[name]</h4>
+													<div class=\"item-group-item-text\">$item[description]</div>
+													</a>";
+												}
+											?>
+										</ul>
+									</div>
 								</div>
-								<div class="col-sm-8">
+								<div class="col-sm-8 pull-right">
 									<h4>โจทย์คำถาม</h4>
 									<div id="newQuestion">
 										<div class="box box-warning nav-tabs-custom question-item">
@@ -396,6 +398,21 @@ EOL;
 																</div>
 															</div>
 														</div>
+													</div>
+													<div class="form-group">
+														<?php echo form_label('สถานะ', 'status');
+															$options = array(
+																'active' => "<i class=\"text-green fa fa-circle\"></i>ใช้งานได้",
+																'inactive' => "ใช้งานไม่ได้",
+																'draft' => "ฉบับร่าง",
+															);
+															//echo form_dropdown('status', $options, 'default', 'id="qstatus" class="form-control"');
+														?>
+														<select name="status" id="qstatus" class="form-control">
+															<option data-content="<i class='text-green fa fa-circle'></i> ใช้งานได้" value="active">ใช้งานได้</option>
+															<option data-content="<i class='text-muted fa fa-circle'></i> ใช้งานไม่ได้" value="inactive">ใช้งานไม่ได้</option>
+															<option data-content="<i class='fa fa-circle-o'></i> ฉบับร่าง" value="draft">ฉบับร่าง</option>
+														</select>
 													</div>
 												</form> <!-- End  Form wrapper  -->
 											</div>
