@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 06, 2014 at 07:17 AM
+-- Generation Time: Sep 08, 2014 at 05:15 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -24,6 +24,25 @@ DELIMITER $$
 --
 -- Functions
 --
+CREATE DEFINER=`root`@`localhost` FUNCTION `getNameFromUid`(`Uid` INT) RETURNS varchar(100) CHARSET utf8
+    NO SQL
+BEGIN
+	DECLARE fullname varchar(100);
+	SELECT IFNULL(IFNULL( concat(admins.name,' ',admins.lname), concat(teachers.name,' ',teachers.lname) ), concat(students.name,' ',students.lname)) as fullname
+    into @fullname
+from users
+left join admins on (users.id = admins.id)
+left join teachers on (users.id = teachers.id)
+left join students on (users.id = students.id)
+    where users.id = Uid;
+
+	IF FOUND_ROWS() > 0 THEN
+		RETURN @fullname;
+    ELSE
+    	RETURN "false";
+    END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `isHasQuestion`(`sub_id` INT) RETURNS varchar(20) CHARSET utf8
     NO SQL
 BEGIN
@@ -91,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `chapter` (
   `description` text,
   `subject_id` int(5) NOT NULL,
   PRIMARY KEY (`chapter_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `chapter`
@@ -123,8 +142,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('2d08f75e6b1878f521cb914051cbe7d9', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1409980436, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
-('a3f8fe39e9dab140066b59abdee7c57e', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:31', 1409978615, '');
+('9c6b5c876a3622caaf01b6e3442d18a4', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1410187476, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -207,23 +225,29 @@ CREATE TABLE IF NOT EXISTS `Questions` (
   `question` text NOT NULL,
   `type` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'active',
+  `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `chapter_id` int(7) NOT NULL,
+  `created_by_id` int(8) NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `Questions`
 --
 
-INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `chapter_id`) VALUES
-(1, '<p><strong><span style="font-size:16px;">ปัจจุบัน Office เวอร์ชั่นอะไร ที่นิยมที่สุด</span></strong></p>', 'numeric', 'active', 4),
-(2, '<p>Test2</p>', 'choice', 'active', 4),
-(3, '<p>คำสั่ง <br /><span style="line-height:1.6em;">   echo "Hello World";<br />\nเป็นภาษาใด</span></p>', 'choice', 'active', 5),
-(4, '<p><span style="font-size:16px;"><u><strong>Method</strong></u> มีอีกชื่อเรียกหนึ่งว่าอะไร</span></p>', 'choice', 'active', 7),
-(5, '<p>VB.NET ถือเป็นการเขียนโปรแกรมแบบ OOP</p>', 'boolean', 'active', 7),
-(6, '<p><strong>Class</strong> ประกอบไปด้วย <strong>Attribute</strong> และ <strong>Method</strong>  <u><span style="color:#FF0000;">ไม่สามารถสืบทอดได้</span></u></p>', 'boolean', 'active', 8),
-(7, '<p><span style="font-size:22px;"><span style="font-family:''th sarabun new'', ''th sarabun psk'';">หากมี <strong>Method</strong>  <u>Run() </u> ใน <strong>Class</strong>  ต้องการให้เรียกใช้จากภายนอกได้  จะต้องกำหนด <span style="color:#FF0000;"><strong>Encapsulation</strong></span> อย่างไร</span></span></p>', 'choice', 'active', 8),
-(8, '<blockquote>\n<p>Class Fan {</p>\n\n<p>    private int speed;<br /><span style="line-height:1.6em;">    private double power</span><br /><span style="line-height:1.6em;">    private bool isSwing;</span><br /><span style="line-height:1.6em;">    public string name;</span><br /><span style="line-height:1.6em;">}</span></p>\n</blockquote>\n\n<p>จาก Class ดังกล่าว  มีการกำหนด  Attribute กี่ตัว  </p>', 'numeric', 'active', 8);
+INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_time`, `chapter_id`, `created_by_id`) VALUES
+(1, '<p><strong><span style="font-size:16px;">ปัจจุบัน Office เวอร์ชั่นอะไร ที่นิยมที่สุด</span></strong></p>', 'numeric', 'active', '0000-00-00 00:00:00', 4, 8),
+(2, '<p>Test2</p>', 'choice', 'active', '0000-00-00 00:00:00', 4, 3),
+(3, '<p>คำสั่ง <br /><span style="line-height:1.6em;">   echo "Hello World";<br />\nเป็นภาษาใด</span></p>', 'choice', 'active', '0000-00-00 00:00:00', 5, 8),
+(4, '<p><span style="font-size:16px;"><u><strong>Method</strong></u> มีอีกชื่อเรียกหนึ่งว่าอะไร</span></p>', 'choice', 'active', '0000-00-00 00:00:00', 7, 3),
+(5, '<p>VB.NET ถือเป็นการเขียนโปรแกรมแบบ OOP</p>', 'boolean', 'active', '2014-09-08 16:35:48', 7, 8),
+(6, '<p><strong>Class</strong> ประกอบไปด้วย <strong>Attribute</strong> และ <strong>Method</strong>  <u><span style="color:#FF0000;">ไม่สามารถสืบทอดได้</span></u></p>', 'boolean', 'active', '0000-00-00 00:00:00', 8, 3),
+(7, '<p><span style="font-size:22px;"><span style="font-family:''th sarabun new'', ''th sarabun psk'';">หากมี <strong>Method</strong>  <u>Run() </u> ใน <strong>Class</strong>  ต้องการให้เรียกใช้จากภายนอกได้  จะต้องกำหนด <span style="color:#FF0000;"><strong>Encapsulation</strong></span> อย่างไร</span></span></p>', 'choice', 'active', '0000-00-00 00:00:00', 8, 3),
+(8, '<blockquote>\n<p>Class Fan {</p>\n\n<p>    private int speed;<br /><span style="line-height:1.6em;">    private double power</span><br /><span style="line-height:1.6em;">    private bool isSwing;</span><br /><span style="line-height:1.6em;">    public string name;</span><br /><span style="line-height:1.6em;">}</span></p>\n</blockquote>\n\n<p>จาก Class ดังกล่าว  มีการกำหนด  Attribute กี่ตัว  </p>', 'numeric', 'active', '0000-00-00 00:00:00', 8, 8),
+(9, '<p>Drafting question</p>', 'boolean', 'active', '0000-00-00 00:00:00', 5, 3),
+(10, '<p>Drafting 2</p>', 'choice', 'draft', '0000-00-00 00:00:00', 4, 3),
+(11, '<p>Disabled question</p>', 'numeric', 'inactive', '2014-09-08 21:05:28', 4, 8),
+(12, '<p>Trueeee</p>', 'boolean', 'active', '2014-09-08 21:09:05', 4, 8);
 
 -- --------------------------------------------------------
 
@@ -236,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `Question_boolean` (
   `answer` varchar(20) NOT NULL,
   `question_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `Question_boolean`
@@ -244,7 +268,9 @@ CREATE TABLE IF NOT EXISTS `Question_boolean` (
 
 INSERT INTO `Question_boolean` (`id`, `answer`, `question_id`) VALUES
 (1, 't', 5),
-(2, 'f', 6);
+(2, 'f', 6),
+(3, 't', 9),
+(4, 't', 12);
 
 -- --------------------------------------------------------
 
@@ -263,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `Question_choice` (
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `Question_choice`
@@ -273,7 +299,8 @@ INSERT INTO `Question_choice` (`id`, `choice1`, `choice2`, `choice3`, `choice4`,
 (1, 'aaaa', 'bbbb', 'cccc', 'dddd', '', '', '1', 2),
 (2, 'HTML', 'C#.NET', 'PHP', 'MySQL', '', '', '3', 3),
 (3, 'Public', 'Function', 'Attribute', 'ถูกทุกข้อ', '', '', '2', 4),
-(4, 'Private', 'Public', 'Protected', 'Void', '', '', '2', 7);
+(4, 'Private', 'Public', 'Protected', 'Void', '', '', '2', 7),
+(5, '5656', '7404', '', '', '', '', '2', 10);
 
 -- --------------------------------------------------------
 
@@ -286,6 +313,8 @@ CREATE TABLE IF NOT EXISTS `question_list` (
 ,`type` varchar(10)
 ,`status` varchar(10)
 ,`chapter_id` int(7)
+,`created_by` varchar(100)
+,`created_time` datetime
 ,`choice1` text
 ,`choice2` text
 ,`choice3` text
@@ -308,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `Question_numerical` (
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `Question_numerical`
@@ -316,7 +345,8 @@ CREATE TABLE IF NOT EXISTS `Question_numerical` (
 
 INSERT INTO `Question_numerical` (`id`, `answer`, `question_id`) VALUES
 (1, '2010', 1),
-(2, '4', 8);
+(2, '4', 8),
+(3, '2', 11);
 
 -- --------------------------------------------------------
 
@@ -548,7 +578,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `question_list`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `question_list` AS select `q`.`question_id` AS `question_id`,`q`.`question` AS `question`,`q`.`type` AS `type`,`q`.`status` AS `status`,`q`.`chapter_id` AS `chapter_id`,`qc`.`choice1` AS `choice1`,`qc`.`choice2` AS `choice2`,`qc`.`choice3` AS `choice3`,`qc`.`choice4` AS `choice4`,`qc`.`choice5` AS `choice5`,`qc`.`choice6` AS `choice6`,`qc`.`answer` AS `answer_choice`,`qn`.`answer` AS `answer_numeric`,`qb`.`answer` AS `answer_boolean`,`ch`.`name` AS `chapter_name` from ((((`questions` `q` left join `question_choice` `qc` on((`q`.`question_id` = `qc`.`question_id`))) left join `question_numerical` `qn` on((`q`.`question_id` = `qn`.`question_id`))) left join `question_boolean` `qb` on((`q`.`question_id` = `qb`.`question_id`))) left join `chapter` `ch` on((`q`.`chapter_id` = `ch`.`chapter_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `question_list` AS select `q`.`question_id` AS `question_id`,`q`.`question` AS `question`,`q`.`type` AS `type`,`q`.`status` AS `status`,`q`.`chapter_id` AS `chapter_id`,`getNameFromUid`(`q`.`created_by_id`) AS `created_by`,`q`.`created_time` AS `created_time`,`qc`.`choice1` AS `choice1`,`qc`.`choice2` AS `choice2`,`qc`.`choice3` AS `choice3`,`qc`.`choice4` AS `choice4`,`qc`.`choice5` AS `choice5`,`qc`.`choice6` AS `choice6`,`qc`.`answer` AS `answer_choice`,`qn`.`answer` AS `answer_numeric`,`qb`.`answer` AS `answer_boolean`,`ch`.`name` AS `chapter_name` from ((((`questions` `q` left join `question_choice` `qc` on((`q`.`question_id` = `qc`.`question_id`))) left join `question_numerical` `qn` on((`q`.`question_id` = `qn`.`question_id`))) left join `question_boolean` `qb` on((`q`.`question_id` = `qb`.`question_id`))) left join `chapter` `ch` on((`q`.`chapter_id` = `ch`.`chapter_id`)));
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
