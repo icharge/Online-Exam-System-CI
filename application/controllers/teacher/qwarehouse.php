@@ -465,7 +465,7 @@ class Qwarehouse extends CI_Controller {
 				console.log("sent " + myData + " to " + oxsysAPI);
 
 				var respHtml = $(data.html);
-				$("#questionList").html(respHtml).slideDown();
+				$("#questionListTable").html(respHtml).slideDown();
 				$(".questionLoading").slideUp();
 				$(".jtooltip").jBox("Tooltip", {theme: "TooltipDark"});
 			}, 500, data);
@@ -842,7 +842,7 @@ class Qwarehouse extends CI_Controller {
 				{
 					$html = "";
 					foreach ($questionList as $row) {
-						$html .= $this->load->view('teacher/question_item_view', $row, true);
+						$html .= $this->load->view('teacher/question_item_table_view', $row, true);
 					}
 					echo json_encode(array(
 						'html' => $html,

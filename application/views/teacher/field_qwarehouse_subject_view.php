@@ -444,6 +444,31 @@ EOL;
 									</div>
 								</div>
 							</div>
+							<!-- Question list as Table -->
+							<div class="row">
+								<div class="col-md-12">
+									<table class="table table-striped table-hover rowclick">
+										<thead>
+											<tr>
+												<th style="width: 50px;">#</th>
+												<th style="width: 55%;">โจทย์</th>
+												<th>รูปแบบ</th>
+												<th style="width: 80px;">เฉลย</th>
+												<th style="width: 90px;"></th>
+											</tr>
+										</thead>
+										<tbody id="questionListTable">
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="box-footer text-right">
