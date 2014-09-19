@@ -53,78 +53,14 @@ EOL;
 				<!-- Begin box -->
 				<div class="box nav-tabs-custom" style="border: none;">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#basic" data-toggle="tab">พื้นฐาน</a></li>
-						<li><a href="#chapter" data-toggle="tab">บท / ตอน</a></li>
-						<li><?php echo anchor('teacher/qwarehouse/viewq/'.$subjectInfo['code'], 'โจทย์คำถาม');?></li>
+						<li><?php echo anchor('teacher/qwarehouse/view/'.$subjectInfo['code'], 'พื้นฐาน');?>
+						<li><?php echo anchor('teacher/qwarehouse/view/'.$subjectInfo['code'].'#chapter', 'บท / ตอน');?></li>
+						<li class="active"><a href="#questions" data-toggle="tab">โจทย์คำถาม</a></li>
 					</ul>
-					<!-- Tab Basic -->
-					<div class="tab-content">
-						<div class="box-body tab-pane active" id="basic">
-							<div class="form-group<?php if(form_error('subjectid')) echo ' has-error';?>">
-								<?php
-								echo form_label('วิชา', 'subjectid');
-								echo "<div id=\"subjectcodename\">$subjectInfo[code] - $subjectInfo[name]</div>";
-								?>
-							</div>
-							<div class="form-group<?php if(form_error('subjectid')) echo ' has-error';?>">
-								<?php
-								echo form_label('ชื่อย่อวิชา', 'ชื่อย่อวิชา');
-								echo "<div id=\"subjectshortname\">$subjectInfo[shortname]</div>";
-								?>
-							</div>
-							<div class="form-group<?php if(form_error('description')) echo ' has-error';?>">
-								<label>คำอธิบายวิชา</label>
-								<div id="subjectDesc" class="text-justify">
-									<?php echo (isset($subjectInfo['description'])?$subjectInfo['description']:'');?>
-								</div>
-							</div>
-						</div>
-						<!-- Tab Chapter -->
-						<div class="box-body tab-pane" id="chapter">
-							<div class="row">
-								<div class="col-md-12 text-center">
-									<h3 class="">Chapters</h3>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-4 col-md-12">
-									<div class="callout callout-info">
-										<h4>คำแนะนำ</h4>
-										<p class="text-justify">ส่วนนี้มีไว้เพื่อจัดกลุ่มของแต่ละข้อสอบ หรือโจทย์คำถาม เพื่อให้ง่ายต่อการนำไปใช้ภายหลัง</p>
-									</div>
-								</div>
-								<div class="col-lg-8 col-md-12 pull-right">
-									<ul id="chapterList" class="list-group">
-										<?php
-											foreach ($chapterList as $item) {
-												echo "<li class=\"list-group-item\" data-chapter-id=\"$item[chapter_id]\">
-												<span class=\"badge\"></span>
-												<div class=\"optionlinks\">
-													<a href=\"#edit\">
-														<i class=\"fa fa-edit\"></i>
-													</a>
-													<a href=\"#remove\" class=\"text-danger\">
-														<i class=\"glyphicon glyphicon-remove\"></i>
-													</a>
-												</div>
-												<h4 class=\"list-group-item-heading\">$item[name]</h4>
-												<div class=\"item-group-item-text\">$item[description]</div>
-												</li>";
-											}
-										?>
-									</ul>
 
-									<div class="input-group">
-										<input id="chapterName" class="form-control" maxlength="40" placeholder="">
-										<div class="input-group-btn">
-											<button id="chapterAdd" class="btn btn-success"><i class="fa fa-plus"></i></button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+					<div class="tab-content">
 						<!-- Questions tab -->
-						<div class="box-body tab-pane" id="questions">
+						<div class="box-body tab-pane active" id="questions">
 							<div class="row">
 								<div class="col-md-12 text-center">
 									<h3 class=""></h3>

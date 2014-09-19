@@ -9,6 +9,8 @@
 	<script src="vendor/js/jquery-ui.js" type="text/javascript"></script>
 	<!-- ScrollToFixed -->
 	<script src="vendor/js/scrolltofixed.min.js" type="text/javascript"></script>
+	<!-- jQuery ScrollTo -->
+	<script src="vendor/js/jquery.scrollto.min.js" type="text/javascript"></script>
 	<!-- Bootstrap -->
 	<script src="vendor/js/bootstrap.min.js" type="text/javascript"></script>
 	<!-- Bootstrap select -->

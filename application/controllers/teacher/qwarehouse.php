@@ -32,6 +32,8 @@ class Qwarehouse extends CI_Controller {
 		}
 
 		$this->chapterManage = '
+	$(\'a[href="\'+location.hash+\'"]\').tab(\'show\');
+
 	$("#chapterName").keydown(function(e) {
 		if (e.which == 13)
 		{
@@ -924,6 +926,51 @@ class Qwarehouse extends CI_Controller {
 					$data['chapterList'] = $this->qwh->getChapterList($data['subjectInfo']['subject_id']);
 
 					$this->load->view('teacher/field_qwarehouse_subject_view', $data);
+				}
+				else
+				{
+					show_404();
+				}
+
+			}
+		}
+
+		// Send additional script to footer
+		$footdata['additionScript'] = $this->getAddScripts();
+		$this->load->view('teacher/t_footer_view', $footdata);
+	}
+
+	public function viewq($subjectId)
+	{
+		$this->session->set_flashdata('noAnim', true);
+		$this->load->view('teacher/t_header_view');
+		$this->load->view('teacher/t_headerbar_view');
+		$this->load->view('teacher/t_sidebar_view');
+
+		if ($this->input->post('submit'))
+		{
+			//$this->edit($subjectId);
+		}
+		else
+		{
+			if ($subjectId == '')
+			{
+				redirect('teacher/qwarehouse');
+			}
+			else
+			{
+				$data['subjectInfo'] = $this->subjects->getSubjectById($subjectId);
+				if (!empty($data['subjectInfo']))
+				{
+
+					// Set page desc
+					$data['formlink'] = 'teacher/qwarehouse/view/'.$subjectId;
+					$data['pagetitle'] = "จัดการคลังข้อสอบ";
+					$data['pagesubtitle'] = "วิชา ".$data['subjectInfo']['code']." ".$data['subjectInfo']['name'];
+
+					$data['chapterList'] = $this->qwh->getChapterList($data['subjectInfo']['subject_id']);
+
+					$this->load->view('teacher/field_qwarehouse_q_view', $data);
 				}
 				else
 				{
