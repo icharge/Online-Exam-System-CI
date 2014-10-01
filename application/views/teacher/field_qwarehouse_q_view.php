@@ -83,296 +83,301 @@ EOL;
 								</div>
 								<div class="col-sm-8 pull-right">
 									<h4>โจทย์คำถาม</h4>
-									<div id="newQuestion">
-										<div class="box box-warning nav-tabs-custom question-item">
-											<ul class="nav nav-tabs">
-												<li class="pull-left header">
-													<i class="fa fa-clipboard"></i> เพิ่มโจทย์ใหม่
-												</li>
-												<!-- <li class="pull-right">
-													<a href="#" class="text-muted"><i class="fa fa-gear"></i></a>
-												</li> -->
-											</ul>
-											<div class="box-body">
-												<!-- Form wrapper -->
-												<form id="qnew" name="qnew" class="form-inline form-question-item">
-													<div class="form-group">
-														<?php
-														echo form_label('โจทย์ <span class="text-danger">*</span>', 'question');
-														echo form_textarea('question', "", 'id="question" class="form-control"');
-														// echo form_input(array(
-														// 	'id'=>'question',
-														// 	'name'=>'question',
-														// 	'value'=>"",
-														// 	'type'=>'text',
-														// 	'class'=>'form-control',
-														// 	));
-														?>
-													</div>
-													<div class="form-group">
-														<?php echo form_label('ประเภทข้อสอบ', 'qtype');
-															$options = array(
-																'choice' => "ปรนัย",
-																'numeric' => "เติมคำตอบด้วยตัวเลข",
-																'boolean' => "ถูก / ผิด",
-															);
-															echo form_dropdown('qtype', $options, 'default', 'id="qtype" class="form-control"');
-														?>
-													</div>
-													<div id="choice" class="question-type">
+									<div class="modal fade" id="newQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+													<h4 class="modal-title"><i class="fa fa-clipboard"></i> เพิ่มโจทย์ใหม่</h4>
+												</div>
+												<div class="modal-body">
+													<!-- Form wrapper -->
+													<form id="qnew" name="qnew" class="form-inline form-question-item">
 														<div class="form-group">
 															<?php
-															echo form_label('ตัวเลือก <span class="text-danger">*</span>', 'correct');
+															echo form_label('โจทย์ <span class="text-danger">*</span>', 'question');
+															echo form_textarea('question', "", 'id="question" class="form-control"');
+															// echo form_input(array(
+															// 	'id'=>'question',
+															// 	'name'=>'question',
+															// 	'value'=>"",
+															// 	'type'=>'text',
+															// 	'class'=>'form-control',
+															// 	));
 															?>
-															<div class="radio">
-																<div class="col-xs-1 no-padding">
-																	<label>
-																		<?php
-																			echo form_radio('correct', '1', false,'class="minimal-red correct-choice"')." ";
-																		?>
-																	</label>
-																</div>
-																<div class="col-xs-11">
-																	<div class="form-inline">
-																		<label id="c1" class="choice">
-																			<span class="clabel">ก.</span>
+														</div>
+														<div class="form-group">
+															<?php echo form_label('ประเภทข้อสอบ', 'qtype');
+																$options = array(
+																	'choice' => "ปรนัย",
+																	'numeric' => "เติมคำตอบด้วยตัวเลข",
+																	'boolean' => "ถูก / ผิด",
+																);
+																echo form_dropdown('qtype', $options, 'default', 'id="qtype" class="form-control"');
+															?>
+														</div>
+														<div id="choice" class="question-type">
+															<div class="form-group">
+																<?php
+																echo form_label('ตัวเลือก <span class="text-danger">*</span>', 'correct');
+																?>
+																<div class="radio">
+																	<div class="col-xs-1 no-padding">
+																		<label>
 																			<?php
-																				echo form_input(array(
-																					'id'=>'choice1',
-																					'name'=>'choice1',
-																					'value'=>"",
-																					'type'=>'text',
-																					'class'=>'form-control',
-																					'style'=>'width: 92%;'
-																				));
+																				echo form_radio('correct', '1', false,'class="minimal-red correct-choice"')." ";
 																			?>
 																		</label>
 																	</div>
+																	<div class="col-xs-11">
+																		<div class="form-inline">
+																			<label id="c1" class="choice">
+																				<span class="clabel">ก.</span>
+																				<?php
+																					echo form_input(array(
+																						'id'=>'choice1',
+																						'name'=>'choice1',
+																						'value'=>"",
+																						'type'=>'text',
+																						'class'=>'form-control',
+																						'style'=>'width: 92%;'
+																					));
+																				?>
+																			</label>
+																		</div>
+																	</div>
 																</div>
-															</div>
-															<div class="radio">
-																<div class="col-xs-1 no-padding">
-																	<label>
-																		<?php
-																			echo form_radio('correct', '2', false,'class="minimal-red correct-choice"')." ";
-																		?>
-																	</label>
-																</div>
-																<div class="col-xs-11">
-																	<div class="form-inline">
-																		<label id="c2" class="choice">
-																			<span class="clabel">ข.</span>
+																<div class="radio">
+																	<div class="col-xs-1 no-padding">
+																		<label>
 																			<?php
-																				echo form_input(array(
-																					'id'=>'choice2',
-																					'name'=>'choice2',
-																					'value'=>"",
-																					'type'=>'text',
-																					'class'=>'form-control',
-																					'style'=>'width: 92%;'
-																				));
+																				echo form_radio('correct', '2', false,'class="minimal-red correct-choice"')." ";
 																			?>
 																		</label>
 																	</div>
+																	<div class="col-xs-11">
+																		<div class="form-inline">
+																			<label id="c2" class="choice">
+																				<span class="clabel">ข.</span>
+																				<?php
+																					echo form_input(array(
+																						'id'=>'choice2',
+																						'name'=>'choice2',
+																						'value'=>"",
+																						'type'=>'text',
+																						'class'=>'form-control',
+																						'style'=>'width: 92%;'
+																					));
+																				?>
+																			</label>
+																		</div>
+																	</div>
 																</div>
-															</div>
-															<div class="radio">
-																<div class="col-xs-1 no-padding">
-																	<label>
-																		<?php
-																			echo form_radio('correct', '3', false,'class="minimal-red correct-choice"')." ";
-																		?>
-																	</label>
-																</div>
-																<div class="col-xs-11">
-																	<div class="form-inline">
-																		<label id="c3" class="choice">
-																			<span class="clabel">ค.</span>
+																<div class="radio">
+																	<div class="col-xs-1 no-padding">
+																		<label>
 																			<?php
-																				echo form_input(array(
-																					'id'=>'choice3',
-																					'name'=>'choice3',
-																					'value'=>"",
-																					'type'=>'text',
-																					'class'=>'form-control',
-																					'style'=>'width: 92%;'
-																				));
+																				echo form_radio('correct', '3', false,'class="minimal-red correct-choice"')." ";
 																			?>
 																		</label>
 																	</div>
+																	<div class="col-xs-11">
+																		<div class="form-inline">
+																			<label id="c3" class="choice">
+																				<span class="clabel">ค.</span>
+																				<?php
+																					echo form_input(array(
+																						'id'=>'choice3',
+																						'name'=>'choice3',
+																						'value'=>"",
+																						'type'=>'text',
+																						'class'=>'form-control',
+																						'style'=>'width: 92%;'
+																					));
+																				?>
+																			</label>
+																		</div>
+																	</div>
 																</div>
-															</div>
-															<div class="radio">
-																<div class="col-xs-1 no-padding">
-																	<label>
-																		<?php
-																			echo form_radio('correct', '4', false,'class="minimal-red correct-choice"')." ";
-																		?>
-																	</label>
-																</div>
-																<div class="col-xs-11">
-																	<div class="form-inline">
-																		<label id="c4" class="choice">
-																			<span class="clabel">ง.</span>
+																<div class="radio">
+																	<div class="col-xs-1 no-padding">
+																		<label>
 																			<?php
-																				echo form_input(array(
-																					'id'=>'choice4',
-																					'name'=>'choice4',
-																					'value'=>"",
-																					'type'=>'text',
-																					'class'=>'form-control',
-																					'style'=>'width: 92%;'
-																				));
+																				echo form_radio('correct', '4', false,'class="minimal-red correct-choice"')." ";
 																			?>
 																		</label>
 																	</div>
+																	<div class="col-xs-11">
+																		<div class="form-inline">
+																			<label id="c4" class="choice">
+																				<span class="clabel">ง.</span>
+																				<?php
+																					echo form_input(array(
+																						'id'=>'choice4',
+																						'name'=>'choice4',
+																						'value'=>"",
+																						'type'=>'text',
+																						'class'=>'form-control',
+																						'style'=>'width: 92%;'
+																					));
+																				?>
+																			</label>
+																		</div>
+																	</div>
 																</div>
-															</div>
-															<div class="radio">
-																<div class="col-xs-1 no-padding">
-																	<label>
-																		<?php
-																			echo form_radio('correct', '5', false,'class="minimal-red correct-choice"')." ";
-																		?>
-																	</label>
-																</div>
-																<div class="col-xs-11">
-																	<div class="form-inline">
-																		<label id="c5" class="choice">
-																			<span class="clabel">จ.</span>
+																<div class="radio">
+																	<div class="col-xs-1 no-padding">
+																		<label>
 																			<?php
-																				echo form_input(array(
-																					'id'=>'choice5',
-																					'name'=>'choice5',
-																					'value'=>"",
-																					'type'=>'text',
-																					'class'=>'form-control',
-																					'style'=>'width: 92%;'
-																				));
+																				echo form_radio('correct', '5', false,'class="minimal-red correct-choice"')." ";
 																			?>
 																		</label>
 																	</div>
+																	<div class="col-xs-11">
+																		<div class="form-inline">
+																			<label id="c5" class="choice">
+																				<span class="clabel">จ.</span>
+																				<?php
+																					echo form_input(array(
+																						'id'=>'choice5',
+																						'name'=>'choice5',
+																						'value'=>"",
+																						'type'=>'text',
+																						'class'=>'form-control',
+																						'style'=>'width: 92%;'
+																					));
+																				?>
+																			</label>
+																		</div>
+																	</div>
 																</div>
-															</div>
-															<div class="radio">
-																<div class="col-xs-1 no-padding">
-																	<label>
-																		<?php
-																			echo form_radio('correct', '6', false,'class="minimal-red correct-choice"')." ";
-																		?>
-																	</label>
-																</div>
-																<div class="col-xs-11">
-																	<div class="form-inline">
-																		<label id="c6" class="choice">
-																			<span class="clabel">ฉ.</span>
+																<div class="radio">
+																	<div class="col-xs-1 no-padding">
+																		<label>
 																			<?php
-																				echo form_input(array(
-																					'id'=>'choice6',
-																					'name'=>'choice6',
-																					'value'=>"",
-																					'type'=>'text',
-																					'class'=>'form-control',
-																					'style'=>'width: 92%;'
-																				));
+																				echo form_radio('correct', '6', false,'class="minimal-red correct-choice"')." ";
 																			?>
 																		</label>
+																	</div>
+																	<div class="col-xs-11">
+																		<div class="form-inline">
+																			<label id="c6" class="choice">
+																				<span class="clabel">ฉ.</span>
+																				<?php
+																					echo form_input(array(
+																						'id'=>'choice6',
+																						'name'=>'choice6',
+																						'value'=>"",
+																						'type'=>'text',
+																						'class'=>'form-control',
+																						'style'=>'width: 92%;'
+																					));
+																				?>
+																			</label>
+																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
-													</div>
-													<div id="numeric" class="question-type">
-														<div class="form-group">
-															<?php
-															echo form_label('คำตอบที่ถูกต้อง <span class="text-danger">*</span>', 'correct');
-															echo form_input(array(
-																'id'=>'correct-numeric',
-																'name'=>'correct',
-																'value'=>'',
-																'type'=>'text',
-																'class'=>'form-control correct-numeric',
-																));
-															?>
+														<div id="numeric" class="question-type">
+															<div class="form-group">
+																<?php
+																echo form_label('คำตอบที่ถูกต้อง <span class="text-danger">*</span>', 'correct');
+																echo form_input(array(
+																	'id'=>'correct-numeric',
+																	'name'=>'correct',
+																	'value'=>'',
+																	'type'=>'text',
+																	'class'=>'form-control correct-numeric',
+																	));
+																?>
+															</div>
 														</div>
-													</div>
-													<div id="boolean" class="question-type">
-														<div class="form-group">
-															<?php
-															echo form_label('ถูก / ผิด <span class="text-danger">*</span>', 'correct');
-															?>
-															<div class="radio">
-																<div class="col-xs-1 no-padding">
-																	<label>
-																		<?php
-																			echo form_radio('correct', 't', false,'class="minimal-red correct-boolean"')." ";
-																		?>
-																	</label>
-																</div>
-																<div class="col-xs-11">
-																	<div class="form-inline">
-																		<label class="boolean">
-																			<span class="clabel">ถูก</span>
+														<div id="boolean" class="question-type">
+															<div class="form-group">
+																<?php
+																echo form_label('ถูก / ผิด <span class="text-danger">*</span>', 'correct');
+																?>
+																<div class="radio">
+																	<div class="col-xs-1 no-padding">
+																		<label>
+																			<?php
+																				echo form_radio('correct', 't', false,'class="minimal-red correct-boolean"')." ";
+																			?>
 																		</label>
+																	</div>
+																	<div class="col-xs-11">
+																		<div class="form-inline">
+																			<label class="boolean">
+																				<span class="clabel">ถูก</span>
+																			</label>
+																		</div>
+																	</div>
+																</div>
+																<div class="radio">
+																	<div class="col-xs-1 no-padding">
+																		<label>
+																			<?php
+																				echo form_radio('correct', 'f', false,'class="minimal-red correct-boolean"')." ";
+																			?>
+																		</label>
+																	</div>
+																	<div class="col-xs-11">
+																		<div class="form-inline">
+																			<label class="boolean">
+																				<span class="clabel">ผิด</span>
+																			</label>
+																		</div>
 																	</div>
 																</div>
 															</div>
-															<div class="radio">
-																<div class="col-xs-1 no-padding">
-																	<label>
-																		<?php
-																			echo form_radio('correct', 'f', false,'class="minimal-red correct-boolean"')." ";
-																		?>
-																	</label>
-																</div>
-																<div class="col-xs-11">
-																	<div class="form-inline">
-																		<label class="boolean">
-																			<span class="clabel">ผิด</span>
-																		</label>
-																	</div>
-																</div>
-															</div>
 														</div>
-													</div>
-													<div class="form-group">
-														<?php echo form_label('สถานะ', 'status');
-															$options = array(
-																'active' => "<i class=\"text-green fa fa-circle\"></i>ใช้งานได้",
-																'inactive' => "ใช้งานไม่ได้",
-																'draft' => "ฉบับร่าง",
-															);
-															//echo form_dropdown('status', $options, 'default', 'id="qstatus" class="form-control"');
-														?>
-														<select name="status" id="qstatus" class="form-control">
-															<option data-content="<i class='text-green fa fa-circle'></i> ใช้งานได้" value="active">ใช้งานได้</option>
-															<option data-content="<i class='text-muted fa fa-circle'></i> ใช้งานไม่ได้" value="inactive">ใช้งานไม่ได้</option>
-															<option data-content="<i class='fa fa-circle-o'></i> ฉบับร่าง" value="draft">ฉบับร่าง</option>
-														</select>
-													</div>
-												</form> <!-- End  Form wrapper  -->
-											</div>
-											<div class="box-footer text-right">
-											<?php
-												$button = array(
-													'id' => 'closeNewQuestion',
-													'type' => 'button',
-													'content' => 'ยกเลิก',
-													'class' => 'btn btn-default'
-												);
-												echo form_button($button);
+														<div class="form-group">
+															<?php echo form_label('สถานะ', 'status');
+																$options = array(
+																	'active' => "<i class=\"text-green fa fa-circle\"></i>ใช้งานได้",
+																	'inactive' => "ใช้งานไม่ได้",
+																	'draft' => "ฉบับร่าง",
+																);
+																//echo form_dropdown('status', $options, 'default', 'id="qstatus" class="form-control"');
+															?>
+															<select name="status" id="qstatus" class="form-control">
+																<option data-content="<i class='text-green fa fa-circle'></i> ใช้งานได้" value="active">ใช้งานได้</option>
+																<option data-content="<i class='text-muted fa fa-circle'></i> ใช้งานไม่ได้" value="inactive">ใช้งานไม่ได้</option>
+																<option data-content="<i class='fa fa-circle-o'></i> ฉบับร่าง" value="draft">ฉบับร่าง</option>
+															</select>
+														</div>
+													</form> <!-- End  Form wrapper  -->
+												</div>
+												<div class="modal-footer">
+													<?php
+														$button = array(
+															'id' => 'closeNewQuestion',
+															'type' => 'button',
+															'content' => 'ยกเลิก',
+															'class' => 'btn btn-default',
+															'data-dismiss' => 'modal'
+														);
+														echo form_button($button);
 
-												$button = array(
-													'id' => 'addQuestion',
-													'type' => 'button',
-													'content' => '<i class="fa fa-plus"></i> เพิ่ม',
-													'class' => 'btn btn-primary'
-												);
-												echo form_button($button);
-											?>
-											</div>
-										</div>
-									</div>
+														$button = array(
+															'id' => 'addQuestion',
+															'type' => 'button',
+															'content' => '<i class="fa fa-plus"></i> เพิ่ม',
+															'class' => 'btn btn-primary'
+														);
+														echo form_button($button);
+													?>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal-dialog -->
+									</div><!-- /.modal -->
+
+									<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newQuestion">
+										เพิ่มโจทย์คำถามใหม่
+									</button>
+
+
 									<div id="questionList">
 									</div>
 									<div class="questionLoading" style="display: none;">
@@ -383,24 +388,78 @@ EOL;
 							<!-- Question list as Table -->
 							<div class="row">
 								<div class="col-md-12">
-									<table class="table table-striped table-hover rowclick">
+									<table class="table table-striped table-hover rowclick ellipsis">
 										<thead>
 											<tr>
 												<th style="width: 50px;">#</th>
-												<th style="width: 55%;">โจทย์</th>
+												<th style="width: 40%;">โจทย์</th>
 												<th>รูปแบบ</th>
-												<th style="width: 80px;">เฉลย</th>
-												<th style="width: 90px;"></th>
+												<th style="width: 13%;">เฉลย</th>
+												<th style="width: 20%;">โดย</th>
 											</tr>
 										</thead>
 										<tbody id="questionListTable">
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
+											<?php
+												if (($questionlist)) {
+													foreach ($questionlist as $item) {
+														echo "
+														<tr id=\"question-$item[question_id]\" href=\"".$this->misc->getHref('admin/courses/view')."/$item[question_id]\">
+														<td>$item[question_id]</td>
+														<td>$item[question]</td>
+														<td>";
+
+														switch ($item['type']) {
+															case 'choice':
+																echo "ปรนัย";
+																break;
+															case 'numeric':
+																echo "ตอบด้วยตัวเลข";
+																break;
+															case 'boolean':
+																echo "ถูก / ผิด";
+																break;
+															case 'matching':
+																echo "จับคู่";
+																break;
+														}
+
+														if ($item['type'] == "choice") {
+															if ($item['answer_choice'] == "1") $answer = $item['choice1'];
+															elseif ($item['answer_choice'] == "2") $answer = $item['choice2'];
+															elseif ($item['answer_choice'] == "3") $answer = $item['choice3'];
+															elseif ($item['answer_choice'] == "4") $answer = $item['choice4'];
+															elseif ($item['answer_choice'] == "5") $answer = $item['choice5'];
+															elseif ($item['answer_choice'] == "6") $answer = $item['choice6'];
+														}
+														if ($item['type'] == "boolean")
+														{
+															if (strtolower($item['answer_boolean']) == "b")
+																$answer = "ถูก";
+															else
+																$answer = "ผิด";
+														}
+														elseif ($item['type'] == "numeric")
+														{
+															$answer = $item['answer_numeric'];
+														}
+														list($date, $time) = explode(' ', $item['created_time']);
+														echo "</td>
+														<td>$answer</td>
+														<td>
+															<span class=\"jtooltip\" title=\"".
+															$this->misc->getFullDateTH($date)."<br>เวลา ".$time."\">".
+															$item['created_by'].
+															"</span>
+														</td>
+
+														</tr>
+														";
+													}
+												} else {
+													echo "<tr class='warning'><td colspan='4' class='text-center'>ไม่พบข้อมูล</td></tr>";
+												}
+
+											?>
 										</tbody>
 									</table>
 								</div>

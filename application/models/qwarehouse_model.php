@@ -240,6 +240,21 @@ class Qwarehouse_model extends CI_Model {
 		return $query;
 	}
 
+	function countQuestionList($keyword='',$chapter_id)
+	{
+		$fields = array(
+			'count(*) as qcount'
+		);
+		$this->db->order_by('question_id','desc');
+		$query = $this->db
+			->select($fields)
+			->like("CONCAT(question)",$keyword,'both')
+			->get_where('question_list', array('chapter_id'=>$chapter_id))
+			->row_array();
+			// die($this->db->last_query());
+		return $query['qcount'];
+	}
+
 }
 
 /* End of file qwarehouse_model.php */

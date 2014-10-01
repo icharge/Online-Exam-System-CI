@@ -25,6 +25,14 @@ button.btn.dropdown-toggle.selectpicker {
 	text-justify: newspaper;
 }
 
+.table.ellipsis td,
+td.ellipsis {
+	max-width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .navbar {
 	min-width: 330px;
 }

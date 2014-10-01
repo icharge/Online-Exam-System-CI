@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 08, 2014 at 05:15 PM
+-- Generation Time: Oct 01, 2014 at 08:34 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -142,7 +142,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('9c6b5c876a3622caaf01b6e3442d18a4', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1410187476, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
+('a6145960e94e92cd5f744eab9a656d31', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1412179531, ''),
+('e609d236a3cde44ca77373e110c99241', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1412188468, '');
 
 -- --------------------------------------------------------
 
@@ -229,25 +230,26 @@ CREATE TABLE IF NOT EXISTS `Questions` (
   `chapter_id` int(7) NOT NULL,
   `created_by_id` int(8) NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `Questions`
 --
 
 INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_time`, `chapter_id`, `created_by_id`) VALUES
-(1, '<p><strong><span style="font-size:16px;">ปัจจุบัน Office เวอร์ชั่นอะไร ที่นิยมที่สุด</span></strong></p>', 'numeric', 'active', '0000-00-00 00:00:00', 4, 8),
-(2, '<p>Test2</p>', 'choice', 'active', '0000-00-00 00:00:00', 4, 3),
-(3, '<p>คำสั่ง <br /><span style="line-height:1.6em;">   echo "Hello World";<br />\nเป็นภาษาใด</span></p>', 'choice', 'active', '0000-00-00 00:00:00', 5, 8),
-(4, '<p><span style="font-size:16px;"><u><strong>Method</strong></u> มีอีกชื่อเรียกหนึ่งว่าอะไร</span></p>', 'choice', 'active', '0000-00-00 00:00:00', 7, 3),
+(1, '<p><strong><span style="font-size:16px;">ปัจจุบัน Office เวอร์ชั่นอะไร ที่นิยมที่สุด</span></strong></p>', 'numeric', 'active', '2014-09-02 18:30:26', 4, 8),
+(2, '<p>Test2</p>', 'choice', 'active', '2014-09-09 09:14:28', 4, 3),
+(3, '<p>คำสั่ง <br /><span style="line-height:1.6em;">   echo "Hello World";<br />\nเป็นภาษาใด</span></p>', 'choice', 'active', '2014-09-15 12:23:25', 5, 8),
+(4, '<p><span style="font-size:16px;"><u><strong>Method</strong></u> มีอีกชื่อเรียกหนึ่งว่าอะไร</span></p>', 'choice', 'active', '2014-09-17 19:41:24', 7, 3),
 (5, '<p>VB.NET ถือเป็นการเขียนโปรแกรมแบบ OOP</p>', 'boolean', 'active', '2014-09-08 16:35:48', 7, 8),
-(6, '<p><strong>Class</strong> ประกอบไปด้วย <strong>Attribute</strong> และ <strong>Method</strong>  <u><span style="color:#FF0000;">ไม่สามารถสืบทอดได้</span></u></p>', 'boolean', 'active', '0000-00-00 00:00:00', 8, 3),
-(7, '<p><span style="font-size:22px;"><span style="font-family:''th sarabun new'', ''th sarabun psk'';">หากมี <strong>Method</strong>  <u>Run() </u> ใน <strong>Class</strong>  ต้องการให้เรียกใช้จากภายนอกได้  จะต้องกำหนด <span style="color:#FF0000;"><strong>Encapsulation</strong></span> อย่างไร</span></span></p>', 'choice', 'active', '0000-00-00 00:00:00', 8, 3),
-(8, '<blockquote>\n<p>Class Fan {</p>\n\n<p>    private int speed;<br /><span style="line-height:1.6em;">    private double power</span><br /><span style="line-height:1.6em;">    private bool isSwing;</span><br /><span style="line-height:1.6em;">    public string name;</span><br /><span style="line-height:1.6em;">}</span></p>\n</blockquote>\n\n<p>จาก Class ดังกล่าว  มีการกำหนด  Attribute กี่ตัว  </p>', 'numeric', 'active', '0000-00-00 00:00:00', 8, 8),
-(9, '<p>Drafting question</p>', 'boolean', 'active', '0000-00-00 00:00:00', 5, 3),
-(10, '<p>Drafting 2</p>', 'choice', 'draft', '0000-00-00 00:00:00', 4, 3),
+(6, '<p><strong>Class</strong> ประกอบไปด้วย <strong>Attribute</strong> และ <strong>Method</strong>  <u><span style="color:#FF0000;">ไม่สามารถสืบทอดได้</span></u></p>', 'boolean', 'active', '2014-09-22 08:23:26', 8, 3),
+(7, '<p><span style="font-size:22px;"><span style="font-family:''th sarabun new'', ''th sarabun psk'';">หากมี <strong>Method</strong>  <u>Run() </u> ใน <strong>Class</strong>  ต้องการให้เรียกใช้จากภายนอกได้  จะต้องกำหนด <span style="color:#FF0000;"><strong>Encapsulation</strong></span> อย่างไร</span></span></p>', 'choice', 'active', '2014-09-24 13:20:44', 8, 3),
+(8, '<blockquote>\n<p>Class Fan {</p>\n\n<p>    private int speed;<br /><span style="line-height:1.6em;">    private double power</span><br /><span style="line-height:1.6em;">    private bool isSwing;</span><br /><span style="line-height:1.6em;">    public string name;</span><br /><span style="line-height:1.6em;">}</span></p>\n</blockquote>\n\n<p>จาก Class ดังกล่าว  มีการกำหนด  Attribute กี่ตัว  </p>', 'numeric', 'active', '2014-09-29 09:32:17', 8, 8),
+(9, '<p>Drafting question</p>', 'boolean', 'active', '2014-09-22 09:48:18', 5, 3),
+(10, '<p>Drafting 2</p>', 'choice', 'draft', '2014-10-01 15:20:10', 4, 3),
 (11, '<p>Disabled question</p>', 'numeric', 'inactive', '2014-09-08 21:05:28', 4, 8),
-(12, '<p>Trueeee</p>', 'boolean', 'active', '2014-09-08 21:09:05', 4, 8);
+(12, '<p>Trueeee</p>', 'boolean', 'active', '2014-09-08 21:09:05', 4, 8),
+(13, '<p><strong>jhglkdjf;sldkfs;dkjfls;</strong></p>', 'numeric', 'active', '2014-09-09 15:38:00', 7, 8);
 
 -- --------------------------------------------------------
 
@@ -337,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `Question_numerical` (
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `Question_numerical`
@@ -346,7 +348,8 @@ CREATE TABLE IF NOT EXISTS `Question_numerical` (
 INSERT INTO `Question_numerical` (`id`, `answer`, `question_id`) VALUES
 (1, '2010', 1),
 (2, '4', 8),
-(3, '2', 11);
+(3, '2', 11),
+(4, '4234234', 13);
 
 -- --------------------------------------------------------
 

@@ -458,13 +458,7 @@ EOL;
 											</tr>
 										</thead>
 										<tbody id="questionListTable">
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
+
 										</tbody>
 									</table>
 								</div>

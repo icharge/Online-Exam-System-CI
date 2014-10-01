@@ -263,9 +263,9 @@ class Qwarehouse extends CI_Controller {
 		CKEDITOR.instances.question.editable();
 	};
 
-	$(".chapterListGroup").scrollToFixed({
-		marginTop: $(".chapterListGroup").outerHeight()+50,
-	});
+	// $(".chapterListGroup").scrollToFixed({
+	// 	marginTop: $(".chapterListGroup").outerHeight()+50,
+	// });
 
 	$("a[href=#questions]").click(function(e){
 		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/getChapterList/").'/?ts="+Date.now();
@@ -969,6 +969,14 @@ class Qwarehouse extends CI_Controller {
 					$data['pagesubtitle'] = "วิชา ".$data['subjectInfo']['code']." ".$data['subjectInfo']['name'];
 
 					$data['chapterList'] = $this->qwh->getChapterList($data['subjectInfo']['subject_id']);
+
+					// SET Default Per page
+					$data['perpage'] = '20';
+					if ($this->input->get('perpage')!='') $data['perpage'] = $this->input->get('perpage');
+					$data['total'] = $this->qwh->countQuestionList($this->input->get('q'),4);
+					$data['questionlist'] = $this->qwh->QuestionList($this->input->get('q'),4,
+						$data['perpage'],
+						$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
 
 					$this->load->view('teacher/field_qwarehouse_q_view', $data);
 				}
