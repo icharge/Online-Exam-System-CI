@@ -14,11 +14,11 @@ class Qwarehouse_model extends CI_Model {
 	{
 		switch ($str) {
 			case 'true':
-				return '<i class="text-green fa fa-circle jtooltip" title="มีข้อมูล"></i>';
+				return '<i class="text-green fa fa-circle jtooltip" title="มีเนื้อหา"></i>';
 				break;
 
 			case 'false':
-				return '<i class="fa fa-circle-o jtooltip" title="ไม่มีข้อมูล"></i>';
+				return '<i class="fa fa-circle-o jtooltip" title="ไม่มีเนื้อหา"></i>';
 				break;
 
 			default:
