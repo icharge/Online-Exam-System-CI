@@ -185,7 +185,7 @@ if ($this->session->flashdata('msg_error')) {
 							if (($courseslist)) {
 								foreach ($courseslist as $item) {
 									echo "
-									<tr href=\"".$this->misc->getHref('teacher/mycourses/view')."/$item[course_id]\">
+									<tr href=\"".$this->misc->getHref('teacher/courses/view')."/$item[course_id]\">
 									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status']).
 									' '.$this->misc->getVisibilityStatusIcon($item['visible'])."</td>
 									<td>$item[code]</td>
