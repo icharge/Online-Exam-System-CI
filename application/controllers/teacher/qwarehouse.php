@@ -7,6 +7,8 @@ class Qwarehouse extends CI_Controller {
 	private $chapterManage;
 	private $questionManage;
 
+	private $role;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -30,6 +32,8 @@ class Qwarehouse extends CI_Controller {
 			else
 				redirect('auth/login');
 		}
+
+		$this->role = $this->session->userdata('role');
 
 		$this->chapterManage = '
 	$(\'a[href="\'+location.hash+\'"]\').tab(\'show\');
@@ -418,10 +422,10 @@ class Qwarehouse extends CI_Controller {
 			{
 				console.log("sent");
 				clearInput();
+				$("#newQuestion").modal("hide")
 				$(".question-notfound").remove();
-				$("#newQuestion .box-body, #newQuestion .box-footer").slideUp();
 				var respHtml = $(data.html);
-				$("#questionList").prepend(respHtml);
+				$("#questionListTable").prepend(respHtml);
 				respHtml.hide().slideDown();
 				$(".jtooltip").jBox("Tooltip", {theme: "TooltipDark"});
 			}
@@ -444,49 +448,6 @@ class Qwarehouse extends CI_Controller {
 		});
 	});
 
-	// Select Chapter for Question
-	$("#chapterListq").delegate(".list-group-item", "click", function(e) {
-		e.preventDefault();
-		$(this).siblings().removeClass("active");
-		$(this).addClass("active");
-
-		$(".questionLoading").slideDown();
-		$("#questionList").slideUp();
-		var chapter_id = $(this).attr("data-chapter-id");
-		var oxsysAPI = "'.$this->misc->getHref("teacher/qwarehouse/callbackjson/getQuestionList/").'/?ts="+Date.now();
-		var myData = "chapter_id="+chapter_id;
-		$.ajax({
-			type: "POST",
-			url: oxsysAPI,
-			data: myData,
-			contentType: "application/x-www-form-urlencoded",
-			dataType: "json"
-		})
-		.done(function(data) {
-			setTimeout(function() {
-				console.log("sent " + myData + " to " + oxsysAPI);
-
-				var respHtml = $(data.html);
-				$("#questionListTable").html(respHtml).slideDown();
-				$(".questionLoading").slideUp();
-				$(".jtooltip").jBox("Tooltip", {theme: "TooltipDark"});
-			}, 500, data);
-		})
-		.fail(function(jqxhr, textStatus, error) {
-			var err = textStatus + ", " + error;
-			console.log("Request Failed: "+err);
-
-			var jbox = new jBox(\'Modal\', {
-				width: 350,
-				height: 100,
-				title: \'ข้อผิดพลาด\',
-				overlay: true,
-				content: error,
-			});
-			jbox.open();
-			$(".questionLoading").slideUp();
-		});
-	});
 
 ';
 
@@ -816,7 +777,7 @@ class Qwarehouse extends CI_Controller {
 					}
 					// var_dump($data);
 					// die();
-					$html = $this->load->view('teacher/question_item_view', $data, true);
+					$html = $this->load->view('teacher/question_item_table_view', $data, true);
 					echo json_encode(array(
 						'id' => $insert_trans['id'],
 						'html' => $html,
@@ -940,7 +901,7 @@ class Qwarehouse extends CI_Controller {
 		$this->load->view('teacher/t_footer_view', $footdata);
 	}
 
-	public function viewq($subjectId)
+	public function viewq($subjectId,$chapterid='')
 	{
 		$this->session->set_flashdata('noAnim', true);
 		$this->load->view('teacher/t_header_view');
@@ -969,14 +930,21 @@ class Qwarehouse extends CI_Controller {
 					$data['pagesubtitle'] = "วิชา ".$data['subjectInfo']['code']." ".$data['subjectInfo']['name'];
 
 					$data['chapterList'] = $this->qwh->getChapterList($data['subjectInfo']['subject_id']);
-
+					$data['chapterid'] = $chapterid;
 					// SET Default Per page
-					$data['perpage'] = '20';
+					$data['perpage'] = '10';
 					if ($this->input->get('perpage')!='') $data['perpage'] = $this->input->get('perpage');
-					$data['total'] = $this->qwh->countQuestionList($this->input->get('q'),4);
-					$data['questionlist'] = $this->qwh->QuestionList($this->input->get('q'),4,
+					$data['total'] = $this->qwh->countQuestionList($this->input->get('q'),$chapterid);
+					$data['questionlist'] = $this->qwh->QuestionList($this->input->get('q'),$chapterid,
 						$data['perpage'],
 						$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
+
+					$this->misc->PaginationInit(
+						$this->role.'/qwarehouse/viewq/'.$subjectId.'/'.$chapterid.'?perpage='.
+						$data['perpage'].'&q='.$this->input->get('q'),
+						$data['total'],$data['perpage']);
+
+					$data['pagin'] = $this->pagination->create_links();
 
 					$this->load->view('teacher/field_qwarehouse_q_view', $data);
 				}

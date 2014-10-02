@@ -71,7 +71,7 @@ EOL;
 										<ul id="chapterListq" class="list-group">
 											<?php
 												foreach ($chapterList as $item) {
-													echo "<a href=\"#\" class=\"list-group-item\" data-chapter-id=\"$item[chapter_id]\">
+													echo "<a href=\"".$this->misc->getHref("teacher/qwarehouse/viewq")."/$subjectInfo[code]/$item[chapter_id]\" class=\"list-group-item".(($item['chapter_id']==$chapterid)?" active":"")."\" data-chapter-id=\"$item[chapter_id]\">
 													<span class=\"badge\"></span>
 													<h4 class=\"list-group-item-heading\">$item[name]</h4>
 													<div class=\"item-group-item-text\">$item[description]</div>
@@ -377,9 +377,6 @@ EOL;
 										เพิ่มโจทย์คำถามใหม่
 									</button>
 
-
-									<div id="questionList">
-									</div>
 									<div class="questionLoading" style="display: none;">
 										<span><i class="fa fa-spinner fa-spin"></i> กำลังโหลด...</span>
 									</div>
@@ -388,6 +385,7 @@ EOL;
 							<!-- Question list as Table -->
 							<div class="row">
 								<div class="col-md-12">
+									<h2 class="page-header"><small>แสดง <b><?php echo $perpage;?></b> รายการ จากทั้งหมด <b><?php echo $total;?></b> รายการ</small></h2>
 									<table class="table table-striped table-hover rowclick ellipsis">
 										<thead>
 											<tr>
@@ -403,7 +401,7 @@ EOL;
 												if (($questionlist)) {
 													foreach ($questionlist as $item) {
 														echo "
-														<tr id=\"question-$item[question_id]\" href=\"".$this->misc->getHref('admin/courses/view')."/$item[question_id]\">
+														<tr id=\"question-$item[question_id]\" href=\"".$this->misc->getHref('teacher/qwarehouse/editq/')."/$item[question_id]\">
 														<td>$item[question_id]</td>
 														<td>$item[question]</td>
 														<td>";
@@ -456,7 +454,7 @@ EOL;
 														";
 													}
 												} else {
-													echo "<tr class='warning'><td colspan='4' class='text-center'>ไม่พบข้อมูล</td></tr>";
+													$this->load->view('teacher/question_notfound_view');
 												}
 
 											?>
@@ -466,10 +464,8 @@ EOL;
 							</div>
 						</div>
 					</div>
-					<div class="box-footer text-right">
-					<?php
-					//echo form_submit('submit', $this->courses->btnSaveText(), 'class="btn btn-primary"');
-					?>
+					<div class="box-footer text-right clearfix">
+					<?php echo $pagin;?>
 					</div>
 				</div>
 				<!-- End BasicInfo -->

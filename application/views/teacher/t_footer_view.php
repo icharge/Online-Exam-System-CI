@@ -56,6 +56,7 @@
 	<script src="vendor/js/jquery.ui.widget.js" type="text/javascript"></script>
 	<script src="vendor/js/jquery-picklist.js" type="text/javascript"></script>
 
+
 	<?php
 		if (defined('useEditor')) echo '
 	<!-- CK Editor -->
@@ -64,7 +65,7 @@
 	<!-- TR Href -->
 	<script>
 	$(function() {
-		$('body').on('mousedown', 'tr[href]', function(e){
+		$('body').delegate('tr[href]', 'mousedown', function(e){
 			var click = e.which;
 			var url = $(this).attr('href');
 			if(url){

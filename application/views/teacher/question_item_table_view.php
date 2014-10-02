@@ -1,4 +1,4 @@
-		<tr id="question-<?php echo $question_id;?>">
+		<tr id="question-<?php echo $question_id;?>" href="<?php echo $this->misc->getHref('teacher/qwarehouse/editq/')."/$question_id";?>">
 			<td><?php echo $question_id;?></td>
 			<td><?php echo $question;?></td>
 			<td><?php
@@ -35,9 +35,14 @@
 			{
 				$answer = $answer_numeric;
 			}
+			list($date, $time) = explode(' ', $created_time);
 		?></td>
 			<td><?php echo $answer;?></td>
-			<td></td>
+			<td><span class="jtooltip" title="<?php
+				echo $this->misc->getFullDateTH($date)."<br>เวลา ".$time."\">".
+				$created_by; ?>
+				</span>
+			</td>
 		</tr>
 <?php
 

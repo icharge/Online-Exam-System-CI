@@ -526,14 +526,18 @@ input[type=text].date {
 }
 
 .questionLoading {
-	background: #FFFEE7;
-	height: 200px;
-	position: relative;
+	background: rgba(255, 254, 231, 0.5);
+	position: fixed;
+	z-index: 10000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 .questionLoading span {
 	font-size: 40px;
 	text-align: center;
 	position: absolute;
 	width: 100%;
-	line-height: 5;
+	top: 44%;
 }
