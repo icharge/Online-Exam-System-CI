@@ -466,12 +466,15 @@ $(function() {
 			$courseData['status'] = ($this->input->post('status')=="active"?"active":"inactive");
 			$courseData['visible'] = ($this->input->post('visible')=="hidden"?"0":"1");
 
+			// Update Teacher list
 			$updateTeasRes = $this->courses->updateTeacherList($courseId,$this->input->post('teaselected'));
 			if ($updateTeasRes != 0) {
 				$this->session->set_flashdata('msg_error',
 					'มีบางอย่างผิดพลาด ในการเพิ่มผู้สอน '.$updateTeasRes);
 				redirect($this->role.'/courses');
 			}
+
+			// Update Student list
 			$updateStdsRes = $this->courses->updateStudentList($courseId,$this->input->post('stdselected'));
 			if ($updateStdsRes != 0) {
 				$this->session->set_flashdata('msg_error',
