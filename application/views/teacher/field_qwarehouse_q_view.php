@@ -373,8 +373,8 @@ EOL;
 										</div><!-- /.modal-dialog -->
 									</div><!-- /.modal -->
 
-									<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newQuestion">
-										เพิ่มโจทย์คำถามใหม่
+									<button class="btn btn-app" data-toggle="modal" data-target="#newQuestion">
+										<i class="fa fa-plus"></i> เพิ่มโจทย์
 									</button>
 
 									<div class="questionLoading" style="display: none;">
