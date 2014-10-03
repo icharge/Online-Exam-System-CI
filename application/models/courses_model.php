@@ -262,25 +262,27 @@ class Courses_model extends CI_Model {
 		}
 	}
 
-	function updateStudentList($CourseId, $stdId)
+	function updateStudentList($groupId, $CourseId, $stdId)
 	{
 		$data = array();
 
 		if ($stdId == null)
 		{
 			$this->db->delete('Student_Enroll',
-				array('course_id' => $CourseId));
+				array('course_id' => $CourseId, 'group_id' => $groupId));
 			return 0;
 		}
 
 		for ($i=0; $i < sizeof($stdId); $i++) {
+			$data[$i]['group_id'] = $groupId;
 			$data[$i]['stu_id'] = $stdId[$i];
 			$data[$i]['course_id'] = $CourseId;
 		}
 
 		$this->db->trans_begin();
 		$this->db->delete('Student_Enroll',
-			array('course_id' => $CourseId));
+			array('course_id' => $CourseId,
+						'group_id' => $groupId));
 
 		$qins = $this->db->insert_batch('Student_Enroll', $data);
 		$errno = $this->db->_error_number();
@@ -293,6 +295,26 @@ class Courses_model extends CI_Model {
 		{
 			return $errno;
 		}
+	}
+
+	function getStudentGroups($CourseId)
+	{
+		$cause = array('course_id' => $CourseId);
+		$query = $this->db
+			->get_where('Course_Students_group', $cause)
+			->result_array();
+		return $query;
+	}
+
+	function countStudentInGroup($groupId, $CourseId = '')
+	{
+		$cause['group_id'] = $groupId;
+		if ($CourseId != '') $cause['course_id'] = $CourseId;
+		$query = $this->db
+			->select('count(stu_id) as scount')
+			->get_where('Student_Enroll', $cause)
+			->row_array();
+		return $query['scount'];
 	}
 
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 03, 2014 at 09:27 AM
+-- Generation Time: Oct 03, 2014 at 08:37 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -143,8 +143,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('915fe2ba7beb38acdb240a4fbd285211', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1412271736, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
-('f20a7e48ee1028dcbd51fbbdde259838', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1412318412, 'a:12:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;s:16:"flash:new:noAnim";b:1;}');
+('7a8fef62dfea2567f42a5567d5fc1aef', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1412361400, '');
 
 -- --------------------------------------------------------
 
@@ -168,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `Courses` (
 
 INSERT INTO `Courses` (`course_id`, `year`, `pwd`, `visible`, `status`, `subject_id`) VALUES
 (1, '2014', NULL, 1, 'active', 1),
-(2, '2014', '12345', 1, 'active', 2),
+(2, '2014', '12345', 1, 'inactive', 2),
 (3, '2014', NULL, 0, 'inactive', 4);
 
 -- --------------------------------------------------------
@@ -199,14 +198,15 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
   `description` text,
   `course_id` int(4) NOT NULL,
   PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `Course_Students_group`
 --
 
 INSERT INTO `Course_Students_group` (`group_id`, `name`, `description`, `course_id`) VALUES
-(1, 'Sec 1', NULL, 1);
+(1, 'Sec 1', NULL, 1),
+(2, 'Sec 1', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -535,16 +535,30 @@ CREATE TABLE IF NOT EXISTS `Student_Enroll` (
 
 INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('54310104', '1', 1),
+('54310104', '2', 2),
 ('54311095', '1', 1),
-('57700188', '1', 1),
-('57700193', '1', 1),
-('57700194', '1', 1),
-('57700197', '1', 1),
-('58700115', '1', 1),
-('58700121', '1', 1),
-('58700135', '1', 1),
-('58700140', '1', 1),
-('58700157', '1', 1);
+('54311095', '2', 2),
+('57700191', '2', 2),
+('57700195', '2', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Student_Group_Paper`
+--
+
+CREATE TABLE IF NOT EXISTS `Student_Group_Paper` (
+  `group_id` int(6) NOT NULL,
+  `paper_id` int(7) NOT NULL,
+  PRIMARY KEY (`group_id`,`paper_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Student_Group_Paper`
+--
+
+INSERT INTO `Student_Group_Paper` (`group_id`, `paper_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 

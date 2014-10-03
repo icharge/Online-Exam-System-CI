@@ -200,23 +200,18 @@ EOL;
 										<i class="fa fa-plus"></i> เพิ่มกลุ่ม
 									</button>
 
-									<div class="chapterListGroup">
+									<div class="sectorListGroup">
 										<h4>กลุ่มผู้เรียนในวิชา</h4>
-										<ul id="chapterListq" class="list-group">
+										<ul id="sectorListq" class="list-group">
 											<?php
-												// foreach ($chapterList as $item) {
-												// 	echo "<a href=\"".$this->misc->getHref("teacher/qwarehouse/viewq")."/$subjectInfo[code]/$item[chapter_id]\" class=\"list-group-item".(($item['chapter_id']==$chapterid)?" active":"")."\" data-chapter-id=\"$item[chapter_id]\">
-												// 	<span class=\"badge\"></span>
-												// 	<h4 class=\"list-group-item-heading\">$item[name]</h4>
-												// 	<div class=\"item-group-item-text\">$item[description]</div>
-												// 	</a>";
-												// }
+												foreach ($studentListGroups as $item) {
+													echo "<a href=\"#group/".$item['group_id']."\" class=\"list-group-item\" data-group-id=\"$item[group_id]\">
+													<span class=\"badge\">".$this->courses->countStudentInGroup($item['group_id'], $item['course_id'])."</span>
+													<h4 class=\"list-group-item-heading\">$item[name]</h4>
+													<div class=\"item-group-item-text\">$item[description]</div>
+													</a>";
+												}
 											?>
-											<a href="#1" class="list-group-item" data-group-id="1" data-toggle="modal" data-target="#stugroup">
-												<span class="badge">10 คน</span>
-												<h4 class="list-group-item-heading">Sec 1</h4>
-												<div class="item-group-item-text"></div>
-											</a>
 										</ul>
 									</div>
 								</div>
@@ -250,8 +245,8 @@ EOL;
 												</div>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save changes</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+												<button type="button" class="btn btn-primary" id="stdListSave"><i class="fa fa-save"></i> บันทึก</button>
 											</div>
 										</div><!-- /.modal-content -->
 									</div><!-- /.modal-dialog -->

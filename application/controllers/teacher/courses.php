@@ -9,6 +9,7 @@ class Courses extends CI_Controller {
 	private $datePicker;
 	private $removePwd;
 	private $listview;
+	private $stdGroup;
 
 	private $role;
 
@@ -26,7 +27,12 @@ class Courses extends CI_Controller {
 		{
 			if ( ! $this->Users->_checkRole($perm)) redirect('main');
 		} else {
-			redirect('auth/login');
+			if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+				echo json_encode(array('error' => "Session expire, please re-login."));
+				die();
+			}
+			else
+				redirect('auth/login');
 		}
 
 		$this->role = $this->session->userdata('role');
@@ -299,11 +305,85 @@ $(function() {
 
 ";
 
+		$this->stdGroup = <<<HTML
+	function btnAddState(s) {
+		var btn = $("#stdListSave");
+		if (s == "load")
+		{
+			btn.removeClass("btn-primary").attr("disabled","disabled")
+			.find("i").removeClass("fa-save").addClass("fa-spinner fa-spin");
+		}
+		else if(s == "normal")
+		{
+			btn.addClass("btn-primary").removeAttr("disabled")
+			.find("i").removeClass("fa-spinner fa-spin").addClass("fa-save");
+		}
+	};
+
+	$("#sectorListq").delegate("a[href^='#group/']", "click", function(e) {
+		e.preventDefault();
+		var group_id = $(this).attr("data-group-id");
+		// Load data
+
+		$("#stugroup").attr("data-group-id", group_id).modal('show');
+	});
+
+	$("#stdListSave").click(function(e) {
+		e.preventDefault();
+		btnAddState("load");
+		var oxsysAPI = "{$this->misc->getHref("teacher/courses/callbackjson/saveStdList/")}/?ts="+Date.now();
+
+		var stdselected = decodeURIComponent($("#studentList").serialize());
+		var course_id = "course_id={$this->uri->segment(4)}";
+		var group_id = "group_id="+$(this).parent().parent().parent().parent().attr('data-group-id');
+		var myData = stdselected + '&' + course_id + '&' + group_id;
+
+		$.ajax({
+			type: "POST",
+			url: oxsysAPI,
+			data: myData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json"
+		})
+		.done(function(data) {
+			if (data.error != "") {
+
+				var jbox = new jBox('Modal', {
+					width: 350,
+					title: 'ข้อผิดพลาด',
+					overlay: true,
+					content: data.error,
+				});
+				jbox.open();
+			}else{
+				$("#stugroup").modal('hide');
+			}
+			btnAddState("normal");
+		})
+		.fail(function(jqxhr, textStatus, error) {
+			var err = textStatus + ", " + error;
+			console.log("Request Failed: "+err);
+
+			var jbox = new jBox('Modal', {
+				width: 350,
+				height: 100,
+				title: 'ข้อผิดพลาด',
+				overlay: true,
+				content: error,
+			});
+			jbox.open();
+			btnAddState("normal");
+		});
+
+	});
+HTML;
+
 		$this->scriptList = array(
 			'subjectDropdownScript' => $this->subjectDropdownScript,
 			//'datePicker' => $this->datePicker,
 			'removePwd' => $this->removePwd,
 			'listview' => $this->listview,
+			'stdGroup' => $this->stdGroup,
 		);
 
 
@@ -367,6 +447,9 @@ $(function() {
 				// Load Students
 				$data['studentListinCourse'] = $this->courses->getStudentlist($courseId);
 				$data['studentListAvaliable'] = $this->courses->getStudentlist($courseId, 'exclude');
+
+				// Load Sectors
+				$data['studentListGroups'] = $this->courses->getStudentGroups($courseId);
 
 				// Set page desc
 				$data['formlink'] = $this->role.'/courses/view/'.$courseId;
@@ -475,12 +558,7 @@ $(function() {
 			}
 
 			// Update Student list
-			$updateStdsRes = $this->courses->updateStudentList($courseId,$this->input->post('stdselected'));
-			if ($updateStdsRes != 0) {
-				$this->session->set_flashdata('msg_error',
-					'มีบางอย่างผิดพลาด ในการเพิ่มผู้สอน '.$updateStdsRes);
-				redirect($this->role.'/courses');
-			}
+			// Moved to AJAX !
 
 			# Remove password ??
 			if ($this->input->post('removepass') == "1")
@@ -535,6 +613,19 @@ $(function() {
 					echo json_encode($this->courses->getSubjectDesc($arg_list[1]));
 				else
 					echo json_encode(array('error' => "No Subject_id"));
+				break;
+
+			case 'saveStdList':
+				// Update Student list
+				$updateStdsRes = $this->courses->updateStudentList($this->input->post('group_id'),
+					$this->input->post('course_id'),
+					$this->input->post('stdselected'));
+				if ($updateStdsRes != 0) {
+					echo json_encode(array('error' => 'Error with '.$updateStdsRes));
+				}
+				else
+					echo json_encode(array('result' => 'completed', 'error' => ''));
+
 				break;
 
 			default:
