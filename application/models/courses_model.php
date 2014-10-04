@@ -317,6 +317,32 @@ class Courses_model extends CI_Model {
 		return $query['scount'];
 	}
 
+	function addStudentGroup($CourseId, $gname, $gdesc)
+	{
+		$data = array(
+			'name' => $gname,
+			'description' => $gdesc,
+			'course_id' => $CourseId,
+		);
+		$query = $this->db->insert('Course_Students_group', $data);
+		$newid = $this->db->insert_id();
+		return array(
+			'result' => 'ok',
+			'newid' => $newid,
+			'name' => $gname,
+			'desc' => $gdesc,
+			'error' => $this->db->_error_number(),
+		);
+	}
+
+	function deleteStudentGroup($groupId)
+	{
+		$query = $this->db->delete('Course_Students_group',
+			array('group_id' => $groupId));
+		$errno = $this->db->_error_number();
+		return ($errno == 0?"ok":$errno);
+	}
+
 }
 
 /* End of file courses_model.php */

@@ -196,9 +196,9 @@ EOL;
 									<h3 class="" contenteditable="false">ผู้ที่ลงเรียน <?php echo $courseInfo['code'] . ' ' . $courseInfo['name']; ?></h3>
 								</div>
 								<div class="col-md-12">
-									<button class="btn btn-app">
+									<a href="#addstdgroup" class="btn btn-app">
 										<i class="fa fa-plus"></i> เพิ่มกลุ่ม
-									</button>
+									</a>
 
 									<div class="sectorListGroup">
 										<h4>กลุ่มผู้เรียนในวิชา</h4>
@@ -246,17 +246,66 @@ EOL;
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+												<button type="button" class="btn btn-danger" data-dismiss="modal" id="stdListDel"><i class="fa fa-times"></i> ลบกลุ่ม</button>
 												<button type="button" class="btn btn-primary" id="stdListSave"><i class="fa fa-save"></i> บันทึก</button>
 											</div>
 										</div><!-- /.modal-content -->
 									</div><!-- /.modal-dialog -->
 								</div><!-- /.modal -->
+
+								<!-- add Group Dialog -->
+								<div class="modal fade" id="addstugroup">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+												<h4 class="modal-title">เพิ่มกลุ่มนักเรียน</h4>
+											</div>
+											<div class="modal-body">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="alert alert-danger alert-dismissable" style="display: none;">
+															<i class="fa fa-ban"></i>
+															<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+															<b>โปรด</b> ตรวจสอบความถูกต้อง
+														</div>
+													</div>
+													<div class="col-md-12">
+														<form id="addstugroupfrm" action="" class="form-inline">
+															<div class="form-group">
+																<?php
+																echo form_label('ชื่อกลุ่ม <span class="text-danger">*</span>', 'name');
+																echo form_input(array(
+																	'id'=>'stdgname',
+																	'name'=>'stdgname',
+																	'type'=>'text',
+																	'class'=>'form-control',
+																	'placeholder'=>''));
+																?>
+															</div>
+															<div class="form-group">
+																<?php
+																echo form_label('คำอธิบายกลุ่ม', 'stdgdescription');
+																echo form_textarea('stdgdescription', "", 'id="stdgdescription" class="form-control" style="height: 90px"');
+																?>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+												<button type="button" class="btn btn-primary" id="stdListAdd"><i class="fa fa-plus"></i> เพิ่ม</button>
+											</div>
+										</div><!-- /.modal-content -->
+									</div><!-- /.modal-dialog -->
+								</div><!-- /.modal -->
+
 							</div>
 						</div>
 						<div class="box-body tab-pane" id="papers">
 							<h3>ชุดข้อสอบ</h3>
 						</div>
-
 
 					</div>
 					<div class="box-footer text-right">

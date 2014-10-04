@@ -113,7 +113,7 @@ EOL;
 						</div>
 						<div class="form-group<?php if(form_error('description')) echo ' has-error';?>">
 							<?php
-							echo form_label('คำอธิบายวิชา', 'ชื่อย่อวิชา');
+							echo form_label('คำอธิบายวิชา', 'description');
 							echo form_textarea('description', $subjectInfo['description'], 'id="editor" class="form-control"');
 							// echo form_error('description', '<span class="label label-danger">', '</span>');
 							?>

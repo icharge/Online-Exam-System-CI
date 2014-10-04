@@ -306,17 +306,17 @@ $(function() {
 ";
 
 		$this->stdGroup = <<<HTML
-	function btnAddState(s) {
-		var btn = $("#stdListSave");
+	function btnAddState(btn, s, ori) {
+		//var btn = $("#stdListSave");
 		if (s == "load")
 		{
 			btn.removeClass("btn-primary").attr("disabled","disabled")
-			.find("i").removeClass("fa-save").addClass("fa-spinner fa-spin");
+			.find("i").removeClass(ori).addClass("fa-spinner fa-spin");
 		}
 		else if(s == "normal")
 		{
 			btn.addClass("btn-primary").removeAttr("disabled")
-			.find("i").removeClass("fa-spinner fa-spin").addClass("fa-save");
+			.find("i").removeClass("fa-spinner fa-spin").addClass(ori);
 		}
 	};
 
@@ -330,13 +330,13 @@ $(function() {
 
 	$("#stdListSave").click(function(e) {
 		e.preventDefault();
-		btnAddState("load");
+		btnAddState($(this), "load", "fa-save");
 		var oxsysAPI = "{$this->misc->getHref("teacher/courses/callbackjson/saveStdList/")}/?ts="+Date.now();
 
 		var stdselected = decodeURIComponent($("#studentList").serialize());
 		var course_id = "course_id={$this->uri->segment(4)}";
 		var group_id = "group_id="+$(this).parent().parent().parent().parent().attr('data-group-id');
-		var myData = stdselected + '&' + course_id + '&' + group_id;
+		var myData = course_id + '&' + group_id + '&' + stdselected;
 
 		$.ajax({
 			type: "POST",
@@ -358,7 +358,7 @@ $(function() {
 			}else{
 				$("#stugroup").modal('hide');
 			}
-			btnAddState("normal");
+			btnAddState($("#stdListSave"), "normal", "fa-save");
 		})
 		.fail(function(jqxhr, textStatus, error) {
 			var err = textStatus + ", " + error;
@@ -372,10 +372,142 @@ $(function() {
 				content: error,
 			});
 			jbox.open();
-			btnAddState("normal");
+			btnAddState($("#stdListSave"), "normal", "fa-save");
 		});
 
 	});
+
+	$("a[href='#addstdgroup']").click(function(e) {
+		e.preventDefault();
+		$("#addstugroup").modal('show');
+	});
+
+	$("#stdListAdd").click(function(e) {
+		btnAddState($(this), "load", "fa-plus");
+		var oxsysAPI = "{$this->misc->getHref("teacher/courses/callbackjson/addStdList/")}/?ts="+Date.now();
+
+		var isError = 0;
+		var stdgname = $("#stdgname");
+		var stdgdesc = $("#stdgdescription");
+		var modalAlert = $(this).parent().parent().find(".alert");
+
+
+		if (stdgname.val() == "")
+		{
+			isError = 1;
+			stdgname.parent().addClass("has-error");
+		}
+		else
+			stdgname.parent().removeClass("has-error");
+		if (isError == 0)
+		{
+			// Perform send.
+			modalAlert.fadeOut();
+
+			var course_id = "{$this->uri->segment(4)}";
+			var myData = "name="+stdgname.val()+"&desc="+stdgdesc.val()+"&course_id="+course_id;
+
+			$.ajax({
+				type: "POST",
+				url: oxsysAPI,
+				data: myData,
+				contentType: "application/x-www-form-urlencoded",
+				dataType: "json"
+			})
+			.done(function(data) {
+				if (data.error != "") {
+
+					var jbox = new jBox('Modal', {
+						width: 350,
+						title: 'ข้อผิดพลาด',
+						overlay: true,
+						content: data.error,
+					});
+					jbox.open();
+				}else{
+					$("#addstugroup").modal('hide');
+					var newgroupid = data.newid;
+					var ghtml = "<a href=\"#group/"+newgroupid+"\" class=\"list-group-item\" data-group-id=\""+newgroupid+"\">"+
+											"<span class=\"badge\"></span>"+
+											"<h4 class=\"list-group-item-heading\">"+data.name+"</h4>"+
+											"<div class=\"item-group-item-text\">"+data.desc+"</div>"+
+											"</a>";
+					$("#sectorListq").append(ghtml);
+					$("#addstugroup").modal('hide');
+				}
+				btnAddState($("#stdListAdd"), "normal", "fa-plus");
+			})
+			.fail(function(jqxhr, textStatus, error) {
+				var err = textStatus + ", " + error;
+				console.log("Request Failed: "+err);
+
+				var jbox = new jBox('Modal', {
+					width: 350,
+					height: 100,
+					title: 'ข้อผิดพลาด',
+					overlay: true,
+					content: error,
+				});
+				jbox.open();
+				btnAddState($("#stdListAdd"), "normal", "fa-plus");
+			});
+		}
+		else
+		{
+			modalAlert.fadeIn();
+			btnAddState($(this), "normal", "fa-plus");
+		}
+
+	});
+
+	$("#stdListDel").click(function(e) {
+		e.preventDefault();
+		btnAddState($(this), "load", "fa-times");
+		var oxsysAPI = "{$this->misc->getHref("teacher/courses/callbackjson/delStdList/")}/?ts="+Date.now();
+		var course_id = "course_id={$this->uri->segment(4)}";
+		var group_id = "group_id="+$(this).parent().parent().parent().parent().attr('data-group-id');
+		var myData = course_id + '&' + group_id;
+
+		$.ajax({
+			type: "POST",
+			url: oxsysAPI,
+			data: myData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json"
+		})
+		.done(function(data) {
+			if (data.error != "") {
+
+				var jbox = new jBox('Modal', {
+					width: 350,
+					title: 'ข้อผิดพลาด',
+					overlay: true,
+					content: data.error,
+				});
+				jbox.open();
+			}else{
+				$("#stugroup").modal('hide');
+
+				$("#sectorListq a[data-group-id='"+data.group_id+"'").remove();
+			}
+			btnAddState($("#stdListDel"), "normal", "fa-times");
+		})
+		.fail(function(jqxhr, textStatus, error) {
+			var err = textStatus + ", " + error;
+			console.log("Request Failed: "+err);
+
+			var jbox = new jBox('Modal', {
+				width: 350,
+				height: 100,
+				title: 'ข้อผิดพลาด',
+				overlay: true,
+				content: error,
+			});
+			jbox.open();
+			btnAddState($("#stdListDel"), "normal", "fa-times");
+		});
+	});
+
 HTML;
 
 		$this->scriptList = array(
@@ -615,6 +747,20 @@ HTML;
 					echo json_encode(array('error' => "No Subject_id"));
 				break;
 
+			case 'addStdList':
+				$addStdList = $this->courses->addStudentGroup($this->input->post('course_id'),
+					$this->input->post('name'), $this->input->post('desc'));
+				if ($addStdList['error'] != 0)
+				{
+					$addStdList['error'] = '';
+					echo json_encode($addStdList);
+				}
+				else
+				{
+					echo json_encode($addStdList);
+				}
+				break;
+
 			case 'saveStdList':
 				// Update Student list
 				$updateStdsRes = $this->courses->updateStudentList($this->input->post('group_id'),
@@ -625,6 +771,29 @@ HTML;
 				}
 				else
 					echo json_encode(array('result' => 'completed', 'error' => ''));
+
+				break;
+
+			case 'delStdList':
+				$updateStdsRes = $this->courses->updateStudentList($this->input->post('group_id'),
+					$this->input->post('course_id'),
+					$this->input->post('stdselected'));
+				if ($updateStdsRes != 0) {
+					echo json_encode(array('error' => 'Error delStdList.updateStdsRes with '.$updateStdsRes));
+				}
+				else
+				{
+					$deleteStdList = $this->courses->deleteStudentGroup($this->input->post('group_id'));
+					if ($deleteStdList != 0) {
+						echo json_encode(array('error' => 'Error delStdList.deleteStdList with '.$updateStdsRes));
+					}
+					else
+					{
+						echo json_encode(array('result' => 'completed',
+																	'group_id' => $this->input->post('group_id'),
+						 											'error' => ''));
+					}
+				}
 
 				break;
 
