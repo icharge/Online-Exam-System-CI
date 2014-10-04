@@ -228,11 +228,12 @@ class Courses_model extends CI_Model {
 		}
 	}
 
-	function getStudentlist($CourseId, $mode='incourse')
+	function getStudentlist($CourseId, $mode='incourse', $groupId='')
 	{
 		if ($mode=='incourse')
 		{
 			$cause = array('course_id' => $CourseId);
+			if ($groupId != '') $cause['group_id'] = $groupId;
 			$query = $this->db
 				->select('stu.stu_id,title,name,lname,birth,gender,idcard,year,fac_id,branch_id,email,pic')
 				->from('students stu')

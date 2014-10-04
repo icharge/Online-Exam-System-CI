@@ -324,8 +324,77 @@ $(function() {
 		e.preventDefault();
 		var group_id = $(this).attr("data-group-id");
 		// Load data
+		var stdlist = $("#studentList");
+		$(".questionLoading").show();
+		stdlist.pickList("destroy");
+		stdlist.css("visibility", 'hidden');
+		stdlist.html('');
 
 		$("#stugroup").attr("data-group-id", group_id).modal('show');
+
+		var stdlist = $("#studentList");
+		var oxsysAPI = "{$this->misc->getHref("teacher/courses/callbackjson/getStdListfromGroup/")}/?ts="+Date.now();
+
+		var course_id = "course_id={$this->uri->segment(4)}";
+		var myData = course_id + '&group_id=' + group_id;
+
+		$.ajax({
+			type: "POST",
+			url: oxsysAPI,
+			data: myData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json"
+		})
+		.done(function(data) {
+			var stdlist = $("#studentList");
+			if (data.error != "") {
+
+				var jbox = new jBox('Modal', {
+					width: 350,
+					title: 'ข้อผิดพลาด',
+					overlay: true,
+					content: data.error,
+				});
+				jbox.open();
+			}else{
+				stdlist.html(data.html);
+				stdlist.pickList({
+					sourceListLabel: '<i class="fa fa-search"></i><input id="stdsearch" class="searchbox" type="text" autocomplete="off" />',
+					targetListLabel: 'นักเรียนในวิชา',
+
+					mainClass: 'pickList col-sm-12',
+					listContainerClass: 'panel panel-primary',
+					listLabelClass: 'panel-heading',
+					listClass: 'pickList_list list-group',
+					listItemClass: 'pickList_listItem list-group-item',
+					addAllClass: 'btn btn-default center-block',
+					addClass: 'btn btn-default center-block',
+					removeAllClass: 'btn btn-default center-block',
+					removeClass: 'btn btn-default center-block',
+					addLabel: '<i class="glyphicon glyphicon-chevron-right"></i>',
+					addAllLabel: '<i class="glyphicon glyphicon-chevron-right"></i><i class="glyphicon glyphicon-chevron-right"></i>',
+					removeLabel: '<i class="glyphicon glyphicon-chevron-left"></i>',
+					removeAllLabel: '<i class="glyphicon glyphicon-chevron-left"></i><i class="glyphicon glyphicon-chevron-left"></i>'
+				});
+				stdlist.filterByText($('#stdsearch'), $('#studentList') );
+				stdlist.css("visibility", 'visible');
+				$(".questionLoading").fadeOut();
+			}
+		})
+		.fail(function(jqxhr, textStatus, error) {
+
+			var err = textStatus + ", " + error;
+			console.log("Request Failed: "+err);
+
+			var jbox = new jBox('Modal', {
+				width: 350,
+				height: 100,
+				title: 'ข้อผิดพลาด',
+				overlay: true,
+				content: error,
+			});
+			jbox.open();
+		});
 	});
 
 	$("#stdListSave").click(function(e) {
@@ -357,6 +426,11 @@ $(function() {
 				jbox.open();
 			}else{
 				$("#stugroup").modal('hide');
+				var groupItem = $("#sectorListq").find("a[data-group-id='"+data.id+"'] .badge");
+				if (data.members == '0')
+					groupItem.text('');
+				else
+					groupItem.text(data.members);
 			}
 			btnAddState($("#stdListSave"), "normal", "fa-save");
 		})
@@ -379,7 +453,10 @@ $(function() {
 
 	$("a[href='#addstdgroup']").click(function(e) {
 		e.preventDefault();
+		$("#stdgname").val('');
+		$("#stdgdescription").val('');
 		$("#addstugroup").modal('show');
+
 	});
 
 	$("#stdListAdd").click(function(e) {
@@ -747,6 +824,24 @@ HTML;
 					echo json_encode(array('error' => "No Subject_id"));
 				break;
 
+			case 'getStdListfromGroup':
+				$studentListinCourse = $this->courses->getStudentlist($this->input->post('course_id'), 'incourse', $this->input->post('group_id'));
+				$studentListAvaliable = $this->courses->getStudentlist($this->input->post('course_id'), 'exclude', $this->input->post('group_id'));
+				$html = "";
+
+				foreach ($studentListAvaliable as $item) {
+					$html .= '<option value="'.$item['stu_id'].'">'.$item['name'].' '.$item['lname'].
+					'</option>';
+				}
+				foreach ($studentListinCourse as $item) {
+					$html .= '<option value="'.$item['stu_id'].'" selected="selected">'.$item['name'].' '.$item['lname'].
+					'</option>';
+				}
+
+				echo json_encode(array('html' => $html,
+					'error' => ''));
+				break;
+
 			case 'addStdList':
 				$addStdList = $this->courses->addStudentGroup($this->input->post('course_id'),
 					$this->input->post('name'), $this->input->post('desc'));
@@ -770,7 +865,11 @@ HTML;
 					echo json_encode(array('error' => 'Error with '.$updateStdsRes));
 				}
 				else
-					echo json_encode(array('result' => 'completed', 'error' => ''));
+					echo json_encode(array('result' => 'completed',
+						'error' => '',
+						'members' => $this->courses->countStudentInGroup($this->input->post('group_id'),
+							$this->input->post('course_id')),
+						'id' => $this->input->post('group_id')));
 
 				break;
 

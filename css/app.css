@@ -12,6 +12,18 @@ button.btn.dropdown-toggle.selectpicker {
 	border-color: #ccc;
 }
 
+textarea.vert {
+	resize: vertical;
+}
+
+textarea.horiz {
+	resize: horizontal;
+}
+
+textarea.noresize {
+	resize: none;
+}
+
 .box-footer {
 	cursor: default;
 }

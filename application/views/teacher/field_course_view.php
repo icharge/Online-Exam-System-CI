@@ -227,6 +227,9 @@ EOL;
 											<div class="modal-body">
 												<div class="row">
 													<div class="col-md-12">
+														<div class="questionLoading" style="display: none;">
+															<span><i class="fa fa-spinner fa-spin"></i> กำลังโหลด...</span>
+														</div>
 														<select name="stdselected[]" id="studentList" class="def" size="10" multiple style="width:200px;height:300px">
 															<?php
 																foreach ($studentListAvaliable as $item) {
@@ -286,7 +289,7 @@ EOL;
 															<div class="form-group">
 																<?php
 																echo form_label('คำอธิบายกลุ่ม', 'stdgdescription');
-																echo form_textarea('stdgdescription', "", 'id="stdgdescription" class="form-control" style="height: 90px"');
+																echo form_textarea('stdgdescription', "", 'id="stdgdescription" class="form-control vert" style="height: 90px"');
 																?>
 															</div>
 														</form>
