@@ -323,12 +323,19 @@ $(function() {
 	$("#sectorListq").delegate("a[href^='#group/']", "click", function(e) {
 		e.preventDefault();
 		var group_id = $(this).attr("data-group-id");
+		var stdgname = $(this).find(".list-group-item-heading").text();
+		var stdgdesc = $(this).find(".item-group-item-text").text();
+
 		// Load data
 		var stdlist = $("#studentList");
 		$(".questionLoading").show();
 		stdlist.pickList("destroy");
 		stdlist.css("visibility", 'hidden');
 		stdlist.html('');
+
+		$("#stdgroupname").text(stdgname);
+		$("#askstdgname").text(stdgname);
+		$("#stdgroupdesc").text(stdgdesc);
 
 		$("#stugroup").attr("data-group-id", group_id).modal('show');
 
@@ -537,12 +544,12 @@ $(function() {
 
 	});
 
-	$("#stdListDel").click(function(e) {
-		e.preventDefault();
-		btnAddState($(this), "load", "fa-times");
+	var delstdlist = function() {
+		//e.preventDefault();
+		btnAddState($("#stdListDel"), "load", "fa-times");
 		var oxsysAPI = "{$this->misc->getHref("teacher/courses/callbackjson/delStdList/")}/?ts="+Date.now();
 		var course_id = "course_id={$this->uri->segment(4)}";
-		var group_id = "group_id="+$(this).parent().parent().parent().parent().attr('data-group-id');
+		var group_id = "group_id="+$("#stdListDel").parent().parent().parent().parent().attr('data-group-id');
 		var myData = course_id + '&' + group_id;
 
 		$.ajax({
@@ -563,7 +570,7 @@ $(function() {
 				});
 				jbox.open();
 			}else{
-				$("#stugroup").modal('hide');
+				$("#delstdgask").modal('hide');
 
 				$("#sectorListq a[data-group-id='"+data.group_id+"'").remove();
 			}
@@ -582,7 +589,16 @@ $(function() {
 			});
 			jbox.open();
 			btnAddState($("#stdListDel"), "normal", "fa-times");
+			$("#delstdgask").modal('hide');
 		});
+	}
+
+	$("#stdListDel").click(function() {
+		$("#delstdgask").modal('show');
+	});
+
+	$("#askstdgdelsure").click(function() {
+		delstdlist();
 	});
 
 HTML;

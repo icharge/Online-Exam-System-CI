@@ -70,7 +70,7 @@ EOL;
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#basic" data-toggle="tab">พื้นฐาน</a></li>
 						<li><a href="#teachers" data-toggle="tab">ผู้สอน</a></li>
-						<li><a href="#students" data-toggle="tab">นักเรียน</a></li>
+						<li><a href="#students" data-toggle="tab">ผู้สอบ</a></li>
 						<li><a href="#papers" data-toggle="tab">ชุดข้อสอบ</a></li>
 					</ul>
 					<!-- Tab Content 1 -->
@@ -193,7 +193,7 @@ EOL;
 						<div class="box-body tab-pane" id="students">
 							<div class="row">
 								<div class="col-md-12 text-center">
-									<h3 class="" contenteditable="false">ผู้ที่ลงเรียน <?php echo $courseInfo['code'] . ' ' . $courseInfo['name']; ?></h3>
+									<h3 class="" contenteditable="false">ผู้ที่ลงสอบ <?php echo $courseInfo['code'] . ' ' . $courseInfo['name']; ?></h3>
 								</div>
 								<div class="col-md-12">
 									<a href="#addstdgroup" class="btn btn-app">
@@ -201,7 +201,7 @@ EOL;
 									</a>
 
 									<div class="sectorListGroup">
-										<h4>กลุ่มผู้เรียนในวิชา</h4>
+										<h4>กลุ่มผู้ลงสอบในวิชา</h4>
 										<ul id="sectorListq" class="list-group">
 											<?php
 												foreach ($studentListGroups as $item) {
@@ -227,9 +227,14 @@ EOL;
 											<div class="modal-body">
 												<div class="row">
 													<div class="col-md-12">
+														<h4 id="stdgroupname"></h4>
+														<div id="stdgroupdesc" style="padding-bottom: 20px"></div>
+													</div>
+													<div class="col-md-12">
 														<div class="questionLoading" style="display: none;">
 															<span><i class="fa fa-spinner fa-spin"></i> กำลังโหลด...</span>
 														</div>
+
 														<select name="stdselected[]" id="studentList" class="def" size="10" multiple style="width:200px;height:300px">
 															<?php
 																foreach ($studentListAvaliable as $item) {
@@ -299,6 +304,23 @@ EOL;
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
 												<button type="button" class="btn btn-primary" id="stdListAdd"><i class="fa fa-plus"></i> เพิ่ม</button>
+											</div>
+										</div><!-- /.modal-content -->
+									</div><!-- /.modal-dialog -->
+								</div><!-- /.modal -->
+
+								<div class="modal fade" id="delstdgask" data-backdrop="static">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title">คุณแน่ใจ ?</h4>
+											</div>
+											<div class="modal-body">
+												<p>ต้องการนำสมาชิกออก และลบ <b><span id="askstdgname"></span></b> หรือไม่ ?</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+												<button type="button" class="btn btn-danger" id="askstdgdelsure">แน่ใจ</button>
 											</div>
 										</div><!-- /.modal-content -->
 									</div><!-- /.modal-dialog -->
