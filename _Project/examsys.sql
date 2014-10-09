@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 03, 2014 at 08:37 PM
+-- Generation Time: Oct 09, 2014 at 03:22 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('7a8fef62dfea2567f42a5567d5fc1aef', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1412361400, '');
+('d99e80ecc96e8bbaf826a401905510d2', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1412860612, 'a:12:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;s:16:"flash:new:noAnim";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
   `description` text,
   `course_id` int(4) NOT NULL,
   PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `Course_Students_group`
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
 
 INSERT INTO `Course_Students_group` (`group_id`, `name`, `description`, `course_id`) VALUES
 (1, 'Sec 1', NULL, 1),
-(2, 'Sec 1', NULL, 2);
+(9, 'Sec 2', 'กลุ่มเพิ่มเติม', 1);
 
 -- --------------------------------------------------------
 
@@ -413,6 +413,33 @@ INSERT INTO `Question_choice` (`id`, `choice1`, `choice2`, `choice3`, `choice4`,
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `question_detail_list`
+--
+CREATE TABLE IF NOT EXISTS `question_detail_list` (
+`paper_id` int(7)
+,`part_id` int(7)
+,`no` tinyint(3)
+,`question_id` int(10)
+,`question` text
+,`type` varchar(10)
+,`status` varchar(10)
+,`chapter_id` int(7)
+,`created_by` varchar(100)
+,`created_time` datetime
+,`choice1` text
+,`choice2` text
+,`choice3` text
+,`choice4` text
+,`choice5` text
+,`choice6` text
+,`answer_choice` varchar(20)
+,`answer_numeric` varchar(20)
+,`answer_boolean` varchar(20)
+,`chapter_name` varchar(30)
+);
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `question_list`
 --
 CREATE TABLE IF NOT EXISTS `question_list` (
@@ -535,11 +562,11 @@ CREATE TABLE IF NOT EXISTS `Student_Enroll` (
 
 INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('54310104', '1', 1),
-('54310104', '2', 2),
 ('54311095', '1', 1),
-('54311095', '2', 2),
-('57700191', '2', 2),
-('57700195', '2', 2);
+('57700196', '1', 9),
+('57700200', '1', 9),
+('58700127', '1', 9),
+('58700141', '1', 9);
 
 -- --------------------------------------------------------
 
@@ -703,6 +730,15 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
 DROP TABLE IF EXISTS `courseslist_view`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `courseslist_view` AS select `c`.`course_id` AS `course_id`,`s`.`subject_id` AS `subject_id`,`s`.`code` AS `code`,`c`.`year` AS `year`,`s`.`name` AS `name`,`s`.`shortname` AS `shortname`,`s`.`description` AS `description`,`c`.`visible` AS `visible`,`c`.`status` AS `status` from (`courses` `c` left join `subjects` `s` on((`c`.`subject_id` = `s`.`subject_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `question_detail_list`
+--
+DROP TABLE IF EXISTS `question_detail_list`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `question_detail_list` AS select `epd`.`paper_id` AS `paper_id`,`epd`.`part_id` AS `part_id`,`epd`.`no` AS `no`,`q`.`question_id` AS `question_id`,`q`.`question` AS `question`,`q`.`type` AS `type`,`q`.`status` AS `status`,`q`.`chapter_id` AS `chapter_id`,`q`.`created_by` AS `created_by`,`q`.`created_time` AS `created_time`,`q`.`choice1` AS `choice1`,`q`.`choice2` AS `choice2`,`q`.`choice3` AS `choice3`,`q`.`choice4` AS `choice4`,`q`.`choice5` AS `choice5`,`q`.`choice6` AS `choice6`,`q`.`answer_choice` AS `answer_choice`,`q`.`answer_numeric` AS `answer_numeric`,`q`.`answer_boolean` AS `answer_boolean`,`q`.`chapter_name` AS `chapter_name` from (`exam_papers_detail` `epd` left join `question_list` `q` on((`epd`.`question_id` = `q`.`question_id`))) order by `epd`.`paper_id`,`epd`.`part_id`,`epd`.`no`;
 
 -- --------------------------------------------------------
 

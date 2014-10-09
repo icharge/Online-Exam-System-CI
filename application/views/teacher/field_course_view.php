@@ -313,14 +313,14 @@ EOL;
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h4 class="modal-title">คุณแน่ใจ ?</h4>
+												<h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> คุณแน่ใจ ?</h4>
 											</div>
 											<div class="modal-body">
 												<p>ต้องการนำสมาชิกออก และลบ <b><span id="askstdgname"></span></b> หรือไม่ ?</p>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-												<button type="button" class="btn btn-danger" id="askstdgdelsure">แน่ใจ</button>
+												<button type="button" class="btn btn-danger" id="askstdgdelsure">ลบกลุ่ม</button>
 											</div>
 										</div><!-- /.modal-content -->
 									</div><!-- /.modal-dialog -->
@@ -330,6 +330,37 @@ EOL;
 						</div>
 						<div class="box-body tab-pane" id="papers">
 							<h3>ชุดข้อสอบ</h3>
+							<div class="row">
+								<div class="col-md-12">
+									<ul class="todo-list">
+										<li>
+											<!-- drag handle -->
+											<span class="handle">
+												<i class="fa fa-ellipsis-v"></i>
+												<i class="fa fa-ellipsis-v"></i>
+											</span>
+											<!-- todo text -->
+											<span class="text">ชุดที่ 1</span>
+											<!-- General tools such as edit or delete-->
+											<div class="tools">
+												<i class="fa fa-edit"></i>
+												<i class="fa fa-trash-o"></i>
+											</div>
+										</li>
+										<li>
+											<span class="handle">
+												<i class="fa fa-ellipsis-v"></i>
+												<i class="fa fa-ellipsis-v"></i>
+											</span>
+											<span class="text">ชุดที่ 2</span>
+											<div class="tools">
+												<i class="fa fa-edit"></i>
+												<i class="fa fa-trash-o"></i>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 
 					</div>
