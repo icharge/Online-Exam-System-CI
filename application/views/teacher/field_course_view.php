@@ -332,32 +332,36 @@ EOL;
 							<h3>ชุดข้อสอบ</h3>
 							<div class="row">
 								<div class="col-md-12">
+									<button type="button" class="btn btn-app" data-toggle="modal" data-target="#modaladdpaper"><i class="fa fa-plus"></i> เพิ่มชุดข้อสอบ</button>
+								</div>
+								<div class="col-md-12">
 									<ul class="todo-list">
-										<li>
-											<!-- drag handle -->
-											<span class="handle">
-												<i class="fa fa-ellipsis-v"></i>
-												<i class="fa fa-ellipsis-v"></i>
-											</span>
-											<!-- todo text -->
-											<span class="text">ชุดที่ 1</span>
-											<!-- General tools such as edit or delete-->
-											<div class="tools">
-												<i class="fa fa-edit"></i>
-												<i class="fa fa-trash-o"></i>
-											</div>
-										</li>
+									<?php
+										if(isset($examPapersList))
+										{
+											foreach ($examPapersList as $item) {
+												list($startdate, $starttime) = explode(' ', $item['starttime']);
+												list($enddate, $endtime) = explode(' ', $item['endtime']);
+												$datetooltip = $this->misc->getFullDateTH($startdate)." ".$starttime.
+												' ถึง '.$this->misc->getFullDateTH($enddate)." ".$endtime;
+												$datediff = $this->misc->dateDifference($item['starttime'], $item['endtime']);
+												echo <<<HTML
 										<li>
 											<span class="handle">
 												<i class="fa fa-ellipsis-v"></i>
 												<i class="fa fa-ellipsis-v"></i>
 											</span>
-											<span class="text">ชุดที่ 2</span>
+											<span class="text"><b>{$item['title']}</b> <small>{$item['description']}</small></span>
+											<span class="label label-info jtooltip" title="{$datetooltip}"><i class="fa fa-clock-o"></i> {$datediff}</span>
 											<div class="tools">
 												<i class="fa fa-edit"></i>
 												<i class="fa fa-trash-o"></i>
 											</div>
 										</li>
+HTML;
+											}
+										}
+									?>
 									</ul>
 								</div>
 							</div>
@@ -374,4 +378,76 @@ EOL;
 			</div>
 		</div>
 		<?php form_close(); ?>
+		<div class="modal fade" id="modaladdpaper" data-backdrop="static">
+			<?php
+				$attr = array(
+					'name' => 'addpaper',
+					'role' => 'form',
+					'method' => 'post'
+				);
+				echo form_open($formlinkaddpaper, $attr);
+			?>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> สร้างชุดข้อสอบ</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<?php
+								echo form_label('ชื่อชุด <span class="text-danger">*</span>', 'title');
+								echo form_input(array(
+									'id'=>'title',
+									'name'=>'title',
+									'type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>''));
+								?>
+							</div>
+							<div class="form-group">
+								<?php
+								echo form_label('คำอธิบาย', 'description');
+								echo form_textarea('description', "", 'id="paperdesc" class="form-control vert" style="height: 90px"');
+								?>
+							</div>
+							<div class="form-group">
+								<?php
+								echo form_label('กฎในการสอบ', 'rules');
+								echo form_textarea('rules', "", 'id="paperrules" class="form-control vert" style="height: 90px"');
+								?>
+							</div>
+							<div class="form-group">
+								<?php
+								echo form_label('เริ่มต้นสอบ <span class="text-danger">*</span>', 'starttime');
+								echo form_input(array(
+									'id'=>'starttime',
+									'name'=>'starttime',
+									'type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>''));
+								?>
+							</div>
+							<div class="form-group">
+								<?php
+								echo form_label('สิ้นสุด <span class="text-danger">*</span>', 'endtime');
+								echo form_input(array(
+									'id'=>'endtime',
+									'name'=>'endtime',
+									'type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>''));
+								?>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+							<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> สร้าง</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			<?php form_close(); ?>
+		</div><!-- /.modal -->
 <!-- End content -->

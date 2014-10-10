@@ -65,7 +65,12 @@ $('#subjectid').change(function(){
 			});
 	}
 });";
-		$this->datePicker = "var tdate = $('#startdate').val().split(\"/\");
+		$this->datePicker = <<<HTML
+	$('#timerange').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm'});
+HTML;
+
+		/*
+			var tdate = $('#startdate').val().split(\"/\");
 			tdate = tdate[0]+'/'+tdate[1]+'/'+(parseInt(tdate[2],10)-543);
 			$( '#dp1p' ).datepicker({
 				onSelect: function(dateText, inst) {
@@ -86,7 +91,7 @@ $('#subjectid').change(function(){
 				changeMonth: true,
 				changeYear: true,
 				dateFormat: \"dd/mm/yy\"
-			});";
+			});";*/
 		/*'//Datemask dd/mm/yyyy
 //$("#startdate").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 $("#startdate").datepicker({language:\'th-th\',format:\'dd/mm/yyyy\'});';*/
@@ -605,7 +610,7 @@ HTML;
 
 		$this->scriptList = array(
 			'subjectDropdownScript' => $this->subjectDropdownScript,
-			//'datePicker' => $this->datePicker,
+			'datePicker' => $this->datePicker,
 			'removePwd' => $this->removePwd,
 			'listview' => $this->listview,
 			'stdGroup' => $this->stdGroup,
@@ -676,10 +681,15 @@ HTML;
 				// Load Sectors
 				$data['studentListGroups'] = $this->courses->getStudentGroups($courseId);
 
+				// Load Exam Papers
+				$data['examPapersList'] = $this->courses->getExamPapersList($courseId);
+
 				// Set page desc
 				$data['formlink'] = $this->role.'/courses/view/'.$courseId;
 				$data['pagetitle'] = "ข้อมูลการเปิดสอบ";
 				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];
+
+				$data['formlinkaddpaper'] = $this->role.'/courses/addpaper/'.$courseId;
 				$this->load->view('teacher/field_course_view', $data);
 			}
 		}

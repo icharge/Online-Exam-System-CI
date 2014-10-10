@@ -33,7 +33,7 @@ class Misc_model extends CI_Model {
 	function listCActive($page='',$useclass=true,$direction='')
 	{
 		$result = '';
-		
+
 		switch ($direction) {
 			case 'start':
 				$result = $this->startsWith($this->getClassName(),$page);
@@ -95,7 +95,7 @@ class Misc_model extends CI_Model {
 			case 'student':
 				return "ผู้เรียน";
 				break;
-			
+
 			default:
 				return "ไม่มี";
 				break;
@@ -137,7 +137,7 @@ class Misc_model extends CI_Model {
 				else
 					return "ข้อมูลซ้ำ";
 				break;
-			
+
 			default:
 				return "";
 				break;
@@ -196,7 +196,7 @@ class Misc_model extends CI_Model {
 		if ($page=='') $page = 1;
 		return ($page-1) * $perpage;
 	}
-	
+
 	function doLog($action,$uid='')
 	{
 		$logData = array(
@@ -249,6 +249,50 @@ class Misc_model extends CI_Model {
 		return $ThaiDate;
 	}
 
+	//////////////////////////////////////////////////////////////////////
+	//PARA: Date Should In YYYY-MM-DD Format
+	//RESULT FORMAT:
+	// '%y Year %m Month %d Day %h Hours %i Minute %s Seconds'        =>  1 Year 3 Month 14 Day 11 Hours 49 Minute 36 Seconds
+	// '%y Year %m Month %d Day'                                    =>  1 Year 3 Month 14 Days
+	// '%m Month %d Day'                                            =>  3 Month 14 Day
+	// '%d Day %h Hours'                                            =>  14 Day 11 Hours
+	// '%d Day'                                                        =>  14 Days
+	// '%h Hours %i Minute %s Seconds'                                =>  11 Hours 49 Minute 36 Seconds
+	// '%i Minute %s Seconds'                                        =>  49 Minute 36 Seconds
+	// '%h Hours                                                    =>  11 Hours
+	// '%a Days                                                        =>  468 Days
+	//////////////////////////////////////////////////////////////////////
+	function dateDifference($date_1 , $date_2 )
+	{
+		$datetime1 = date_create($date_1);
+		$datetime2 = date_create($date_2);
+
+		$interval = date_diff($datetime1, $datetime2);
+
+		$unit = array(
+			'year' => 'ปี',
+			'month' => 'เดือน',
+			'day' => 'วัน',
+			'hours' => 'ชั่วโมง',
+			'minutes' => 'นาที',
+			'seconds' => 'วินาที'
+		);
+		$text = "";
+		if ($interval->y > 0) $text .= " %y $unit[year] ";
+		if ($interval->m > 0) $text .= " %m $unit[month] ";
+		if ($interval->d > 0) $text .= " %d $unit[day] ";
+		if ($interval->h > 0) $text .= " %h $unit[hours]";
+		if ($interval->i > 0) $text .= " %i $unit[minutes]";
+		if ($interval->s > 0
+			&& $interval->i == 0
+			&& $interval->h == 0
+			&& $interval->d == 0
+			&& $interval->m == 0
+			&& $interval->y == 0) $text .= " %s $unit[seconds]";
+
+		return $interval->format($text);
+	}
+
 	function buildYearOptions($range = '10')
 	{
 		$startYear = date("Y");
@@ -271,7 +315,7 @@ class Misc_model extends CI_Model {
 			case 'inactive':
 				return '<i class="fa fa-circle-o jtooltip" title="ปิดใช้งาน"></i>';
 				break;
-			
+
 			default:
 				break;
 		}
@@ -294,7 +338,7 @@ class Misc_model extends CI_Model {
 			case '0':
 				return '<i class="fa fa-eye-slash jtooltip" title="ซ่อน"></i>';
 				break;
-			
+
 			default:
 				break;
 		}

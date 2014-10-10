@@ -553,3 +553,7 @@ input[type=text].date {
 	width: 100%;
 	top: 44%;
 }
+
+.box .todo-list > li .label {
+	font-size: 14px;
+}

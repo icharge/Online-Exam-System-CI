@@ -344,6 +344,21 @@ class Courses_model extends CI_Model {
 		return ($errno == 0?"ok":$errno);
 	}
 
+	function getExamPapersList($course_id, $keyword='')
+	{
+		$fields = array(
+			'paper_id', 'title', 'description', 'rules', 'starttime', 'endtime', 'course_id'
+		);
+		$query = $this->db
+			->select($fields)
+			->from('Exam_Papers')
+			->like("CONCAT(title,description,rules,starttime,endtime)",$keyword,'both')
+			->where(array('course_id'=>$course_id))
+			->get()
+			->result_array();
+		return $query;
+	}
+
 }
 
 /* End of file courses_model.php */
