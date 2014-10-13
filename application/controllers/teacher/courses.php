@@ -66,10 +66,18 @@ $('#subjectid').change(function(){
 	}
 });";
 		$this->datePicker = <<<HTML
-	$('#timerange').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm'});
+	$('#modaladdpaper .input-daterange').datepicker({
+		format: "dd/mm/yyyy",
+		todayBtn: "linked",
+		language: "th",
+		orientation: "bottom left",
+		autoclose: true
+	});
 HTML;
 
 		/*
+			$('#timerange').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm'});
+
 			var tdate = $('#startdate').val().split(\"/\");
 			tdate = tdate[0]+'/'+tdate[1]+'/'+(parseInt(tdate[2],10)-543);
 			$( '#dp1p' ).datepicker({
@@ -916,7 +924,7 @@ HTML;
 					{
 						echo json_encode(array('result' => 'completed',
 																	'group_id' => $this->input->post('group_id'),
-						 											'error' => ''));
+																	'error' => ''));
 					}
 				}
 

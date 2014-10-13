@@ -557,3 +557,7 @@ input[type=text].date {
 .box .todo-list > li .label {
 	font-size: 14px;
 }
+
+.datepicker.datepicker-dropdown {
+	z-index: 2000!important;
+}

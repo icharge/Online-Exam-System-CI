@@ -441,6 +441,16 @@ HTML;
 									'placeholder'=>''));
 								?>
 							</div>
+							<div class="form-group" >
+								<?php
+								echo form_label('ช่วงเวลาสอบ <span class="text-danger">*</span>', '');
+								?>
+								<div class="input-daterange input-group" id="datepicker">
+									<input type="text" class="input-md form-control" name="startdate" />
+									<span class="input-group-addon" style="border-left-width: 0;border-right-width: 0;">ถึง</span>
+									<input type="text" class="input-md form-control" name="enddate" />
+								</div>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>

@@ -6,7 +6,7 @@
 	<!-- jQuery 2.0.2 -->
 	<script src="vendor/js/jquery.min.js"></script>
 	<!-- jQuery UI 1.10.3 -->
-	<script src="vendor/js/jquery-ui.js" type="text/javascript"></script>
+	<!-- <script src="vendor/js/jquery-ui.js" type="text/javascript"></script> -->
 	<!-- jQuery ScrollTo -->
 	<script src="vendor/js/jquery.scrollto.min.js" type="text/javascript"></script>
 	<!-- ScrollToFixed -->
@@ -17,6 +17,9 @@
 	<script src="vendor/js/bootstrap-select.min.js" type="text/javascript"></script>
 	<!-- Bootstrap editable -->
 	<script src="vendor/js/bootstrap-editable.min.js" type="text/javascript"></script>
+	<!-- Bootstrap Datepicker -->
+	<script src="vendor/js/bootstrap-datepicker.js" type="text/javascript"></script>
+	<script src="vendor/js/bootstrap-datepicker.th.js" type="text/javascript"></script>
 	<!-- InputMask -->
 	<script src="vendor/js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
 	<script src="vendor/js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
@@ -90,7 +93,7 @@
 
 		$('select:not(.def)').selectpicker();
 
-		$('#datepicker').datepicker();
+		//$('#datepicker').datepicker();
 
 		//iCheck for checkbox and radio inputs
 		$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
