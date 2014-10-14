@@ -439,17 +439,17 @@ HTML;
 										<i class="fa fa-clock-o"></i>
 									</div>
 									<div class="bootstrap-timepicker">
-										<input type="text" class="form-control timepicker" name="starttime">
+										<input type="text" class="form-control timepicker" name="starttime" value="<?php echo date('H:i');?>">
 									</div>
 									<span class="input-group-addon" style="border-left-width: 0;border-right-width: 0;">ถึง</span>
 									<div class="bootstrap-timepicker">
-										<input type="text" class="form-control timepicker" name="endtime">
+										<input type="text" class="form-control timepicker" name="endtime" value="<?php echo date('H:i');?>">
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+							<button type="reset" class="btn btn-default">ยกเลิก</button>
 							<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> สร้าง</button>
 						</div>
 					</div><!-- /.modal-content -->

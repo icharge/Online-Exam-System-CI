@@ -77,7 +77,8 @@ $('#subjectid').change(function(){
 
 	$('.timepicker').timepicker({
 		showInputs: false,
-		showMeridian: false
+		showMeridian: false,
+		minuteStep: 1
 	});
 HTML;
 
