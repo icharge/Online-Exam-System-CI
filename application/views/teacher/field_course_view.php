@@ -332,7 +332,7 @@ EOL;
 							<h3>ชุดข้อสอบ</h3>
 							<div class="row">
 								<div class="col-md-12">
-									<button type="button" class="btn btn-app" data-toggle="modal" data-target="#modaladdpaper"><i class="fa fa-plus"></i> เพิ่มชุดข้อสอบ</button>
+									<button type="button" class="btn btn-app" id="addPaper"><i class="fa fa-plus"></i> เพิ่มชุดข้อสอบ</button>
 								</div>
 								<div class="col-md-12">
 									<ul class="todo-list">
@@ -396,6 +396,11 @@ HTML;
 							<h4 class="modal-title"><i class="fa fa-plus"></i> สร้างชุดข้อสอบ</h4>
 						</div>
 						<div class="modal-body">
+							<div class="alert alert-danger alert-dismissable" style="display: none;">
+								<i class="fa fa-ban"></i>
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<b>โปรด</b> ตรวจสอบความถูกต้อง
+							</div>
 							<div class="form-group">
 								<?php
 								echo form_label('ชื่อชุด <span class="text-danger">*</span>', 'title');
@@ -427,29 +432,29 @@ HTML;
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
-									<input type="text" class="input-md form-control" name="startdate" value="<?php echo date('d/m/Y');?>" />
+									<input type="text" class="input-md form-control" name="startdate" value="<?php echo date('d/m/Y');?>" autocomplete="off">
 									<span class="input-group-addon" style="border-left-width: 0;border-right-width: 0;">ถึง</span>
-									<input type="text" class="input-md form-control" name="enddate" value="<?php echo date('d/m/Y');?>" />
+									<input type="text" class="input-md form-control" name="enddate" value="<?php echo date('d/m/Y');?>" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
-								<label>ช่วงเวลา</label>
+								<label>ช่วงเวลา <span class="text-danger">*</span></label>
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-clock-o"></i>
 									</div>
 									<div class="bootstrap-timepicker">
-										<input type="text" class="form-control timepicker" name="starttime" value="<?php echo date('H:i');?>">
+										<input type="text" class="form-control timepicker" name="starttime" value="<?php echo date('H:i');?>" autocomplete="off">
 									</div>
 									<span class="input-group-addon" style="border-left-width: 0;border-right-width: 0;">ถึง</span>
 									<div class="bootstrap-timepicker">
-										<input type="text" class="form-control timepicker" name="endtime" value="<?php echo date('H:i');?>">
+										<input type="text" class="form-control timepicker" name="endtime" value="<?php echo date('H:i');?>" autocomplete="off">
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="reset" class="btn btn-default">ยกเลิก</button>
+							<button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
 							<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> สร้าง</button>
 						</div>
 					</div><!-- /.modal-content -->

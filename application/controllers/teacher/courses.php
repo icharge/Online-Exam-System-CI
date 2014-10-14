@@ -10,6 +10,7 @@ class Courses extends CI_Controller {
 	private $removePwd;
 	private $listview;
 	private $stdGroup;
+	private $papers;
 
 	private $role;
 
@@ -72,7 +73,7 @@ $('#subjectid').change(function(){
 		language: "th",
 		orientation: "bottom left",
 		autoclose: true,
-		todayHighlight: true
+		//todayHighlight: true
 	});
 
 	$('.timepicker').timepicker({
@@ -623,12 +624,88 @@ $(function() {
 
 HTML;
 
+		$this->papers = <<<HTML
+	$('#addPaper').click(function(e) {
+		$('#modaladdpaper').modal('show');
+	});
+
+	$('#modaladdpaper').on('hidden.bs.modal', function (e) {
+	  $("form[name='addpaper']")[0].reset();
+	})
+
+	$("#modaladdpaper form[name='addpaper']").submit(function(e) {
+
+		// Form validation
+		var hasError = false;
+		var myform = $(this);
+		var txttitle = myform.find("input[name='title']");
+		var txtdesc = myform.find("textarea[name='description']");
+		var txtrules = myform.find("textarea[name='rules']");
+		var txtstartdate = myform.find("input[name='startdate']");
+		var txtenddate = myform.find("input[name='enddate']");
+		var txtstarttime = myform.find("input[name='starttime']");
+		var txtendtime = myform.find("input[name='endtime']");
+		// clear class
+		txttitle.parent().removeClass('has-error');
+		txtdesc.parent().removeClass('has-error');
+		txtrules.parent().removeClass('has-error');
+		txtstartdate.parent().parent().removeClass('has-error');
+		txtenddate.parent().parent().removeClass('has-error');
+		txtstarttime.parent().parent().removeClass('has-error');
+		txtendtime.parent().parent().removeClass('has-error');
+
+		// TRIM TXT
+		myform.find("input, textarea").each(function() {
+			$(this).val($.trim($(this).val()));
+		});
+
+		// Checking
+		if (txttitle.val() == "") {
+			hasError = true;
+			txttitle.parent().addClass('has-error');
+		}
+		if (txtdesc.val() == "") {
+			hasError = true;
+			txtdesc.parent().addClass('has-error');
+		}
+		if (txtrules.val() == "") {
+			hasError = true;
+			txtrules.parent().addClass('has-error');
+		}
+		if (txtstartdate.val() == "") {
+			hasError = true;
+			txtstartdate.parent().parent().addClass('has-error');
+		}
+		if (txtenddate.val() == "") {
+			hasError = true;
+			txtenddate.parent().parent().addClass('has-error');
+		}
+		if (txtstarttime.val() == "") {
+			hasError = true;
+			txtstarttime.parent().parent().addClass('has-error');
+		}
+		if (txtendtime.val() == "") {
+			hasError = true;
+			txtendtime.parent().parent().addClass('has-error');
+		}
+		if (hasError) {
+			myform.find(".alert").fadeIn();
+			e.preventDefault();
+		} else {
+			myform.find(".alert").fadeOut();
+			return;
+		}
+
+	});
+HTML;
+
 		$this->scriptList = array(
 			'subjectDropdownScript' => $this->subjectDropdownScript,
 			'datePicker' => $this->datePicker,
 			'removePwd' => $this->removePwd,
 			'listview' => $this->listview,
 			'stdGroup' => $this->stdGroup,
+			'papers' => $this->papers,
 		);
 
 
@@ -843,7 +920,7 @@ HTML;
 		}
 	}
 
-	function papers($courseId='')
+	function addpaper($courseId='')
 	{
 		echo "test";
 	}
