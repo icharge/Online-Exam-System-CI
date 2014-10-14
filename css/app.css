@@ -565,3 +565,7 @@ input[type=text].date {
 .input-group .bootstrap-timepicker-widget.dropdown-menu {
 	top: 38px;
 }
+
+.bootstrap-timepicker input {
+	text-align: center;
+}

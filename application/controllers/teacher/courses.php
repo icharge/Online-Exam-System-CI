@@ -71,7 +71,8 @@ $('#subjectid').change(function(){
 		todayBtn: "linked",
 		language: "th",
 		orientation: "bottom left",
-		autoclose: true
+		autoclose: true,
+		todayHighlight: true
 	});
 
 	$('.timepicker').timepicker({

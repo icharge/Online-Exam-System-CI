@@ -427,9 +427,9 @@ HTML;
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
-									<input type="text" class="input-md form-control" name="startdate" />
+									<input type="text" class="input-md form-control" name="startdate" value="<?php echo date('d/m/Y');?>" />
 									<span class="input-group-addon" style="border-left-width: 0;border-right-width: 0;">ถึง</span>
-									<input type="text" class="input-md form-control" name="enddate" />
+									<input type="text" class="input-md form-control" name="enddate" value="<?php echo date('d/m/Y');?>" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -449,7 +449,7 @@ HTML;
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+							<button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
 							<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> สร้าง</button>
 						</div>
 					</div><!-- /.modal-content -->
