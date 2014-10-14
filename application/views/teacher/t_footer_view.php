@@ -20,6 +20,8 @@
 	<!-- Bootstrap Datepicker -->
 	<script src="vendor/js/bootstrap-datepicker.js" type="text/javascript"></script>
 	<script src="vendor/js/bootstrap-datepicker.th.js" type="text/javascript"></script>
+	<!-- Bootstrap Timepicker -->
+	<script src="vendor/js/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
 	<!-- InputMask -->
 	<script src="vendor/js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
 	<script src="vendor/js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>

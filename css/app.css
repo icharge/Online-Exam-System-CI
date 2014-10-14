@@ -561,3 +561,7 @@ input[type=text].date {
 .datepicker.datepicker-dropdown {
 	z-index: 2000!important;
 }
+
+.input-group .bootstrap-timepicker-widget.dropdown-menu {
+	top: 38px;
+}

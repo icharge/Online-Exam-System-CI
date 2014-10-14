@@ -393,7 +393,7 @@ HTML;
 							<button type="button" class="close" data-dismiss="modal">
 								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 							</button>
-							<h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> สร้างชุดข้อสอบ</h4>
+							<h4 class="modal-title"><i class="fa fa-plus"></i> สร้างชุดข้อสอบ</h4>
 						</div>
 						<div class="modal-body">
 							<div class="form-group">
@@ -419,36 +419,32 @@ HTML;
 								echo form_textarea('rules', "", 'id="paperrules" class="form-control vert" style="height: 90px"');
 								?>
 							</div>
-							<div class="form-group">
-								<?php
-								echo form_label('เริ่มต้นสอบ <span class="text-danger">*</span>', 'starttime');
-								echo form_input(array(
-									'id'=>'starttime',
-									'name'=>'starttime',
-									'type'=>'text',
-									'class'=>'form-control',
-									'placeholder'=>''));
-								?>
-							</div>
-							<div class="form-group">
-								<?php
-								echo form_label('สิ้นสุด <span class="text-danger">*</span>', 'endtime');
-								echo form_input(array(
-									'id'=>'endtime',
-									'name'=>'endtime',
-									'type'=>'text',
-									'class'=>'form-control',
-									'placeholder'=>''));
-								?>
-							</div>
 							<div class="form-group" >
 								<?php
-								echo form_label('ช่วงเวลาสอบ <span class="text-danger">*</span>', '');
+								echo form_label('ช่วงวัน <span class="text-danger">*</span>', '');
 								?>
-								<div class="input-daterange input-group" id="datepicker">
+								<div class="input-daterange input-group col-xs-12" id="datepicker">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
 									<input type="text" class="input-md form-control" name="startdate" />
 									<span class="input-group-addon" style="border-left-width: 0;border-right-width: 0;">ถึง</span>
 									<input type="text" class="input-md form-control" name="enddate" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label>ช่วงเวลา</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-clock-o"></i>
+									</div>
+									<div class="bootstrap-timepicker">
+										<input type="text" class="form-control timepicker" name="starttime">
+									</div>
+									<span class="input-group-addon" style="border-left-width: 0;border-right-width: 0;">ถึง</span>
+									<div class="bootstrap-timepicker">
+										<input type="text" class="form-control timepicker" name="endtime">
+									</div>
 								</div>
 							</div>
 						</div>

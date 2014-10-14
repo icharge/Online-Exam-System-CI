@@ -73,6 +73,11 @@ $('#subjectid').change(function(){
 		orientation: "bottom left",
 		autoclose: true
 	});
+
+	$('.timepicker').timepicker({
+		showInputs: false,
+		showMeridian: false
+	});
 HTML;
 
 		/*
