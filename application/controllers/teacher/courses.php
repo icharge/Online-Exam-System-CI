@@ -79,7 +79,7 @@ $('#subjectid').change(function(){
 	$('.timepicker').timepicker({
 		showInputs: false,
 		showMeridian: false,
-		minuteStep: 1
+		minuteStep: 5
 	});
 HTML;
 
@@ -629,9 +629,74 @@ HTML;
 		$('#modaladdpaper').modal('show');
 	});
 
+	$('#modaladdpaper').on('show.bs.modal', function (e) {
+
+		var oxsysAPI = "{$this->misc->getHref("teacher/courses/callbackjson/getStdList/")}/?ts="+Date.now();
+		var course_id = "course_id={$this->uri->segment(4)}";
+		var myData = course_id;
+
+		$.ajax({
+			type: "POST",
+			url: oxsysAPI,
+			data: myData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json"
+		})
+		.done(function(data) {
+			if (data.error != "") {
+
+				var jbox = new jBox('Modal', {
+					width: 350,
+					title: 'ข้อผิดพลาด',
+					overlay: true,
+					content: data.error,
+				});
+				jbox.open();
+
+			}else{
+				$("#modaladdpaper select[name='groupid']").html(data.html).selectpicker('refresh');
+			}
+		})
+		.fail(function(jqxhr, textStatus, error) {
+			var err = textStatus + ", " + error;
+			console.log("Request Failed: "+err);
+
+			var jbox = new jBox('Modal', {
+				width: 350,
+				height: 100,
+				title: 'ข้อผิดพลาด',
+				overlay: true,
+				content: error,
+			});
+			jbox.open();
+
+		});
+
+	});
+
 	$('#modaladdpaper').on('hidden.bs.modal', function (e) {
-	  $("form[name='addpaper']")[0].reset();
-	})
+		$("form[name='addpaper']")[0].reset();
+		var myform = $(this);
+		var txttitle = myform.find("input[name='title']");
+		var txtdesc = myform.find("textarea[name='description']");
+		var txtrules = myform.find("textarea[name='rules']");
+		var txtstartdate = myform.find("input[name='startdate']");
+		var txtenddate = myform.find("input[name='enddate']");
+		var txtstarttime = myform.find("input[name='starttime']");
+		var txtendtime = myform.find("input[name='endtime']");
+		var stdgroup = myform.find("select[name='groupid']");
+
+		// clear class
+		txttitle.parent().removeClass('has-error');
+		txtdesc.parent().removeClass('has-error');
+		txtrules.parent().removeClass('has-error');
+		txtstartdate.parent().parent().removeClass('has-error');
+		txtenddate.parent().parent().removeClass('has-error');
+		txtstarttime.parent().parent().removeClass('has-error');
+		txtendtime.parent().parent().removeClass('has-error');
+		stdgroup.parent().removeClass('has-error');
+		myform.find(".alert").hide();
+	});
 
 	$("#modaladdpaper form[name='addpaper']").submit(function(e) {
 
@@ -645,6 +710,8 @@ HTML;
 		var txtenddate = myform.find("input[name='enddate']");
 		var txtstarttime = myform.find("input[name='starttime']");
 		var txtendtime = myform.find("input[name='endtime']");
+		var stdgroup = myform.find("select[name='groupid']");
+
 		// clear class
 		txttitle.parent().removeClass('has-error');
 		txtdesc.parent().removeClass('has-error');
@@ -653,6 +720,7 @@ HTML;
 		txtenddate.parent().parent().removeClass('has-error');
 		txtstarttime.parent().parent().removeClass('has-error');
 		txtendtime.parent().parent().removeClass('has-error');
+		stdgroup.parent().removeClass('has-error');
 
 		// TRIM TXT
 		myform.find("input, textarea").each(function() {
@@ -664,6 +732,7 @@ HTML;
 			hasError = true;
 			txttitle.parent().addClass('has-error');
 		}
+		/*
 		if (txtdesc.val() == "") {
 			hasError = true;
 			txtdesc.parent().addClass('has-error');
@@ -671,6 +740,11 @@ HTML;
 		if (txtrules.val() == "") {
 			hasError = true;
 			txtrules.parent().addClass('has-error');
+		}
+		*/
+		if (stdgroup.val() == "") {
+			hasError = true;
+			stdgroup.parent().addClass('has-error');
 		}
 		if (txtstartdate.val() == "") {
 			hasError = true;
@@ -775,6 +849,8 @@ HTML;
 
 				// Load Exam Papers
 				$data['examPapersList'] = $this->courses->getExamPapersList($courseId);
+
+				$data['courseId'] = $courseId;
 
 				// Set page desc
 				$data['formlink'] = $this->role.'/courses/view/'.$courseId;
@@ -922,7 +998,21 @@ HTML;
 
 	function addpaper($courseId='')
 	{
-		echo "test";
+		$paperData['title'] = $this->input->post('title');
+		$paperData['description'] = $this->input->post('description');
+		$paperData['rules'] = $this->input->post('rules');
+		$paperData['group_id'] = $this->input->post('groupid');
+
+		$paperData['starttime'] = $this->misc->reformatDate($this->input->post('startdate'),'Y-m-d', true, '/').
+															' '.$this->input->post('starttime');
+		$paperData['endtime'] = $this->misc->reformatDate($this->input->post('enddate'),'Y-m-d', true, '/').
+															' '.$this->input->post('endtime');
+		$paperData['course_id'] = $courseId;
+		$addPapaer = $this->courses->addPaper($paperData);
+		//echo $addPapaer['result'];
+		$this->session->set_flashdata('msg_info',
+					'เพิ่มชุดข้อสอบ '.$addPapaer['name'].' แล้ว');
+				redirect($this->role.'/courses/view/'.$courseId);
 	}
 
 	function callbackjson()
@@ -930,7 +1020,7 @@ HTML;
 		// JSON Callback with modes & arguments.
 
 		# Simulation loading...
-		sleep(1);
+		//sleep(1);
 
 		$this->output->set_header('Content-Type: application/json; charset=utf-8');
 		$arg_list = func_get_args();
@@ -958,6 +1048,15 @@ HTML;
 
 				echo json_encode(array('html' => $html,
 					'error' => ''));
+				break;
+
+			case 'getStdList':
+				$cdata = $this->courses->buildPapersOptions($this->input->post('course_id'));
+				$html = '';
+				foreach ($cdata as $key => $value) {
+					$html .= "<option value='$key'>$value</option>";
+				}
+				echo json_encode(array('html' => $html, 'error' => ''));
 				break;
 
 			case 'addStdList':

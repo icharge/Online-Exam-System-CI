@@ -119,6 +119,16 @@ class Courses_model extends CI_Model {
 		return $options;
 	}
 
+	function buildPapersOptions($courseId)
+	{
+		$paperList = $this->getStudentGroups($courseId);
+		$options[''] = "-- เลือก --";
+		foreach ($paperList as $item) {
+			$options[$item['group_id']] = $item['name'];
+		}
+		return $options;
+	}
+
 	function countCourseList($keyword='')
 	{
 		$fields = array(
@@ -357,6 +367,19 @@ class Courses_model extends CI_Model {
 			->get()
 			->result_array();
 		return $query;
+	}
+
+	function addPaper($paperData)
+	{
+
+		$query = $this->db->insert('Exam_Papers', $paperData);
+		$newid = $this->db->insert_id();
+		return array(
+			'result' => 'ok',
+			'newid' => $newid,
+			'name' => $paperData['title'],
+			'error' => $this->db->_error_number(),
+		);
 	}
 
 }

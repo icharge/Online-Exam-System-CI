@@ -569,3 +569,7 @@ input[type=text].date {
 .bootstrap-timepicker input {
 	text-align: center;
 }
+
+.has-error .btn.dropdown-toggle.selectpicker {
+	border-color: #f56954;
+}

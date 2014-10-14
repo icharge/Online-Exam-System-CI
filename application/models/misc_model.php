@@ -226,9 +226,16 @@ class Misc_model extends CI_Model {
 			return $d . $delimitt . $m . $delimitt . $y;
 	}
 
-	function reformatDate($strdate, $mask="d/m/Y")
+	function reformatDate($strdate, $mask="d/m/Y", $reverse=false, $delimit='')
 	{
-		return date($mask, strtotime($strdate));
+		if (!$reverse)
+			return date($mask, strtotime($strdate));
+		else
+		{
+			list($y, $m, $d) = explode($delimit, $strdate);
+			return date($mask, strtotime($y.'-'.$m.'-'.$d));
+		}
+
 	}
 
 	function getFullDateTH($strdate)
