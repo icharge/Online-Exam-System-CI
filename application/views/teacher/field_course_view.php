@@ -424,13 +424,6 @@ HTML;
 								echo form_textarea('rules', "", 'id="paperrules" class="form-control vert" style="height: 90px"');
 								?>
 							</div>
-							<div class="form-group">
-								<?php
-								echo form_label('กลุ่มเรียน <span class="text-danger">*</span>', 'groupid');
-								$options = $this->courses->buildPapersOptions($courseId);
-								echo form_dropdown('groupid', $options, 'default', 'class="form-control"');
-								?>
-							</div>
 							<div class="form-group" >
 								<?php
 								echo form_label('ช่วงวัน <span class="text-danger">*</span>', '');
@@ -458,6 +451,13 @@ HTML;
 										<input type="text" class="form-control timepicker" name="endtime" value="<?php echo date('H:i');?>" autocomplete="off">
 									</div>
 								</div>
+							</div>
+							<div class="form-group">
+								<?php
+								echo form_label('กลุ่มเรียน <span class="text-danger">*</span>', 'groupid');
+								$options = $this->courses->buildPapersOptions($courseId);
+								echo form_dropdown('groupid', $options, 'default', 'class="form-control"');
+								?>
 							</div>
 						</div>
 						<div class="modal-footer">

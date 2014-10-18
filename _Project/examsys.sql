@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 09, 2014 at 03:22 PM
+-- Generation Time: Oct 18, 2014 at 03:09 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -143,7 +143,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('d99e80ecc96e8bbaf826a401905510d2', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1412860612, 'a:12:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;s:16:"flash:new:noAnim";b:1;}');
+('5219ae338745b9076dc5ae38d2217ed6', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1413353803, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('907f4897615e51d7651d49f2ce2ec1da', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1413302506, '');
 
 -- --------------------------------------------------------
 
@@ -217,21 +218,24 @@ INSERT INTO `Course_Students_group` (`group_id`, `name`, `description`, `course_
 CREATE TABLE IF NOT EXISTS `Exam_Papers` (
   `paper_id` int(7) NOT NULL AUTO_INCREMENT,
   `title` varchar(30) NOT NULL,
-  `descriptiion` text,
+  `description` text,
   `rules` text,
   `starttime` datetime NOT NULL,
   `endtime` datetime NOT NULL,
   `group_id` int(6) NOT NULL,
   `course_id` int(4) NOT NULL,
   PRIMARY KEY (`paper_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `Exam_Papers`
 --
 
-INSERT INTO `Exam_Papers` (`paper_id`, `title`, `descriptiion`, `rules`, `starttime`, `endtime`, `group_id`, `course_id`) VALUES
-(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-10-03 09:00:00', '2014-10-03 09:30:00', 1, 1);
+INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `starttime`, `endtime`, `group_id`, `course_id`) VALUES
+(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-10-03 09:00:00', '2014-10-03 09:30:00', 1, 1),
+(2, 'ชุด A', 'desc', 'r', '2014-10-14 22:06:00', '2014-10-14 22:06:00', 1, 1),
+(3, 'Final', 'ปลายภาค', 'ห้ามลอก', '2014-10-20 10:00:00', '2014-10-20 15:00:00', 9, 1),
+(4, 'ชุด B', 'บท 4', 'ห้ามลอก\nนำชีทเข้าไปได้', '2014-10-16 12:00:00', '2014-10-16 14:00:00', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -324,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `Questions` (
   `chapter_id` int(7) NOT NULL,
   `created_by_id` int(8) NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `Questions`
@@ -350,7 +354,8 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (17, '<p><strong>bfafrstjvghulkbjklinjkljkl</strong></p>', 'boolean', 'active', '2014-10-02 14:08:47', 4, 8),
 (18, '<p><span style="color:#FF0000;"> bbcbcvxvcxvxccvxcvxcxcvxcv</span></p>', 'numeric', 'active', '2014-10-02 15:17:08', 4, 8),
 (19, '<p><u>yrttewewerwe</u></p>', 'boolean', 'active', '2014-10-02 15:23:38', 4, 8),
-(20, '<p>werwertertwertr</p>', 'boolean', 'active', '2014-10-02 15:32:12', 9, 8);
+(20, '<p>werwertertwertr</p>', 'boolean', 'active', '2014-10-02 15:32:12', 9, 8),
+(21, '<p><span style="font-size:20px;">1+2 = ?</span></p>', 'numeric', 'active', '2014-10-09 20:43:29', 4, 8);
 
 -- --------------------------------------------------------
 
@@ -472,7 +477,7 @@ CREATE TABLE IF NOT EXISTS `Question_numerical` (
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `Question_numerical`
@@ -484,7 +489,8 @@ INSERT INTO `Question_numerical` (`id`, `answer`, `question_id`) VALUES
 (3, '2', 11),
 (4, '4234234', 13),
 (5, '29311', 15),
-(6, '22222', 18);
+(6, '22222', 18),
+(7, '3', 21);
 
 -- --------------------------------------------------------
 
@@ -552,7 +558,7 @@ INSERT INTO `Students` (`stu_id`, `id`, `title`, `name`, `lname`, `birth`, `gend
 CREATE TABLE IF NOT EXISTS `Student_Enroll` (
   `stu_id` varchar(10) NOT NULL,
   `course_id` varchar(10) NOT NULL,
-  `group_id` int(6) NOT NULL,
+  `group_id` int(6) DEFAULT NULL,
   PRIMARY KEY (`stu_id`,`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
