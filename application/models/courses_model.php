@@ -382,6 +382,15 @@ class Courses_model extends CI_Model {
 		);
 	}
 
+	function getExamPaperParts($paperid)
+	{
+		$cause = array('paper_id' => $paperid);
+		$query = $this->db
+			->get_where('Exam_Papers_Parts', $cause)
+			->result_array();
+		return $query;
+	}
+
 }
 
 /* End of file courses_model.php */

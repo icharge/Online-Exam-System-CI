@@ -361,6 +361,26 @@ EOL;
 										</li>
 HTML;
 */
+
+												$paperparts = "";
+
+												$paperPartsList = $this->courses->getExamPaperParts($item['paper_id']);
+												foreach ($paperPartsList as $itemPart) {
+													$paperparts .= <<<HTML
+													<li>
+														<span class="handle">
+															<i class="fa fa-ellipsis-v"></i>
+															<i class="fa fa-ellipsis-v"></i>
+														</span>
+														<span class="text"><b>{$itemPart['title']}</b> <small>{$itemPart['description']}</small></span>
+														<div class="tools">
+															<i class="fa fa-edit"></i>
+															<i class="fa fa-trash-o"></i>
+														</div>
+													</li>
+HTML;
+												}
+
 												echo <<<HTML
 												<li class="list-group-item jtooltip" title="{$datetooltip}">
 													<span class="badge"><i class="fa fa-clock-o"></i> {$datediff}</span>
@@ -378,18 +398,7 @@ HTML;
 													</div>
 													<div class="content-toggle" style="display: none;">
 														<ul class="todo-list">
-														<li>
-															<span class="handle">
-																<i class="fa fa-ellipsis-v"></i>
-																<i class="fa fa-ellipsis-v"></i>
-															</span>
-															<span class="text"><b>title</b> <small>description</small></span>
-															<span class="label label-info"><i class="fa fa-clock-o"></i> Datediff</span>
-															<div class="tools">
-																<i class="fa fa-edit"></i>
-																<i class="fa fa-trash-o"></i>
-															</div>
-														</li>
+														{$paperparts}
 														</ul>
 													</div>
 												</li>
