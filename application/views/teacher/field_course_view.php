@@ -335,7 +335,7 @@ EOL;
 									<button type="button" class="btn btn-app" id="addPaper"><i class="fa fa-plus"></i> เพิ่มชุดข้อสอบ</button>
 								</div>
 								<div class="col-md-12">
-									<ul class="todo-list">
+									<ul class="paper-list">
 									<?php
 										if(isset($examPapersList))
 										{
@@ -345,6 +345,7 @@ EOL;
 												$datetooltip = $this->misc->getFullDateTH($startdate)." ".$starttime.
 												' ถึง '.$this->misc->getFullDateTH($enddate)." ".$endtime;
 												$datediff = $this->misc->dateDifference($item['starttime'], $item['endtime']);
+												/*
 												echo <<<HTML
 										<li>
 											<span class="handle">
@@ -358,6 +359,40 @@ EOL;
 												<i class="fa fa-trash-o"></i>
 											</div>
 										</li>
+HTML;
+*/
+												echo <<<HTML
+												<li class="list-group-item jtooltip" title="{$datetooltip}">
+													<span class="badge"><i class="fa fa-clock-o"></i> {$datediff}</span>
+													<div class="optionlinks">
+														<a href="#edit">
+															<i class="fa fa-edit"></i>
+														</a>
+														<a href="#remove" class="text-danger">
+															<i class="glyphicon glyphicon-remove"></i>
+														</a>
+													</div>
+													<div class="content-toggle-click">
+														<h4 class="list-group-item-heading">{$item['title']}</h4>
+														<div class="item-group-item-text">{$item['description']}</div>
+													</div>
+													<div class="content-toggle" style="display: none;">
+														<ul class="todo-list">
+														<li>
+															<span class="handle">
+																<i class="fa fa-ellipsis-v"></i>
+																<i class="fa fa-ellipsis-v"></i>
+															</span>
+															<span class="text"><b>title</b> <small>description</small></span>
+															<span class="label label-info"><i class="fa fa-clock-o"></i> Datediff</span>
+															<div class="tools">
+																<i class="fa fa-edit"></i>
+																<i class="fa fa-trash-o"></i>
+															</div>
+														</li>
+														</ul>
+													</div>
+												</li>
 HTML;
 											}
 										}

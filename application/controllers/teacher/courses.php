@@ -41,10 +41,10 @@ class Courses extends CI_Controller {
 		// Prepare JavaScript !!
 		$this->subjectDropdownScript = "
 
-			if ($('#subjectid').val() == '')
-			{
-				$('#courseDesc').html('<h4>...กรุณาเลือกวิชา...<h4>');
-			}
+if ($('#subjectid').val() == '')
+{
+	$('#courseDesc').html('<h4>...กรุณาเลือกวิชา...<h4>');
+}
 
 
 $('#subjectid').change(function(){
@@ -770,6 +770,11 @@ HTML;
 			return;
 		}
 
+	});
+
+	$('.paper-list').delegate('.list-group-item .content-toggle-click', 'click', function(e) {
+		var content = $(this).next('.content-toggle');
+		content.slideToggle(100);
 	});
 HTML;
 

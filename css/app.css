@@ -2,7 +2,7 @@ body {
 		padding-bottom: 20px;
 }
 
-select {
+select:focus {
 	outline: none;
 }
 
@@ -253,9 +253,9 @@ form.searchform > div > div > input[type=text]:focus + span > .btn {
 
 /* Datepicker  (JQuery UI) */
 .ui-datepicker {
-	box-shadow: none;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
+	box-shadow: none;
 	width: 17em;
 	padding: .2em .2em 0;
 	display: none;
@@ -486,7 +486,8 @@ input[type=text].date {
 	position: absolute;
 	display: none;
 	right: 10px;
-	padding-left: 21px;
+	padding-left: 51px;
+	background-color: #fff;
 }
 
 .list-group-item:hover .optionlinks {
@@ -572,4 +573,10 @@ input[type=text].date {
 
 .has-error .btn.dropdown-toggle.selectpicker {
 	border-color: #f56954;
+}
+.jBox-content {
+	overflow: hidden;
+}
+.content-toggle-click {
+	cursor: pointer;
 }
