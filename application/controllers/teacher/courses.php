@@ -567,7 +567,7 @@ $(function() {
 
 	var delstdlist = function() {
 		//e.preventDefault();
-		btnAddState($("#stdListDel"), "load", "fa-times");
+		btnAddState($("#stdListDel"), "load", "fa-trash-o");
 		var oxsysAPI = "{$this->misc->getHref("teacher/courses/callbackjson/delStdList/")}/?ts="+Date.now();
 		var course_id = "course_id={$this->uri->segment(4)}";
 		var group_id = "group_id="+$("#stdListDel").parent().parent().parent().parent().attr('data-group-id');
@@ -595,7 +595,7 @@ $(function() {
 
 				$("#sectorListq a[data-group-id='"+data.group_id+"'").remove();
 			}
-			btnAddState($("#stdListDel"), "normal", "fa-times");
+			btnAddState($("#stdListDel"), "normal", "fa-trash-o");
 		})
 		.fail(function(jqxhr, textStatus, error) {
 			var err = textStatus + ", " + error;
@@ -774,6 +774,7 @@ HTML;
 
 	$('.paper-list').delegate('.list-group-item .content-toggle-click', 'click', function(e) {
 		var content = $(this).next('.content-toggle');
+		$(this).parent().toggleClass('active');
 		content.slideToggle(100);
 	});
 HTML;

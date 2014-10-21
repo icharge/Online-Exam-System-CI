@@ -488,6 +488,18 @@ input[type=text].date {
 	right: 10px;
 	padding-left: 51px;
 	background-color: #fff;
+	margin-top: -2px;
+}
+
+.list-group-item.active .optionlinks {
+	color: #fff;
+	background-color: #DAEEFF;
+}
+
+.list-group-item.active,
+.list-group-item.active:hover {
+	color: #000;
+	background-color: #DAEEFF;
 }
 
 .list-group-item:hover .optionlinks {

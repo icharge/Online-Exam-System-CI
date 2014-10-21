@@ -254,7 +254,7 @@ EOL;
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-												<button type="button" class="btn btn-danger" data-dismiss="modal" id="stdListDel"><i class="fa fa-times"></i> ลบกลุ่ม</button>
+												<button type="button" class="btn btn-danger" data-dismiss="modal" id="stdListDel"><i class="fa fa-trash-o"></i> ลบกลุ่ม</button>
 												<button type="button" class="btn btn-primary" id="stdListSave"><i class="fa fa-save"></i> บันทึก</button>
 											</div>
 										</div><!-- /.modal-content -->
@@ -382,14 +382,18 @@ HTML;
 												}
 
 												echo <<<HTML
-												<li class="list-group-item jtooltip" title="{$datetooltip}">
+												<li class="list-group-item">
 													<span class="badge"><i class="fa fa-clock-o"></i> {$datediff}</span>
 													<div class="optionlinks">
+														<span class="badge jtooltip" title="{$datetooltip}"><i class="fa fa-clock-o"></i> {$datediff}</span>
+														<a href="#add">
+															<i class="fa fa-plus"></i>
+														</a>
 														<a href="#edit">
 															<i class="fa fa-edit"></i>
 														</a>
 														<a href="#remove" class="text-danger">
-															<i class="glyphicon glyphicon-remove"></i>
+															<i class="fa fa-trash-o"></i>
 														</a>
 													</div>
 													<div class="content-toggle-click">
