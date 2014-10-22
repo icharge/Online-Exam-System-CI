@@ -629,51 +629,6 @@ HTML;
 		$('#modaladdpaper').modal('show');
 	});
 
-	$('#modaladdpaper').on('show.bs.modal', function (e) {
-
-		var oxsysAPI = "{$this->misc->getHref("teacher/courses/callbackjson/getStdList/")}/?ts="+Date.now();
-		var course_id = "course_id={$this->uri->segment(4)}";
-		var myData = course_id;
-
-		$.ajax({
-			type: "POST",
-			url: oxsysAPI,
-			data: myData,
-			contentType: "application/x-www-form-urlencoded",
-			dataType: "json"
-		})
-		.done(function(data) {
-			if (data.error != "") {
-
-				var jbox = new jBox('Modal', {
-					width: 350,
-					title: 'ข้อผิดพลาด',
-					overlay: true,
-					content: data.error,
-				});
-				jbox.open();
-
-			}else{
-				$("#modaladdpaper select[name='groupid']").html(data.html).selectpicker('refresh');
-			}
-		})
-		.fail(function(jqxhr, textStatus, error) {
-			var err = textStatus + ", " + error;
-			console.log("Request Failed: "+err);
-
-			var jbox = new jBox('Modal', {
-				width: 350,
-				height: 100,
-				title: 'ข้อผิดพลาด',
-				overlay: true,
-				content: error,
-			});
-			jbox.open();
-
-		});
-
-	});
-
 	$('#modaladdpaper').on('hidden.bs.modal', function (e) {
 		$("form[name='addpaper']")[0].reset();
 		var myform = $(this);
@@ -684,7 +639,6 @@ HTML;
 		var txtenddate = myform.find("input[name='enddate']");
 		var txtstarttime = myform.find("input[name='starttime']");
 		var txtendtime = myform.find("input[name='endtime']");
-		var stdgroup = myform.find("select[name='groupid']");
 
 		// clear class
 		txttitle.parent().removeClass('has-error');
@@ -694,7 +648,6 @@ HTML;
 		txtenddate.parent().parent().removeClass('has-error');
 		txtstarttime.parent().parent().removeClass('has-error');
 		txtendtime.parent().parent().removeClass('has-error');
-		stdgroup.parent().removeClass('has-error');
 		myform.find(".alert").hide();
 	});
 
@@ -710,7 +663,6 @@ HTML;
 		var txtenddate = myform.find("input[name='enddate']");
 		var txtstarttime = myform.find("input[name='starttime']");
 		var txtendtime = myform.find("input[name='endtime']");
-		var stdgroup = myform.find("select[name='groupid']");
 
 		// clear class
 		txttitle.parent().removeClass('has-error');
@@ -720,7 +672,6 @@ HTML;
 		txtenddate.parent().parent().removeClass('has-error');
 		txtstarttime.parent().parent().removeClass('has-error');
 		txtendtime.parent().parent().removeClass('has-error');
-		stdgroup.parent().removeClass('has-error');
 
 		// TRIM TXT
 		myform.find("input, textarea").each(function() {
@@ -742,10 +693,6 @@ HTML;
 			txtrules.parent().addClass('has-error');
 		}
 		*/
-		if (stdgroup.val() == "") {
-			hasError = true;
-			stdgroup.parent().addClass('has-error');
-		}
 		if (txtstartdate.val() == "") {
 			hasError = true;
 			txtstartdate.parent().parent().addClass('has-error');
@@ -1007,7 +954,6 @@ HTML;
 		$paperData['title'] = $this->input->post('title');
 		$paperData['description'] = $this->input->post('description');
 		$paperData['rules'] = $this->input->post('rules');
-		$paperData['group_id'] = $this->input->post('groupid');
 
 		$paperData['starttime'] = $this->misc->reformatDate($this->input->post('startdate'),'Y-m-d', true, '/').
 															' '.$this->input->post('starttime');

@@ -500,13 +500,6 @@ HTML;
 									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<?php
-								echo form_label('กลุ่มเรียน <span class="text-danger">*</span>', 'groupid');
-								$options = $this->courses->buildPapersOptions($courseId);
-								echo form_dropdown('groupid', $options, 'default', 'class="form-control"');
-								?>
-							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>

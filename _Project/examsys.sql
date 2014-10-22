@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.6
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 18, 2014 at 03:09 PM
--- Server version: 5.6.16
--- PHP Version: 5.5.9
+-- Generation Time: Oct 22, 2014 at 08:29 AM
+-- Server version: 5.6.20
+-- PHP Version: 5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -65,13 +65,12 @@ DELIMITER ;
 --
 
 CREATE TABLE IF NOT EXISTS `admins` (
-  `admin_id` int(10) NOT NULL AUTO_INCREMENT,
+`admin_id` int(10) NOT NULL,
   `id` int(8) NOT NULL,
   `name` varchar(60) NOT NULL,
   `lname` varchar(60) NOT NULL,
   `email` varchar(200) DEFAULT NULL,
-  `pic` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`admin_id`)
+  `pic` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
@@ -91,11 +90,10 @@ INSERT INTO `admins` (`admin_id`, `id`, `name`, `lname`, `email`, `pic`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Branch` (
-  `branch_id` int(4) NOT NULL AUTO_INCREMENT,
+`branch_id` int(4) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text,
-  `fac_id` int(4) NOT NULL,
-  PRIMARY KEY (`branch_id`)
+  `fac_id` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -105,11 +103,10 @@ CREATE TABLE IF NOT EXISTS `Branch` (
 --
 
 CREATE TABLE IF NOT EXISTS `chapter` (
-  `chapter_id` int(7) NOT NULL AUTO_INCREMENT,
+`chapter_id` int(7) NOT NULL,
   `name` varchar(30) NOT NULL,
   `description` text,
-  `subject_id` int(5) NOT NULL,
-  PRIMARY KEY (`chapter_id`)
+  `subject_id` int(5) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
@@ -134,8 +131,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
   `ip_address` varchar(50) NOT NULL,
   `user_agent` varchar(50) NOT NULL,
   `last_activity` int(10) DEFAULT NULL,
-  `user_data` text NOT NULL,
-  PRIMARY KEY (`session_id`)
+  `user_data` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -143,8 +139,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('5219ae338745b9076dc5ae38d2217ed6', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1413353803, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
-('907f4897615e51d7651d49f2ce2ec1da', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) App', 1413302506, '');
+('197d423fcff06c1045ad5fb4d89512d6', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10) Appl', 1413959112, 'a:11:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;s:16:"flash:new:noAnim";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -153,13 +148,12 @@ INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activ
 --
 
 CREATE TABLE IF NOT EXISTS `Courses` (
-  `course_id` int(4) NOT NULL AUTO_INCREMENT,
+`course_id` int(4) NOT NULL,
   `year` varchar(4) NOT NULL DEFAULT '',
   `pwd` varchar(20) DEFAULT NULL,
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   `status` varchar(20) NOT NULL,
-  `subject_id` int(5) NOT NULL,
-  PRIMARY KEY (`course_id`)
+  `subject_id` int(5) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
@@ -194,11 +188,10 @@ CREATE TABLE IF NOT EXISTS `courseslist_view` (
 --
 
 CREATE TABLE IF NOT EXISTS `Course_Students_group` (
-  `group_id` int(6) NOT NULL AUTO_INCREMENT,
+`group_id` int(6) NOT NULL,
   `name` varchar(40) NOT NULL,
   `description` text,
-  `course_id` int(4) NOT NULL,
-  PRIMARY KEY (`group_id`)
+  `course_id` int(4) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
@@ -216,26 +209,24 @@ INSERT INTO `Course_Students_group` (`group_id`, `name`, `description`, `course_
 --
 
 CREATE TABLE IF NOT EXISTS `Exam_Papers` (
-  `paper_id` int(7) NOT NULL AUTO_INCREMENT,
+`paper_id` int(7) NOT NULL,
   `title` varchar(30) NOT NULL,
   `description` text,
   `rules` text,
   `starttime` datetime NOT NULL,
   `endtime` datetime NOT NULL,
-  `group_id` int(6) NOT NULL,
-  `course_id` int(4) NOT NULL,
-  PRIMARY KEY (`paper_id`)
+  `course_id` int(4) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `Exam_Papers`
 --
 
-INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `starttime`, `endtime`, `group_id`, `course_id`) VALUES
-(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-10-03 09:00:00', '2014-10-03 09:30:00', 1, 1),
-(2, 'ชุด A', 'desc', 'r', '2014-10-14 22:06:00', '2014-10-14 22:06:00', 1, 1),
-(3, 'Final', 'ปลายภาค', 'ห้ามลอก', '2014-10-20 10:00:00', '2014-10-20 15:00:00', 9, 1),
-(4, 'ชุด B', 'บท 4', 'ห้ามลอก\nนำชีทเข้าไปได้', '2014-10-16 12:00:00', '2014-10-16 14:00:00', 9, 1);
+INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `starttime`, `endtime`, `course_id`) VALUES
+(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-10-03 09:00:00', '2014-10-03 09:30:00', 1),
+(2, 'ชุด A', 'desc', 'r', '2014-10-14 22:06:00', '2014-10-14 22:06:00', 1),
+(3, 'Final', 'ปลายภาค', 'ห้ามลอก', '2014-10-20 10:00:00', '2014-10-20 15:00:00', 1),
+(4, 'ชุด B', 'บท 4', 'ห้ามลอก\nนำชีทเข้าไปได้', '2014-10-16 12:00:00', '2014-10-16 14:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -247,8 +238,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Detail` (
   `question_id` int(10) NOT NULL,
   `part_id` int(7) NOT NULL,
   `paper_id` int(7) NOT NULL,
-  `no` tinyint(3) NOT NULL,
-  PRIMARY KEY (`question_id`,`part_id`)
+  `no` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -268,21 +258,21 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 --
 
 CREATE TABLE IF NOT EXISTS `Exam_Papers_Parts` (
-  `part_id` int(7) NOT NULL AUTO_INCREMENT,
+`part_id` int(7) NOT NULL,
   `no` tinyint(3) NOT NULL,
   `title` varchar(40) NOT NULL,
   `description` text,
   `israndom` tinyint(1) NOT NULL,
-  `paper_id` int(7) NOT NULL,
-  PRIMARY KEY (`part_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `paper_id` int(7) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `Exam_Papers_Parts`
 --
 
 INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `israndom`, `paper_id`) VALUES
-(1, 1, 'ตอน 1', 'เลือกคำตอบที่ถูกต้อง', 0, 1);
+(1, 1, 'ตอน 1', 'เลือกคำตอบที่ถูกต้อง', 0, 1),
+(2, 2, 'ตอน 2', 'หาคำตอบจากโจทย์', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -291,10 +281,9 @@ INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `isran
 --
 
 CREATE TABLE IF NOT EXISTS `Faculty` (
-  `fac_id` int(4) NOT NULL AUTO_INCREMENT,
+`fac_id` int(4) NOT NULL,
   `name` varchar(40) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`fac_id`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -320,14 +309,13 @@ CREATE TABLE IF NOT EXISTS `log_usage` (
 --
 
 CREATE TABLE IF NOT EXISTS `Questions` (
-  `question_id` int(10) NOT NULL AUTO_INCREMENT,
+`question_id` int(10) NOT NULL,
   `question` text NOT NULL,
   `type` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'active',
   `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `chapter_id` int(7) NOT NULL,
-  `created_by_id` int(8) NOT NULL,
-  PRIMARY KEY (`question_id`)
+  `created_by_id` int(8) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
@@ -364,10 +352,9 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 --
 
 CREATE TABLE IF NOT EXISTS `Question_boolean` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+`id` int(10) NOT NULL,
   `answer` varchar(20) NOT NULL,
-  `question_id` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
+  `question_id` int(10) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
@@ -391,7 +378,7 @@ INSERT INTO `Question_boolean` (`id`, `answer`, `question_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Question_choice` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+`id` int(10) NOT NULL,
   `choice1` text NOT NULL,
   `choice2` text NOT NULL,
   `choice3` text,
@@ -399,8 +386,7 @@ CREATE TABLE IF NOT EXISTS `Question_choice` (
   `choice5` text,
   `choice6` text,
   `answer` varchar(20) NOT NULL,
-  `question_id` int(7) NOT NULL,
-  PRIMARY KEY (`id`)
+  `question_id` int(7) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
@@ -473,10 +459,9 @@ CREATE TABLE IF NOT EXISTS `question_list` (
 --
 
 CREATE TABLE IF NOT EXISTS `Question_numerical` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+`id` int(10) NOT NULL,
   `answer` varchar(20) NOT NULL,
-  `question_id` int(7) NOT NULL,
-  PRIMARY KEY (`id`)
+  `question_id` int(7) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
@@ -511,8 +496,7 @@ CREATE TABLE IF NOT EXISTS `Students` (
   `fac_id` varchar(50) NOT NULL,
   `branch_id` varchar(50) NOT NULL,
   `email` varchar(200) DEFAULT NULL,
-  `pic` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`stu_id`)
+  `pic` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -558,8 +542,7 @@ INSERT INTO `Students` (`stu_id`, `id`, `title`, `name`, `lname`, `birth`, `gend
 CREATE TABLE IF NOT EXISTS `Student_Enroll` (
   `stu_id` varchar(10) NOT NULL,
   `course_id` varchar(10) NOT NULL,
-  `group_id` int(6) DEFAULT NULL,
-  PRIMARY KEY (`stu_id`,`course_id`)
+  `group_id` int(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -582,8 +565,7 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `Student_Group_Paper` (
   `group_id` int(6) NOT NULL,
-  `paper_id` int(7) NOT NULL,
-  PRIMARY KEY (`group_id`,`paper_id`)
+  `paper_id` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -600,14 +582,12 @@ INSERT INTO `Student_Group_Paper` (`group_id`, `paper_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Subjects` (
-  `subject_id` int(5) NOT NULL AUTO_INCREMENT,
+`subject_id` int(5) NOT NULL,
   `code` varchar(10) NOT NULL,
   `name` varchar(60) NOT NULL,
   `shortname` varchar(15) NOT NULL,
   `description` text,
-  `status` varchar(20) DEFAULT 'active',
-  PRIMARY KEY (`subject_id`),
-  UNIQUE KEY `code` (`code`)
+  `status` varchar(20) DEFAULT 'active'
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
@@ -628,14 +608,13 @@ INSERT INTO `Subjects` (`subject_id`, `code`, `name`, `shortname`, `description`
 --
 
 CREATE TABLE IF NOT EXISTS `Teachers` (
-  `tea_id` int(10) NOT NULL AUTO_INCREMENT,
+`tea_id` int(10) NOT NULL,
   `id` int(8) NOT NULL,
   `name` varchar(60) NOT NULL,
   `lname` varchar(60) NOT NULL,
   `fac_id` varchar(50) NOT NULL,
   `email` varchar(200) DEFAULT NULL,
-  `pic` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`tea_id`)
+  `pic` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
@@ -656,8 +635,7 @@ INSERT INTO `Teachers` (`tea_id`, `id`, `name`, `lname`, `fac_id`, `email`, `pic
 
 CREATE TABLE IF NOT EXISTS `Teacher_Course_Detail` (
   `tea_id` int(10) NOT NULL,
-  `course_id` int(4) NOT NULL,
-  PRIMARY KEY (`tea_id`,`course_id`)
+  `course_id` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -677,13 +655,11 @@ INSERT INTO `Teacher_Course_Detail` (`tea_id`, `course_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(8) NOT NULL AUTO_INCREMENT,
+`id` int(8) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(128) NOT NULL,
   `role` varchar(20) DEFAULT NULL,
-  `status` varchar(10) NOT NULL DEFAULT 'active',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
+  `status` varchar(10) NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=64 ;
 
 --
@@ -755,6 +731,215 @@ DROP TABLE IF EXISTS `question_list`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `question_list` AS select `q`.`question_id` AS `question_id`,`q`.`question` AS `question`,`q`.`type` AS `type`,`q`.`status` AS `status`,`q`.`chapter_id` AS `chapter_id`,`getNameFromUid`(`q`.`created_by_id`) AS `created_by`,`q`.`created_time` AS `created_time`,`qc`.`choice1` AS `choice1`,`qc`.`choice2` AS `choice2`,`qc`.`choice3` AS `choice3`,`qc`.`choice4` AS `choice4`,`qc`.`choice5` AS `choice5`,`qc`.`choice6` AS `choice6`,`qc`.`answer` AS `answer_choice`,`qn`.`answer` AS `answer_numeric`,`qb`.`answer` AS `answer_boolean`,`ch`.`name` AS `chapter_name` from ((((`questions` `q` left join `question_choice` `qc` on((`q`.`question_id` = `qc`.`question_id`))) left join `question_numerical` `qn` on((`q`.`question_id` = `qn`.`question_id`))) left join `question_boolean` `qb` on((`q`.`question_id` = `qb`.`question_id`))) left join `chapter` `ch` on((`q`.`chapter_id` = `ch`.`chapter_id`)));
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+ ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `Branch`
+--
+ALTER TABLE `Branch`
+ ADD PRIMARY KEY (`branch_id`);
+
+--
+-- Indexes for table `chapter`
+--
+ALTER TABLE `chapter`
+ ADD PRIMARY KEY (`chapter_id`);
+
+--
+-- Indexes for table `ci_sessions`
+--
+ALTER TABLE `ci_sessions`
+ ADD PRIMARY KEY (`session_id`);
+
+--
+-- Indexes for table `Courses`
+--
+ALTER TABLE `Courses`
+ ADD PRIMARY KEY (`course_id`);
+
+--
+-- Indexes for table `Course_Students_group`
+--
+ALTER TABLE `Course_Students_group`
+ ADD PRIMARY KEY (`group_id`);
+
+--
+-- Indexes for table `Exam_Papers`
+--
+ALTER TABLE `Exam_Papers`
+ ADD PRIMARY KEY (`paper_id`);
+
+--
+-- Indexes for table `Exam_Papers_Detail`
+--
+ALTER TABLE `Exam_Papers_Detail`
+ ADD PRIMARY KEY (`question_id`,`part_id`);
+
+--
+-- Indexes for table `Exam_Papers_Parts`
+--
+ALTER TABLE `Exam_Papers_Parts`
+ ADD PRIMARY KEY (`part_id`);
+
+--
+-- Indexes for table `Faculty`
+--
+ALTER TABLE `Faculty`
+ ADD PRIMARY KEY (`fac_id`);
+
+--
+-- Indexes for table `Questions`
+--
+ALTER TABLE `Questions`
+ ADD PRIMARY KEY (`question_id`);
+
+--
+-- Indexes for table `Question_boolean`
+--
+ALTER TABLE `Question_boolean`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Question_choice`
+--
+ALTER TABLE `Question_choice`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Question_numerical`
+--
+ALTER TABLE `Question_numerical`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Students`
+--
+ALTER TABLE `Students`
+ ADD PRIMARY KEY (`stu_id`);
+
+--
+-- Indexes for table `Student_Enroll`
+--
+ALTER TABLE `Student_Enroll`
+ ADD PRIMARY KEY (`stu_id`,`course_id`);
+
+--
+-- Indexes for table `Student_Group_Paper`
+--
+ALTER TABLE `Student_Group_Paper`
+ ADD PRIMARY KEY (`group_id`,`paper_id`);
+
+--
+-- Indexes for table `Subjects`
+--
+ALTER TABLE `Subjects`
+ ADD PRIMARY KEY (`subject_id`), ADD UNIQUE KEY `code` (`code`);
+
+--
+-- Indexes for table `Teachers`
+--
+ALTER TABLE `Teachers`
+ ADD PRIMARY KEY (`tea_id`);
+
+--
+-- Indexes for table `Teacher_Course_Detail`
+--
+ALTER TABLE `Teacher_Course_Detail`
+ ADD PRIMARY KEY (`tea_id`,`course_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `Branch`
+--
+ALTER TABLE `Branch`
+MODIFY `branch_id` int(4) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `chapter`
+--
+ALTER TABLE `chapter`
+MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `Courses`
+--
+ALTER TABLE `Courses`
+MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `Course_Students_group`
+--
+ALTER TABLE `Course_Students_group`
+MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `Exam_Papers`
+--
+ALTER TABLE `Exam_Papers`
+MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `Exam_Papers_Parts`
+--
+ALTER TABLE `Exam_Papers_Parts`
+MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `Faculty`
+--
+ALTER TABLE `Faculty`
+MODIFY `fac_id` int(4) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Questions`
+--
+ALTER TABLE `Questions`
+MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT for table `Question_boolean`
+--
+ALTER TABLE `Question_boolean`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `Question_choice`
+--
+ALTER TABLE `Question_choice`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `Question_numerical`
+--
+ALTER TABLE `Question_numerical`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `Subjects`
+--
+ALTER TABLE `Subjects`
+MODIFY `subject_id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `Teachers`
+--
+ALTER TABLE `Teachers`
+MODIFY `tea_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+MODIFY `id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

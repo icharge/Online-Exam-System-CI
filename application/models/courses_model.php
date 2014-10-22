@@ -386,6 +386,7 @@ class Courses_model extends CI_Model {
 	{
 		$cause = array('paper_id' => $paperid);
 		$query = $this->db
+			->order_by('no','asc')
 			->get_where('Exam_Papers_Parts', $cause)
 			->result_array();
 		return $query;
