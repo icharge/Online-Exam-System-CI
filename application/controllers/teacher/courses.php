@@ -119,103 +119,7 @@ $("#startdate").datepicker({language:\'th-th\',format:\'dd/mm/yyyy\'});';*/
 		});";
 
 		$this->listview = "
-$('.add').click(function(){
-	//$('.all').prop(\"checked\",false);
-	$('.all').iCheck('uncheck');
-	var items = $(\"#list1 input:checked:not('.all')\");
-	items.attr('name', 'teaselected[]');
-	//$(items).iCheck('uncheck');
-	items = $(items).parent().parent();
-	var n = items.length;
-	if (n > 0) {
-		items.each(function(idx,item){
-			var choice = $(item);
-			choice.prop(\"checked\",false);
-			choice.parent().appendTo(\"#list2\");
-		});
-	}
-	else {
-		alert(\"โปรดเลือกผู้สอน\");
-	}
-});
 
-$('.remove').click(function(){
-	//$('.all').prop(\"checked\",false);
-	$('.all').iCheck('uncheck');
-	var items = $(\"#list2 input:checked:not('.all')\");
-	items.attr('name', '');
-	$(items).iCheck('uncheck');
-	items = $(items).parent().parent();
-	items.each(function(idx,item){
-		var choice = $(item);
-		choice.prop(\"checked\",false);
-		choice.parent().appendTo(\"#list1\");
-	});
-});
-
-/* toggle all checkboxes in group */
-$('.all').click(function(e){
-	e.preventDefault();
-
-	var \$this = $(this);
-	// iCheck
-	if(\$this.is(\":checked\")) {
-		var listgroup = \$this.parent().parent().parent().parent();
-		listgroup.next('.list-group').find(\"[type=checkbox]\").iCheck('uncheck');
-		//.prop(\"checked\",true);
-	}
-	else {
-		var listgroup = \$this.parent().parent().parent().parent();
-		listgroup.next('.list-group').find(\"[type=checkbox]\").iCheck('check');
-		//.prop(\"checked\",false);
-	}
-});
-
-$('[type=checkbox]').click(function(e){
-	e.stopPropagation();
-});
-
-/* toggle checkbox when list group item is clicked */
-$('.list-group a, .listview a').click(function(e){
-	e.preventDefault();
-	//e.stopPropagation();
-
-	var \$this = $(this).find(\"[type=checkbox]\");
-
-	// For iCheck
-	$(\$this).iCheck('toggle');
-
-	/*if(\$this.is(\":checked\")) {
-		\$this.prop(\"checked\",false);
-	}
-	else {
-		\$this.prop(\"checked\",true);
-	}*/
-
-	if (\$this.hasClass(\"all\")) {
-		\$this.trigger('click');
-	}
-});
-/*
-$('#list1 a').click(function(e) {
-	var findall = $(this).find('div.all');
-	if (! findall.hasClass('all'))
-		$('.add').trigger('click');
-});
-
-$('#list2 a').click(function(e) {
-	var findall = $(this).find('div.all');
-	if (! findall.hasClass('all'))
-		$('.remove').trigger('click');
-});
-*/
-// iCheck
-$('.all > div > ins').click(function(e){
-	var \$this = $(this).siblings('[type=checkbox]');
-	if (\$this.hasClass(\"all\")) {
-		\$this.trigger('click');
-	}
-});
 
 // filter select list options
 });
@@ -724,6 +628,22 @@ HTML;
 		$(this).parent().toggleClass('active');
 		content.slideToggle(100);
 	});
+
+	$('.paper-list').delegate('.list-group-item .optionlinks a.add', 'click', function(e) {
+		e.preventDefault();
+		var paperid = $(this).parent().parent().attr('data-paperid');
+		$('#modaladdpart').modal('show');
+
+		// setting values
+		var form = $("#modaladdpart form");
+		form.find("input[type='text']").val('');
+		form.find("input[type='checkbox']").iCheck('uncheck');
+		form.find("textarea").val('');
+		form.find("input[name='paper_id']").val(paperid);
+
+
+	});
+
 HTML;
 
 		$this->scriptList = array(
@@ -811,6 +731,7 @@ HTML;
 				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];
 
 				$data['formlinkaddpaper'] = $this->role.'/courses/addpaper/'.$courseId;
+				$data['formlinkaddpart'] = $this->role.'/courses/addpart/'.$courseId;
 				$this->load->view('teacher/field_course_view', $data);
 			}
 		}
@@ -964,6 +885,20 @@ HTML;
 		//echo $addPapaer['result'];
 		$this->session->set_flashdata('msg_info',
 					'เพิ่มชุดข้อสอบ '.$addPapaer['name'].' แล้ว');
+				redirect($this->role.'/courses/view/'.$courseId);
+	}
+
+	function addpart($courseId='')
+	{
+		$partData['no'] = $this->input->post('no');
+		$partData['title'] = $this->input->post('title');
+		$partData['description'] = $this->input->post('description');
+		$partData['israndom'] = ($this->input->post('random')=="true"?"1":"0");
+		$partData['paper_id'] = $this->input->post('paper_id');
+		$addPart = $this->courses->addPart($partData);
+
+		$this->session->set_flashdata('msg_info',
+					'เพิ่มตอน '.$partData['title'].' แล้ว');
 				redirect($this->role.'/courses/view/'.$courseId);
 	}
 

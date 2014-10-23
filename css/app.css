@@ -491,6 +491,10 @@ input[type=text].date {
 	margin-top: -2px;
 }
 
+.optionlinks .badge {
+	margin-right: 10px;
+}
+
 .list-group-item.active .optionlinks {
 	color: #fff;
 	background-color: #DAEEFF;

@@ -335,7 +335,7 @@ EOL;
 									<button type="button" class="btn btn-app" id="addPaper"><i class="fa fa-plus"></i> เพิ่มชุดข้อสอบ</button>
 								</div>
 								<div class="col-md-12">
-									<ul class="paper-list">
+									<ul class="list-group paper-list">
 									<?php
 										if(isset($examPapersList))
 										{
@@ -367,7 +367,7 @@ HTML;
 												$paperPartsList = $this->courses->getExamPaperParts($item['paper_id']);
 												foreach ($paperPartsList as $itemPart) {
 													$paperparts .= <<<HTML
-													<li>
+													<li data-partid="{$itemPart['part_id']}">
 														<span class="handle">
 															<i class="fa fa-ellipsis-v"></i>
 															<i class="fa fa-ellipsis-v"></i>
@@ -382,11 +382,11 @@ HTML;
 												}
 
 												echo <<<HTML
-												<li class="list-group-item">
+												<li class="list-group-item" data-paperid="{$item['paper_id']}">
 													<span class="badge"><i class="fa fa-clock-o"></i> {$datediff}</span>
 													<div class="optionlinks">
 														<span class="badge jtooltip" title="{$datetooltip}"><i class="fa fa-clock-o"></i> {$datediff}</span>
-														<a href="#add">
+														<a href="#add" class="add">
 															<i class="fa fa-plus"></i>
 														</a>
 														<a href="#edit">
@@ -507,6 +507,73 @@ HTML;
 						</div>
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
-			<?php form_close(); ?>
+			<?php echo form_close(); ?>
+		</div><!-- /.modal -->
+
+		<div class="modal fade" id="modaladdpart" data-backdrop="static">
+			<?php
+				$attr = array(
+					'name' => 'addpart',
+					'role' => 'form',
+					'method' => 'post'
+				);
+				echo form_open($formlinkaddpart, $attr);
+				echo form_hidden('paper_id', '-1');
+			?>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title"><i class="fa fa-plus"></i> เพิ่ม Chapter</h4>
+						</div>
+						<div class="modal-body">
+							<div class="alert alert-danger alert-dismissable" style="display: none;">
+								<i class="fa fa-ban"></i>
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<b>โปรด</b> ตรวจสอบความถูกต้อง
+							</div>
+							<div class="form-group">
+								<?php
+								echo form_label('ลำดับ <span class="text-danger">*</span>', 'no');
+								echo form_input(array(
+									'id'=>'no',
+									'name'=>'no',
+									'type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>''));
+								?>
+							</div>
+							<div class="form-group">
+								<?php
+								echo form_label('หัวข้อ <span class="text-danger">*</span>', 'title');
+								echo form_input(array(
+									'id'=>'title',
+									'name'=>'title',
+									'type'=>'text',
+									'class'=>'form-control',
+									'placeholder'=>''));
+								?>
+							</div>
+							<div class="form-group">
+								<?php
+								echo form_label('คำอธิบาย', 'description');
+								echo form_textarea('description', "", 'id="paperdesc" class="form-control vert" style="height: 90px"');
+								?>
+							</div>
+							<div class="form-group">
+								<label><?php
+								echo form_checkbox('random', 'true', FALSE,'class="minimal-red"');
+								?> สุ่มข้อสอบ</label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="reset" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+							<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> เพิ่ม</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			<?php echo form_close(); ?>
 		</div><!-- /.modal -->
 <!-- End content -->

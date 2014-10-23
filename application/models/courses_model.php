@@ -392,6 +392,19 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
+	function addPart($partData)
+	{
+
+		$query = $this->db->insert('Exam_Papers_Parts', $partData);
+		$newid = $this->db->insert_id();
+		return array(
+			'result' => 'ok',
+			'newid' => $newid,
+			'name' => $partData['title'],
+			'error' => $this->db->_error_number(),
+		);
+	}
+
 }
 
 /* End of file courses_model.php */
