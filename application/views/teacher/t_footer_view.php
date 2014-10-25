@@ -5,8 +5,8 @@
 
 	<!-- jQuery 2.0.2 -->
 	<script src="vendor/js/jquery.min.js"></script>
-	<!-- jQuery UI 1.10.3 -->
-	<!-- <script src="vendor/js/jquery-ui.js" type="text/javascript"></script> -->
+	<!-- jQuery UI 1.1 -->
+	<script src="vendor/js/jquery-ui.min.js" type="text/javascript"></script>
 	<!-- jQuery ScrollTo -->
 	<script src="vendor/js/jquery.scrollto.min.js" type="text/javascript"></script>
 	<!-- ScrollToFixed -->
@@ -58,7 +58,7 @@
 	<!-- <script src="vendor/js/AdminLTE/demo.js" type="text/javascript"></script> -->
 
 	<!-- PickList -->
-	<script src="vendor/js/jquery.ui.widget.js" type="text/javascript"></script>
+	<!-- <script src="vendor/js/jquery.ui.widget.js" type="text/javascript"></script> -->
 	<script src="vendor/js/jquery-picklist.js" type="text/javascript"></script>
 
 

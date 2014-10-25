@@ -596,3 +596,6 @@ input[type=text].date {
 .content-toggle-click {
 	cursor: pointer;
 }
+.sort-highlight {
+	padding: 9px 10px !important;
+}

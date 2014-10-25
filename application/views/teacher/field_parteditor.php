@@ -10,7 +10,8 @@
 		<ol class="breadcrumb">
 			<li><?php echo anchor('teacher', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
 			<li><?php echo anchor('teacher/courses', 'วิชาที่เปิดสอบ');?></li>
-			<li class="active"><?php echo $pagesubtitle;?></li>
+			<li><?php echo anchor('teacher/courses/'.$courseInfo['course_id'], $courseInfo['code'].' '.$courseInfo['name']);?></li>
+			<li class="active"><?php echo $partInfo['title'];?></li>
 		</ol>
 	</section>
 	<section class="content">

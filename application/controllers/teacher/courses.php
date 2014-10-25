@@ -11,6 +11,7 @@ class Courses extends CI_Controller {
 	private $listview;
 	private $stdGroup;
 	private $papers;
+	private $sortable;
 
 	private $role;
 
@@ -625,6 +626,7 @@ HTML;
 
 	$('.paper-list').delegate('.list-group-item .content-toggle-click', 'click', function(e) {
 		var content = $(this).next('.content-toggle');
+		if ($.trim(content.html) == "") return;
 		$(this).parent().toggleClass('active');
 		content.slideToggle(100);
 	});
@@ -646,6 +648,24 @@ HTML;
 
 HTML;
 
+		$this->sortable = <<<HTML
+	
+	$(".todo-list").sortable({
+		placeholder: "sort-highlight",
+		handle: ".handle",
+		forcePlaceholderSize: true,
+		zIndex: 999999,
+		stop: function(i) {
+			placeholder: 'ui-state-highlight'
+			$.ajax({
+				type: "POST",
+				url: "{$this->misc->getHref("teacher/courses/callbackjson/updatepartno/")}/?ts="+Date.now(),
+				data: $(this).sortable("serialize")});
+		}
+	}).disableSelection();
+
+HTML;
+
 		$this->scriptList = array(
 			'subjectDropdownScript' => $this->subjectDropdownScript,
 			'datePicker' => $this->datePicker,
@@ -653,6 +673,7 @@ HTML;
 			'listview' => $this->listview,
 			'stdGroup' => $this->stdGroup,
 			'papers' => $this->papers,
+			'sortable' => $this->sortable,
 		);
 
 
@@ -902,6 +923,24 @@ HTML;
 				redirect($this->role.'/courses/view/'.$courseId);
 	}
 
+	function editpart($partId='')
+	{
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
+		
+		$courseId = $this->courses->getCourseIdFromPartId($partId);
+		$data['courseInfo'] = $this->courses->getCourseById($courseId);
+		$data['partInfo'] = $this->courses->getPartInfoById($partId);
+		$data['pagetitle'] = "ตัวแก้ไขชุดข้อสอบ";
+		$data['pagesubtitle'] = $data['partInfo']['title'];
+
+		$this->load->view($this->role.'/field_parteditor', $data);
+		// Send additional script to footer
+		$footdata['additionScript'] = $this->getAddScripts();
+		$this->load->view($this->role.'/t_footer_view', $footdata);
+	}
+
 	function callbackjson()
 	{
 		// JSON Callback with modes & arguments.
@@ -998,6 +1037,19 @@ HTML;
 					}
 				}
 
+				break;
+			case 'updatepartno':
+				if (is_array($this->input->post('part')))
+				{
+					$this->courses->updatePartOrder($this->input->post('part'));
+					echo json_encode(array('error' => '', 'result'=>'success'));
+				}
+				else
+				{
+					echo json_encode(array('error' => 'No Array'));
+				}
+				
+				
 				break;
 
 			default:

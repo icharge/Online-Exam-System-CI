@@ -405,6 +405,35 @@ class Courses_model extends CI_Model {
 		);
 	}
 
+	function getPartInfoById($partId)
+	{
+		$cause = array('part_id' => $partId);
+		$query = $this->db
+			->get_where('Exam_Papers_Parts', $cause)
+			->row_array();
+		return $query;
+	}
+
+	function getCourseIdFromPartId($partId)
+	{
+		$query = $this->db
+			->select("course_id")
+			->from('Exam_Papers_Parts')
+			->join('Exam_Papers', 'Exam_Papers_Parts.paper_id = Exam_Papers.paper_id', 'left')
+			->where(array('Exam_Papers.paper_id'=>$partId))
+			->limit(1)
+			->get()
+			->row_array();
+		return $query['course_id'];
+	}
+
+	function updatePartOrder($partData)
+	{
+		foreach ($partData as $key => $value) {
+			$query = $this->db->update('Exam_Papers_Parts', array('no'=>$key+1), array('part_id'=>$value));
+		}
+	}
+
 }
 
 /* End of file courses_model.php */
