@@ -401,7 +401,7 @@ HTML;
 														<div class="item-group-item-text">{$item['description']}</div>
 													</div>
 													<div class="content-toggle" style="display: none;">
-														<ul class="todo-list">
+														<ul class="todo-list part-list">
 														{$paperparts}
 														</ul>
 													</div>

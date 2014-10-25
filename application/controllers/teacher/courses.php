@@ -625,10 +625,11 @@ HTML;
 	});
 
 	$('.paper-list').delegate('.list-group-item .content-toggle-click', 'click', function(e) {
-		var content = $(this).next('.content-toggle');
-		if ($.trim(content.html) == "") return;
+		var contenttoggle = $(this).next('.content-toggle');
+		var content = $(this).parent().find('.part-list');
+		if ($.trim(content.html()) == "") return false;
 		$(this).parent().toggleClass('active');
-		content.slideToggle(100);
+		contenttoggle.slideToggle(100);
 	});
 
 	$('.paper-list').delegate('.list-group-item .optionlinks a.add', 'click', function(e) {
@@ -928,7 +929,7 @@ HTML;
 		$this->load->view($this->role.'/t_header_view');
 		$this->load->view($this->role.'/t_headerbar_view');
 		$this->load->view($this->role.'/t_sidebar_view');
-		
+
 		$courseId = $this->courses->getCourseIdFromPartId($partId);
 		$data['courseInfo'] = $this->courses->getCourseById($courseId);
 		$data['partInfo'] = $this->courses->getPartInfoById($partId);
