@@ -434,6 +434,8 @@ class Courses_model extends CI_Model {
 		}
 	}
 
+	
+
 }
 
 /* End of file courses_model.php */

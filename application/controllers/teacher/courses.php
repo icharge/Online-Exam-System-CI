@@ -926,6 +926,8 @@ HTML;
 
 	function editpart($partId='')
 	{
+		$this->load->model('parteditor_model', 'parteditor');
+
 		$this->load->view($this->role.'/t_header_view');
 		$this->load->view($this->role.'/t_headerbar_view');
 		$this->load->view($this->role.'/t_sidebar_view');
@@ -935,6 +937,8 @@ HTML;
 		$data['partInfo'] = $this->courses->getPartInfoById($partId);
 		$data['pagetitle'] = "ตัวแก้ไขชุดข้อสอบ";
 		$data['pagesubtitle'] = $data['partInfo']['title'];
+
+		$data['formlink'] = $this->role.'/courses/editpart/'.$courseId;
 
 		$this->load->view($this->role.'/field_parteditor', $data);
 		// Send additional script to footer
