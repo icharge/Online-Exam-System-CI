@@ -1,11 +1,12 @@
 <div id="question-<?php echo $question_id;?>" class="box nav-tabs-custom question-item">
-	<ul class="nav nav-tabs">
+	<ul class="box-header nav nav-tabs">
 		<li class="pull-left header">
 			<i class="fa fa-file-o"></i> <?php echo "#$question_id <span class=\"text-muted\" style=\"font-size: 12px\">$chapter_name</span>";?>
 		</li>
-		<li class="pull-right">
-			<a href="#" class="text-muted"><i class="fa fa-gear"></i></a>
-		</li>
+		<div class="box-tools pull-right">
+			<button class="btn bg-teal btn-sm" type="button" data-widget="collapse"><i class="fa fa-plus"></i></button>
+			<button class="btn bg-teal btn-sm" type="button" data-widget="remove"><i class="fa fa-times"></i></button>
+		</div>
 	</ul>
 	<div class="box-body">
 		<b>โจทย์คำถาม:</b>

@@ -18,16 +18,21 @@ class Parteditor_model extends CI_Model {
 		*/
 
 		$query = $this->db
-			->select("*")
+			->select(array(
+				'no','question_list.question_id','question','type','status','chapter_id',
+				'created_by','created_time',
+				'choice1','choice2','choice3','choice4','choice5','choice6',
+				'answer_choice','answer_numeric','answer_boolean','chapter_name'))
 			->from('question_list')
 			->join('Exam_Papers_Detail', 
 				'question_list.question_id = Exam_Papers_Detail.question_id', 'left')
 			->where(array(
-				'question_list.question_id'=>NULL,
+				'Exam_Papers_Detail.question_id'=>NULL,
 				'question_list.chapter_id'=>$chapterid
 			))
 			->get()
-			->row_array();
+			->result_array();
+			//die($this->db->last_query());
 		return $query;
 	}
 

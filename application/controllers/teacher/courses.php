@@ -655,7 +655,7 @@ HTML;
 		placeholder: "sort-highlight",
 		handle: ".handle",
 		forcePlaceholderSize: true,
-		zIndex: 999999,
+		zIndex: 999,
 		stop: function(i) {
 			placeholder: 'ui-state-highlight'
 			$.ajax({
@@ -664,6 +664,15 @@ HTML;
 				data: $(this).sortable("serialize")});
 		}
 	}).disableSelection();
+
+	$(".questionSortable").sortable({
+		placeholder: "sort-highlight",
+		connectWith: ".questionSortable",
+		handle: ".box-header, .nav-tabs",
+		forcePlaceholderSize: true,
+		zIndex: 999999
+	}).disableSelection();
+	$(".questionSortable .box-header").css("cursor", "move");
 
 HTML;
 
@@ -939,6 +948,8 @@ HTML;
 		$data['pagesubtitle'] = $data['partInfo']['title'];
 
 		$data['formlink'] = $this->role.'/courses/editpart/'.$courseId;
+
+		$data['questionData'] = $this->parteditor->getQuestionList(4);
 
 		$this->load->view($this->role.'/field_parteditor', $data);
 		// Send additional script to footer
