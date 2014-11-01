@@ -670,7 +670,12 @@ HTML;
 		connectWith: ".questionSortable",
 		handle: ".box-header, .nav-tabs",
 		forcePlaceholderSize: true,
-		zIndex: 999999
+		zIndex: 999,
+		stop: function(i) {
+			$(".questionSortable .box").each(function(index,elem) {
+				$(elem).find(".question-no").text(index+1);
+			});
+		}
 	}).disableSelection();
 	$(".questionSortable .box-header").css("cursor", "move");
 
@@ -951,7 +956,7 @@ HTML;
 
 		$data['questionData'] = $this->parteditor->getQuestionList(4);
 
-		$this->load->view($this->role.'/field_parteditor', $data);
+		$this->load->view($this->role.'/field_parteditor_view', $data);
 		// Send additional script to footer
 		$footdata['additionScript'] = $this->getAddScripts();
 		$this->load->view($this->role.'/t_footer_view', $footdata);

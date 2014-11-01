@@ -51,12 +51,13 @@ EOL;
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="row">
-					<div class="col-lg-7 questionSortable">
+					<div class="col-lg-7 col-md-7 col-sm-7 questionSortable">
 						<?php
-						//var_dump($questionData);
+							$qno = 1;
 							foreach ($questionData as $item) {
-
+								$item['number'] = $qno;
 								echo $this->load->view("teacher/question_item_view", $item, true);
+								$qno++;
 							}
 							
 						?>

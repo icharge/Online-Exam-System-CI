@@ -1,14 +1,15 @@
-<div id="question-<?php echo $question_id;?>" class="box nav-tabs-custom question-item">
+<div id="question-<?php echo $question_id;?>" class="box nav-tabs-custom question-item collapsed-box">
 	<ul class="box-header nav nav-tabs">
 		<li class="pull-left header">
-			<i class="fa fa-file-o"></i> <?php echo "#$question_id <span class=\"text-muted\" style=\"font-size: 12px\">$chapter_name</span>";?>
+			<i class="fa fa-file-o"></i> <?php echo "ข้อ <span class=\"question-no\">$number</span> <span class=\"text-muted\" style=\"font-size: 14px\">($chapter_name) ".
+			$this->misc->getShortText(strip_tags($question))."</span>";?>
 		</li>
 		<div class="box-tools pull-right">
 			<button class="btn bg-teal btn-sm" type="button" data-widget="collapse"><i class="fa fa-plus"></i></button>
 			<button class="btn bg-teal btn-sm" type="button" data-widget="remove"><i class="fa fa-times"></i></button>
 		</div>
 	</ul>
-	<div class="box-body">
+	<div class="box-body" style="display: none;">
 		<b>โจทย์คำถาม:</b>
 		<div class="question-label"><?php echo $question;?></div>
 		<b>รูปแบบ:</b>
@@ -66,7 +67,7 @@
 		<b>เฉลย:</b>
 		<p class="question-answer-label"><?php echo $answer;?></p>
 	</div>
-	<div class="box-footer">
+	<div class="box-footer" style="display: none;">
 		<div class="row">
 			<div class="col-md-12 text-right">
 				<span class="text-muted">สร้างเมื่อ <?php
