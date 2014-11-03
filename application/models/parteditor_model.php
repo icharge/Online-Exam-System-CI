@@ -10,6 +10,7 @@ class Parteditor_model extends CI_Model {
 
 	function getQuestionList($chapterid)
 	{
+		// เรียกรายการ question ในคลังที่ไม่มีใน exam_papers_detail
 		/*
 		SELECT * FROM question_list q 
 		LEFT JOIN Exam_Papers_Detail epd on q.question_id = epd.question_id 
@@ -33,6 +34,22 @@ class Parteditor_model extends CI_Model {
 			->get()
 			->result_array();
 			//die($this->db->last_query());
+		return $query;
+	}
+
+	function getQuestionDetailList($partid)
+	{
+		$query = $this->db
+			->select('*')
+			->from('question_detail_list')
+			->where(array(
+				//'paper_id' => $paperid,
+				'part_id' => $partid,
+				'status !=' => 'inactive'
+			))
+			->get()
+			->result_array();
+
 		return $query;
 	}
 

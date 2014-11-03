@@ -599,3 +599,11 @@ input[type=text].date {
 /*.sort-highlight {
 	padding: 9px 10px !important;
 }*/
+
+#availablequestions .box {
+	margin-bottom: 15px;
+}
+
+#availablequestions .box-header {
+	padding-bottom: 0;
+}

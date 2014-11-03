@@ -51,7 +51,11 @@ EOL;
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="row">
-					<div class="col-lg-7 col-md-7 col-sm-7 questionSortable">
+					<div class="col-sm-7"><h3><span class="label label-success">ข้อสอบ</span></h3></div>
+					<div class="col-sm-5"><h3><span class="label label-info">ข้อสอบที่มีให้</span></h3></div>
+				</div>
+				<div class="row">
+					<div id="selectedquestions" class="col-lg-7 col-md-7 col-sm-7 questionSortable">
 						<?php
 							$qno = 1;
 							foreach ($questionData as $item) {
@@ -59,7 +63,16 @@ EOL;
 								echo $this->load->view("teacher/question_item_view", $item, true);
 								$qno++;
 							}
-							
+						?>
+					</div>
+					<div id="availablequestions" class="col-lg-5 col-md-5 col-sm-5 questionSortable">
+						<?php
+							$qno = 1;
+							foreach ($questionDataWh as $item) {
+								$item['number'] = $qno;
+								echo $this->load->view("teacher/question_item_view", $item, true);
+								$qno++;
+							}
 						?>
 					</div>
 				</div>

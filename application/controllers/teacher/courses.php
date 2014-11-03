@@ -672,7 +672,7 @@ HTML;
 		forcePlaceholderSize: true,
 		zIndex: 999,
 		stop: function(i) {
-			$(".questionSortable .box").each(function(index,elem) {
+			$("#selectedquestions .box").each(function(index,elem) {
 				$(elem).find(".question-no").text(index+1);
 			});
 		}
@@ -954,7 +954,9 @@ HTML;
 
 		$data['formlink'] = $this->role.'/courses/editpart/'.$courseId;
 
-		$data['questionData'] = $this->parteditor->getQuestionList(4);
+
+		$data['questionData'] = $this->parteditor->getQuestionDetailList(1);
+		$data['questionDataWh'] = $this->parteditor->getQuestionList(4);
 
 		$this->load->view($this->role.'/field_parteditor_view', $data);
 		// Send additional script to footer
