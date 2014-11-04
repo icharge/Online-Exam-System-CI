@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2014 at 08:29 AM
+-- Generation Time: Nov 04, 2014 at 07:04 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('197d423fcff06c1045ad5fb4d89512d6', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10) Appl', 1413959112, 'a:11:{s:9:"user_data";s:0:"";s:2:"id";s:1:"8";s:3:"uid";s:1:"3";s:8:"username";s:7:"teacher";s:8:"fullname";s:59:"อ.ธารารัตน์ พวงสุวรรณ";s:5:"fname";s:31:"อ.ธารารัตน์";s:5:"lname";s:27:"พวงสุวรรณ";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;s:16:"flash:new:noAnim";b:1;}');
+('8f7a379b94c9c9c0c4367549850a49a0', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) Ap', 1415124186, '');
 
 -- --------------------------------------------------------
 
@@ -216,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers` (
   `starttime` datetime NOT NULL,
   `endtime` datetime NOT NULL,
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `Exam_Papers`
@@ -226,7 +226,8 @@ INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `startti
 (1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-10-03 09:00:00', '2014-10-03 09:30:00', 1),
 (2, 'ชุด A', 'desc', 'r', '2014-10-14 22:06:00', '2014-10-14 22:06:00', 1),
 (3, 'Final', 'ปลายภาค', 'ห้ามลอก', '2014-10-20 10:00:00', '2014-10-20 15:00:00', 1),
-(4, 'ชุด B', 'บท 4', 'ห้ามลอก\nนำชีทเข้าไปได้', '2014-10-16 12:00:00', '2014-10-16 14:00:00', 1);
+(4, 'ชุด B', 'บท 4', 'ห้ามลอก\nนำชีทเข้าไปได้', '2014-10-16 12:00:00', '2014-10-16 14:00:00', 1),
+(5, 'สอบก่อนเรียน', '', '', '2014-10-23 15:30:00', '2014-10-23 15:45:00', 3);
 
 -- --------------------------------------------------------
 
@@ -264,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Parts` (
   `description` text,
   `israndom` tinyint(1) NOT NULL,
   `paper_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `Exam_Papers_Parts`
@@ -272,7 +273,9 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Parts` (
 
 INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `israndom`, `paper_id`) VALUES
 (1, 1, 'ตอน 1', 'เลือกคำตอบที่ถูกต้อง', 0, 1),
-(2, 2, 'ตอน 2', 'หาคำตอบจากโจทย์', 0, 1);
+(2, 2, 'ตอน 2', 'หาคำตอบจากโจทย์', 0, 1),
+(3, 1, 'ตอนที่ 1', 'ทำความเข้าใจ', 0, 5),
+(4, 1, 'Choice', '...', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -894,12 +897,12 @@ MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 -- AUTO_INCREMENT for table `Exam_Papers`
 --
 ALTER TABLE `Exam_Papers`
-MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `Exam_Papers_Parts`
 --
 ALTER TABLE `Exam_Papers_Parts`
-MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `Faculty`
 --
