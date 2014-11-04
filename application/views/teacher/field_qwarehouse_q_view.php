@@ -373,10 +373,20 @@ EOL;
 										</div><!-- /.modal-dialog -->
 									</div><!-- /.modal -->
 
+<?php 
+								if($chapterid != '')
+								{
+									echo <<<HTML
 									<button class="btn btn-app" data-toggle="modal" data-target="#newQuestion">
 										<i class="fa fa-plus"></i> เพิ่มโจทย์
 									</button>
-
+HTML;
+								}
+								else
+								{
+									echo "<h3>เลือก บท / ตอน</h3>";
+								}
+?>
 									<div class="questionLoading" style="display: none;">
 										<span><i class="fa fa-spinner fa-spin"></i> กำลังโหลด...</span>
 									</div>

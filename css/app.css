@@ -607,3 +607,14 @@ input[type=text].date {
 #availablequestions .box-header {
 	padding-bottom: 0;
 }
+
+#availablequestions .nav-tabs li.header {
+	line-height: 27px;
+}
+
+.connectedSortable {
+	min-height: 100px;
+}
+.questionSortable {
+	min-height: 100px;
+}

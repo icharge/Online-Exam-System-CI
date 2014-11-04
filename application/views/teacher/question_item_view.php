@@ -1,7 +1,12 @@
 <div id="question-<?php echo $question_id;?>" class="box nav-tabs-custom question-item collapsed-box">
 	<ul class="box-header nav nav-tabs">
 		<li class="pull-left header">
-			<i class="fa fa-file-o"></i> <?php echo "ข้อ <span class=\"question-no\">$number</span> <span class=\"text-muted\" style=\"font-size: 14px\">($chapter_name) ".
+			<i class="fa fa-file-o"></i> <?php 
+			if (isset($number))
+				echo "<span class=\"question-labelno\">ข้อ</span> <span class=\"question-no\">$number</span>";
+			else
+				echo "<span class=\"question-labelno\"></span> <span class=\"question-no\"></span>";
+			echo " <span class=\"question-chapter text-muted\" style=\"font-size: 14px\">($chapter_name)</span> <span class=\"question-text text-muted\" style=\"font-size: 14px\">".
 			$this->misc->getShortText(strip_tags($question))."</span>";?>
 		</li>
 		<div class="box-tools pull-right">

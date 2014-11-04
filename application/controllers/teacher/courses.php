@@ -674,6 +674,11 @@ HTML;
 		stop: function(i) {
 			$("#selectedquestions .box").each(function(index,elem) {
 				$(elem).find(".question-no").text(index+1);
+				$(elem).find(".question-labelno").text("ข้อ");
+			});
+			$("#availablequestions .box").each(function(index,elem) {
+				$(elem).find(".question-no").text('');
+				$(elem).find(".question-labelno").text("");
 			});
 		}
 	}).disableSelection();
@@ -947,6 +952,7 @@ HTML;
 		$this->load->view($this->role.'/t_sidebar_view');
 
 		$courseId = $this->courses->getCourseIdFromPartId($partId);
+		$data['courseId'] = $courseId;
 		$data['courseInfo'] = $this->courses->getCourseById($courseId);
 		$data['partInfo'] = $this->courses->getPartInfoById($partId);
 		$data['pagetitle'] = "ตัวแก้ไขชุดข้อสอบ";
