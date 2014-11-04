@@ -665,6 +665,17 @@ HTML;
 		}
 	}).disableSelection();
 
+	var resortOrder = function() {
+		$("#selectedquestions .box").each(function(index,elem) {
+			$(elem).find(".question-no").text(index+1);
+			$(elem).find(".question-labelno").text("ข้อ");
+		});
+		$("#availablequestions .box").each(function(index,elem) {
+			$(elem).find(".question-no").text('');
+			$(elem).find(".question-labelno").text("");
+		});
+	};
+
 	$(".questionSortable").sortable({
 		placeholder: "sort-highlight",
 		connectWith: ".questionSortable",
@@ -672,17 +683,26 @@ HTML;
 		forcePlaceholderSize: true,
 		zIndex: 999,
 		stop: function(i) {
-			$("#selectedquestions .box").each(function(index,elem) {
-				$(elem).find(".question-no").text(index+1);
-				$(elem).find(".question-labelno").text("ข้อ");
-			});
-			$("#availablequestions .box").each(function(index,elem) {
-				$(elem).find(".question-no").text('');
-				$(elem).find(".question-labelno").text("");
-			});
+			resortOrder();
 		}
 	}).disableSelection();
 	$(".questionSortable .box-header").css("cursor", "move");
+
+	$("[data-widget='popqup']").click(function() {
+		//Find the box parent        
+		var box = $(this).parents(".box").first();
+		var sortbox = box.parent().attr('id');
+		if (sortbox == "selectedquestions")
+		{
+			box.appendTo("#availablequestions");
+			resortOrder();
+		}
+		else if(sortbox == "availablequestions")
+		{
+			box.appendTo("#selectedquestions");
+			resortOrder();
+		}
+	});
 
 HTML;
 
@@ -961,7 +981,7 @@ HTML;
 		$data['formlink'] = $this->role.'/courses/editpart/'.$courseId;
 
 
-		$data['questionData'] = $this->parteditor->getQuestionDetailList(1);
+		$data['questionData'] = $this->parteditor->getQuestionDetailList($partId);
 		$data['questionDataWh'] = $this->parteditor->getQuestionList(4);
 
 		$this->load->view($this->role.'/field_parteditor_view', $data);
