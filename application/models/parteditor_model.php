@@ -49,8 +49,36 @@ class Parteditor_model extends CI_Model {
 			))
 			->get()
 			->result_array();
-
 		return $query;
+	}
+
+	function addQuestionDetail($questionData)
+	{
+		$query = $this->db
+			->insert('Exam_Papers_Detail', $questionData);
+		return $query;
+	}
+
+	function reorderQuestions($questionData)
+	{
+		foreach ($questionData as $key => $value) {
+			$query = $this->db->update('Exam_Papers_Detail', array('no'=>$key+1), array('question_id'=>$value));
+		}
+		// No checking yet
+		return 0;
+	}
+
+	function removeQuestion($questionId,$partid,$paperid)
+	{
+		$this->db->delete('Exam_Papers_Detail',
+				array(
+					'question_id' => $questionId,
+					'part_id' => $partid,
+					'paper_id' => $paperid
+				));
+
+		// No checking yet
+		return 0;
 	}
 
 }

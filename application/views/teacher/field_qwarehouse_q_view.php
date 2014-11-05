@@ -372,7 +372,6 @@ EOL;
 											</div><!-- /.modal-content -->
 										</div><!-- /.modal-dialog -->
 									</div><!-- /.modal -->
-
 <?php 
 								if($chapterid != '')
 								{

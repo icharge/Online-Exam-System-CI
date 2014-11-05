@@ -661,48 +661,10 @@ HTML;
 			$.ajax({
 				type: "POST",
 				url: "{$this->misc->getHref("teacher/courses/callbackjson/updatepartno/")}/?ts="+Date.now(),
-				data: $(this).sortable("serialize")});
+				data: $(this).sortable("serialize")
+			});
 		}
 	}).disableSelection();
-
-	var resortOrder = function() {
-		$("#selectedquestions .box").each(function(index,elem) {
-			$(elem).find(".question-no").text(index+1);
-			$(elem).find(".question-labelno").text("ข้อ");
-		});
-		$("#availablequestions .box").each(function(index,elem) {
-			$(elem).find(".question-no").text('');
-			$(elem).find(".question-labelno").text("");
-		});
-	};
-
-	$(".questionSortable").sortable({
-		placeholder: "sort-highlight",
-		connectWith: ".questionSortable",
-		handle: ".box-header, .nav-tabs",
-		forcePlaceholderSize: true,
-		zIndex: 999,
-		stop: function(i) {
-			resortOrder();
-		}
-	}).disableSelection();
-	$(".questionSortable .box-header").css("cursor", "move");
-
-	$("[data-widget='popqup']").click(function() {
-		//Find the box parent        
-		var box = $(this).parents(".box").first();
-		var sortbox = box.parent().attr('id');
-		if (sortbox == "selectedquestions")
-		{
-			box.appendTo("#availablequestions");
-			resortOrder();
-		}
-		else if(sortbox == "availablequestions")
-		{
-			box.appendTo("#selectedquestions");
-			resortOrder();
-		}
-	});
 
 HTML;
 
@@ -721,6 +683,15 @@ HTML;
 
 	private function getAddScripts()
 	{
+		$this->scriptList = array(
+			'subjectDropdownScript' => $this->subjectDropdownScript,
+			'datePicker' => $this->datePicker,
+			'removePwd' => $this->removePwd,
+			'listview' => $this->listview,
+			'stdGroup' => $this->stdGroup,
+			'papers' => $this->papers,
+			'sortable' => $this->sortable,
+		);
 		return $this->scriptList;
 	}
 
@@ -984,6 +955,59 @@ HTML;
 		$data['questionData'] = $this->parteditor->getQuestionDetailList($partId);
 		$data['questionDataWh'] = $this->parteditor->getQuestionList(4);
 
+		// Add script
+		$this->sortable .= <<<HTML
+	var resortOrder = function() {
+		$("#selectedquestions .box").each(function(index,elem) {
+			$(elem).find(".question-no").text(index+1);
+			$(elem).find(".question-labelno").text("ข้อ");
+		});
+		$("#availablequestions .box").each(function(index,elem) {
+			$(elem).find(".question-no").text('');
+			$(elem).find(".question-labelno").text("");
+		});
+		$.ajax({
+			type: "POST",
+			url: "{$this->misc->getHref("teacher/courses/callbackjson/reorderQuestions/")}/?ts="+Date.now(),
+			data: $("#selectedquestions").sortable("serialize")
+		});
+	};
+
+	$(".questionSortable").sortable({
+		placeholder: "sort-highlight",
+		connectWith: ".questionSortable",
+		handle: ".box-header, .nav-tabs",
+		forcePlaceholderSize: true,
+		zIndex: 999,
+		stop: function(i) {
+			resortOrder();
+		}
+	}).disableSelection();
+	$(".questionSortable .box-header").css("cursor", "move");
+	$(".questionSortable .box-header .header").css("cursor", "move");
+
+	$("[data-widget='popqup']").click(function() {
+		//Find the box parent        
+		var box = $(this).parents(".box").first();
+		var sortbox = box.parent().attr('id');
+		if (sortbox == "selectedquestions")
+		{
+			box.appendTo("#availablequestions");
+			$.ajax({
+				type: "POST",
+				url: "{$this->misc->getHref("teacher/courses/callbackjson/removeQuestion/")}/?ts="+Date.now(),
+				data: "id="+box.attr('id').split("-")[1]+"&partid={$partId}&paperid={$data['partInfo']['paper_id']}"
+			});
+			resortOrder();
+		}
+		else if(sortbox == "availablequestions")
+		{
+			box.appendTo("#selectedquestions");
+			resortOrder();
+		}
+	});
+HTML;
+
 		$this->load->view($this->role.'/field_parteditor_view', $data);
 		// Send additional script to footer
 		$footdata['additionScript'] = $this->getAddScripts();
@@ -1097,8 +1121,44 @@ HTML;
 				{
 					echo json_encode(array('error' => 'No Array'));
 				}
-				
-				
+				break;
+
+			case 'addQuestion':
+				$this->load->model('parteditor_model', 'parteditor');
+
+				$questionData = array(
+					'question_id' => $this->input->post('id'),
+					'part_id' => $this->input->post('partid'),
+					'paper_id' => $this->input->post('paperid'),
+					'no' => $this->input->post('number')
+				);
+				$this->parteditor->addQuestionDetail($questionData);
+				echo json_encode(array('error' => '', 'result'=>'success'));
+				// No error check yet
+				break;
+
+			case 'reorderQuestions':
+				$this->load->model('parteditor_model', 'parteditor');
+
+				if (is_array($this->input->post('question')))
+				{
+					$this->parteditor->reorderQuestions($this->input->post('question'));
+					echo json_encode(array('error' => '', 'result'=>'success'));
+				}
+				else
+				{
+					echo json_encode(array('error' => 'No Array'));
+				}
+				break;
+
+			case 'removeQuestion':
+				$this->load->model('parteditor_model', 'parteditor');
+
+				$question_id = $this->input->post('id');
+				$part_id = $this->input->post('partid');
+				$paper_id = $this->input->post('paperid');
+				$this->parteditor->removeQuestion($question_id, $part_id, $paper_id);
+				echo json_encode(array('error' => '', 'result'=>'success'));
 				break;
 
 			default:

@@ -10,8 +10,8 @@
 			$this->misc->getShortText(strip_tags($question))."</span>";?>
 		</li>
 		<div class="box-tools pull-right">
-			<button class="btn bg-aqua btn-sm" type="button" data-widget="collapse"><i class="fa fa-plus"></i></button>
-			<button class="btn bg-red btn-sm" type="button" data-widget="popqup"><i class="fa fa-times"></i></button>
+			<button class="btn bg-info btn-sm" type="button" data-widget="collapse"><i class="fa fa-plus"></i></button>
+			<button class="btn bg-aqua btn-sm" type="button" data-widget="popqup"><i class="fa fa-retweet"></i></button>
 		</div>
 	</ul>
 	<div class="box-body" style="display: none;">
