@@ -52,7 +52,7 @@ EOL;
 			<div class="col-md-10 col-md-offset-1">
 				<div class="row">
 					<div class="col-sm-7"><h3><span class="label label-success">ข้อสอบ</span></h3></div>
-					<div class="col-sm-5"><h3><span class="label label-info">ข้อสอบที่มีให้</span></h3> <?php echo anchor('teacher/qwarehouse/viewq/'.$courseInfo['code'],'คลังข้อสอบ <i class="fa fa-external-link"></i>');?></div>
+					<div class="col-sm-5"><h3><span class="label label-info">ข้อสอบที่มีให้</span></h3></div>
 				</div>
 				<div class="row">
 					<div id="selectedquestions" class="col-lg-7 col-md-7 col-sm-7 questionSortable">
@@ -65,13 +65,31 @@ EOL;
 							}
 						?>
 					</div>
-					<div id="availablequestions" class="col-lg-5 col-md-5 col-sm-5 questionSortable">
-						<?php
-							foreach ($questionDataWh as $item) {
-								$item['number'] = null;
-								echo $this->load->view("teacher/question_item_view", $item, true);
-							}
-						?>
+					<div class="wrapping-question col-lg-5 col-md-5 col-sm-5 ">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">เลือกบท</h3>
+								<div class="box-tools pull-right">
+									<?php 
+									echo anchor('teacher/qwarehouse/viewq/'.$courseInfo['code'],
+									'ไปคลังข้อสอบ <i class="fa fa-external-link"></i>');?>
+								</div>
+							</div>
+							<div class="box-body"><?php
+									$options = $this->parteditor->buildChapterOptions($courseInfo['subject_id']);
+									echo form_dropdown('chapterselect', $options, 'default', 
+										'id="chapterselect" class="form-control"');
+								?>
+							</div>
+						</div>
+						<div id="availablequestions" class="questionSortable">
+							<?php
+								foreach ($questionDataWh as $item) {
+									$item['number'] = null;
+									echo $this->load->view("teacher/question_item_view", $item, true);
+								}
+							?>
+						</div>
 					</div>
 				</div>
 			</div>

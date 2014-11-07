@@ -6,7 +6,12 @@ select:focus {
 	outline: none;
 }
 
+ul.dropdown-menu.inner.selectpicker li.selected {
+	border-right: solid #09F 5px;
+}
+
 button.btn.dropdown-toggle.selectpicker {
+	outline: none !important;
 	border-radius: 0px !important;
 	box-shadow: none;
 	border-color: #ccc;
@@ -617,4 +622,7 @@ input[type=text].date {
 }
 .questionSortable {
 	min-height: 100px;
+}
+.ui-sortable-helper {
+	box-shadow: 0 10px 15px rgba(165, 165, 165, 0.68);
 }

@@ -81,6 +81,25 @@ class Parteditor_model extends CI_Model {
 		return 0;
 	}
 
+	function getChapterList($subjectId)
+	{
+		$query = $this->db
+			->select('*')
+			->get_where('Chapter', array('subject_id' => $subjectId))
+			->result_array();
+		return $query;
+	}
+
+	function buildChapterOptions($subjectId)
+	{
+		$chapterList = $this->getChapterList($subjectId);
+		//$options['all'] = "ทั้งหมด";
+		foreach ($chapterList as $item) {
+			$options[$item['chapter_id']] = $item['name'];
+		}
+		return $options;
+	}
+
 }
 
 /* End of file parteditor_model.php */

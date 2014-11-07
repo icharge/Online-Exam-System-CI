@@ -420,7 +420,7 @@ class Courses_model extends CI_Model {
 			->select("course_id")
 			->from('Exam_Papers_Parts')
 			->join('Exam_Papers', 'Exam_Papers_Parts.paper_id = Exam_Papers.paper_id', 'left')
-			->where(array('Exam_Papers.paper_id'=>$partId))
+			->where(array('Exam_Papers_Parts.part_id'=>$partId))
 			->limit(1)
 			->get()
 			->row_array();

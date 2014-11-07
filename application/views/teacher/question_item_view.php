@@ -1,4 +1,4 @@
-<div id="question-<?php echo $question_id;?>" class="box nav-tabs-custom question-item collapsed-box">
+<div id="question-<?php echo $question_id;?>" data-chapterid="<?php echo $chapter_id; ?>" class="box box-solid nav-tabs-custom question-item collapsed-box">
 	<ul class="box-header nav nav-tabs">
 		<li class="pull-left header">
 			<i class="fa fa-file-o"></i> <?php 
@@ -81,7 +81,7 @@
 	$date = $this->misc->chrsDateToBudDate($date,"-","/");
 
 	echo "<span class=\"jtooltip\" title=\"$fullthdate\">$date $time</span>";
-				?> โดย <?php echo $created_by ; ?></span>
+				?> <span style="white-space: nowrap;">โดย <?php echo $created_by ; ?></span></span>
 			</div>
 		</div>
 		<div class="row">

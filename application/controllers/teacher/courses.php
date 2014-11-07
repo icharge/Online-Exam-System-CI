@@ -953,7 +953,13 @@ HTML;
 
 
 		$data['questionData'] = $this->parteditor->getQuestionDetailList($partId);
-		$data['questionDataWh'] = $this->parteditor->getQuestionList(4);
+		$firstchapter = $this->db
+			->select('chapter_id')
+			->limit(1)
+			->get_where('Chapter', array('subject_id'=>$data['courseInfo']['subject_id']))
+			->row_array();
+		$firstchapter = $firstchapter['chapter_id'];
+		$data['questionDataWh'] = $this->parteditor->getQuestionList($firstchapter);
 
 		// Add script
 		$this->sortable .= <<<HTML
@@ -973,38 +979,73 @@ HTML;
 		});
 	};
 
+	var removequestionfunc = function(box) {
+		$.ajax({
+			type: "POST",
+			url: "{$this->misc->getHref("teacher/courses/callbackjson/removeQuestion/")}/?ts="+Date.now(),
+			data: "id="+box.attr('id').split("-")[1]+"&partid={$partId}&paperid={$data['partInfo']['paper_id']}"
+		});
+		if (box.attr('data-chapterid') != $('#chapterselect').val())
+			box.remove()
+	};
+
+	var addquestionfunc = function(box) {
+		$.ajax({
+			type: "POST",
+			url: "{$this->misc->getHref("teacher/courses/callbackjson/addQuestion/")}/?ts="+Date.now(),
+			data: "id="+box.attr('id').split("-")[1]+"&partid={$partId}&paperid={$data['partInfo']['paper_id']}"
+		});
+	};
+
 	$(".questionSortable").sortable({
 		placeholder: "sort-highlight",
 		connectWith: ".questionSortable",
 		handle: ".box-header, .nav-tabs",
 		forcePlaceholderSize: true,
 		zIndex: 999,
-		stop: function(i) {
+		receive: function(e, ui) {
+			if (ui.sender.attr('id') == "selectedquestions") {
+				removequestionfunc(ui.item);
+			}
+			else if (ui.sender.attr('id') == "availablequestions") {
+				addquestionfunc(ui.item);
+			}
+		},
+		stop: function(e, ui) {
 			resortOrder();
 		}
 	}).disableSelection();
 	$(".questionSortable .box-header").css("cursor", "move");
 	$(".questionSortable .box-header .header").css("cursor", "move");
 
-	$("[data-widget='popqup']").click(function() {
+	$(".questionSortable").delegate("[data-widget='popqup']", 'click', function() {
 		//Find the box parent        
 		var box = $(this).parents(".box").first();
 		var sortbox = box.parent().attr('id');
 		if (sortbox == "selectedquestions")
 		{
 			box.appendTo("#availablequestions");
-			$.ajax({
-				type: "POST",
-				url: "{$this->misc->getHref("teacher/courses/callbackjson/removeQuestion/")}/?ts="+Date.now(),
-				data: "id="+box.attr('id').split("-")[1]+"&partid={$partId}&paperid={$data['partInfo']['paper_id']}"
-			});
+			removequestionfunc(box);
 			resortOrder();
 		}
 		else if(sortbox == "availablequestions")
 		{
 			box.appendTo("#selectedquestions");
+			addquestionfunc(box);
 			resortOrder();
 		}
+	});
+
+	$("select#chapterselect").change(function() {
+		$.ajax({
+			type: "POST",
+			url: "{$this->misc->getHref("teacher/courses/callbackjson/getPEQuestionList/")}/?ts="+Date.now(),
+			data: "chapter="+$(this).val(),
+			dataType: "json"
+		})
+		.done(function(data) {
+			$("#availablequestions").html(data.html);
+		});
 	});
 HTML;
 
@@ -1121,6 +1162,19 @@ HTML;
 				{
 					echo json_encode(array('error' => 'No Array'));
 				}
+				break;
+
+			case 'getPEQuestionList':
+				$chapterid = $this->input->post('chapter');
+				$this->load->model('parteditor_model', 'parteditor');
+				$questionList = $this->parteditor->getQuestionList($chapterid);
+				$html = "";
+				foreach ($questionList as $item) {
+					$item['number'] = null;
+					$html .= $this->load->view("teacher/question_item_view", $item, true);
+				}
+
+				echo json_encode(array('error' => '', 'result'=>'success', 'html' => $html));
 				break;
 
 			case 'addQuestion':
