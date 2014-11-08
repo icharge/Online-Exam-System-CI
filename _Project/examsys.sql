@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 04, 2014 at 07:04 PM
+-- Generation Time: Nov 08, 2014 at 06:43 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -99,21 +99,21 @@ CREATE TABLE IF NOT EXISTS `Branch` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chapter`
+-- Table structure for table `Chapter`
 --
 
-CREATE TABLE IF NOT EXISTS `chapter` (
+CREATE TABLE IF NOT EXISTS `Chapter` (
 `chapter_id` int(7) NOT NULL,
   `name` varchar(30) NOT NULL,
   `description` text,
   `subject_id` int(5) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=10 ;
 
 --
--- Dumping data for table `chapter`
+-- Dumping data for table `Chapter`
 --
 
-INSERT INTO `chapter` (`chapter_id`, `name`, `description`, `subject_id`) VALUES
+INSERT INTO `Chapter` (`chapter_id`, `name`, `description`, `subject_id`) VALUES
 (4, 'บทที่ 1', NULL, 1),
 (5, 'บทที่ 2', NULL, 1),
 (7, 'บทที่ 1 แนะนำ OOP', NULL, 2),
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('8f7a379b94c9c9c0c4367549850a49a0', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) Ap', 1415124186, '');
+('9e026de70355657aa80ecbb939c1a6e6', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) Ap', 1415468618, '');
 
 -- --------------------------------------------------------
 
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Detail` (
   `question_id` int(10) NOT NULL,
   `part_id` int(7) NOT NULL,
   `paper_id` int(7) NOT NULL,
-  `no` tinyint(3) NOT NULL
+  `no` tinyint(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -247,10 +247,17 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Detail` (
 --
 
 INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VALUES
-(1, 1, 1, 1),
-(2, 1, 1, 2),
-(15, 1, 1, 3),
-(20, 1, 1, 4);
+(1, 1, 1, 3),
+(2, 1, 1, 5),
+(9, 2, 1, 1),
+(10, 4, 2, 1),
+(11, 1, 1, 3),
+(12, 4, 2, 3),
+(14, 1, 1, 2),
+(15, 1, 1, 1),
+(16, 4, 2, 0),
+(18, 1, 1, 4),
+(21, 4, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -751,9 +758,9 @@ ALTER TABLE `Branch`
  ADD PRIMARY KEY (`branch_id`);
 
 --
--- Indexes for table `chapter`
+-- Indexes for table `Chapter`
 --
-ALTER TABLE `chapter`
+ALTER TABLE `Chapter`
  ADD PRIMARY KEY (`chapter_id`);
 
 --
@@ -784,7 +791,7 @@ ALTER TABLE `Exam_Papers`
 -- Indexes for table `Exam_Papers_Detail`
 --
 ALTER TABLE `Exam_Papers_Detail`
- ADD PRIMARY KEY (`question_id`,`part_id`);
+ ADD PRIMARY KEY (`question_id`,`part_id`,`paper_id`);
 
 --
 -- Indexes for table `Exam_Papers_Parts`
@@ -879,9 +886,9 @@ MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 ALTER TABLE `Branch`
 MODIFY `branch_id` int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `chapter`
+-- AUTO_INCREMENT for table `Chapter`
 --
-ALTER TABLE `chapter`
+ALTER TABLE `Chapter`
 MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `Courses`
