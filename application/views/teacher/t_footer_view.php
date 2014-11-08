@@ -70,6 +70,12 @@
 	<!-- TR Href -->
 	<script>
 	$(function() {
+		var doAnim = function(elem, x) {
+			$(elem).removeClass(x + ' animated').addClass(x + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+				$(elem).removeClass(x + ' animated');
+			});
+		};
+		
 		$('body').delegate('tr[href]', 'mousedown', function(e){
 			var click = e.which;
 			var url = $(this).attr('href');

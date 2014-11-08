@@ -621,7 +621,7 @@ input[type=text].date {
 	min-height: 100px;
 }
 .questionSortable {
-	min-height: 100px;
+	min-height: 500px;
 }
 .ui-sortable-helper {
 	box-shadow: 0 10px 15px rgba(165, 165, 165, 0.68);

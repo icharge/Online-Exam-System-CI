@@ -123,7 +123,7 @@ $("#startdate").datepicker({language:\'th-th\',format:\'dd/mm/yyyy\'});';*/
 
 
 // filter select list options
-});
+//});
 jQuery.fn.filterByText = function(textbox, ListBox, selectSingleMatch) {
 	return this.each(function() {
 		var select = this;
@@ -177,7 +177,7 @@ jQuery.fn.filterByText = function(textbox, ListBox, selectSingleMatch) {
 	});
 };
 
-$(function() {
+//$(function() {
 
 
 	$('#teacherList').pickList({
@@ -980,6 +980,7 @@ HTML;
 	};
 
 	var removequestionfunc = function(box) {
+		doAnim(box, 'bounceIn');
 		$.ajax({
 			type: "POST",
 			url: "{$this->misc->getHref("teacher/courses/callbackjson/removeQuestion/")}/?ts="+Date.now(),
@@ -990,6 +991,7 @@ HTML;
 	};
 
 	var addquestionfunc = function(box) {
+		doAnim(box, 'bounceIn');
 		$.ajax({
 			type: "POST",
 			url: "{$this->misc->getHref("teacher/courses/callbackjson/addQuestion/")}/?ts="+Date.now(),
@@ -1012,6 +1014,7 @@ HTML;
 			}
 		},
 		stop: function(e, ui) {
+			doAnim(ui.item, 'bouncing');
 			resortOrder();
 		}
 	}).disableSelection();
@@ -1037,6 +1040,7 @@ HTML;
 	});
 
 	$("select#chapterselect").change(function() {
+		//$("#availablequestions").hide();
 		$.ajax({
 			type: "POST",
 			url: "{$this->misc->getHref("teacher/courses/callbackjson/getPEQuestionList/")}/?ts="+Date.now(),
@@ -1045,6 +1049,7 @@ HTML;
 		})
 		.done(function(data) {
 			$("#availablequestions").html(data.html);
+			doAnim($("#availablequestions"), 'fadeIn');
 		});
 	});
 HTML;

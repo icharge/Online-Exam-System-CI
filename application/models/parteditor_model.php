@@ -12,6 +12,15 @@ class Parteditor_model extends CI_Model {
 	{
 		// เรียกรายการ question ในคลังที่ไม่มีใน exam_papers_detail
 		/*
+
+		ใหม่  ใช้งานได้  แยกชุดข้อสอบ
+		SELECT * FROM `question_list` 
+		where `chapter_id` in (SELECT chapter_id from chapter where subject_id = 1) 
+		and question_id not in ( SELECT question_id FROM question_detail_list qd where qd.paper_id = 1 ) 
+		ORDER BY `question_id` ASC
+
+
+		เก่า ๆๆๆ  ใช้ไม่ได้เรื่อง  
 		SELECT * FROM question_list q 
 		LEFT JOIN Exam_Papers_Detail epd on q.question_id = epd.question_id 
 		WHERE epd.question_id IS NULL 

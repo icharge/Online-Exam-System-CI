@@ -36,6 +36,8 @@
 	<!-- jBox style -->
 	<link href="vendor/css/jBox.css" rel="stylesheet">
 	<link href="vendor/css/jBox-themes/TooltipDark.css" rel="stylesheet">
+	<!-- Animate CSS -->
+	<link href="vendor/css/animate.css" rel="stylesheet" type="text/css" />
 	<!-- My Style -->
 	<link href="css/app.css" rel="stylesheet" type="text/css" />
 
