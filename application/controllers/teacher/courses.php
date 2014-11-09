@@ -959,7 +959,8 @@ HTML;
 			->get_where('Chapter', array('subject_id'=>$data['courseInfo']['subject_id']))
 			->row_array();
 		$firstchapter = $firstchapter['chapter_id'];
-		$data['questionDataWh'] = $this->parteditor->getQuestionList($firstchapter);
+		$data['questionDataWh'] = $this->parteditor->getQuestionList($firstchapter,
+			$data['courseInfo']['subject_id'],$data['partInfo']['paper_id']);
 
 		// Add script
 		$this->sortable .= <<<HTML
@@ -1044,7 +1045,7 @@ HTML;
 		$.ajax({
 			type: "POST",
 			url: "{$this->misc->getHref("teacher/courses/callbackjson/getPEQuestionList/")}/?ts="+Date.now(),
-			data: "chapter="+$(this).val(),
+			data: "chapter="+$(this).val()+"&subject={$data['courseInfo']['subject_id']}&paper={$data['partInfo']['paper_id']}",
 			dataType: "json"
 		})
 		.done(function(data) {
@@ -1171,8 +1172,10 @@ HTML;
 
 			case 'getPEQuestionList':
 				$chapterid = $this->input->post('chapter');
+				$subjectid = $this->input->post('subject');
+				$paperid = $this->input->post('paper');
 				$this->load->model('parteditor_model', 'parteditor');
-				$questionList = $this->parteditor->getQuestionList($chapterid);
+				$questionList = $this->parteditor->getQuestionList($chapterid,$subjectid,$paperid);
 				$html = "";
 				foreach ($questionList as $item) {
 					$item['number'] = null;

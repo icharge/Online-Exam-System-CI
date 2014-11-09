@@ -8,7 +8,7 @@ class Parteditor_model extends CI_Model {
 
 	}
 
-	function getQuestionList($chapterid)
+	function getQuestionList($chapterid, $subjectId, $paperId)
 	{
 		// เรียกรายการ question ในคลังที่ไม่มีใน exam_papers_detail
 		/*
@@ -27,21 +27,28 @@ class Parteditor_model extends CI_Model {
 		ORDER BY `q`.`question_id` ASC
 		*/
 
-		$query = $this->db
-			->select(array(
-				'no','question_list.question_id','question','type','status','chapter_id',
-				'created_by','created_time',
-				'choice1','choice2','choice3','choice4','choice5','choice6',
-				'answer_choice','answer_numeric','answer_boolean','chapter_name'))
-			->from('question_list')
-			->join('Exam_Papers_Detail', 
-				'question_list.question_id = Exam_Papers_Detail.question_id', 'left')
-			->where(array(
-				'Exam_Papers_Detail.question_id'=>NULL,
-				'question_list.chapter_id'=>$chapterid
-			))
-			->get()
-			->result_array();
+		// $query = $this->db
+			// ->select(array(
+			// 	'no','question_list.question_id','question','type','status','chapter_id',
+			// 	'created_by','created_time',
+			// 	'choice1','choice2','choice3','choice4','choice5','choice6',
+			// 	'answer_choice','answer_numeric','answer_boolean','chapter_name'))
+			// ->from('question_list')
+			// ->join('Exam_Papers_Detail', 
+			// 	'question_list.question_id = Exam_Papers_Detail.question_id', 'left')
+			// ->where(array(
+			// 	'Exam_Papers_Detail.question_id'=>NULL,
+			// 	'question_list.chapter_id'=>$chapterid
+			// ))
+			// ->get()
+			// ->result_array();
+
+		$query = $this->db->query("SELECT * FROM `question_list` 
+		where `chapter_id` in (SELECT chapter_id from chapter where subject_id = $subjectId) 
+		and question_id not in ( SELECT question_id FROM question_detail_list qd where qd.paper_id = $paperId) 
+		and chapter_id = $chapterid
+		ORDER BY `question_id` ASC")->result_array();
+
 			//die($this->db->last_query());
 		return $query;
 	}
