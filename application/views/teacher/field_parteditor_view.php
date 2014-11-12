@@ -84,9 +84,12 @@ EOL;
 						</div>
 						<div id="availablequestions" class="questionSortable">
 							<?php
-								foreach ($questionDataWh as $item) {
-									$item['number'] = null;
-									echo $this->load->view("teacher/question_item_view", $item, true);
+								if (isset($questionDataWh))
+								{
+									foreach ($questionDataWh as $item) {
+										$item['number'] = null;
+										echo $this->load->view("teacher/question_item_view", $item, true);
+									}
 								}
 							?>
 						</div>

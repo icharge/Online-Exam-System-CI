@@ -113,6 +113,8 @@ class Parteditor_model extends CI_Model {
 		foreach ($chapterList as $item) {
 			$options[$item['chapter_id']] = $item['name'];
 		}
+		if (!isset($options))
+			$options[''] = "-- ไม่มีบท -- ";
 		return $options;
 	}
 

@@ -956,11 +956,16 @@ HTML;
 		$firstchapter = $this->db
 			->select('chapter_id')
 			->limit(1)
-			->get_where('Chapter', array('subject_id'=>$data['courseInfo']['subject_id']))
-			->row_array();
-		$firstchapter = $firstchapter['chapter_id'];
-		$data['questionDataWh'] = $this->parteditor->getQuestionList($firstchapter,
-			$data['courseInfo']['subject_id'],$data['partInfo']['paper_id']);
+			->get_where('Chapter', array('subject_id'=>$data['courseInfo']['subject_id']));
+			//->row_array();
+
+		if ($firstchapter->num_rows() > 0)
+		{
+			$firstchapter = $firstchapter->row_array();
+			$firstchapter = $firstchapter['chapter_id'];
+			$data['questionDataWh'] = $this->parteditor->getQuestionList($firstchapter,
+				$data['courseInfo']['subject_id'],$data['partInfo']['paper_id']);
+		}
 
 		// Add script
 		$this->sortable .= <<<HTML
