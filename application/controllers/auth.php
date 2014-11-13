@@ -16,8 +16,6 @@ class Auth extends CI_Controller {
 	public function login()
 	{
 		$this->load->view('frontend/t_header_view');
-		$this->load->view('frontend/t_nav_view');
-		$this->load->view('frontend/t_beginbody_view');
 
 		$this->load->view('frontend/login_view');
 
@@ -28,8 +26,6 @@ class Auth extends CI_Controller {
 	{
 		# Load View
 		$this->load->view('frontend/t_header_view');
-		$this->load->view('frontend/t_nav_view');
-		$this->load->view('frontend/t_beginbody_view');
 
 		# Login Process
 		$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');

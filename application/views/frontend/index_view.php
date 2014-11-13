@@ -7,6 +7,26 @@
 						<div class="hover">
 							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
 						</div>
+						<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (1).jpg" alt="">
+						<div class="info">
+							<h4><a href="#">Course Name</a></h4>
+							<span class="author">John Smith</span>
+							<div class="clearfix"></div>
+							<div class="user-count"><i class="icon-user"></i>10</div>
+							<div class="rating">
+								<span class="star-on"></span>
+								<span class="star-on"></span>
+								<span class="star-on"></span>
+								<span class="star-on"></span>
+								<span class="star-on"></span>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="span3 course-item">
+					<div class="inner">
 						<div class="hover">
 							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
 						</div>
@@ -33,7 +53,7 @@
 						<div class="hover">
 							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
 						</div>
-						<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (2).jpg" alt="">
+						<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (1).jpg" alt="">
 						<div class="info">
 							<h4><a href="#">Course Name</a></h4>
 							<span class="author">John Smith</span>
@@ -56,30 +76,7 @@
 						<div class="hover">
 							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
 						</div>
-						<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (3).jpg" alt="">
-						<div class="info">
-							<h4><a href="#">Course Name</a></h4>
-							<span class="author">John Smith</span>
-							<div class="clearfix"></div>
-							<div class="user-count"><i class="icon-user"></i>10</div>
-							<div class="rating">
-								<span class="star-on"></span>
-								<span class="star-on"></span>
-								<span class="star-on"></span>
-								<span class="star-on"></span>
-								<span class="star-on"></span>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-				</div>
-
-				<div class="span3 course-item">
-					<div class="inner">
-						<div class="hover">
-							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-						</div>
-						<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (4).jpg" alt="">
+						<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (1).jpg" alt="">
 						<div class="info">
 							<h4><a href="#">Course Name</a></h4>
 							<span class="author">John Smith</span>
@@ -139,49 +136,7 @@
 								<div class="hover">
 									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
 								</div>
-								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (5).jpg" alt="">
-								<div class="info">
-									<h5><a href="#">Course Name</a></h5>
-									<span class="author">John Smith</span>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-
-						<div class="span2 course-item-small center">
-							<div class="inner">
-								<div class="hover">
-									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
-								</div>
-								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (6).jpg" alt="">
-								<div class="info">
-									<h5><a href="#">Course Name</a></h5>
-									<span class="author">John Smith</span>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-
-						<div class="span2 course-item-small center">
-							<div class="inner">
-								<div class="hover">
-									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
-								</div>
-								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (7).jpg" alt="">
-								<div class="info">
-									<h5><a href="#">Course Name</a></h5>
-									<span class="author">John Smith</span>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-
-						<div class="span2 course-item-small center">
-							<div class="inner">
-								<div class="hover">
-									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
-								</div>
-								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (8).jpg" alt="">
+								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (1).jpg" alt="">
 								<div class="info">
 									<h5><a href="#">Course Name</a></h5>
 									<span class="author">John Smith</span>
@@ -209,7 +164,7 @@
 								<div class="hover">
 									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
 								</div>
-								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (2).jpg" alt="">
+								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (1).jpg" alt="">
 								<div class="info">
 									<h5><a href="#">Course Name</a></h5>
 									<span class="author">John Smith</span>
@@ -223,7 +178,7 @@
 								<div class="hover">
 									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
 								</div>
-								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (3).jpg" alt="">
+								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (1).jpg" alt="">
 								<div class="info">
 									<h5><a href="#">Course Name</a></h5>
 									<span class="author">John Smith</span>
@@ -237,7 +192,49 @@
 								<div class="hover">
 									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
 								</div>
-								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (4).jpg" alt="">
+								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (1).jpg" alt="">
+								<div class="info">
+									<h5><a href="#">Course Name</a></h5>
+									<span class="author">John Smith</span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="span2 course-item-small center">
+							<div class="inner">
+								<div class="hover">
+									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
+								</div>
+								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (1).jpg" alt="">
+								<div class="info">
+									<h5><a href="#">Course Name</a></h5>
+									<span class="author">John Smith</span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="span2 course-item-small center">
+							<div class="inner">
+								<div class="hover">
+									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
+								</div>
+								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (1).jpg" alt="">
+								<div class="info">
+									<h5><a href="#">Course Name</a></h5>
+									<span class="author">John Smith</span>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="span2 course-item-small center">
+							<div class="inner">
+								<div class="hover">
+									<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
+								</div>
+								<img src="assets-student/img/pic-blank-1.gif" data-original="assets-student/img/course/pic (1).jpg" alt="">
 								<div class="info">
 									<h5><a href="#">Course Name</a></h5>
 									<span class="author">John Smith</span>

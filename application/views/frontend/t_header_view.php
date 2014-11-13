@@ -31,14 +31,16 @@
 
 	</header>
 	<!-- header close -->
-<?php $this->load->view('frontend/t_slider_view');?>
+<?php 
+	if (isset($enableSlider)) $this->load->view('frontend/t_slider_view');
+?>
 	<div class="call-to-action">
 		<div class="container">
 			<div class="row">
 				<div class="span12">
 					<div class="inner">
-						<h1>Learn from 542 courses, from our 107 partners.</h1>
-						<a class="btn btn-large btn-blue pull-right">Try Now!</a>
+						<h1>มีวิชาให้ลงสอบ 21 รายการ จากทั้งหมด</h1>
+						<a class="btn btn-large btn-blue pull-right">ลงทะเบียนเดี๋ยวนี้</a>
 						<div class="clearfix"></div>
 					</div>
 				</div>

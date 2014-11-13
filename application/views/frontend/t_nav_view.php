@@ -1,12 +1,12 @@
 					<ul id="mainmenu">
-						<li><a href="index.html">หน้าแรก</a></li>
+						<li><?php echo anchor('', 'หน้าแรก'); ?></li>
 						<li><a href="#">วิชา</a>
 							<ul>
-								<li><a href="course-list.html">รายการวิชา</a>
-								<li><a href="course-single.html">รายวิชาที่เปิดสอบ</a>
+								<li><?php echo anchor('subject-list', 'รายการวิชาทั้งหมด'); ?></li>
+								<li><?php echo anchor('course-list', 'รายวิชาที่เปิดสอบ'); ?></li>
 							</ul>
 						</li>
-						<li><a href="#">ข่าวสาร</a></li>
-						<li><a href="contact.html">ติดต่อ</a></li>
-						<li class="sign-in-btn"><a href="#">เข้าสู่ระบบ</a></li>
+						<li><?php echo anchor('news', 'ข่าวสาร'); ?></li>
+						<li><?php echo anchor('contact', 'ติดต่อ'); ?></li>
+						<li class="sign-in-btn"><?php echo anchor('auth/login', 'เข้าสู่ระบบ'); ?></li>
 					</ul>

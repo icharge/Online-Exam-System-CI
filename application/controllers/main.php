@@ -11,7 +11,8 @@ class Main extends CI_Controller {
 	public function index()
 	{
 		//if ($this->session->userdata('logged')) {
-			$this->load->view('frontend/t_header_view');
+			$headerData['enableSlider'] = 1;
+			$this->load->view('frontend/t_header_view', $headerData);
 
 			$this->load->view('frontend/index_view');
 

@@ -528,7 +528,7 @@ a {
 
     #mainmenu a {
         display: block;
-        padding: 20px 17px 20px 17px;
+        padding: 19px 17px 19px 17px;
         text-decoration: none;
         color: #555555;
     }
@@ -1281,6 +1281,7 @@ blockquote {
     font-size: 28px;
     letter-spacing: -1px;
     float: left;
+    margin: 15px 0;
 }
 
 .call-to-action .btn {
@@ -1292,6 +1293,7 @@ blockquote {
     padding-right: 40px;
     text-transform: uppercase;
     font-family: Roboto;
+    line-height: 20px;
 }
 
 .call-to-action .btn-blue {
@@ -1531,6 +1533,7 @@ hr {
 
     .trainer-list .info {
         margin-left: 110px;
+        line-height: 20px;
     }
 
         .trainer-list .info h5, .trainer-list .info h6 {
@@ -1688,4 +1691,26 @@ address span {
             line-height: normal;
             top: 25%;
         }
+}
+
+/*
+=====  Fix  =====
+*/
+.btn-large {
+    padding: 11px 19px;
+    font-size: 17.5px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+}
+
+h5, h6 {
+    line-height: 20px;
 }

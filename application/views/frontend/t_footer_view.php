@@ -11,12 +11,10 @@
 					<div class="inner">
 						<nav>
 							<ul>
-								<li><a href="#">Home</a></li>
-								<li><a href="#">Course</a></li>
-								<li><a href="#">Plans</a></li>
-								<li><a href="#">News</a></li>
-								<li><a href="#">Gallery</a></li>
-								<li><a href="#">Contact</a></li>
+								<li><a href="index.html">หน้าแรก</a></li>
+								<li><a href="#">วิชา</a>	</li>
+								<li><a href="#">ข่าวสาร</a></li>
+								<li><a href="contact.html">ติดต่อ</a></li>
 							</ul>
 						</nav>
 					</div>
