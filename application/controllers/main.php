@@ -12,8 +12,6 @@ class Main extends CI_Controller {
 	{
 		//if ($this->session->userdata('logged')) {
 			$this->load->view('frontend/t_header_view');
-			$this->load->view('frontend/t_nav_view');
-			$this->load->view('frontend/t_beginbody_view');
 
 			$this->load->view('frontend/index_view');
 

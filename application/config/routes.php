@@ -42,6 +42,7 @@
 // $route['admin/subjects'] = 'admin1/subjects';
 $route['admin'] = 'admin/admin';
 $route['teacher'] = 'teacher/teacher';
+$route['student'] = 'student/student';
 
 $route['default_controller'] = "main";
 $route['404_override'] = '';

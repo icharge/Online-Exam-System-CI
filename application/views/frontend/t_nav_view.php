@@ -1,27 +1,12 @@
-	<!-- Begin navbar -->
-	<div class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-<?php
-	echo anchor('main', 'Online Examination', 'class="navbar-brand"');
-?>
-			</div>
-			<div class="navbar-collapse collapse navbar-responsive-collapse">
-				<ul class="nav navbar-nav">
-					
-					
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					<li><?php echo anchor('main', 'หน้าแรก');?></li>
-					<li><?php echo anchor('auth/login', 'เข้าสู่ระบบ');?></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- End navbar -->
+					<ul id="mainmenu">
+						<li><a href="index.html">หน้าแรก</a></li>
+						<li><a href="#">วิชา</a>
+							<ul>
+								<li><a href="course-list.html">รายการวิชา</a>
+								<li><a href="course-single.html">รายวิชาที่เปิดสอบ</a>
+							</ul>
+						</li>
+						<li><a href="#">ข่าวสาร</a></li>
+						<li><a href="contact.html">ติดต่อ</a></li>
+						<li class="sign-in-btn"><a href="#">เข้าสู่ระบบ</a></li>
+					</ul>
