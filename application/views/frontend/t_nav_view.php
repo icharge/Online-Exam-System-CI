@@ -8,5 +8,27 @@
 						</li>
 						<li><?php echo anchor('news', 'ข่าวสาร'); ?></li>
 						<li><?php echo anchor('contact', 'ติดต่อ'); ?></li>
-						<li class="sign-in-btn"><?php echo anchor('auth/login', 'เข้าสู่ระบบ'); ?></li>
+						<li class="sign-in-btn"><?php
+							$mnprofile = anchor('student/profile', 'ข้อมูลส่วนตัว');
+							$mnlogout = anchor('auth/logout', 'ออกจากระบบ');
+							if ($this->session->userdata('fname') != null)
+							{
+								echo <<<HTML
+								<a href="#">{$this->session->userdata('fname')}</a>
+								<ul>
+									<li>
+										{$mnprofile}
+									</li>
+									<li>
+										{$mnlogout}
+									</li>
+								</ul>
+HTML;
+							}
+							else
+							{
+								echo anchor('auth/login', 'เข้าสู่ระบบ'); 
+							}
+
+						?></li>
 					</ul>

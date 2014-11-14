@@ -1,5 +1,5 @@
 body {
-		padding-bottom: 20px;
+	padding-bottom: 20px;
 }
 
 select:focus {
@@ -112,42 +112,18 @@ div.messenger-message {
  */
 .animate-fade-up {
 	-webkit-animation: 0.35s fade-up-enter;
-	-moz-animation: 0.35s fade-up-enter;
-	-o-animation: 0.35s fade-up-enter;
 	animation: 0.35s fade-up-enter;
 }
 @-webkit-keyframes fade-up-enter {
 	0% {
 		opacity: 0;
+		filter: alpha(opacity=0);
 		-webkit-transform: translateY(20px);
 	}
 
 	100% {
 		opacity: 1;
-		-webkit-transform: translateY(0);
-	}
-}
-
-@-moz-keyframes fade-up-enter {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(20px);
-	}
-
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-	}
-}
-
-@-o-keyframes fade-up-enter {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(20px);
-	}
-
-	100% {
-		opacity: 1;
+		filter: alpha(opacity=100);
 		-webkit-transform: translateY(0);
 	}
 }
@@ -155,53 +131,31 @@ div.messenger-message {
 @keyframes fade-up-enter {
 	0% {
 		opacity: 0;
+		filter: alpha(opacity=0);
 		-webkit-transform: translateY(20px);
 	}
 
 	100% {
 		opacity: 1;
+		filter: alpha(opacity=100);
 		-webkit-transform: translateY(0);
 	}
 }
 
 .animate-fade-down {
 	-webkit-animation: 0.35s fade-down-enter;
-	-moz-animation: 0.35s fade-down-enter;
-	-o-animation: 0.35s fade-down-enter;
 	animation: 0.35s fade-down-enter;
 }
 @-webkit-keyframes fade-down-enter {
 	0% {
 		opacity: 0;
+		filter: alpha(opacity=0);
 		-webkit-transform: translateY(-20px);
 	}
 
 	100% {
 		opacity: 1;
-		-webkit-transform: translateY(0);
-	}
-}
-
-@-moz-keyframes fade-down-enter {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(-20px);
-	}
-
-	100% {
-		opacity: 1;
-		-webkit-transform: translateY(0);
-	}
-}
-
-@-o-keyframes fade-down-enter {
-	0% {
-		opacity: 0;
-		-webkit-transform: translateY(-20px);
-	}
-
-	100% {
-		opacity: 1;
+		filter: alpha(opacity=100);
 		-webkit-transform: translateY(0);
 	}
 }
@@ -209,11 +163,13 @@ div.messenger-message {
 @keyframes fade-down-enter {
 	0% {
 		opacity: 0;
+		filter: alpha(opacity=0);
 		-webkit-transform: translateY(-20px);
 	}
 
 	100% {
 		opacity: 1;
+		filter: alpha(opacity=100);
 		-webkit-transform: translateY(0);
 	}
 }
@@ -226,8 +182,8 @@ div.messenger-message {
 ul.sidebar-menu > li, ul.sidebar-menu > li.treeview > ul.treeview-menu > li {
 	position: relative;
 }
-ul.sidebar-menu > li.active:not(.treeview)::after,
-ul.sidebar-menu > li.treeview > ul.treeview-menu > li.active::after
+ul.sidebar-menu > li.active:not(.treeview):after,
+ul.sidebar-menu > li.treeview > ul.treeview-menu > li.active:after
 {
 	border-right: solid #09F 5px;
 	display: block;
@@ -258,8 +214,6 @@ form.searchform > div > div > input[type=text]:focus + span > .btn {
 
 /* Datepicker  (JQuery UI) */
 .ui-datepicker {
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
 	box-shadow: none;
 	width: 17em;
 	padding: .2em .2em 0;

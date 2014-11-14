@@ -562,7 +562,7 @@ a {
         width: 170px;
         height: auto;
         position: absolute;
-        top: 100%;
+        /*top: 100%;*/
         left: 0px;
         z-index: 10;
         display: none;
@@ -594,6 +594,11 @@ a {
 	#mainmenu li.sign-in-btn:hover a{
 		background:#eee;
 	}
+
+    #mainmenu li.sign-in-btn ul li a:hover {
+        color: #000;
+        background: #62bbe6;
+    }
 
 
     #mainmenu select {
@@ -1489,7 +1494,7 @@ blockquote {
 }
 
 .call-to-action {
-    padding: 20px 0 15px 0;
+    padding: 20px 0 40px 0;
 }
 
     .call-to-action h3 {
