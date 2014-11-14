@@ -6,6 +6,7 @@ class Auth extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Users_model','Users');
+		$this->load->model('Courses_model', 'Courses');
 	}
 
 	public function index()
@@ -15,7 +16,10 @@ class Auth extends CI_Controller {
 
 	public function login()
 	{
-		$this->load->view('frontend/t_header_view');
+		$coursesNum = $this->Courses->countCourseList();
+		$headerData['coursesNum'] = $coursesNum;
+
+		$this->load->view('frontend/t_header_view', $headerData);
 
 		$this->load->view('frontend/login_view');
 

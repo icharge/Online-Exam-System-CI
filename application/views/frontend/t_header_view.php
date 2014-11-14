@@ -39,7 +39,7 @@
 			<div class="row">
 				<div class="span12">
 					<div class="inner">
-						<h1>มีวิชาให้ลงสอบ 21 รายการ จากทั้งหมด</h1>
+						<h1>มีวิชาให้ลงสอบ <?php echo $coursesNum;?> รายการ จากทั้งหมด</h1>
 						<a class="btn btn-large btn-blue pull-right">ลงทะเบียนเดี๋ยวนี้</a>
 						<div class="clearfix"></div>
 					</div>

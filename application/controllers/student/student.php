@@ -6,6 +6,7 @@ class Student extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('users_model', 'Users');
+		$this->load->model('courses_model', 'Courses');
 
 		// Permissions List for this Class
 		$perm = array('student');
@@ -21,7 +22,12 @@ class Student extends CI_Controller {
 	public function index()
 	{
 		$headerData['enableSlider'] = 1;
+		$coursesNum = $this->Courses->countCourseList();
+		$headerData['coursesNum'] = $coursesNum;
+
 		$this->load->view('frontend/t_header_view', $headerData);
+
+
 
 		$this->load->view('frontend/index_view');
 
