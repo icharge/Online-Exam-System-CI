@@ -1,14 +1,21 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/*
+ * FullExamPaper -- To show full exam paper
+ * Library
+ */
+
 class Fullexampaper
 {
-	protected $ci;
+	protected $ci; // CI Instance
+	protected $db; // DB Object
 	private $paperId;
 
 	public function __construct($param = array())
 	{
 		$this->ci =& get_instance();
-		$this->ci->load->model('paperexam_model', 'paperexam');
+		$this->db = $this->ci->db;
+		// $this->ci->load->model('paperexam_model', 'paperexam');
 
 		// Default value
 		$this->paperId = '';
@@ -25,6 +32,11 @@ class Fullexampaper
 
 	}
 
+	public function setPaperId($value)
+	{
+		$this->paperId = $value;
+	}
+
 	public function createExamPaper()
 	{
 		$paperData = $this->_loadPaper();
@@ -37,9 +49,28 @@ class Fullexampaper
 	{
 		if ($this->paperId == '') return "Failed";
 		else
-			return $this->ci->paperexam->loadPaper($this->paperId);
+			return $query = $this->db
+			->get_where('Exam_Papers', array('paper_id' => $this->paperId))
+			->row_array();
 	}
 
+	function _loadPart()
+	{
+		if ($this->paperId == '') return "Failed";
+		else
+			return $query = $this->db
+			->get_where('Exam_Papers_Parts', array('paper_id' => $this->paperId))
+			->result_array();
+	}
+
+	function _loadQuestion($partId)
+	{
+		// if ($partId == '') return "Failed";
+		// else
+		// 	return $query = $this->db
+		// 	->get_where('Exam_Papers', array('paper_id' => $this->paperId))
+		// 	->row_array();
+	}
 
 
 }
