@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Student extends CI_Controller {
+class Exam extends CI_Controller {
 
 	public function __construct()
 	{
@@ -21,14 +21,16 @@ class Student extends CI_Controller {
 
 	public function index()
 	{
+		// Load Library
+		$this->load->library('Fullexampaper', array('paperid'=>1));
+
+
 		$headerData['enableSlider'] = 1;
 		$coursesNum = $this->Courses->countCourseList();
 		$headerData['coursesNum'] = $coursesNum;
 
 		$this->load->view('frontend/t_header_view', $headerData);
-
-
-
+		echo $this->fullexampaper->createExamPaper();
 		$this->load->view('frontend/index_view');
 
 		$this->load->view('frontend/t_footer_view');
