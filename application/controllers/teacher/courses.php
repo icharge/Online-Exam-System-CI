@@ -1066,6 +1066,28 @@ HTML;
 		$this->load->view($this->role.'/t_footer_view', $footdata);
 	}
 
+	function exampaper($paperid)
+	{
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
+
+		$this->load->library('Fullexampaper', array('paperid'=>$paperid));
+
+		$data['paperId'] = $paperid;
+
+		// Set page desc
+		$data['pagetitle'] = "ชุดข้อสอบ";
+		$data['pagesubtitle'] = '';
+		$data['formlink'] = '';
+
+		$this->load->view($this->role.'/showfullpaper_view', $data);
+
+		// Send additional script to footer
+		$footdata['additionScript'] = $this->getAddScripts();
+		$this->load->view($this->role.'/t_footer_view', $footdata);
+	}
+
 	function callbackjson()
 	{
 		// JSON Callback with modes & arguments.

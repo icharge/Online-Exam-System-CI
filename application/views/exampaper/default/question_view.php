@@ -64,9 +64,9 @@
 		<b>เฉลย:</b>
 		<p class="question-answer-label"><?php echo $answer;?></p>
 	</div>
-	<div class="box-footer">
+	<!-- <div class="box-footer">
 		<div class="row">
 
 		</div>
-	</div>
+	</div> -->
 </div>
