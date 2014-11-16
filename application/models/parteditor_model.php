@@ -70,6 +70,9 @@ class Parteditor_model extends CI_Model {
 
 	function addQuestionDetail($questionData)
 	{
+		// add inuse to question
+		$this->db->update('Questions', array('status' => 'inuse'), 
+			array('question_id'=>$questionData['question_id']));
 		$query = $this->db
 			->insert('Exam_Papers_Detail', $questionData);
 		return $query;

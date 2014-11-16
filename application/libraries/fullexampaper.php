@@ -9,23 +9,31 @@ class Fullexampaper
 {
 	protected $ci; // CI Instance
 	protected $db; // DB Object
+	protected $load; // Load Object
 	private $paperId;
+	private $template;
 
 	public function __construct($param = array())
 	{
 		$this->ci =& get_instance();
 		$this->db = $this->ci->db;
+		$this->load = $this->ci->load;
 		// $this->ci->load->model('paperexam_model', 'paperexam');
+		$this->load->model('misc_model', 'misc');
 
 		// Default value
 		$this->paperId = '';
+		$this->template = 'default';
 
 		if (is_array($param))
 		{
 			if (isset($param['paperid']))
 			{
 				$this->paperId = $param['paperid'];
-				// echo $this->paperId;
+			}
+			if (isset($param['template']))
+			{
+				$this->template = $param['template'];
 			}
 
 		}
@@ -37,11 +45,24 @@ class Fullexampaper
 		$this->paperId = $value;
 	}
 
+	public function templateName()
+	{
+		return $this->template;
+	}
+
 	public function createExamPaper()
 	{
-		$paperData = $this->_loadPaper();
 		// Create View to HTML var
-		$html = $paperData['title'];
+		$html = '';
+		// Load data
+		$paperData = $this->_loadPaper();
+		$partData = $this->_loadPart();
+
+		$data['lib'] = $this;
+		$data['paperData'] = $paperData;
+		$data['partData'] = $partData;
+		$html .= $this->load->view('exampaper/'.$this->template.'/paper_view', $data, true);
+
 		return $html;
 	}
 
@@ -65,11 +86,21 @@ class Fullexampaper
 
 	function _loadQuestion($partId)
 	{
-		// if ($partId == '') return "Failed";
-		// else
-		// 	return $query = $this->db
-		// 	->get_where('Exam_Papers', array('paper_id' => $this->paperId))
-		// 	->row_array();
+		if ($partId == '') return "Failed";
+		else
+		{
+			$query = $this->db
+				->select('*')
+				->from('question_detail_list')
+				->where(array(
+					'paper_id' => $this->paperId,
+					'part_id' => $partId,
+				))
+				->get()
+				->result_array();
+			return $query;
+		}
+		
 	}
 
 
