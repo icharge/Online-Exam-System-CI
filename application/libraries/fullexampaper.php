@@ -103,6 +103,25 @@ class Fullexampaper
 		
 	}
 
+	function _makeChoiceComp($questionid, $str, $value)
+	{
+		$num = rand();
+		$alpha = array('', 'ก.','ข.','ค.','ง.','จ.','ฉ.');
+		return '
+	<div class="radio">
+		<div class="col-xs-1 no-padding" style="width: inherit;">
+			<label style="padding-left: 0">'.
+					form_radio('correct['.$questionid.']', $value, false,'class="minimal-red correct-choice" id="'.$num.'"')." "
+			.'</label>
+		</div>
+		<label id="c'.$value.'" class="choice" style="padding-left: 12px" for="'.$num.'">
+			<span class="clabel">'.$alpha[$value].'</span>
+			'.$str.'
+		</label>
+	</div>
+';
+	}
+
 
 }
 

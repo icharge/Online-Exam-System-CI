@@ -11,6 +11,7 @@ html;
 		$count = 1;
 		foreach ($questData as $questItem) {
 			$questItem['number'] = $count++;
+			$questItem['lib'] = $lib;
 			echo $this->load->view('exampaper/'.$lib->templateName().'/question_view', $questItem);
 		}
 	}

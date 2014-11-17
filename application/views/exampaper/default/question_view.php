@@ -7,36 +7,18 @@
 		</li>
 	</ul>
 	<div class="box-body">
-		<b>โจทย์คำถาม:</b>
 		<div class="question-label"><?php echo $question;?></div>
-		<b>รูปแบบ:</b>
-		<p class="question-type-label"><?php
-			switch ($type) {
-				case 'choice':
-					echo "ปรนัย";
-					break;
-				case 'numeric':
-					echo "เติมคำตอบด้วยตัวเลข";
-					break;
-				case 'boolean':
-					echo "ถูก / ผิด";
-					break;
-				case 'matching':
-					echo "จับคู่";
-					break;
-			}
-		?></p>
 		<?php if ($type == "choice") { ?>
-		<b>ตัวเลือก:</b>
 		<div class="question-choices-label">
 			<ul>
 				<?php
-					echo ((isset($choice1) && $choice1 != "") ? "<li>".$choice1."</li>" : "").
-					((isset($choice2) && $choice2 != "") ? "<li>".$choice2."</li>" : "").
-					((isset($choice3) && $choice3 != "") ? "<li>".$choice3."</li>" : "").
-					((isset($choice4) && $choice4 != "") ? "<li>".$choice4."</li>" : "").
-					((isset($choice5) && $choice5 != "") ? "<li>".$choice5."</li>" : "").
-					((isset($choice6) && $choice6 != "") ? "<li>".$choice6."</li>" : "");
+
+					echo ((isset($choice1) && $choice1 != "") ? $lib->_makeChoiceComp($question_id, $choice1, 1) : "").
+					((isset($choice2) && $choice2 != "") ? $lib->_makeChoiceComp($question_id, $choice2, 2) : "").
+					((isset($choice3) && $choice3 != "") ? $lib->_makeChoiceComp($question_id, $choice3, 3) : "").
+					((isset($choice4) && $choice4 != "") ? $lib->_makeChoiceComp($question_id, $choice4, 4) : "").
+					((isset($choice5) && $choice5 != "") ? $lib->_makeChoiceComp($question_id, $choice5, 5) : "").
+					((isset($choice6) && $choice6 != "") ? $lib->_makeChoiceComp($question_id, $choice6, 6) : "");
 
 					if ($answer_choice == "1") $answer = $choice1;
 					elseif ($answer_choice == "2") $answer = $choice2;
@@ -60,9 +42,14 @@
 				$answer = $answer_numeric;
 			}
 		?>
-
+<?php 
+/*
+	echo <<<HTML
 		<b>เฉลย:</b>
-		<p class="question-answer-label"><?php echo $answer;?></p>
+		<p class="question-answer-label">{$answer}</p>
+HTML;
+*/
+?>
 	</div>
 	<!-- <div class="box-footer">
 		<div class="row">

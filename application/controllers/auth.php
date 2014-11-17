@@ -29,7 +29,10 @@ class Auth extends CI_Controller {
 	public function dologin()
 	{
 		# Load View
-		$this->load->view('frontend/t_header_view');
+		$coursesNum = $this->Courses->countCourseList();
+		$headerData['coursesNum'] = $coursesNum;
+
+		$this->load->view('frontend/t_header_view', $headerData);
 
 		# Login Process
 		$this->form_validation->set_rules('username', 'ชื่อผู้ใช้', 'required');
