@@ -1,4 +1,4 @@
-<div class="content">
+<div class="fullpaper">
 	<h2 class="page-header" data-paper="<?php echo $paperData['paper_id'];?>">
 		<?php echo $paperData['title'];?>
 	</h2>

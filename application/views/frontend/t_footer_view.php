@@ -37,6 +37,16 @@
 	<script src="assets-student/js/ender.js"></script>
 	<script src="assets-student/js/custom.js"></script>
 	<script src="assets-student/js/responsiveslides.min.js"></script>
-
+	<!-- iCheck -->
+	<script src="vendor/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+	<script>
+		$(function() {
+			//Red color scheme for iCheck
+			$('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+					checkboxClass: 'icheckbox_minimal-red',
+					radioClass: 'iradio_minimal-red'
+			});
+		});
+	</script>
 </body>
 </html>

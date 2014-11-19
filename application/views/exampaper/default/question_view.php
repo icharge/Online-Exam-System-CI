@@ -10,9 +10,9 @@
 		<div class="question-label"><?php echo $question;?></div>
 		<?php if ($type == "choice") { ?>
 		<div class="question-choices-label">
-			<ul>
+			<div class="col-md-8">
 				<?php
-
+					echo form_label('คำตอบ <span class="text-danger">*</span>', 'answer['.$question_id.']');
 					echo ((isset($choice1) && $choice1 != "") ? $lib->_makeChoiceComp($question_id, $choice1, 1) : "").
 					((isset($choice2) && $choice2 != "") ? $lib->_makeChoiceComp($question_id, $choice2, 2) : "").
 					((isset($choice3) && $choice3 != "") ? $lib->_makeChoiceComp($question_id, $choice3, 3) : "").
@@ -26,23 +26,41 @@
 					elseif ($answer_choice == "4") $answer = $choice4;
 					elseif ($answer_choice == "5") $answer = $choice5;
 					elseif ($answer_choice == "6") $answer = $choice6;
+					
 				?>
-			</ul>
+			</div>
 		</div>
-		<?php }
-			if ($type == "boolean")
-			{
-				if (strtolower($answer_boolean) == "b")
-					$answer = "ถูก";
-				else
-					$answer = "ผิด";
-			}
-			elseif ($type == "numeric")
-			{
-				$answer = $answer_numeric;
-			}
-		?>
-<?php 
+		<div class="clearfix"></div>
+<?php } elseif ($type == "boolean")
+				{
+					echo '<div class="col-md-8">';
+					echo form_label('คำตอบ <span class="text-danger">*</span>', 'answer['.$question_id.']');
+					echo $lib->_makeChoiceComp($question_id, '', 't').$lib->_makeChoiceComp($question_id, '', 'f');
+					echo '</div><div class="clearfix"></div>';
+					if (strtolower($answer_boolean) == "b")
+						$answer = "ถูก";
+					else
+						$answer = "ผิด";
+				}
+				elseif ($type == "numeric")
+				{
+					echo '
+	<div class="question-choices-label">
+		<div class="col-md-5">
+			<div class="form-group">'.
+				form_label('คำตอบ <span class="text-danger">*</span>', 'answer['.$question_id.']').
+				form_input(array(
+					'name'=>'answer['.$question_id.']',
+					'type'=>'text',
+					'class'=>'form-control',
+					'placeholder'=>'')).
+			'</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+';
+					$answer = $answer_numeric;
+				}
 /*
 	echo <<<HTML
 		<b>เฉลย:</b>

@@ -5,6 +5,8 @@
 	<meta charset="utf-8">
 	<title>Online Examination System</title>
 	<link rel="stylesheet" href="vendor/css/bootstrap.min.css">
+	<!-- iCheck for checkboxes and radio inputs -->
+	<link href="vendor/css/iCheck/all.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="vendor/css/messenger.css">
 	<link rel="stylesheet" href="vendor/css/messenger-theme-air.css">
 	<link href="assets-student/css/main.css" rel="stylesheet" type="text/css">

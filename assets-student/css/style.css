@@ -335,7 +335,7 @@ a {
     margin-bottom: 30px;
 }
 
-.hover {
+.inner > .hover {
     font-size: 12px;
     display: block;
     width: 100%;
@@ -347,7 +347,7 @@ a {
     text-align: left;
 }
 
-    .hover span {
+    .inner > .hover span {
         display: block;
         padding: 20px;
     }
