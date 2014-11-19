@@ -12,21 +12,21 @@
 		<div class="question-choices-label">
 			<div class="col-md-8">
 				<?php
-					echo form_label('คำตอบ <span class="text-danger">*</span>', 'answer['.$question_id.']');
-					echo ((isset($choice1) && $choice1 != "") ? $lib->_makeChoiceComp($question_id, $choice1, 1) : "").
-					((isset($choice2) && $choice2 != "") ? $lib->_makeChoiceComp($question_id, $choice2, 2) : "").
-					((isset($choice3) && $choice3 != "") ? $lib->_makeChoiceComp($question_id, $choice3, 3) : "").
-					((isset($choice4) && $choice4 != "") ? $lib->_makeChoiceComp($question_id, $choice4, 4) : "").
-					((isset($choice5) && $choice5 != "") ? $lib->_makeChoiceComp($question_id, $choice5, 5) : "").
-					((isset($choice6) && $choice6 != "") ? $lib->_makeChoiceComp($question_id, $choice6, 6) : "");
-
 					if ($answer_choice == "1") $answer = $choice1;
 					elseif ($answer_choice == "2") $answer = $choice2;
 					elseif ($answer_choice == "3") $answer = $choice3;
 					elseif ($answer_choice == "4") $answer = $choice4;
 					elseif ($answer_choice == "5") $answer = $choice5;
 					elseif ($answer_choice == "6") $answer = $choice6;
-					
+
+					echo form_label('คำตอบ <span class="text-danger">*</span>', 'answer['.$question_id.']');
+					echo ((isset($choice1) && $choice1 != "") ? $lib->_makeChoiceComp($question_id, $choice1, 1, (($showAns)?($answer_choice == "1"?true:false):false) ) : "").
+					((isset($choice2) && $choice2 != "") ? $lib->_makeChoiceComp($question_id, $choice2, 2, (($showAns)?($answer_choice == "2"?true:false):false) ) : "").
+					((isset($choice3) && $choice3 != "") ? $lib->_makeChoiceComp($question_id, $choice3, 3, (($showAns)?($answer_choice == "3"?true:false):false) ) : "").
+					((isset($choice4) && $choice4 != "") ? $lib->_makeChoiceComp($question_id, $choice4, 4, (($showAns)?($answer_choice == "4"?true:false):false) ) : "").
+					((isset($choice5) && $choice5 != "") ? $lib->_makeChoiceComp($question_id, $choice5, 5, (($showAns)?($answer_choice == "5"?true:false):false) ) : "").
+					((isset($choice6) && $choice6 != "") ? $lib->_makeChoiceComp($question_id, $choice6, 6, (($showAns)?($answer_choice == "6"?true:false):false) ) : "");
+
 				?>
 			</div>
 		</div>
@@ -35,9 +35,10 @@
 				{
 					echo '<div class="col-md-8">';
 					echo form_label('คำตอบ <span class="text-danger">*</span>', 'answer['.$question_id.']');
-					echo $lib->_makeChoiceComp($question_id, '', 't').$lib->_makeChoiceComp($question_id, '', 'f');
+					echo $lib->_makeChoiceComp($question_id, '', 't', (($showAns)?(strtolower($answer_boolean)=="t"?true:false):false)).
+					$lib->_makeChoiceComp($question_id, '', 'f', (($showAns)?(strtolower($answer_boolean)=="f"?true:false):false));
 					echo '</div><div class="clearfix"></div>';
-					if (strtolower($answer_boolean) == "b")
+					if (strtolower($answer_boolean) == "t")
 						$answer = "ถูก";
 					else
 						$answer = "ผิด";
@@ -53,7 +54,8 @@
 					'name'=>'answer['.$question_id.']',
 					'type'=>'text',
 					'class'=>'form-control',
-					'placeholder'=>'')).
+					'placeholder'=>'',
+					'value'=>(($showAns)?($answer_numeric):''))).
 			'</div>
 		</div>
 	</div>

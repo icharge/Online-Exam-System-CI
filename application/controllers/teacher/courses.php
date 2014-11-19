@@ -1072,7 +1072,7 @@ HTML;
 		$this->load->view($this->role.'/t_headerbar_view');
 		$this->load->view($this->role.'/t_sidebar_view');
 
-		$this->load->library('Fullexampaper', array('paperid'=>$paperid));
+		$this->load->library('Fullexampaper', array('paperid'=>$paperid, 'showAns'=>true));
 
 		$data['paperId'] = $paperid;
 
