@@ -380,7 +380,7 @@ HTML;
 													</li>
 HTML;
 												}
-
+												$fullpagelink = anchor('teacher/courses/exampaper/'.$item['paper_id'], '<i class="fa fa-file-text-o"></i>');
 												echo <<<HTML
 												<li class="list-group-item" data-paperid="{$item['paper_id']}">
 													<span class="badge"><i class="fa fa-clock-o"></i> {$datediff}</span>
@@ -392,6 +392,7 @@ HTML;
 														<a href="#edit">
 															<i class="fa fa-edit"></i>
 														</a>
+														{$fullpagelink}
 														<a href="#remove" class="text-danger">
 															<i class="fa fa-trash-o"></i>
 														</a>

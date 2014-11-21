@@ -1,27 +1,34 @@
-	<!-- Begin navbar -->
-	<div class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-<?php
-	echo anchor('main', 'Online Examination', 'class="navbar-brand"');
-?>
-			</div>
-			<div class="navbar-collapse collapse navbar-responsive-collapse">
-				<ul class="nav navbar-nav">
-					
-					
-				</ul>
+					<ul id="mainmenu">
+						<li><?php echo anchor('', 'หน้าแรก'); ?></li>
+						<li><a href="#">วิชา</a>
+							<ul>
+								<li><?php echo anchor('subject-list', 'รายการวิชาทั้งหมด'); ?></li>
+								<li><?php echo anchor('course-list', 'รายวิชาที่เปิดสอบ'); ?></li>
+							</ul>
+						</li>
+						<li><?php echo anchor('news', 'ข่าวสาร'); ?></li>
+						<li><?php echo anchor('contact', 'ติดต่อ'); ?></li>
+						<li class="sign-in-btn"><?php
+							$mnprofile = anchor('student/profile', 'ข้อมูลส่วนตัว');
+							$mnlogout = anchor('auth/logout', 'ออกจากระบบ');
+							if ($this->session->userdata('fname') != null)
+							{
+								echo <<<HTML
+								<a href="#">{$this->session->userdata('fname')}</a>
+								<ul>
+									<li>
+										{$mnprofile}
+									</li>
+									<li>
+										{$mnlogout}
+									</li>
+								</ul>
+HTML;
+							}
+							else
+							{
+								echo anchor('auth/login', 'เข้าสู่ระบบ'); 
+							}
 
-				<ul class="nav navbar-nav navbar-right">
-					<li><?php echo anchor('main', 'หน้าแรก');?></li>
-					<li><?php echo anchor('auth/login', 'เข้าสู่ระบบ');?></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- End navbar -->
+						?></li>
+					</ul>

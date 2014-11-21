@@ -6,14 +6,17 @@ class Main extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Users_model','Users');
+		$this->load->model('Courses_model', 'Courses');
 	}
 
 	public function index()
 	{
 		//if ($this->session->userdata('logged')) {
-			$this->load->view('frontend/t_header_view');
-			$this->load->view('frontend/t_nav_view');
-			$this->load->view('frontend/t_beginbody_view');
+			$headerData['enableSlider'] = 1;
+			$coursesNum = $this->Courses->countCourseList();
+			$headerData['coursesNum'] = $coursesNum;
+
+			$this->load->view('frontend/t_header_view', $headerData);
 
 			$this->load->view('frontend/index_view');
 

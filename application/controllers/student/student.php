@@ -6,9 +6,10 @@ class Student extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('users_model', 'Users');
+		$this->load->model('courses_model', 'Courses');
 
 		// Permissions List for this Class
-		$perm = array('student');
+		$perm = array('admin', 'teacher', 'student');
 		// Check
 		if ($this->Users->_checkLogin())
 		{
@@ -20,13 +21,17 @@ class Student extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('student/t_header_view');
-		$this->load->view('student/t_nav_view');
-		$this->load->view('student/t_beginbody_view');
+		$headerData['enableSlider'] = 1;
+		$coursesNum = $this->Courses->countCourseList();
+		$headerData['coursesNum'] = $coursesNum;
 
-		echo "Student index";
+		$this->load->view('frontend/t_header_view', $headerData);
 
-		$this->load->view('student/t_footer_view');
+
+
+		$this->load->view('frontend/index_view');
+
+		$this->load->view('frontend/t_footer_view');
 	}
 
 }

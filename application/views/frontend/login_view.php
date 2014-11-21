@@ -5,8 +5,8 @@
 
 ?>
 <!-- Begin login -->
-<div class="row row-centered animate-fade-up">
-	<div class="col-md-5 col-centered">
+<div class="row animate-fade-up">
+	<div class="col-sm-4 col-sm-offset-4">
 		<div class="panel panel-<?php if(!isset($msg_error)) echo "primary"; else echo "danger";?>">
 			<div class="panel-heading">
 				<h3 class="panel-title"><span class="
@@ -81,12 +81,10 @@ glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Login</h3>
 						</div>
 					</div> -->
 					<div class="form-group">
-						<div class="row row-centered">
-							<div class="col-sm-12">
+						<div class="col-sm-12" style="text-align: center;">
 <?php
-	echo form_submit('submit', 'เข้าสู่ระบบ', 'class="btn btn-primary"');
+echo form_submit('submit', 'เข้าสู่ระบบ', 'class="btn btn-primary"');
 ?>
-							</div>
 						</div>
 					</div>
 				<?php echo form_close(); ?>
