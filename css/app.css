@@ -6,6 +6,10 @@ select:focus {
 	outline: none;
 }
 
+.dropdown-menu {
+	border-radius: 0;
+}
+
 ul.dropdown-menu.inner.selectpicker li.selected {
 	border-right: solid #09F 5px;
 }

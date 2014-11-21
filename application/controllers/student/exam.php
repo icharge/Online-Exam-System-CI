@@ -22,7 +22,7 @@ class Exam extends CI_Controller {
 	public function index()
 	{
 		// Load Library
-		$this->load->library('Fullexampaper', array('paperid'=>1));
+		$this->load->library('Fullexampaper', array('paperid'=>7));
 		// Usage
 		//echo $this->fullexampaper->createExamPaper();
 		

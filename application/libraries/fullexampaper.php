@@ -13,6 +13,7 @@ class Fullexampaper
 	private $paperId;
 	private $template;
 	private $showAns;
+	private $enabled;
 
 	public function __construct($param = array())
 	{
@@ -44,6 +45,10 @@ class Fullexampaper
 			{
 				$this->showAns = false;
 			}
+			if (isset($param['enabled']))
+				$this->enabled = $param['enabled'];
+			else
+				$this->enabled = true;
 		}
 
 	}
@@ -70,6 +75,7 @@ class Fullexampaper
 		$data['paperData'] = $paperData;
 		$data['partData'] = $partData;
 		$data['showAns'] = $this->showAns;
+		$data['enabled'] = $this->enabled;
 		$html .= $this->load->view('exampaper/'.$this->template.'/paper_view', $data, true);
 
 		return $html;
@@ -112,15 +118,19 @@ class Fullexampaper
 		
 	}
 
-	function _makeChoiceComp($questionid, $str='', $idelem='', $checked=false)
+	function _makeChoiceComp($questionid, $str='', $idelem='', $checked=false, $enabled=true)
 	{
 		$num = rand();
+		if (!$enabled)
+			$readonly = "disabled";
+		else
+			$readonly = "";
 		$alpha = array('', 'ก.','ข.','ค.','ง.','จ.','ฉ.','t'=>'ถูก','f'=>'ผิด');
 		return '
 	<div class="radio">
 		<div class="col-xs-1" style="width: inherit;">
 			<label style="padding-left: 0">'.
-					form_radio('answer['.$questionid.']', $idelem, $checked,'class="minimal-red" id="'.$num.'"')." "
+					form_radio('answer['.$questionid.']', $idelem, $checked,'class="minimal-red" id="'.$num.'" '.$readonly)." "
 			.'</label>
 		</div>
 		<label id="c'.$idelem.'" class="choice" style="padding-left: 0" for="'.$num.'">

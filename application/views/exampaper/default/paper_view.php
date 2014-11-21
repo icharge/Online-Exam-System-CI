@@ -13,6 +13,7 @@ html;
 			$questItem['number'] = $count++;
 			$questItem['lib'] = $lib;
 			$questItem['showAns'] = $showAns;
+			$questItem['enabled'] = $enabled;
 			echo $this->load->view('exampaper/'.$lib->templateName().'/question_view', $questItem);
 		}
 	}
