@@ -3,12 +3,13 @@
 		<?php echo $paperData['title'];?>
 	</h2>
 <?php
+	$count = 1;
 	foreach ($partData as $partItem) {
 		echo <<<html
 	<h3 class="chapter">{$partItem['title']}</h3>
 html;
 		$questData = $lib->_loadQuestion($partItem['part_id']);
-		$count = 1;
+		
 		foreach ($questData as $questItem) {
 			$questItem['number'] = $count++;
 			$questItem['lib'] = $lib;

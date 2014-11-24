@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2014 at 03:17 PM
+-- Generation Time: Nov 24, 2014 at 12:15 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -86,6 +86,25 @@ INSERT INTO `admins` (`admin_id`, `id`, `name`, `lname`, `email`, `pic`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Answer_Papers`
+--
+
+CREATE TABLE IF NOT EXISTS `Answer_Papers` (
+  `question_id` int(10) NOT NULL,
+  `sco_id` int(6) NOT NULL,
+  `answer` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Answer_Papers`
+--
+
+INSERT INTO `Answer_Papers` (`question_id`, `sco_id`, `answer`) VALUES
+(15, 1, '2');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Branch`
 --
 
@@ -140,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('55321e3dbafe1f5f3141e083e6f10b4f', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) Ap', 1415797479, 'a:12:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;s:16:"flash:new:noAnim";b:1;}');
+('d98eed144456634e4f3fcd685d543479', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1416826679, 'a:9:{s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -270,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Detail` (
 
 INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VALUES
 (1, 1, 1, 2),
-(3, 1, 1, 4),
+(2, 1, 1, 6),
 (4, 5, 6, 1),
 (4, 7, 7, 1),
 (5, 5, 6, 2),
@@ -283,7 +302,8 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (8, 7, 7, 3),
 (9, 2, 1, 1),
 (9, 4, 2, 1),
-(10, 4, 2, 1),
+(10, 1, 1, 4),
+(10, 4, 2, 4),
 (11, 1, 1, 3),
 (12, 2, 1, 2),
 (12, 4, 2, 2),
@@ -291,7 +311,7 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (13, 7, 7, 3),
 (15, 1, 1, 1),
 (16, 4, 2, 1),
-(18, 1, 1, 3),
+(18, 1, 1, 5),
 (21, 4, 2, 3);
 
 -- --------------------------------------------------------
@@ -371,24 +391,24 @@ CREATE TABLE IF NOT EXISTS `Questions` (
 --
 
 INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_time`, `chapter_id`, `created_by_id`) VALUES
-(1, '<p><strong><span style="font-size:16px;">ปัจจุบัน Office เวอร์ชั่นอะไร ที่นิยมที่สุด</span></strong></p>', 'numeric', 'active', '2014-09-02 18:30:26', 4, 8),
-(2, '<p>Test2</p>', 'choice', 'active', '2014-09-09 09:14:28', 4, 3),
+(1, '<p><strong><span style="font-size:16px;">ปัจจุบัน Office เวอร์ชั่นอะไร ที่นิยมที่สุด</span></strong></p>', 'numeric', 'inuse', '2014-09-02 18:30:26', 4, 8),
+(2, '<p>Test2</p>', 'choice', 'inuse', '2014-09-09 09:14:28', 4, 3),
 (3, '<p>คำสั่ง <br /><span style="line-height:1.6em;">   echo "Hello World";<br />\nเป็นภาษาใด</span></p>', 'choice', 'active', '2014-09-15 12:23:25', 5, 8),
 (4, '<p><span style="font-size:16px;"><u><strong>Method</strong></u> มีอีกชื่อเรียกหนึ่งว่าอะไร</span></p>', 'choice', 'active', '2014-09-17 19:41:24', 7, 3),
 (5, '<p>VB.NET ถือเป็นการเขียนโปรแกรมแบบ OOP</p>', 'boolean', 'active', '2014-09-08 16:35:48', 7, 8),
-(6, '<p><strong>Class</strong> ประกอบไปด้วย <strong>Attribute</strong> และ <strong>Method</strong>  <u><span style="color:#FF0000;">ไม่สามารถสืบทอดได้</span></u></p>', 'boolean', 'active', '2014-09-22 08:23:26', 8, 3),
+(6, '<p><strong>Class</strong> ประกอบไปด้วย <strong>Attribute</strong> และ <strong>Method</strong>  <u><span style="color:#FF0000;">ไม่สามารถสืบทอดได้</span></u></p>', 'boolean', 'inuse', '2014-09-22 08:23:26', 8, 3),
 (7, '<p><span style="font-size:22px;"><span style="font-family:''th sarabun new'', ''th sarabun psk'';">หากมี <strong>Method</strong>  <u>Run() </u> ใน <strong>Class</strong>  ต้องการให้เรียกใช้จากภายนอกได้  จะต้องกำหนด <span style="color:#FF0000;"><strong>Encapsulation</strong></span> อย่างไร</span></span></p>', 'choice', 'active', '2014-09-24 13:20:44', 8, 3),
 (8, '<blockquote>\n<p>Class Fan {</p>\n\n<p>    private int speed;<br /><span style="line-height:1.6em;">    private double power</span><br /><span style="line-height:1.6em;">    private bool isSwing;</span><br /><span style="line-height:1.6em;">    public string name;</span><br /><span style="line-height:1.6em;">}</span></p>\n</blockquote>\n\n<p>จาก Class ดังกล่าว  มีการกำหนด  Attribute กี่ตัว  </p>', 'numeric', 'active', '2014-09-29 09:32:17', 8, 8),
 (9, '<p>Drafting question</p>', 'boolean', 'active', '2014-09-22 09:48:18', 5, 3),
-(10, '<p>Drafting 2</p>', 'choice', 'draft', '2014-10-01 15:20:10', 4, 3),
-(11, '<p>Disabled question</p>', 'numeric', 'inactive', '2014-09-08 21:05:28', 4, 8),
+(10, '<p>Drafting 2</p>', 'choice', 'inuse', '2014-10-01 15:20:10', 4, 3),
+(11, '<p>Disabled question</p>', 'numeric', 'inuse', '2014-09-08 21:05:28', 4, 8),
 (12, '<p>Trueeee</p>', 'boolean', 'active', '2014-09-08 21:09:05', 4, 8),
 (13, '<p><strong>jhglkdjf;sldkfs;dkjfls;</strong></p>', 'numeric', 'active', '2014-09-09 15:38:00', 7, 8),
 (14, '<p><em>dfkjs;ldkfjs;ldfsoduypofsdjo</em></p>', 'choice', 'active', '2014-10-02 13:58:53', 4, 8),
-(15, '<p><span style="background-color:rgb(249,249,249);color:rgb(102,102,102);font-family:''source sans pro'', sans-serif;font-size:17px;">IT Consultancy Method</span></p>\n\n<p><font color="#666666" face="source sans pro, sans-serif"><span style="background-color:rgb(249,249,249);font-size:17px;">รหัสวิชาคืออะไร</span></font></p>', 'numeric', 'active', '2014-10-02 14:05:21', 4, 8),
+(15, '<p><span style="background-color:rgb(249,249,249);color:rgb(102,102,102);font-family:''source sans pro'', sans-serif;font-size:17px;">IT Consultancy Method</span></p>\n\n<p><font color="#666666" face="source sans pro, sans-serif"><span style="background-color:rgb(249,249,249);font-size:17px;">รหัสวิชาคืออะไร</span></font></p>', 'numeric', 'inuse', '2014-10-02 14:05:21', 4, 8),
 (16, '<p><span style="font-size:18px;">ITITITITITITITIT</span></p>', 'boolean', 'active', '2014-10-02 14:07:00', 4, 8),
 (17, '<p><strong>bfafrstjvghulkbjklinjkljkl</strong></p>', 'boolean', 'active', '2014-10-02 14:08:47', 4, 8),
-(18, '<p><span style="color:#FF0000;"> bbcbcvxvcxvxccvxcvxcxcvxcv</span></p>', 'numeric', 'active', '2014-10-02 15:17:08', 4, 8),
+(18, '<p><span style="color:#FF0000;"> bbcbcvxvcxvxccvxcvxcxcvxcv</span></p>', 'numeric', 'inuse', '2014-10-02 15:17:08', 4, 8),
 (19, '<p><u>yrttewewerwe</u></p>', 'boolean', 'active', '2014-10-02 15:23:38', 4, 8),
 (20, '<p>werwertertwertr</p>', 'boolean', 'active', '2014-10-02 15:32:12', 9, 8),
 (21, '<p><span style="font-size:20px;">1+2 = ?</span></p>', 'numeric', 'active', '2014-10-09 20:43:29', 4, 8);
@@ -528,6 +548,27 @@ INSERT INTO `Question_numerical` (`id`, `answer`, `question_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Scoreboard`
+--
+
+CREATE TABLE IF NOT EXISTS `Scoreboard` (
+`sco_id` int(6) NOT NULL,
+  `stu_id` int(10) NOT NULL,
+  `course_id` int(4) NOT NULL,
+  `paper_id` int(7) NOT NULL,
+  `Score` float DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `Scoreboard`
+--
+
+INSERT INTO `Scoreboard` (`sco_id`, `stu_id`, `course_id`, `paper_id`, `Score`) VALUES
+(1, 54310104, 1, 1, 7);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Students`
 --
 
@@ -600,11 +641,13 @@ CREATE TABLE IF NOT EXISTS `Student_Enroll` (
 INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('54310104', '1', 1),
 ('54310104', '3', 10),
-('54311095', '1', 1),
 ('54311095', '3', 10),
+('57700188', '1', 1),
 ('57700194', '1', 9),
 ('57700197', '1', 9),
 ('58700127', '1', 9),
+('58700135', '1', 1),
+('58700140', '1', 1),
 ('58700157', '1', 9);
 
 -- --------------------------------------------------------
@@ -801,6 +844,12 @@ ALTER TABLE `admins`
  ADD PRIMARY KEY (`admin_id`);
 
 --
+-- Indexes for table `Answer_Papers`
+--
+ALTER TABLE `Answer_Papers`
+ ADD PRIMARY KEY (`question_id`,`sco_id`);
+
+--
 -- Indexes for table `Branch`
 --
 ALTER TABLE `Branch`
@@ -877,6 +926,12 @@ ALTER TABLE `Question_choice`
 --
 ALTER TABLE `Question_numerical`
  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Scoreboard`
+--
+ALTER TABLE `Scoreboard`
+ ADD PRIMARY KEY (`sco_id`);
 
 --
 -- Indexes for table `Students`
@@ -984,6 +1039,11 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 ALTER TABLE `Question_numerical`
 MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `Scoreboard`
+--
+ALTER TABLE `Scoreboard`
+MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `Subjects`
 --

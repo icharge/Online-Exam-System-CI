@@ -19,6 +19,7 @@
 					elseif ($answer_choice == "5") $answer = $choice5;
 					elseif ($answer_choice == "6") $answer = $choice6;
 
+					$enabled = true;
 					echo form_label('คำตอบ <span class="text-danger">*</span>', 'answer['.$question_id.']');
 					echo ((isset($choice1) && $choice1 != "") ? $lib->_makeChoiceComp($question_id, $choice1, 1, (($showAns)?($answer_choice == "1"?true:false):false) , $enabled) : "").
 					((isset($choice2) && $choice2 != "") ? $lib->_makeChoiceComp($question_id, $choice2, 2, (($showAns)?($answer_choice == "2"?true:false):false) , $enabled) : "").
@@ -33,6 +34,7 @@
 		<div class="clearfix"></div>
 <?php } elseif ($type == "boolean")
 				{
+					$enabled = true;
 					echo '<div class="col-md-8">';
 					echo form_label('คำตอบ <span class="text-danger">*</span>', 'answer['.$question_id.']');
 					echo $lib->_makeChoiceComp($question_id, '', 't', (($showAns)?(strtolower($answer_boolean)=="t"?true:false):false) ,$enabled).
