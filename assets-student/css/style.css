@@ -448,6 +448,7 @@ a {
 
 .course-item-small {
     margin-bottom: 30px;
+    height: 195px;
 }
 
     .course-item-small .inner {
@@ -455,6 +456,7 @@ a {
         padding: 8px;
         padding-bottom: 0;
         background: #fff;
+        height: 100%;
     }
 
     .course-item-small .info {

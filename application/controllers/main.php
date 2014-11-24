@@ -15,10 +15,11 @@ class Main extends CI_Controller {
 			$headerData['enableSlider'] = 1;
 			$coursesNum = $this->Courses->countCourseList();
 			$headerData['coursesNum'] = $coursesNum;
-
+			$coursesList = $this->Courses->getCourseList();
+			$data['coursesList'] = $coursesList;
 			$this->load->view('frontend/t_header_view', $headerData);
 
-			$this->load->view('frontend/index_view');
+			$this->load->view('frontend/index_view', $data);
 
 			$this->load->view('frontend/t_footer_view');
 		//} else {
