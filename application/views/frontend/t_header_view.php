@@ -19,8 +19,7 @@
 				<div class="span12">
 					<div id="logo">
 						<div class="inner">
-							<a href="index.html">
-								<img src="assets-student/img/logo.png" alt=""></a>
+							<?php echo anchor('', '<img src="assets-student/img/logo.png" alt="">'); ?>
 						</div>
 					</div>
 
@@ -33,8 +32,14 @@
 
 	</header>
 	<!-- header close -->
-<?php 
+<?php
+	$subheader['title'] = (isset($title)?$title:'');
+	$subheader['subtitle'] = (isset($subtitle)?$subtitle:'');
 	if (isset($enableSlider)) $this->load->view('frontend/t_slider_view');
+	else $this->load->view('frontend/t_subheader_view', $subheader);
+
+	if ((isset($statbar)?$statbar:false))
+	{
 ?>
 	<div class="call-to-action">
 		<div class="container">
@@ -51,3 +56,6 @@
 	</div>
 
 	<div class="clearfix"></div>
+<?php
+	}
+?>

@@ -13,6 +13,7 @@ class Main extends CI_Controller {
 	{
 		//if ($this->session->userdata('logged')) {
 			$headerData['enableSlider'] = 1;
+			$headerData['statbar'] = true;
 			$coursesNum = $this->Courses->countCourseList();
 			$headerData['coursesNum'] = $coursesNum;
 			$coursesList = $this->Courses->getCourseList();

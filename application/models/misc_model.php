@@ -159,10 +159,11 @@ class Misc_model extends CI_Model {
 		return (substr($haystack, -$length) === $needle);
 	}
 
-	function PaginationInit($baseurl, $total=0, $perpage=25, $numlink=3)
+	function PaginationInit($baseurl, $total=0, $perpage=25, $numlink=3, $configadd='')
 	{
 		if ($total == "") $total=0;
 		if ($perpage == "") $perpage=25;
+
 		$config['base_url'] = base_url().$this->config->item('index_page').'/'.$baseurl;
 		$config['total_rows'] = $total;
 		$config['per_page'] = $perpage;
@@ -188,6 +189,11 @@ class Misc_model extends CI_Model {
 		$config['cur_tag_close'] = '</a></li>';
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
+
+		if (is_array($configadd))
+		{
+			array_replace($config, $configadd);
+		}
 
 		return $this->pagination->initialize($config);
 	}

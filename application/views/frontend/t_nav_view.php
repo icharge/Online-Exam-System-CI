@@ -3,7 +3,7 @@
 						<li><a href="#">วิชา</a>
 							<ul>
 								<li><?php echo anchor('subject-list', 'รายการวิชาทั้งหมด'); ?></li>
-								<li><?php echo anchor('course-list', 'รายวิชาที่เปิดสอบ'); ?></li>
+								<li><?php echo anchor('courses', 'รายวิชาที่เปิดสอบ'); ?></li>
 							</ul>
 						</li>
 						<li><?php echo anchor('news', 'ข่าวสาร'); ?></li>

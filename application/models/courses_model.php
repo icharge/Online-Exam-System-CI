@@ -328,6 +328,17 @@ class Courses_model extends CI_Model {
 		return $query['scount'];
 	}
 
+	function countStudentInCourse($CourseId)
+	{
+		// SELECT count(stu_id) as countstd FROM `Student_Enroll` WHERE course_id = '1'
+		$cause['course_id'] = $CourseId;
+		$query = $this->db
+			->select('count(stu_id) as countstd')
+			->get_where('Student_Enroll', $cause)
+			->row_array();
+		return $query['countstd'];
+	}
+
 	function addStudentGroup($CourseId, $gname, $gdesc)
 	{
 		$data = array(

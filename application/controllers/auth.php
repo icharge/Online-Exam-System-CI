@@ -7,6 +7,7 @@ class Auth extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Users_model','Users');
 		$this->load->model('Courses_model', 'Courses');
+		$this->load->model('misc_model', 'misc');
 	}
 
 	public function index()
@@ -18,7 +19,9 @@ class Auth extends CI_Controller {
 	{
 		$coursesNum = $this->Courses->countCourseList();
 		$headerData['coursesNum'] = $coursesNum;
-
+		$headerData['statbar'] = true;
+		$headerData['title'] = "Authentication";
+		$headerData['subtitle'] = "การเข้าสู่ระบบ";
 		$this->load->view('frontend/t_header_view', $headerData);
 
 		$this->load->view('frontend/login_view');
@@ -31,7 +34,10 @@ class Auth extends CI_Controller {
 		# Load View
 		$coursesNum = $this->Courses->countCourseList();
 		$headerData['coursesNum'] = $coursesNum;
-
+		$headerData['statbar'] = true;
+		$headerData['title'] = "Authentication";
+		$headerData['subtitle'] = "การเข้าสู่ระบบ";
+		
 		$this->load->view('frontend/t_header_view', $headerData);
 
 		# Login Process
