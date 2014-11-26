@@ -192,7 +192,7 @@ class Misc_model extends CI_Model {
 
 		if (is_array($configadd))
 		{
-			array_replace($config, $configadd);
+			$config = array_replace($config, $configadd);
 		}
 
 		return $this->pagination->initialize($config);

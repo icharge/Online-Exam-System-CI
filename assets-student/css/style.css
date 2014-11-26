@@ -350,6 +350,7 @@ a {
     .inner > .hover span {
         display: block;
         padding: 20px;
+        cursor: default;
     }
 
 .lessons-list {

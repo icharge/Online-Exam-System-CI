@@ -43,7 +43,7 @@ class Courses extends CI_Controller {
 
 		$this->misc->PaginationInit(
 			'courses?q='.$this->input->get('q'),
-			$data['total'],$data['perpage'],
+			$data['total'],$data['perpage'], 3,
 			$paginconfig
 			);
 
@@ -55,7 +55,7 @@ class Courses extends CI_Controller {
 	}
 	public function view($courseId)
 	{
-		
+
 	}
 
 }
