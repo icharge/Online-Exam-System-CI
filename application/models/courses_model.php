@@ -445,7 +445,25 @@ class Courses_model extends CI_Model {
 		}
 	}
 
-	
+	function getUpcomingTest($stdId)
+	{
+		/*
+		SELECT * FROM Student_Enroll se
+		LEFT JOIN Exam_papers ep on se.course_id = ep.course_id
+		WHERE stu_id = '$stdId' and starttime >= now()
+		*/
+		$query = $this->db
+			->select("*")
+			->from('Student_Enroll')
+			->join('Exam_Papers', 'Exam_Papers.course_id = Student_Enroll.course_id', 'left')
+			->where(array(
+				'stu_id' => $stdId, 
+				'starttime' => 'now()'
+			))
+			->get()
+			->row_array();
+		return $query;
+	}
 
 }
 

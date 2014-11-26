@@ -53,6 +53,12 @@ class Courses extends CI_Controller {
 
 		$this->load->view('frontend/t_footer_view');
 	}
+
+	public function upcoming()
+	{
+		
+	}
+
 	public function view($courseId)
 	{
 
