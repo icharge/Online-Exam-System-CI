@@ -6,6 +6,7 @@
 				foreach ($courseslist as $item) {
 					$desc = strip_tags($item['description']);
 					$countstd = $this->courses->countStudentInCourse($item['course_id']);
+					$regbtn = anchor('courses/view/'.$item['course_id'], 'ลงทะเบียน', 'class="btn btn-sm btn-info"');
 					echo <<<HTML
 				<div class="span3 course-item">
 					<div class="inner">
@@ -18,12 +19,8 @@
 							<span class="author">{$item['shortname']}</span>
 							<div class="clearfix"></div>
 							<div class="user-count"><i class="icon-user"></i>{$countstd}</div>
-							<div class="rating">
-								<span class="star-on"></span>
-								<span class="star-on"></span>
-								<span class="star-on"></span>
-								<span class="star-on"></span>
-								<span class="star-on"></span>
+							<div class="rating" style="margin-top: -8px">
+								{$regbtn}
 							</div>
 							<div class="clearfix"></div>
 						</div>

@@ -10,14 +10,14 @@ class Courses extends CI_Controller {
 		$this->load->model('misc_model', 'misc');
 
 		// Permissions List for this Class
-		$perm = array('admin', 'teacher', 'student');
+		//$perm = array('admin', 'teacher', 'student');
 		// Check
-		if ($this->Users->_checkLogin())
+		/*if ($this->Users->_checkLogin())
 		{
 			if ( ! $this->Users->_checkRole($perm)) redirect('main');
 		} else {
 			redirect('auth/login');
-		}
+		}*/
 	}
 
 	public function index()
@@ -52,6 +52,10 @@ class Courses extends CI_Controller {
 		$this->load->view('frontend/courses_view', $data);
 
 		$this->load->view('frontend/t_footer_view');
+	}
+	public function view($courseId)
+	{
+		
 	}
 
 }
