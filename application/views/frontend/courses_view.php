@@ -9,7 +9,7 @@
 					$regbtn = anchor('courses/view/'.$item['course_id'], 'ลงทะเบียน', 'class="btn btn-sm btn-info"');
 					$link = anchor('courses/view/'.$item['course_id'], $item['name']);
 					echo <<<HTML
-				<div class="span3 course-item">
+				<div class="span3 course-item" data-href="{$this->misc->getHref('courses/view/'.$item['course_id'])}">
 					<div class="inner">
 						<div class="hover">
 							<span>{$desc}</span>

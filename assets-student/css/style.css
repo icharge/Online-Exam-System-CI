@@ -1878,3 +1878,28 @@ h5, h6 {
   padding: 0 6px;
   font-size: 10.5px;
 }
+
+
+/*
+ * BlockQuote Fix
+ */
+.box .box-body blockquote p {
+    margin: 0;
+    line-height: 1.6em;
+    font-family: "Open Sans", Arial;
+}
+.box .box-body blockquote span {
+    display: inline;
+}
+
+/*
+ * Exam paper
+ */
+.exampaper {
+    border: solid 1px #C5C5C5;
+    background: #fff;
+    margin: 20px 10px 60px 10px;
+    box-shadow: 0 12px 49px #989898;
+    padding-top: 30px;
+    padding-bottom: 60px;
+}

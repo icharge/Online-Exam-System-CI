@@ -4,7 +4,7 @@
 			<div class="span1">
 				
 			</div>
-			<div class="span10 course-item">
+			<div class="col-md-10 exampaper">
 				<div class="inner">
 					<div class="row">
 						<div class="col-sm-10 col-sm-offset-1">

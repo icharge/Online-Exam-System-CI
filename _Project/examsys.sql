@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 29, 2014 at 07:39 AM
+-- Generation Time: Nov 29, 2014 at 08:39 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -174,8 +174,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('3a80acb831cdab80065bb8d8b0bc9869', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417242909, 'a:13:{s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}'),
-('793f8b7fb4c8fa1f3ab1d234d1ae7a5e', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1416981043, 'a:14:{s:9:"user_data";s:0:"";s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}');
+('669028f1a8f323f431aaefa3a4bc2049', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417289863, ''),
+('c59619eac6e6097873126a9964b96462', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417289855, '');
 
 -- --------------------------------------------------------
 
@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
   `name` varchar(40) NOT NULL,
   `description` text,
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `Course_Students_group`
@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
 INSERT INTO `Course_Students_group` (`group_id`, `name`, `description`, `course_id`) VALUES
 (1, 'Sec 1', NULL, 1),
 (9, 'Sec 2', 'กลุ่มเพิ่มเติม', 1),
-(10, 'Group1', '', 3);
+(11, 'group1', '', 2);
 
 -- --------------------------------------------------------
 
@@ -282,9 +282,9 @@ INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `startti
 (2, 'ชุด A', 'desc', 'r', '2014-10-14 22:06:00', '2014-10-14 22:06:00', 1),
 (3, 'Final', 'ปลายภาค', 'ห้ามลอก', '2014-10-20 10:00:00', '2014-10-20 15:00:00', 1),
 (4, 'ชุด B', 'บท 4', 'ห้ามลอก\nนำชีทเข้าไปได้', '2014-10-16 12:00:00', '2014-10-16 14:00:00', 1),
-(5, 'สอบก่อนเรียน', '', '', '2014-10-23 15:30:00', '2014-10-23 15:45:00', 3),
-(6, 'ชุด  ก', '', '', '2014-11-10 01:05:00', '2014-11-10 10:20:00', 2),
-(7, 'ชุด ข', 'ไม่ซ้ำ ก', '', '2014-11-10 00:23:00', '2014-11-10 00:23:00', 2);
+(5, 'สอบก่อนเรียน', '', '', '2014-12-08 15:30:00', '2014-12-08 15:45:00', 3),
+(6, 'ชุด  ก', '', '', '2014-12-10 09:00:00', '2014-12-10 10:20:00', 2),
+(7, 'ชุด ข', 'ไม่ซ้ำ ก', '', '2014-12-10 09:20:00', '2014-12-10 10:30:00', 2);
 
 -- --------------------------------------------------------
 
@@ -656,8 +656,8 @@ CREATE TABLE IF NOT EXISTS `Student_Enroll` (
 
 INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('54310104', '1', 1),
-('54310104', '3', 10),
-('54311095', '3', 10),
+('54310104', '2', 11),
+('54311095', '2', 11),
 ('57700188', '1', 1),
 ('57700194', '1', 9),
 ('57700197', '1', 9),
@@ -1019,7 +1019,7 @@ MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `Course_Students_group`
 --
 ALTER TABLE `Course_Students_group`
-MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `Exam_Papers`
 --
