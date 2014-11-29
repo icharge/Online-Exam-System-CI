@@ -8,7 +8,7 @@
 					// $regbtn = anchor('courses/view/'.$item['course_id'], 'ลงทะเบียน', 'class="btn btn-sm btn-info"');
 					// $link = anchor('courses/view/'.$item['course_id'], $item['name']);
 					echo <<<HTML
-				<div class="span7 course-item" data-href="{$this->misc->getHref('student/exam/'.$item['paper_id'])}">
+				<div class="span7 course-item" data-href="{$this->misc->getHref('student/exam/doexam/'.$item['paper_id'])}">
 					<div class="inner" style="padding: 0;">
 						<div class="picbox">
 							<img src="assets-student/img/pic-blank-1.gif" data-original="img/clipboard.png" alt="">

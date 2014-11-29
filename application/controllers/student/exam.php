@@ -21,10 +21,21 @@ class Exam extends CI_Controller {
 
 	public function index()
 	{
+		
+	}
+
+	public function doexam($paperId)
+	{
 		// Load Library
-		$this->load->library('Fullexampaper', array('paperid'=>7));
+		$this->load->library('Fullexampaper', array('paperid'=>$paperId));
 		// Usage
 		//echo $this->fullexampaper->createExamPaper();
+
+		/*
+		   ควรเช็คว่าถึงเวลาสอบหรือไม่
+		   และได้ลงวิชาไว้หรือเปล่า
+		   ในที่นี้อาจไม่ทัน  จึงยังไม่ได้ Implement
+		*/
 		
 		$coursesNum = $this->Courses->countCourseList();
 		$headerData['coursesNum'] = $coursesNum;
