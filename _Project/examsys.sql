@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 24, 2014 at 12:15 PM
+-- Generation Time: Nov 29, 2014 at 07:39 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -40,6 +40,21 @@ left join students on (users.id = students.id)
 		RETURN @fullname;
     ELSE
     	RETURN "false";
+    END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `getSubjectIdFromCourseId`(`CourseId` INT) RETURNS int(5)
+    NO SQL
+BEGIN
+Declare ret1 INT(5);
+	SELECT subject_id into @ret1
+from Courses
+    where course_id = CourseId;
+
+	IF FOUND_ROWS() > 0 THEN
+		RETURN @ret1;
+    ELSE
+    	RETURN -1;
     END IF;
 END$$
 
@@ -159,7 +174,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('d98eed144456634e4f3fcd685d543479', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1416826679, 'a:9:{s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
+('3a80acb831cdab80065bb8d8b0bc9869', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417242909, 'a:13:{s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}'),
+('793f8b7fb4c8fa1f3ab1d234d1ae7a5e', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1416981043, 'a:14:{s:9:"user_data";s:0:"";s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -262,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers` (
 --
 
 INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `starttime`, `endtime`, `course_id`) VALUES
-(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-10-03 09:00:00', '2014-10-03 09:30:00', 1),
+(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-02 09:00:00', '2014-12-02 09:30:00', 1),
 (2, 'ชุด A', 'desc', 'r', '2014-10-14 22:06:00', '2014-10-14 22:06:00', 1),
 (3, 'Final', 'ปลายภาค', 'ห้ามลอก', '2014-10-20 10:00:00', '2014-10-20 15:00:00', 1),
 (4, 'ชุด B', 'บท 4', 'ห้ามลอก\nนำชีทเข้าไปได้', '2014-10-16 12:00:00', '2014-10-16 14:00:00', 1),

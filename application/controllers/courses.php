@@ -56,7 +56,18 @@ class Courses extends CI_Controller {
 
 	public function upcoming()
 	{
-		
+		// Must Check auth
+
+		$headerData['statbar'] = false;
+		$headerData['title'] = "Upcoming";
+		$headerData['subtitle'] = "วิชาที่จะมีสอบ";
+		$this->load->view('frontend/t_header_view', $headerData);
+
+		$stdId = $this->session->userdata('uid');
+		$data['upcomingList'] = $this->courses->getUpcomingTest($stdId);
+		$this->load->view('frontend/courses_upcoming_view', $data);
+
+		$this->load->view('frontend/t_footer_view');
 	}
 
 	public function view($courseId)

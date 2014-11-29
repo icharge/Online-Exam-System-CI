@@ -448,20 +448,34 @@ class Courses_model extends CI_Model {
 	function getUpcomingTest($stdId)
 	{
 		/*
+		 ธรรมดา
 		SELECT * FROM Student_Enroll se
 		LEFT JOIN Exam_papers ep on se.course_id = ep.course_id
 		WHERE stu_id = '$stdId' and starttime >= now()
+
+		 พร้อมรายละเอียดวิชา
+		SELECT stu_id,group_id,paper_id,se.course_id,title as papertitle,ep.description as paperdesc,
+			rules,starttime,endtime,subject_id,code,name as subjectname,shortname,s.name as subjectdesc,status
+		FROM Student_Enroll se
+		LEFT JOIN Exam_papers ep on se.course_id = ep.course_id
+		LEFT JOIN Subjects s on s.subject_id = getSubjectIdFromCourseId(se.course_id)
+		WHERE stu_id = '$stdId' and starttime >= now()
 		*/
+		$select = array('stu_id','group_id','paper_id','Student_Enroll.course_id',
+			'title as papertitle','Exam_Papers.description as paperdesc','rules','starttime','endtime',
+			'subject_id','code','name as subjectname','shortname','Subjects.name as subjectdesc','status');
 		$query = $this->db
-			->select("*")
+			->select($select)
 			->from('Student_Enroll')
 			->join('Exam_Papers', 'Exam_Papers.course_id = Student_Enroll.course_id', 'left')
+			->join('Subjects', 'Subjects.subject_id = getSubjectIdFromCourseId(Student_Enroll.course_id)', 'left')
 			->where(array(
 				'stu_id' => $stdId, 
-				'starttime' => 'now()'
+				'starttime >=' => date('Y-m-d H:i:s',now())
 			))
 			->get()
-			->row_array();
+			->result_array();
+		//echo $this->db->last_query();
 		return $query;
 	}
 
