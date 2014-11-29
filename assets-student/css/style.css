@@ -333,6 +333,14 @@ a {
 /*-------------------------------------------------- */
 .course-list .course-item {
     margin-bottom: 30px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.course-list .course-item .inner .picbox {
+    float: left;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .inner > .hover {
@@ -350,7 +358,7 @@ a {
     .inner > .hover span {
         display: block;
         padding: 20px;
-        cursor: default;
+        cursor: pointer;
     }
 
 .lessons-list {
@@ -410,6 +418,7 @@ a {
     .course-item .inner {
         padding: 8px;
         background: #fff;
+        cursor: pointer;
     }
 
     .course-item .info {

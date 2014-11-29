@@ -46,6 +46,22 @@
 					checkboxClass: 'icheckbox_minimal-red',
 					radioClass: 'iradio_minimal-red'
 			});
+
+			// Course-item link
+			$('.course-list').delegate('.course-item', 'mousedown', function(e) {
+				var click = e.which;
+				var url = $(this).attr('data-href');
+				if(url){
+					if(click == 1){
+						window.location.href = url;
+					}
+					else if(click == 2){
+						window.open(url, '_blank');
+						window.focus();
+					}
+					return true;
+				}
+			});
 		});
 	</script>
 </body>
