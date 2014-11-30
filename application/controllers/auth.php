@@ -106,7 +106,7 @@ class Auth extends CI_Controller {
 							'logged' => true
 						);
 						$this->session->set_userdata($data);
-						redirect('student');
+						redirect('');
 						break;
 
 					case 'notfound':
