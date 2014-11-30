@@ -48,7 +48,7 @@
 			});
 
 			// Course-item link
-			$('.course-list').delegate('.course-item', 'mousedown', function(e) {
+			$('.course-list').delegate('.course-item', 'mouseup', function(e) {
 				var click = e.which;
 				var url = $(this).attr('data-href');
 				if(url){

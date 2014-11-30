@@ -4,9 +4,16 @@
 			<div class="row course-list">
 			<?php
 				foreach ($upcomingList as $item) {
-					
-					// $regbtn = anchor('courses/view/'.$item['course_id'], 'ลงทะเบียน', 'class="btn btn-sm btn-info"');
-					// $link = anchor('courses/view/'.$item['course_id'], $item['name']);
+					// get Teachers
+					$teachers = $this->courses->getTeacherlist($item['course_id']);
+					$htmlteas = "";
+					foreach ($teachers as $teac) {
+						if ($htmlteas == "") $htmlteas .= '<i class="icon-user"></i>';
+						else $htmlteas .= '<i class="icon-user" style="visibility: hidden"></i>';
+						$htmlteas .= "$teac[name] $teac[lname]<br>";
+					}
+
+					// Extract date/time
 					list($startdate, $starttime) = explode(' ', $item['starttime']);
 					list($enddate, $endtime) = explode(' ', $item['endtime']);
 					$fulldate = $this->misc->getFullDateTH($startdate)." ".$starttime;
@@ -24,7 +31,7 @@
 						<div class="picbox">
 							<img src="assets-student/img/pic-blank-1.gif" data-original="img/clipboard.png" alt="">
 						</div>
-						<div class="col-md-8" style="margin-left: 0; padding: 0;float: left;">
+						<div class="col-md-8" style="margin-left: 0; margin-bottom: 5px; padding: 0;float: left;">
 							<div class="info">
 								<h4>{$item['code']} {$item['subjectname']}</h4>
 								<span class="author">
@@ -32,7 +39,8 @@
 								</span>
 								<div class="clearfix"></div>
 								<div class="user-count">
-									<i class="icon-calendar"></i>{$fulldate}
+									{$htmlteas}
+									<br><i class="icon-calendar"></i>{$fulldate}
 									<small>(อีก {$fulldayRemain})</small>
 									<br><i class="icon-time"></i>{$datediff}
 								</div>

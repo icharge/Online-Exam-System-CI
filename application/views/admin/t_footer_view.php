@@ -62,7 +62,7 @@
 	<!-- TR Href -->
 	<script>
 	$(function() {
-		$('body').on('mousedown', 'tr[href]', function(e){
+		$('body').on('mouseup', 'tr[href]', function(e){
 			var click = e.which;
 			var url = $(this).attr('href');
 			if(url){

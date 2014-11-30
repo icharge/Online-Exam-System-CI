@@ -76,7 +76,7 @@
 			});
 		};
 		
-		$('body').delegate('tr[href]', 'mousedown', function(e){
+		$('body').delegate('tr[href]', 'mouseup', function(e){
 			var click = e.which;
 			var url = $(this).attr('href');
 			if(url){

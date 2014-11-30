@@ -437,11 +437,13 @@ a {
 
     .course-item h4 {
         margin-bottom: 0;
+        font-weight: 400;
     }
 
     .course-item .author {
         display: block;
         margin-bottom: 10px;
+        word-wrap: break-word;
     }
 
     .course-item .user-count {
