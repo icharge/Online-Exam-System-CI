@@ -22,6 +22,7 @@ class Fullexampaper
 		$this->load = $this->ci->load;
 		// $this->ci->load->model('paperexam_model', 'paperexam');
 		$this->load->model('misc_model', 'misc');
+		$this->load->model('courses_model', 'courses');
 
 		// Default value
 		$this->paperId = '';
@@ -74,6 +75,8 @@ class Fullexampaper
 		$data['lib'] = $this;
 		$data['paperData'] = $paperData;
 		$data['partData'] = $partData;
+		$courseData = $this->ci->courses->getCourseById($paperData['course_id']);
+		$data['courseData'] = $courseData;
 		$data['showAns'] = $this->showAns;
 		$data['enabled'] = $this->enabled;
 		$html .= $this->load->view('exampaper/'.$this->template.'/paper_view', $data, true);

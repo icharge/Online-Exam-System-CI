@@ -42,7 +42,10 @@ class Exam extends CI_Controller {
 
 		$this->load->view('frontend/t_header_view', $headerData);
 		
-		$this->load->view('student/exampaper_view');
+		$courseId = $this->Courses->getCourseIdByPaperId($paperId);
+		$courseData = $this->Courses->getCourseById($courseId);
+		$data['courseData'] = $courseData;
+		$this->load->view('student/exampaper_view', $data);
 
 		$this->load->view('frontend/t_footer_view');
 	}

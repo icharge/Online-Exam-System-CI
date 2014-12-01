@@ -33,10 +33,10 @@ class Courses extends CI_Controller {
 		// SET Default Per page
 		$data['perpage'] = '8';
 
-		$data['total'] = $this->courses->countCourseList($this->input->get('q'));
+		$data['total'] = $this->courses->countCourseList($this->input->get('q'), 1);
 		$data['courseslist'] = $this->courses->getCourseList($this->input->get('q'),
 			$data['perpage'],
-			$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
+			$this->misc->PageOffset($data['perpage'],$this->input->get('p')), 1);
 
 		$paginconfig['full_tag_open'] = '<div class="pagination text-center"><ul>';
 		$paginconfig['full_tag_close'] = '</ul></div>';

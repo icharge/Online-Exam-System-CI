@@ -48,7 +48,7 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
-	function getCourseList($keyword='', $perpage=0, $offset=0)
+	function getCourseList($keyword='', $perpage=0, $offset=0, $visible="*")
 	{
 // SELECT course_id, year, tea_id, startdate, name, shortname, description, visible, enabled
 // FROM Course c
@@ -60,9 +60,12 @@ class Courses_model extends CI_Model {
 		settype($perpage, "integer");
 
 		if ($perpage > 0) $this->db->limit($perpage, $offset);
+		if ($visible != "*") $cause = array('visible' => $visible);
+		else $cause = array('visible >=' => '0');
 		$query = $this->db
 			// ->select($fields)
 			->like("CONCAT(code,year,name,shortname,description)",$keyword,'both')
+			->where($cause)
 			->order_by('year','desc')
 			->order_by('code','asc')
 			->get('courseslist_view')
@@ -129,14 +132,17 @@ class Courses_model extends CI_Model {
 		return $options;
 	}
 
-	function countCourseList($keyword='')
+	function countCourseList($keyword='', $visible="*")
 	{
 		$fields = array(
 			'count(*) as scount'
 		);
+		if ($visible != "*") $cause = array('visible' => $visible);
+		else $cause = array('visible >=' => '0');
 		$query = $this->db
 			->select($fields)
 			->like("CONCAT(code,year,name,shortname,description)",$keyword,'both')
+			->where($cause)
 			->get('courseslist_view')
 			->row_array();
 		return $query['scount'];
@@ -147,8 +153,17 @@ class Courses_model extends CI_Model {
 		$cause = array('course_id' => $CourseId);
 		$query = $this->db
 			->get_where('courseslist_view', $cause)
-			->result_array();
-		return $query[0];
+			->row_array();
+		return $query;
+	}
+
+	function getCourseIdByPaperId($paperid)
+	{
+		$cause = array('paper_id' => $paperid);
+		$query = $this->db
+			->get_where('Exam_Papers', $cause)
+			->row_array();
+		return $query['course_id'];
 	}
 
 	function addCourse($CourseData)
