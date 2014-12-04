@@ -643,8 +643,19 @@ HTML;
 		form.find("input[type='checkbox']").iCheck('uncheck');
 		form.find("textarea").val('');
 		form.find("input[name='paper_id']").val(paperid);
+	});
 
+	$('.paper-list').delegate('.list-group-item .optionlinks a.edit', 'click', function(e) {
+		e.preventDefault();
+		var paperid = $(this).parent().parent().attr('data-paperid');
+		$('#modaladdpart').modal('show');
 
+		// setting values
+		var form = $("#modaladdpart form");
+		form.find("input[type='text']").val('');
+		form.find("input[type='checkbox']").iCheck('uncheck');
+		form.find("textarea").val('');
+		form.find("input[name='paper_id']").val(paperid);
 	});
 
 HTML;

@@ -389,11 +389,11 @@ HTML;
 														<a href="#add" class="add">
 															<i class="fa fa-plus"></i>
 														</a>
-														<a href="#edit">
+														<a href="#edit" class="edit">
 															<i class="fa fa-edit"></i>
 														</a>
 														{$fullpagelink}
-														<a href="#remove" class="text-danger">
+														<a href="#remove" class="remove text-danger">
 															<i class="fa fa-trash-o"></i>
 														</a>
 													</div>
