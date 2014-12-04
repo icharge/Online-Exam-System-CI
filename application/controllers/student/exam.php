@@ -7,6 +7,7 @@ class Exam extends CI_Controller {
 		parent::__construct();
 		$this->load->model('users_model', 'Users');
 		$this->load->model('courses_model', 'Courses');
+		$this->load->model('examprocess_model', 'examproc');
 
 		// Permissions List for this Class
 		$perm = array('admin', 'teacher', 'student');
@@ -57,10 +58,11 @@ class Exam extends CI_Controller {
 		// Check perm
 		// Check Student ID that enroll yet? or can exam this course?
 		// ...
-
+		$courseid = "";
+		$paperid = "";
 		$answers = $this->input->post('answer');
-		var_dump($answers);
-		
+		$examproc = $this->examproc->addScoreboard($this->session->userdata('uid'), $courseid, $paperid, $answers);
+		echo $examproc;
 	}
 
 }

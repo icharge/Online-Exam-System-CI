@@ -18,14 +18,71 @@ class Examprocess_model extends CI_Model {
 		return $this->router->method;
 	}
 
-	function countCorrectAnswer(sco_id)
+	function getCorrectAnswer($sco_id)
 	{
 		/*
-		SELECT question_id,sco_id, answer, getAnswer(question_id) as correct 
-		FROM `Answer_Papers` 
+		SELECT question_id,sco_id, answer
+		FROM Answer_Papers
 		WHERE answer = getAnswer(question_id)
 		*/
-		
+		$query = $this->db
+			->select(array('question_id','sco_id','answer'))
+			->get_where('Answer_Papers', array('answer' => 'getAnswer(question_id)'))
+			->result_array();
+		return $query->num_rows();
+	}
+
+	/*
+	 * addScoreboard
+	 * เพิ่มคะแนนลง DB
+	 * --------------------------
+	 * uid - รหัสนิสิต
+	 * courseid - รหัสวิชาเปิดสอบ
+	 * paperid - รหัสชุดข้อสอบ
+	 * answers - ข้อมูลคำตอบเป็น Array
+	 * score - คะแนนรวม
+	 */
+	function addScoreboard($uid, $courseid, $paperid, $answers, $score=0, $max=null, $min=null)
+	{
+		$dataScoreboard = array(
+			'stu_id' => $uid,
+			'course_id' => $courseid,
+			'paper_id' => $paperid,
+			'Score' => $score,
+			'Max' => $max,
+			'Min' => $min,
+		);
+		$query = $this->db->insert('Scoreboard', $dataScoreboard);
+		$newid = $this->db->insert_id();
+
+		$answerData = array();
+		foreach ($answers as $key => $value) {
+			echo "$key : $value <br>";
+			$data = array(
+				'question_id' => $key,
+				'sco_id' => $newid,
+				'answer' => $value,
+			);
+			array_push($answerData, $data);
+		}
+
+		if ($this->addAnswers($answerData))
+		{
+			$score = $this->getCorrectAnswer($newid);
+		}
+
+		$this->db->update('Scoreboard', array('score'=>$score), array('sco_id'=>$newid));
+
+		return "completed";
+	}
+
+	function addAnswers($data)
+	{
+		// Check error ???
+
+		$query = $this->db->insert_batch('Answer_Papers', $data);
+
+		return true;
 	}
 
 
