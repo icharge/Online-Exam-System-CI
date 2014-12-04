@@ -1079,7 +1079,7 @@ HTML;
 			'enabled'=>false
 			));
 
-		$data['paperId'] = $paperid;
+		$data['paperid'] = $paperid;
 
 		// Set page desc
 		$data['pagetitle'] = "ชุดข้อสอบ";

@@ -46,6 +46,7 @@ class Exam extends CI_Controller {
 		$courseId = $this->Courses->getCourseIdByPaperId($paperId);
 		$courseData = $this->Courses->getCourseById($courseId);
 		$data['courseData'] = $courseData;
+		$data['paperid'] = $paperId;
 		$data['uid'] = $this->session->userdata('uid');
 		$data['formlink'] = "student/exam/submit";
 		$this->load->view('student/exampaper_view', $data);
@@ -58,8 +59,8 @@ class Exam extends CI_Controller {
 		// Check perm
 		// Check Student ID that enroll yet? or can exam this course?
 		// ...
-		$courseid = "";
-		$paperid = "";
+		$courseid = $this->input->post('course');
+		$paperid = $this->input->post('paper');
 		$answers = $this->input->post('answer');
 		$examproc = $this->examproc->addScoreboard($this->session->userdata('uid'), $courseid, $paperid, $answers);
 		echo $examproc;

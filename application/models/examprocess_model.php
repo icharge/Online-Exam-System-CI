@@ -27,8 +27,10 @@ class Examprocess_model extends CI_Model {
 		*/
 		$query = $this->db
 			->select(array('question_id','sco_id','answer'))
-			->get_where('Answer_Papers', array('answer' => 'getAnswer(question_id)'))
-			->result_array();
+			->where('answer' ,'getAnswer(question_id)', false)
+			->where('sco_id' ,$sco_id)
+			->get('Answer_Papers');
+		//die($this->db->last_query());
 		return $query->num_rows();
 	}
 
@@ -57,7 +59,7 @@ class Examprocess_model extends CI_Model {
 
 		$answerData = array();
 		foreach ($answers as $key => $value) {
-			echo "$key : $value <br>";
+			//echo "$key : $value <br>";
 			$data = array(
 				'question_id' => $key,
 				'sco_id' => $newid,
@@ -73,7 +75,7 @@ class Examprocess_model extends CI_Model {
 
 		$this->db->update('Scoreboard', array('score'=>$score), array('sco_id'=>$newid));
 
-		return "completed";
+		return "score : $score completed";
 	}
 
 	function addAnswers($data)

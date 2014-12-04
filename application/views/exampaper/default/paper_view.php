@@ -14,6 +14,8 @@
 		'method' => 'post'
 		);
 	echo form_open($formlink, $attr);
+	echo form_hidden('course', $courseData['course_id']);
+	echo form_hidden('paper', $paperid);
 ?>
 	<div class="panel-group exampapergroup" id="accordion" role="tablist" aria-multiselectable="true">
 <?php
