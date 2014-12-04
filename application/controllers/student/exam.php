@@ -28,7 +28,7 @@ class Exam extends CI_Controller {
 	public function doexam($paperId)
 	{
 		// Load Library
-		$this->load->library('Fullexampaper', array('paperid'=>$paperId));
+		$this->load->library('Fullexampaper', array('paperid'=>$paperId, 'useForm'=>true));
 		// Usage
 		//echo $this->fullexampaper->createExamPaper();
 

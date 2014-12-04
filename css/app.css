@@ -584,3 +584,19 @@ input[type=text].date {
 .ui-sortable-helper {
 	box-shadow: 0 10px 15px rgba(165, 165, 165, 0.68);
 }
+
+.exampapergroup .question-item:last-child {
+	margin-bottom: 0;
+}
+.exampapergroup .panel {
+	background-color: #f0f0f0;
+}
+
+.exampapergroup .panel-heading {
+	padding: 0;
+}
+
+.exampapergroup .panel-title > a {
+	display: block;
+	padding: 10px 15px;
+}

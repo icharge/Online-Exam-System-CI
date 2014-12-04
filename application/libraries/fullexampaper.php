@@ -14,6 +14,7 @@ class Fullexampaper
 	private $template;
 	private $showAns;
 	private $enabled;
+	private $useForm;
 
 	public function __construct($param = array())
 	{
@@ -50,6 +51,10 @@ class Fullexampaper
 				$this->enabled = $param['enabled'];
 			else
 				$this->enabled = true;
+			if (isset($param['useForm']))
+				$this->useForm = $param['useForm'];
+			else
+				$this->useForm = false;
 		}
 
 	}
@@ -79,6 +84,7 @@ class Fullexampaper
 		$data['courseData'] = $courseData;
 		$data['showAns'] = $this->showAns;
 		$data['enabled'] = $this->enabled;
+		$data['useForm'] = $this->useForm;
 		$html .= $this->load->view('exampaper/'.$this->template.'/paper_view', $data, true);
 
 		return $html;
@@ -102,11 +108,14 @@ class Fullexampaper
 			->result_array();
 	}
 
-	function _loadQuestion($partId)
+	function _loadQuestion($partId, $random=0)
 	{
 		if ($partId == '') return "Failed";
 		else
 		{
+			if ($random == 1) $sortby = 'RANDOM';
+			else $sortby = 'asc';
+
 			$query = $this->db
 				->select('*')
 				->from('question_detail_list')
@@ -114,8 +123,10 @@ class Fullexampaper
 					'paper_id' => $this->paperId,
 					'part_id' => $partId,
 				))
+				->order_by('no',$sortby)
 				->get()
 				->result_array();
+			// echo $this->db->last_query();
 			return $query;
 		}
 		

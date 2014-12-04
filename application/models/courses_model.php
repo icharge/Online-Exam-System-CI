@@ -488,6 +488,7 @@ class Courses_model extends CI_Model {
 				'stu_id' => $stdId, 
 				'starttime >=' => date('Y-m-d H:i:s',now())
 			))
+			->order_by('starttime','asc')
 			->get()
 			->result_array();
 		//echo $this->db->last_query();

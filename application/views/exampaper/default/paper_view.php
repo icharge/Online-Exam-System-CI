@@ -8,14 +8,17 @@
 	</h3>
 
 <?php
-	$attr = array(
-		'name' => 'examfrm',
-		'role' => 'form',
-		'method' => 'post'
-		);
-	echo form_open($formlink, $attr);
-	echo form_hidden('course', $courseData['course_id']);
-	echo form_hidden('paper', $paperid);
+	if ($useForm)
+	{
+		$attr = array(
+			'name' => 'examfrm',
+			'role' => 'form',
+			'method' => 'post'
+			);
+		echo form_open($formlink, $attr);
+		echo form_hidden('course', $courseData['course_id']);
+		echo form_hidden('paper', $paperid);
+	}
 ?>
 	<div class="panel-group exampapergroup" id="accordion" role="tablist" aria-multiselectable="true">
 <?php
@@ -34,7 +37,8 @@
 			<div id="collapse{$partItem['no']}" class="panel-collapse collapse{$firstchild}" role="tabpanel" aria-labelledby="heading{$partItem['no']}">
 				<div class="panel-body">
 html;
-		$questData = $lib->_loadQuestion($partItem['part_id']);
+		$israndom = ($partItem['israndom']=='1'?true:false);
+		$questData = $lib->_loadQuestion($partItem['part_id'], $israndom);
 		
 		foreach ($questData as $questItem) {
 			$questItem['number'] = $count++;
@@ -51,8 +55,11 @@ html;
 	</div>
 
 
-<?php 
-	echo form_submit('submit', 'ส่งข้อสอบ', 'class="btn btn-primary"');
-	echo form_close();
+<?php
+	if ($useForm)
+	{
+		echo form_submit('submit', 'ส่งข้อสอบ', 'class="btn btn-primary"');
+		echo form_close();
+	}
 ?>
 </div>
