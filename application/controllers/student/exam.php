@@ -45,9 +45,22 @@ class Exam extends CI_Controller {
 		$courseId = $this->Courses->getCourseIdByPaperId($paperId);
 		$courseData = $this->Courses->getCourseById($courseId);
 		$data['courseData'] = $courseData;
+		$data['uid'] = $this->session->userdata('uid');
+		$data['formlink'] = "student/exam/submit";
 		$this->load->view('student/exampaper_view', $data);
 
 		$this->load->view('frontend/t_footer_view');
+	}
+
+	public function submit()
+	{
+		// Check perm
+		// Check Student ID that enroll yet? or can exam this course?
+		// ...
+
+		$answers = $this->input->post('answer');
+		var_dump($answers);
+		
 	}
 
 }

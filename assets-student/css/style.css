@@ -1916,3 +1916,12 @@ h5, h6 {
     padding-top: 30px;
     padding-bottom: 60px;
 }
+
+.exampapergroup .panel-heading {
+    padding: 0;
+}
+
+.exampapergroup .panel-title > a {
+    display: block;
+    padding: 10px 15px;
+}

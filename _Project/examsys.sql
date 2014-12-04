@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 29, 2014 at 08:39 PM
+-- Generation Time: Dec 04, 2014 at 08:53 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -24,6 +24,22 @@ DELIMITER $$
 --
 -- Functions
 --
+CREATE DEFINER=`root`@`localhost` FUNCTION `getAnswer`(`Qid` INT) RETURNS text CHARSET utf8
+    NO SQL
+BEGIN
+	DECLARE result text;
+	SELECT IFNULL(IFNULL(answer_choice,answer_numeric),answer_boolean) as answer
+    into @result
+from question_list
+    where question_id = Qid;
+
+	IF FOUND_ROWS() > 0 THEN
+		RETURN @result;
+    ELSE
+    	RETURN "false";
+    END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `getNameFromUid`(`Uid` INT) RETURNS varchar(100) CHARSET utf8
     NO SQL
 BEGIN
@@ -115,7 +131,12 @@ CREATE TABLE IF NOT EXISTS `Answer_Papers` (
 --
 
 INSERT INTO `Answer_Papers` (`question_id`, `sco_id`, `answer`) VALUES
-(15, 1, '2');
+(4, 1, '1'),
+(5, 1, 't'),
+(6, 1, 't'),
+(7, 1, '2'),
+(8, 1, '4'),
+(13, 1, 'xxxxx');
 
 -- --------------------------------------------------------
 
@@ -174,8 +195,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('669028f1a8f323f431aaefa3a4bc2049', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417289863, ''),
-('c59619eac6e6097873126a9964b96462', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417289855, '');
+('5797df64a2622a5e0e89c9a2062af716', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417677555, 'a:14:{s:9:"user_data";s:0:"";s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -278,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers` (
 --
 
 INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `starttime`, `endtime`, `course_id`) VALUES
-(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-02 09:00:00', '2014-12-02 09:30:00', 1),
+(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 09:30:00', 1),
 (2, 'ชุด A', 'desc', 'r', '2014-10-14 22:06:00', '2014-10-14 22:06:00', 1),
 (3, 'Final', 'ปลายภาค', 'ห้ามลอก', '2014-10-20 10:00:00', '2014-10-20 15:00:00', 1),
 (4, 'ชุด B', 'บท 4', 'ห้ามลอก\nนำชีทเข้าไปได้', '2014-10-16 12:00:00', '2014-10-16 14:00:00', 1),
@@ -572,15 +592,17 @@ CREATE TABLE IF NOT EXISTS `Scoreboard` (
   `stu_id` int(10) NOT NULL,
   `course_id` int(4) NOT NULL,
   `paper_id` int(7) NOT NULL,
-  `Score` float DEFAULT NULL
+  `Score` float DEFAULT NULL,
+  `Max` float DEFAULT NULL,
+  `Min` float DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `Scoreboard`
 --
 
-INSERT INTO `Scoreboard` (`sco_id`, `stu_id`, `course_id`, `paper_id`, `Score`) VALUES
-(1, 54310104, 1, 1, 7);
+INSERT INTO `Scoreboard` (`sco_id`, `stu_id`, `course_id`, `paper_id`, `Score`, `Max`, `Min`) VALUES
+(1, 54310104, 1, 1, 7, 0, 0);
 
 -- --------------------------------------------------------
 
