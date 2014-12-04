@@ -40,6 +40,8 @@ class Exam extends CI_Controller {
 		
 		$coursesNum = $this->Courses->countCourseList();
 		$headerData['coursesNum'] = $coursesNum;
+		$headerData['title'] = "Exam";
+		$headerData['subtitle'] = "การสอบ";
 
 		$this->load->view('frontend/t_header_view', $headerData);
 		
@@ -63,7 +65,17 @@ class Exam extends CI_Controller {
 		$paperid = $this->input->post('paper');
 		$answers = $this->input->post('answer');
 		$examproc = $this->examproc->addScoreboard($this->session->userdata('uid'), $courseid, $paperid, $answers);
-		echo $examproc;
+		
+		$coursesNum = $this->Courses->countCourseList();
+		$headerData['coursesNum'] = $coursesNum;
+		$headerData['title'] = "Exam";
+		$headerData['subtitle'] = "การสอบ";
+		$this->load->view('frontend/t_header_view', $headerData);
+
+		$data['score'] = $examproc;
+		$this->load->view('student/examposted_view', $data);
+
+		$this->load->view('frontend/t_footer_view');
 	}
 
 }

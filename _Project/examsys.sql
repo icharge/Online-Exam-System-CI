@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 04, 2014 at 08:53 AM
+-- Generation Time: Dec 04, 2014 at 08:46 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -126,18 +126,6 @@ CREATE TABLE IF NOT EXISTS `Answer_Papers` (
   `answer` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `Answer_Papers`
---
-
-INSERT INTO `Answer_Papers` (`question_id`, `sco_id`, `answer`) VALUES
-(4, 1, '1'),
-(5, 1, 't'),
-(6, 1, 't'),
-(7, 1, '2'),
-(8, 1, '4'),
-(13, 1, 'xxxxx');
-
 -- --------------------------------------------------------
 
 --
@@ -195,7 +183,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('5797df64a2622a5e0e89c9a2062af716', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417677555, 'a:14:{s:9:"user_data";s:0:"";s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}');
+('6c4c73f509d72bd2213352530b19a6f3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417718125, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('ac756c9f70466f15e24ee47f88ad61b0', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417722172, 'a:14:{s:9:"user_data";s:0:"";s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -218,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `Courses` (
 
 INSERT INTO `Courses` (`course_id`, `year`, `pwd`, `visible`, `status`, `subject_id`) VALUES
 (1, '2014', NULL, 1, 'active', 1),
-(2, '2014', '12345', 1, 'inactive', 2),
+(2, '2014', '12345', 1, 'active', 2),
 (3, '2014', NULL, 0, 'inactive', 4);
 
 -- --------------------------------------------------------
@@ -291,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers` (
   `starttime` datetime NOT NULL,
   `endtime` datetime NOT NULL,
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `Exam_Papers`
@@ -304,7 +293,8 @@ INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `startti
 (4, 'ชุด B', 'บท 4', 'ห้ามลอก\nนำชีทเข้าไปได้', '2014-10-16 12:00:00', '2014-10-16 14:00:00', 1),
 (5, 'สอบก่อนเรียน', '', '', '2014-12-08 15:30:00', '2014-12-08 15:45:00', 3),
 (6, 'ชุด  ก', '', '', '2014-12-10 09:00:00', '2014-12-10 10:20:00', 2),
-(7, 'ชุด ข', 'ไม่ซ้ำ ก', '', '2014-12-10 09:20:00', '2014-12-10 10:30:00', 2);
+(7, 'ชุด ข', 'ไม่ซ้ำ ก', '', '2014-12-10 09:20:00', '2014-12-10 10:30:00', 2),
+(8, 'รอบพิเศษ', 'สอบเพิ่มคะแนนสำหรับผู้ที่คะแนนน้อย', 'อนุญาตให้จดเข้าห้องสอบได้', '2014-12-05 08:00:00', '2014-12-05 09:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -324,8 +314,11 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Detail` (
 --
 
 INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VALUES
-(1, 1, 1, 2),
-(2, 1, 1, 6),
+(1, 1, 1, 1),
+(1, 9, 8, 1),
+(2, 1, 1, 1),
+(2, 8, 8, 1),
+(3, 8, 8, 3),
 (4, 5, 6, 1),
 (4, 7, 7, 1),
 (5, 5, 6, 2),
@@ -338,17 +331,21 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (8, 7, 7, 3),
 (9, 2, 1, 1),
 (9, 4, 2, 1),
-(10, 1, 1, 4),
-(10, 4, 2, 4),
-(11, 1, 1, 3),
+(10, 1, 1, 2),
+(10, 4, 2, 2),
+(11, 1, 1, 2),
+(11, 9, 8, 2),
 (12, 2, 1, 2),
 (12, 4, 2, 2),
 (13, 5, 6, 3),
 (13, 7, 7, 3),
-(15, 1, 1, 1),
+(14, 8, 8, 2),
+(15, 1, 1, 3),
+(15, 9, 8, 3),
 (16, 4, 2, 1),
 (18, 1, 1, 5),
-(21, 4, 2, 3);
+(21, 4, 2, 4),
+(21, 9, 8, 4);
 
 -- --------------------------------------------------------
 
@@ -363,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Parts` (
   `description` text,
   `israndom` tinyint(1) NOT NULL,
   `paper_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `Exam_Papers_Parts`
@@ -376,7 +373,9 @@ INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `isran
 (4, 1, 'Choice', '...', 0, 2),
 (5, 2, 'ข้อตัวเลือก', 'เป็นตัวเลือก 4 ข้อ', 0, 6),
 (6, 1, 'ตัวเลือกอัน2', '', 1, 6),
-(7, 1, 'ตัวเลือก', '', 0, 7);
+(7, 1, 'ตัวเลือก', '', 0, 7),
+(8, 1, 'Choice', 'ตัวเลือก', 1, 8),
+(9, 2, 'Fill the Answer', 'เติมคำตอบให้ถูกต้อง', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -429,7 +428,7 @@ CREATE TABLE IF NOT EXISTS `Questions` (
 INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_time`, `chapter_id`, `created_by_id`) VALUES
 (1, '<p><strong><span style="font-size:16px;">ปัจจุบัน Office เวอร์ชั่นอะไร ที่นิยมที่สุด</span></strong></p>', 'numeric', 'inuse', '2014-09-02 18:30:26', 4, 8),
 (2, '<p>Test2</p>', 'choice', 'inuse', '2014-09-09 09:14:28', 4, 3),
-(3, '<p>คำสั่ง <br /><span style="line-height:1.6em;">   echo "Hello World";<br />\nเป็นภาษาใด</span></p>', 'choice', 'active', '2014-09-15 12:23:25', 5, 8),
+(3, '<p>คำสั่ง <br /><span style="line-height:1.6em;">   echo "Hello World";<br />\nเป็นภาษาใด</span></p>', 'choice', 'inuse', '2014-09-15 12:23:25', 5, 8),
 (4, '<p><span style="font-size:16px;"><u><strong>Method</strong></u> มีอีกชื่อเรียกหนึ่งว่าอะไร</span></p>', 'choice', 'active', '2014-09-17 19:41:24', 7, 3),
 (5, '<p>VB.NET ถือเป็นการเขียนโปรแกรมแบบ OOP</p>', 'boolean', 'active', '2014-09-08 16:35:48', 7, 8),
 (6, '<p><strong>Class</strong> ประกอบไปด้วย <strong>Attribute</strong> และ <strong>Method</strong>  <u><span style="color:#FF0000;">ไม่สามารถสืบทอดได้</span></u></p>', 'boolean', 'inuse', '2014-09-22 08:23:26', 8, 3),
@@ -440,14 +439,14 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (11, '<p>Disabled question</p>', 'numeric', 'inuse', '2014-09-08 21:05:28', 4, 8),
 (12, '<p>Trueeee</p>', 'boolean', 'active', '2014-09-08 21:09:05', 4, 8),
 (13, '<p><strong>jhglkdjf;sldkfs;dkjfls;</strong></p>', 'numeric', 'active', '2014-09-09 15:38:00', 7, 8),
-(14, '<p><em>dfkjs;ldkfjs;ldfsoduypofsdjo</em></p>', 'choice', 'active', '2014-10-02 13:58:53', 4, 8),
+(14, '<p><em>dfkjs;ldkfjs;ldfsoduypofsdjo</em></p>', 'choice', 'inuse', '2014-10-02 13:58:53', 4, 8),
 (15, '<p><span style="background-color:rgb(249,249,249);color:rgb(102,102,102);font-family:''source sans pro'', sans-serif;font-size:17px;">IT Consultancy Method</span></p>\n\n<p><font color="#666666" face="source sans pro, sans-serif"><span style="background-color:rgb(249,249,249);font-size:17px;">รหัสวิชาคืออะไร</span></font></p>', 'numeric', 'inuse', '2014-10-02 14:05:21', 4, 8),
 (16, '<p><span style="font-size:18px;">ITITITITITITITIT</span></p>', 'boolean', 'active', '2014-10-02 14:07:00', 4, 8),
 (17, '<p><strong>bfafrstjvghulkbjklinjkljkl</strong></p>', 'boolean', 'active', '2014-10-02 14:08:47', 4, 8),
 (18, '<p><span style="color:#FF0000;"> bbcbcvxvcxvxccvxcvxcxcvxcv</span></p>', 'numeric', 'inuse', '2014-10-02 15:17:08', 4, 8),
 (19, '<p><u>yrttewewerwe</u></p>', 'boolean', 'active', '2014-10-02 15:23:38', 4, 8),
 (20, '<p>werwertertwertr</p>', 'boolean', 'active', '2014-10-02 15:32:12', 9, 8),
-(21, '<p><span style="font-size:20px;">1+2 = ?</span></p>', 'numeric', 'active', '2014-10-09 20:43:29', 4, 8);
+(21, '<p><span style="font-size:20px;">1+2 = ?</span></p>', 'numeric', 'inuse', '2014-10-09 20:43:29', 4, 8);
 
 -- --------------------------------------------------------
 
@@ -595,14 +594,7 @@ CREATE TABLE IF NOT EXISTS `Scoreboard` (
   `Score` float DEFAULT NULL,
   `Max` float DEFAULT NULL,
   `Min` float DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `Scoreboard`
---
-
-INSERT INTO `Scoreboard` (`sco_id`, `stu_id`, `course_id`, `paper_id`, `Score`, `Max`, `Min`) VALUES
-(1, 54310104, 1, 1, 7, 0, 0);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -782,6 +774,28 @@ INSERT INTO `Teacher_Course_Detail` (`tea_id`, `course_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `upcomingtest`
+--
+CREATE TABLE IF NOT EXISTS `upcomingtest` (
+`stu_id` varchar(10)
+,`group_id` int(6)
+,`paper_id` int(7)
+,`course_id` varchar(10)
+,`papertitle` varchar(30)
+,`paperdesc` text
+,`rules` text
+,`starttime` datetime
+,`endtime` datetime
+,`subject_id` int(5)
+,`code` varchar(10)
+,`subjectname` varchar(60)
+,`shortname` varchar(15)
+,`subjectdesc` varchar(60)
+,`status` varchar(20)
+);
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -870,6 +884,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `question_list`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `question_list` AS select `q`.`question_id` AS `question_id`,`q`.`question` AS `question`,`q`.`type` AS `type`,`q`.`status` AS `status`,`q`.`chapter_id` AS `chapter_id`,`getNameFromUid`(`q`.`created_by_id`) AS `created_by`,`q`.`created_time` AS `created_time`,`qc`.`choice1` AS `choice1`,`qc`.`choice2` AS `choice2`,`qc`.`choice3` AS `choice3`,`qc`.`choice4` AS `choice4`,`qc`.`choice5` AS `choice5`,`qc`.`choice6` AS `choice6`,`qc`.`answer` AS `answer_choice`,`qn`.`answer` AS `answer_numeric`,`qb`.`answer` AS `answer_boolean`,`ch`.`name` AS `chapter_name` from ((((`questions` `q` left join `question_choice` `qc` on((`q`.`question_id` = `qc`.`question_id`))) left join `question_numerical` `qn` on((`q`.`question_id` = `qn`.`question_id`))) left join `question_boolean` `qb` on((`q`.`question_id` = `qb`.`question_id`))) left join `chapter` `ch` on((`q`.`chapter_id` = `ch`.`chapter_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `upcomingtest`
+--
+DROP TABLE IF EXISTS `upcomingtest`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `upcomingtest` AS select `se`.`stu_id` AS `stu_id`,`se`.`group_id` AS `group_id`,`ep`.`paper_id` AS `paper_id`,`se`.`course_id` AS `course_id`,`ep`.`title` AS `papertitle`,`ep`.`description` AS `paperdesc`,`ep`.`rules` AS `rules`,`ep`.`starttime` AS `starttime`,`ep`.`endtime` AS `endtime`,`s`.`subject_id` AS `subject_id`,`s`.`code` AS `code`,`s`.`name` AS `subjectname`,`s`.`shortname` AS `shortname`,`s`.`name` AS `subjectdesc`,`s`.`status` AS `status` from ((`student_enroll` `se` left join `exam_papers` `ep` on((`se`.`course_id` = `ep`.`course_id`))) left join `subjects` `s` on((`s`.`subject_id` = `getSubjectIdFromCourseId`(`se`.`course_id`)))) where (`ep`.`endtime` >= now());
 
 --
 -- Indexes for dumped tables
@@ -1046,12 +1069,12 @@ MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 -- AUTO_INCREMENT for table `Exam_Papers`
 --
 ALTER TABLE `Exam_Papers`
-MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `Exam_Papers_Parts`
 --
 ALTER TABLE `Exam_Papers_Parts`
-MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `Faculty`
 --
@@ -1081,7 +1104,7 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `Scoreboard`
 --
 ALTER TABLE `Scoreboard`
-MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `Subjects`
 --

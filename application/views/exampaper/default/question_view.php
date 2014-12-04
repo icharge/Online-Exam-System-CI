@@ -52,7 +52,8 @@
 					'type'=>'text',
 					'class'=>'form-control',
 					'placeholder'=>'',
-					'value'=>(($showAns)?($answer_numeric):''));
+					'value'=>(($showAns)?($answer_numeric):''),
+					'autocomplete'=>'off');
 					if (!$enabled) $inputops['readonly'] = "readonly";
 					echo '
 	<div class="question-choices-label">
