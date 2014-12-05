@@ -389,7 +389,7 @@ class Courses_model extends CI_Model {
 			->select($fields)
 			->from('Exam_Papers')
 			->like("CONCAT(title,description,rules,starttime,endtime)",$keyword,'both')
-			->where(array('course_id'=>$course_id))
+			->where(array('course_id'=>$course_id, 'status !='=>'deleted'))
 			->get()
 			->result_array();
 		return $query;
@@ -428,6 +428,15 @@ class Courses_model extends CI_Model {
 		);
 	}
 
+	function deletePaper($paperid)
+	{
+		$query = $this->db->update('Exam_Papers', array('status'=>'deleted'), array('paper_id'=>$paperid));
+		return array(
+			'result' => 'ok',
+			'error' => $this->db->_error_number(),
+		);
+	}
+
 	function getExamPaperParts($paperid)
 	{
 		$cause = array('paper_id' => $paperid);
@@ -447,6 +456,16 @@ class Courses_model extends CI_Model {
 			'result' => 'ok',
 			'newid' => $newid,
 			'name' => $partData['title'],
+			'error' => $this->db->_error_number(),
+		);
+	}
+
+	function deletePart($partid)
+	{
+		$query = $this->db->delete('Exam_Papers_Parts', array('part_id'=>$partid));
+		$query2 = $this->db->delete('Exam_Papers_Detail', array('part_id'=>$partid));
+		return array(
+			'result' => 'ok',
 			'error' => $this->db->_error_number(),
 		);
 	}

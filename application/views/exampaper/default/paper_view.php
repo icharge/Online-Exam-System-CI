@@ -1,8 +1,36 @@
 <div class="fullpaper">
-	<p>
-	การสอบออนไลน์ของวิชา <?php echo "$courseData[code] $courseData[name]"; ?><br>
-	ชุด <?php echo "$paperData[title]<br>$paperData[description]<br><b>คำชี้แจง / กฎการสอบ</b><br>$paperData[rules]"; ?>
-	</p>
+	<div class="row">
+		<div class="col-md-6"><?php echo <<<html
+			<h4 style="display: inline-block;">การสอบออนไลน์ของวิชา</h4> $courseData[code] $courseData[name]<br>
+			<p style="padding-left: 10px">
+				<b><u>คำอธิบาย</u></b><br>
+				$paperData[description]<br>
+				<b><u>คำชี้แจง / กฎการสอบ</u></b>
+				<br> $paperData[rules]
+			</p>
+html;
+?>		</div>
+		<div class="col-md-6" style="text-align: right;">
+			<?=$this->misc->getFullDateTH( date('Y-m-d') );?><br>
+			เวลา <?=$paperData['starttime'];?> - <?=$paperData['endtime'];?><br><br>
+			<b><u>ผู้สอน</u></b><br>
+			<ul style="float: right;list-style: none;">
+			<?php
+				$teachers = $this->courses->getTeacherlist($courseData['course_id']);
+				$i=0;
+				foreach ($teachers as $teac) {
+					if ($i < 3) echo "<li>$teac[name] $teac[lname]</li>";
+					else {
+						echo "...";
+						break;
+					}
+					$i++;
+				}
+			?>
+			</ul>
+		</div>
+	</div>
+	
 	<h3 class="page-header" data-paper="<?php echo $paperData['paper_id'];?>">
 		<?php echo $paperData['title'];?>
 	</h3>
@@ -14,7 +42,7 @@
 			'name' => 'examfrm',
 			'role' => 'form',
 			'method' => 'post'
-			);
+		);
 		echo form_open($formlink, $attr);
 		echo form_hidden('course', $courseData['course_id']);
 		echo form_hidden('paper', $paperid);

@@ -325,7 +325,6 @@ EOL;
 										</div><!-- /.modal-content -->
 									</div><!-- /.modal-dialog -->
 								</div><!-- /.modal -->
-
 							</div>
 						</div>
 						<div class="box-body tab-pane" id="papers">
@@ -375,7 +374,7 @@ HTML;
 														<span class="text"><b>{$itemPart['title']}</b> <small>{$itemPart['description']}</small></span>
 														<div class="tools">
 															<a href="{$this->misc->getHref('teacher/courses/editpart/')}/{$itemPart['part_id']}"><i class="fa fa-edit"></i></a>
-															<i class="fa fa-trash-o"></i>
+															<a href="#remove" class="text-danger"><i class="fa fa-trash-o"></i></a>
 														</div>
 													</li>
 HTML;
@@ -414,6 +413,24 @@ HTML;
 									</ul>
 								</div>
 							</div>
+
+							<div class="modal fade" id="delpaperask" data-backdrop="static">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> คุณแน่ใจ ?</h4>
+										</div>
+										<div class="modal-body">
+											<p>ต้องการลบ <b><span id="askpapername"></span></b> ?</p>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+											<a href="" data-link-paper="<?php echo $this->misc->getHref($this->session->userdata('role').'/courses/removepaper/'.$courseId).'/'; ?>" 
+												data-link-part="<?php echo $this->misc->getHref($this->session->userdata('role').'/courses/removepart/'.$courseId).'/'; ?>" class="btn btn-danger" id="askpaperdelsure">ลบชุดนี้</a>
+										</div>
+									</div><!-- /.modal-content -->
+								</div><!-- /.modal-dialog -->
+							</div><!-- /.modal -->
 						</div>
 
 					</div>

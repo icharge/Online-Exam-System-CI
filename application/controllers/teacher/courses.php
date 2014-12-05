@@ -721,6 +721,27 @@ HTML;
 		});
 	});
 
+	// ลบชุดข้อสอบ
+	$('.paper-list').delegate('.list-group-item .optionlinks a.remove', 'click', function(e) {
+		e.preventDefault();
+
+		var dialog = $("#delpaperask");
+		dialog.find('#askpapername').text( $(this).parent().parent().find('.list-group-item-heading').text() );
+		var paper_id = $(this).parent().parent().attr('data-paperid');
+		dialog.find('#askpaperdelsure').attr('href', dialog.find('#askpaperdelsure').attr('data-link-paper')+ paper_id);
+		dialog.modal('show');
+	});
+
+	$('.part-list').delegate('li .tools a[href="#remove"]', 'click', function(e) {
+		e.preventDefault();
+
+		var dialog = $("#delpaperask");
+		dialog.find('#askpapername').text( $(this).parent().parent().find('.text').text() );
+		var part_id = $(this).parent().parent().attr('data-partid');
+		dialog.find('#askpaperdelsure').attr('href', dialog.find('#askpaperdelsure').attr('data-link-part')+ part_id);
+		dialog.modal('show');
+	});
+
 HTML;
 
 		$this->sortable = <<<HTML
@@ -1017,7 +1038,17 @@ HTML;
 		$editPaper = $this->courses->editPaper($paperData,$paperid);
 		//echo $editPaper['result'];
 		$this->session->set_flashdata('msg_info',
-					'เพิ่มชุดข้อสอบ '.$editPaper['name'].' แล้ว');
+					'ปรับชุดข้อสอบ '.$editPaper['name'].' แล้ว');
+				redirect($this->role.'/courses/view/'.$courseId.'#papers');
+	}
+
+	function removepaper($courseId, $paperid)
+	{
+		
+		$delPaper = $this->courses->deletePaper($paperid);
+		//echo $editPaper['result'];
+		$this->session->set_flashdata('msg_info',
+					'ลบชุดข้อสอบแล้ว');
 				redirect($this->role.'/courses/view/'.$courseId.'#papers');
 	}
 
@@ -1165,6 +1196,15 @@ HTML;
 		// Send additional script to footer
 		$footdata['additionScript'] = $this->getAddScripts();
 		$this->load->view($this->role.'/t_footer_view', $footdata);
+	}
+
+	function removepart($courseId, $partid)
+	{
+		$delPart = $this->courses->deletePart($partid);
+		//echo $editPaper['result'];
+		$this->session->set_flashdata('msg_info',
+					'ลบชุดข้อสอบแล้ว');
+				redirect($this->role.'/courses/view/'.$courseId.'#papers');
 	}
 
 	function exampaper($paperid)

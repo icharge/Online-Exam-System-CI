@@ -78,13 +78,23 @@ class Fullexampaper
 		$partData = $this->_loadPart();
 
 		$data['lib'] = $this;
-		$data['paperData'] = $paperData;
-		$data['partData'] = $partData;
 		$courseData = $this->ci->courses->getCourseById($paperData['course_id']);
 		$data['courseData'] = $courseData;
 		$data['showAns'] = $this->showAns;
 		$data['enabled'] = $this->enabled;
 		$data['useForm'] = $this->useForm;
+
+		list($startdate, $starttime) = explode(' ', $paperData['starttime']);
+		$paperData['startdate'] = date('d/m/Y',strtotime($startdate));
+		$paperData['starttime'] = date('h:i',strtotime($starttime));
+
+		list($enddate, $endtime) = explode(' ', $paperData['endtime']);
+		$paperData['enddate'] = date('d/m/Y',strtotime($enddate));
+		$paperData['endtime'] = date('h:i',strtotime($endtime));
+
+		$data['paperData'] = $paperData;
+		$data['partData'] = $partData;
+
 		$html .= $this->load->view('exampaper/'.$this->template.'/paper_view', $data, true);
 
 		return $html;
