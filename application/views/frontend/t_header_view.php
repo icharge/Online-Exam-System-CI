@@ -16,7 +16,7 @@
 	<header>
 		<div class="container">
 			<div class="row">
-				<div class="span12">
+				<div class="col-md-12 top">
 					<div id="logo">
 						<div class="inner">
 							<?php echo anchor('', '<img src="assets-student/img/logo.png" alt="">'); ?>
@@ -25,7 +25,7 @@
 
 <?php $this->load->view('frontend/t_nav_view');?>
 
-					<div class="clearfix"></div>
+					<div class="clearfix" style="background-color: #fff;"></div>
 				</div>
 			</div>
 		</div>
@@ -44,7 +44,7 @@
 	<div class="call-to-action">
 		<div class="container">
 			<div class="row">
-				<div class="span12">
+				<div class="col-md-12">
 					<div class="inner">
 						<h1>มีวิชาให้ลงสอบ <?php echo $coursesNum;?> รายการ จากทั้งหมด</h1>
 						<a class="btn btn-large btn-blue pull-right">ลงทะเบียนเดี๋ยวนี้</a>

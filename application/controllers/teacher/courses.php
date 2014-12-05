@@ -530,8 +530,13 @@ jQuery.fn.filterByText = function(textbox, ListBox, selectSingleMatch) {
 HTML;
 
 		$this->papers = <<<HTML
+	// เปิดสร้างชุดข้อสอบ
 	$('#addPaper').click(function(e) {
-		$('#modaladdpaper').modal('show');
+		var dialog = $('#modaladdpaper');
+		dialog.modal('show');
+		dialog.find('.modal-title').html('<i class="fa fa-plus"></i> สร้างชุดข้อสอบ');
+		dialog.find("button[type='submit']").html('<i class="fa fa-plus"></i> สร้าง');
+		dialog.find("input[name='method']").val('add');
 	});
 
 	$('#modaladdpaper').on('hidden.bs.modal', function (e) {
@@ -556,6 +561,7 @@ HTML;
 		myform.find(".alert").hide();
 	});
 
+	// ปุ่มเพิ่มชุดข้อสอบ
 	$("#modaladdpaper form[name='addpaper']").submit(function(e) {
 
 		// Form validation
@@ -624,6 +630,7 @@ HTML;
 
 	});
 
+	// แสดง/ซ่อน ตอน
 	$('.paper-list').delegate('.list-group-item .content-toggle-click', 'click', function(e) {
 		var contenttoggle = $(this).next('.content-toggle');
 		var content = $(this).parent().find('.part-list');
@@ -632,6 +639,7 @@ HTML;
 		contenttoggle.slideToggle(100);
 	});
 
+	// เพิ่มตอนข้อสอบ
 	$('.paper-list').delegate('.list-group-item .optionlinks a.add', 'click', function(e) {
 		e.preventDefault();
 		var paperid = $(this).parent().parent().attr('data-paperid');
@@ -645,17 +653,72 @@ HTML;
 		form.find("input[name='paper_id']").val(paperid);
 	});
 
+	// แก้ไขชุดข้อสอบ
 	$('.paper-list').delegate('.list-group-item .optionlinks a.edit', 'click', function(e) {
 		e.preventDefault();
-		var paperid = $(this).parent().parent().attr('data-paperid');
-		$('#modaladdpart').modal('show');
+		var dialog = $('#modaladdpaper');
+		dialog.modal('show');
+		dialog.find('.modal-title').html('<i class="fa fa-edit"></i> แก้ไขชุดข้อสอบ');
+		dialog.find("button[type='submit']").html('<i class="fa fa-save"></i> บันทึก');
+		dialog.find("input[name='method']").val('edit');
 
-		// setting values
-		var form = $("#modaladdpart form");
-		form.find("input[type='text']").val('');
-		form.find("input[type='checkbox']").iCheck('uncheck');
-		form.find("textarea").val('');
-		form.find("input[name='paper_id']").val(paperid);
+		var paper_id = $(this).parent().parent().attr('data-paperid');
+		dialog.find("input[name='paper']").val(paper_id);
+
+		var oxsysAPI = "{$this->misc->getHref("teacher/courses/callbackjson/getPaper/")}/?ts="+Date.now();
+		var myData = 'paper='+paper_id;
+
+		$.ajax({
+			type: "POST",
+			url: oxsysAPI,
+			data: myData,
+			contentType: "application/x-www-form-urlencoded",
+			dataType: "json"
+		})
+		.done(function(data) {
+			if (data.error != "") {
+
+				var jbox = new jBox('Modal', {
+					width: 350,
+					title: 'ข้อผิดพลาด',
+					overlay: true,
+					content: data.error,
+				});
+				jbox.open();
+				$("#modaladdpaper").modal('hide');
+			}else{
+				var myform = $("#modaladdpaper").find('form');
+				var txttitle = myform.find("input[name='title']");
+				var txtdesc = myform.find("textarea[name='description']");
+				var txtrules = myform.find("textarea[name='rules']");
+				var txtstartdate = myform.find("input[name='startdate']");
+				var txtenddate = myform.find("input[name='enddate']");
+				var txtstarttime = myform.find("input[name='starttime']");
+				var txtendtime = myform.find("input[name='endtime']");
+
+				txttitle.val(data.paperData.title);
+				txtdesc.val(data.paperData.description);
+				txtrules.val(data.paperData.rules);
+				txtstartdate.val(data.paperData.startdate);
+				txtenddate.val(data.paperData.enddate);
+				txtstarttime.val(data.paperData.starttime);
+				txtendtime.val(data.paperData.endtime);
+			}
+		})
+		.fail(function(jqxhr, textStatus, error) {
+			var err = textStatus + ", " + error;
+			console.log("Request Failed: "+err);
+
+			var jbox = new jBox('Modal', {
+				width: 350,
+				height: 100,
+				title: 'ข้อผิดพลาด',
+				overlay: true,
+				content: error,
+			});
+			jbox.open();
+			$("#modaladdpaper").modal('hide');
+		});
 	});
 
 HTML;
@@ -774,6 +837,7 @@ HTML;
 				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];
 
 				$data['formlinkaddpaper'] = $this->role.'/courses/addpaper/'.$courseId;
+				$data['formlinkeditpaper'] = $this->role.'/courses/editpaper/'.$courseId;
 				$data['formlinkaddpart'] = $this->role.'/courses/addpart/'.$courseId;
 				$this->load->view('teacher/field_course_view', $data);
 			}
@@ -915,6 +979,33 @@ HTML;
 
 	function addpaper($courseId='')
 	{
+		$method = $this->input->post('method');
+		if ($method == "add")
+		{
+			$paperData['title'] = $this->input->post('title');
+			$paperData['description'] = $this->input->post('description');
+			$paperData['rules'] = $this->input->post('rules');
+
+			$paperData['starttime'] = $this->misc->reformatDate($this->input->post('startdate'),'Y-m-d', true, '/').
+																' '.$this->input->post('starttime');
+			$paperData['endtime'] = $this->misc->reformatDate($this->input->post('enddate'),'Y-m-d', true, '/').
+																' '.$this->input->post('endtime');
+			$paperData['course_id'] = $courseId;
+			$addPapaer = $this->courses->addPaper($paperData);
+			//echo $addPapaer['result'];
+			$this->session->set_flashdata('msg_info',
+						'เพิ่มชุดข้อสอบ '.$addPapaer['name'].' แล้ว');
+					redirect($this->role.'/courses/view/'.$courseId);
+		}
+		elseif ($method == "edit")
+		{
+			$paperid = $this->input->post('paper');
+			$this->editpaper($paperid,$courseId);
+		}
+	}
+
+	function editpaper($paperid,$courseId)
+	{
 		$paperData['title'] = $this->input->post('title');
 		$paperData['description'] = $this->input->post('description');
 		$paperData['rules'] = $this->input->post('rules');
@@ -923,12 +1014,11 @@ HTML;
 															' '.$this->input->post('starttime');
 		$paperData['endtime'] = $this->misc->reformatDate($this->input->post('enddate'),'Y-m-d', true, '/').
 															' '.$this->input->post('endtime');
-		$paperData['course_id'] = $courseId;
-		$addPapaer = $this->courses->addPaper($paperData);
-		//echo $addPapaer['result'];
+		$editPaper = $this->courses->editPaper($paperData,$paperid);
+		//echo $editPaper['result'];
 		$this->session->set_flashdata('msg_info',
-					'เพิ่มชุดข้อสอบ '.$addPapaer['name'].' แล้ว');
-				redirect($this->role.'/courses/view/'.$courseId);
+					'เพิ่มชุดข้อสอบ '.$editPaper['name'].' แล้ว');
+				redirect($this->role.'/courses/view/'.$courseId.'#papers');
 	}
 
 	function addpart($courseId='')
@@ -942,7 +1032,7 @@ HTML;
 
 		$this->session->set_flashdata('msg_info',
 					'เพิ่มตอน '.$partData['title'].' แล้ว');
-				redirect($this->role.'/courses/view/'.$courseId);
+				redirect($this->role.'/courses/view/'.$courseId.'#papers');
 	}
 
 	function editpart($partId='')
@@ -1269,6 +1359,21 @@ HTML;
 			default:
 				echo json_encode(array('error' => "No Arguments"));
 				break;
+
+			case 'getPaper':
+				$paper_id = $this->input->post('paper');
+				$paperData = $this->courses->getPaper($paper_id);
+
+				// ประมวลวันเวลาใหม่
+				list($startdate, $starttime) = explode(' ', $paperData['starttime']);
+				$paperData['startdate'] = date('d/m/Y',strtotime($startdate));
+				$paperData['starttime'] = date('h:i',strtotime($starttime));
+
+				list($enddate, $endtime) = explode(' ', $paperData['endtime']);
+				$paperData['enddate'] = date('d/m/Y',strtotime($enddate));
+				$paperData['endtime'] = date('h:i',strtotime($endtime));
+
+				echo json_encode(array('error'=>'','paperData'=>$paperData));
 		}
 	}
 

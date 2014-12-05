@@ -91,6 +91,18 @@
 			}
 		});
 
+		var hashwithtabs = function() {
+			if(window.location.hash) {
+				var hash = window.location.hash; //window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+				$('[href="'+hash+'"][data-toggle="tab"]').trigger('click');
+			}
+		};
+		hashwithtabs();
+
+		$(window).on('hashchange', function() {
+			hashwithtabs();
+		});
+
 		$('select.input-sm').selectpicker({
 			style: 'btn-default btn-sm'
 		});

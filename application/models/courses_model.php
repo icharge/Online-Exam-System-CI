@@ -395,6 +395,15 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
+	function getPaper($paperid)
+	{
+		$cause = array('paper_id' => $paperid);
+		$query = $this->db
+			->get_where('Exam_Papers', $cause)
+			->row_array();
+		return $query;
+	}
+
 	function addPaper($paperData)
 	{
 
@@ -403,6 +412,17 @@ class Courses_model extends CI_Model {
 		return array(
 			'result' => 'ok',
 			'newid' => $newid,
+			'name' => $paperData['title'],
+			'error' => $this->db->_error_number(),
+		);
+	}
+
+	function editPaper($paperData, $paperid)
+	{
+
+		$query = $this->db->update('Exam_Papers', $paperData, array('paper_id'=>$paperid));
+		return array(
+			'result' => 'ok',
 			'name' => $paperData['title'],
 			'error' => $this->db->_error_number(),
 		);

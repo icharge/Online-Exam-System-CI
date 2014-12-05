@@ -435,6 +435,8 @@ HTML;
 					'method' => 'post'
 				);
 				echo form_open($formlinkaddpaper, $attr);
+				echo form_hidden('method', 'add');
+				echo form_hidden('paper', '');
 			?>
 				<div class="modal-dialog">
 					<div class="modal-content">

@@ -96,7 +96,7 @@
 			</div>
 			<hr>
 			<div class="row">
-				<div class="span4">
+				<div class="col-md-4">
 					<h3>Meet The Instructor</h3>
 					<ul class="trainer-list">
 						<li>
@@ -128,7 +128,7 @@
 					</ul>
 				</div>
 
-				<div class="span8">
+				<div class="col-md-8">
 					<h3>Latest Courses</h3>
 					<div class="row">
 						<?php 
@@ -165,7 +165,7 @@ HTML;
 	<div class="call-to-action bg-blue">
 		<div class="container">
 			<div class="row">
-				<div class="span12">
+				<div class="col-md-12">
 					<div class="inner">
 						<h1>Learn from 542 courses, from our 107 partners.</h1>
 						<a class="btn btn-large btn-black pull-right">Try Now!</a>

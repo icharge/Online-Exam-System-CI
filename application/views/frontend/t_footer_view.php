@@ -2,12 +2,12 @@
 	<footer>
 		<div class="container">
 			<div class="row">
-				<div class="span6">
+				<div class="col-md-6">
 					<div class="inner">
 						&copy; Copyiright 2014 - Ecourse by Aveothemes
 					</div>
 				</div>
-				<div class="span6">
+				<div class="col-md-6">
 					<div class="inner">
 						<nav>
 							<ul>

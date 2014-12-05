@@ -75,7 +75,7 @@ class Examprocess_model extends CI_Model {
 
 		$this->db->update('Scoreboard', array('score'=>$score), array('sco_id'=>$newid));
 
-		return "score : $score completed";
+		return $score;
 	}
 
 	function addAnswers($data)

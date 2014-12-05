@@ -15,10 +15,10 @@ body {
     padding: 0;
 }
 
-    header .container .span12 {
-        background: #fff;
+    header .container .top {
+        /*background: #fff;*/
         margin-bottom: 0 !important;
-        height: 60px;
+        /*height: 60px;*/
     }
 
 .container {
@@ -192,7 +192,7 @@ a {
 }
 
     #logo .inner {
-        margin: 20px 0 20px 30px;
+        margin: 18px 0 18px 30px;
         display: inline-block;
     }
 
@@ -419,6 +419,9 @@ a {
                 content: "\f001";
             }
 
+.span3.course-item:first-child, .course-item-small:first-child {
+    margin-left: 15px;
+}
 
 .course-item, .course-item-small, .trainer-list img {
     box-shadow: 1px 1px 3px #d5d5d5;
@@ -533,6 +536,7 @@ a {
     display: inline-block;
     text-align: left;
     margin-right: 30px;
+    margin-bottom: 0;
 }
 
     #mainmenu ul {
@@ -653,7 +657,7 @@ footer {
 
     footer .container {
         background: #ffffff;
-        padding: 20px 0 20px 0;
+        padding: 20px;
     }
 
     footer .span6 .inner {
