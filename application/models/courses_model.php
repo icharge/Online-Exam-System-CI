@@ -509,7 +509,7 @@ class Courses_model extends CI_Model {
 
 		-- พร้อมรายละเอียดวิชา
 		SELECT stu_id,group_id,paper_id,se.course_id,title as papertitle,ep.description as paperdesc,
-			rules,starttime,endtime,subject_id,code,name as subjectname,shortname,s.name as subjectdesc,status
+			rules,starttime,endtime,subject_id,code,name as subjectname,shortname,s.name as subjectdesc,ep.status
 		FROM Student_Enroll se
 		LEFT JOIN Exam_papers ep on se.course_id = ep.course_id
 		LEFT JOIN Subjects s on s.subject_id = getSubjectIdFromCourseId(se.course_id)
@@ -526,12 +526,13 @@ class Courses_model extends CI_Model {
 		$query = $this->db
 			// ->select($select)
 			->from('upcomingtest')
-			->where('stu_id', $stdId) 
+			->where('stu_id', $stdId)
+			->where('status !=', 'deleted')
 			->where('paper_id not in', "(select paper_id from Scoreboard where stu_id = '$stdId')", false)
 			->order_by('starttime','asc')
 			->get()
 			->result_array();
-		//echo $this->db->last_query();
+		echo $this->db->last_query();
 		return $query;
 	}
 
