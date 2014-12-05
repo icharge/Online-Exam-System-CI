@@ -532,7 +532,7 @@ class Courses_model extends CI_Model {
 			->order_by('starttime','asc')
 			->get()
 			->result_array();
-		echo $this->db->last_query();
+		//echo $this->db->last_query();
 		return $query;
 	}
 

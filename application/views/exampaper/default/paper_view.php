@@ -51,6 +51,9 @@ html;
 	<div class="panel-group exampapergroup" id="accordion" role="tablist" aria-multiselectable="true">
 <?php
 	$count = 1;
+	$countpart = 1;
+	$totalpart = sizeof($partData);
+
 	foreach ($partData as $partItem) {
 		$firstchild = ($count == 1 ? ' in' : '');
 		echo <<<html
@@ -67,6 +70,7 @@ html;
 html;
 		$israndom = ($partItem['israndom']=='1'?true:false);
 		$questData = $lib->_loadQuestion($partItem['part_id'], $israndom);
+
 		
 		foreach ($questData as $questItem) {
 			$questItem['number'] = $count++;
@@ -75,19 +79,31 @@ html;
 			$questItem['enabled'] = $enabled;
 			echo $this->load->view('exampaper/'.$lib->templateName().'/question_view', $questItem);
 		}
-		echo '				</div>
+		if ($useForm && $countpart < $totalpart)
+		{
+			echo '<div class="row">
+				<div class="col-md-12 text-right"><a href="#next" class="btn btn-info btn-sm">หน้าถัดไป</a>
+			</div>
+			</div>';
+		}
+		echo '
+				</div>
 			</div>
 		</div>';
+		$countpart++;
 	}
 ?>
 	</div>
 
-
-<?php
-	if ($useForm)
-	{
-		echo form_submit('submit', 'ส่งข้อสอบ', 'class="btn btn-primary"');
-		echo form_close();
-	}
-?>
+	<div class="row" style="padding-top: 30px">
+		<div class="col-md-12 text-right">
+		<?php
+			if ($useForm)
+			{
+				echo form_submit('submit', 'ส่งข้อสอบ', 'class="btn btn-primary"');
+				echo form_close();
+			}
+		?>
+		</div>
+	</div>
 </div>

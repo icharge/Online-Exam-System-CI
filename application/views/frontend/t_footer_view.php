@@ -47,6 +47,8 @@
 					radioClass: 'iradio_minimal-red'
 			});
 
+			<?php echo $this->load->view('exampaper/script_view', null, true); ?>
+
 			// Course-item link
 			$('.course-list').delegate('.course-item', 'mouseup', function(e) {
 				var click = e.which;
