@@ -857,9 +857,9 @@ HTML;
 				$data['pagetitle'] = "ข้อมูลการเปิดสอบ";
 				$data['pagesubtitle'] = $data['courseInfo']['code']." ".$data['courseInfo']['name'];
 
-				$data['formlinkaddpaper'] = $this->role.'/courses/addpaper/'.$courseId;
-				$data['formlinkeditpaper'] = $this->role.'/courses/editpaper/'.$courseId;
-				$data['formlinkaddpart'] = $this->role.'/courses/addpart/'.$courseId;
+				$data['formlinkaddpaper'] = $this->role.'/courses/addpaper/'.$courseId.'#papers';
+				$data['formlinkeditpaper'] = $this->role.'/courses/editpaper/'.$courseId.'#papers';
+				$data['formlinkaddpart'] = $this->role.'/courses/addpart/'.$courseId.'#papers';
 				$this->load->view('teacher/field_course_view', $data);
 			}
 		}

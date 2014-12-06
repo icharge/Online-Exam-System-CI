@@ -83,7 +83,7 @@ EOL;
 								</div>
 								<div class="col-sm-8 pull-right">
 									<h4>โจทย์คำถาม</h4>
-									<div class="modal fade" id="newQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal fade" id="newQuestion" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
@@ -132,7 +132,7 @@ EOL;
 																	<div class="col-xs-11">
 																		<div class="form-inline">
 																			<label id="c1" class="choice">
-																				<span class="clabel">ก.</span>
+																				<span class="clabel">1)</span>
 																				<?php
 																					echo form_input(array(
 																						'id'=>'choice1',
@@ -158,7 +158,7 @@ EOL;
 																	<div class="col-xs-11">
 																		<div class="form-inline">
 																			<label id="c2" class="choice">
-																				<span class="clabel">ข.</span>
+																				<span class="clabel">2)</span>
 																				<?php
 																					echo form_input(array(
 																						'id'=>'choice2',
@@ -184,7 +184,7 @@ EOL;
 																	<div class="col-xs-11">
 																		<div class="form-inline">
 																			<label id="c3" class="choice">
-																				<span class="clabel">ค.</span>
+																				<span class="clabel">3)</span>
 																				<?php
 																					echo form_input(array(
 																						'id'=>'choice3',
@@ -210,7 +210,7 @@ EOL;
 																	<div class="col-xs-11">
 																		<div class="form-inline">
 																			<label id="c4" class="choice">
-																				<span class="clabel">ง.</span>
+																				<span class="clabel">4)</span>
 																				<?php
 																					echo form_input(array(
 																						'id'=>'choice4',
@@ -236,7 +236,7 @@ EOL;
 																	<div class="col-xs-11">
 																		<div class="form-inline">
 																			<label id="c5" class="choice">
-																				<span class="clabel">จ.</span>
+																				<span class="clabel">5)</span>
 																				<?php
 																					echo form_input(array(
 																						'id'=>'choice5',
@@ -262,7 +262,7 @@ EOL;
 																	<div class="col-xs-11">
 																		<div class="form-inline">
 																			<label id="c6" class="choice">
-																				<span class="clabel">ฉ.</span>
+																				<span class="clabel">6)</span>
 																				<?php
 																					echo form_input(array(
 																						'id'=>'choice6',

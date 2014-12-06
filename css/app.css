@@ -452,10 +452,17 @@ input[type=text].date {
 	padding-left: 51px;
 	background-color: #fff;
 	margin-top: -2px;
+	font-size: 22px;
+}
+
+.paper-list .badge {
+	margin-top: 3px;
+	font-size: 18px;
 }
 
 .optionlinks .badge {
 	margin-right: 10px;
+	font-size: 18px;
 }
 
 .list-group-item.active .optionlinks {

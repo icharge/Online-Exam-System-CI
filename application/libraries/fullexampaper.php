@@ -149,7 +149,10 @@ class Fullexampaper
 			$readonly = "disabled";
 		else
 			$readonly = "";
-		$alpha = array('', 'ก.','ข.','ค.','ง.','จ.','ฉ.','t'=>'ถูก','f'=>'ผิด');
+		//$alpha = array('', 'ก.','ข.','ค.','ง.','จ.','ฉ.','t'=>'ถูก','f'=>'ผิด');
+
+		// ใช้เป็นตัวเลข  ยืดหยุ่นกว่า  เพราะอาจจะมีข้อสอบ ไทย ? อังกฤษ
+		$alpha = array('', '1)','2)','3)','4)','5)','6)','t'=>'ถูก','f'=>'ผิด');
 		return '
 	<div class="radio">
 		<div class="col-xs-1" style="width: inherit;">

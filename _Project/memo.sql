@@ -25,3 +25,17 @@ WHERE tcd.tea_id IS null
 SELECT *
 FROM Exam_Papers
 WHERE starttime <= '2014-10-03 9:15:00' AND endtime >= '2014-10-03 9:15:00'
+
+
+-- รายงาน ตามวิชา  (บอก ผู้ลงสอบ , เข้าสอบ, เฉลี่ย, min, max)
+
+select c.course_id, subject_id, code, year, name, shortname, c.visible, c.status,
+paper_id, getEnrollCount(c.course_id) AS enrollcount,count(stu_id) AS testedcount,
+avg(Score) AS average,min(Score) AS minimum,max(Score) AS maximum
+from courseslist_view c
+left join scoreboard s on c.course_id = s.course_id
+
+group by s.course_id
+ORDER BY c.code ASC
+
+

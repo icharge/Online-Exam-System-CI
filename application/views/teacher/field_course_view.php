@@ -373,26 +373,26 @@ HTML;
 														</span>
 														<span class="text"><b>{$itemPart['title']}</b> <small>{$itemPart['description']}</small></span>
 														<div class="tools">
-															<a href="{$this->misc->getHref('teacher/courses/editpart/')}/{$itemPart['part_id']}"><i class="fa fa-edit"></i></a>
-															<a href="#remove" class="text-danger"><i class="fa fa-trash-o"></i></a>
+															<a href="{$this->misc->getHref('teacher/courses/editpart/')}/{$itemPart['part_id']}" class="jtooltip" title="เพิ่ม/ลด ข้อสอบ"><i class="fa fa-edit"></i></a>
+															<a href="#remove" class="text-danger jtooltip" title="ลบตอน"><i class="fa fa-trash-o"></i></a>
 														</div>
 													</li>
 HTML;
 												}
-												$fullpagelink = anchor('teacher/courses/exampaper/'.$item['paper_id'], '<i class="fa fa-file-text-o"></i>');
+												$fullpagelink = anchor('teacher/courses/exampaper/'.$item['paper_id'], '<i class="fa fa-file-text-o"></i>','class="jtooltip" title="ดูชุดข้อสอบ"');
 												echo <<<HTML
 												<li class="list-group-item" data-paperid="{$item['paper_id']}">
 													<span class="badge"><i class="fa fa-clock-o"></i> {$datediff}</span>
 													<div class="optionlinks">
 														<span class="badge jtooltip" title="{$datetooltip}"><i class="fa fa-clock-o"></i> {$datediff}</span>
-														<a href="#add" class="add">
+														<a href="#add" class="add jtooltip" title="เพิ่มตอน">
 															<i class="fa fa-plus"></i>
 														</a>
-														<a href="#edit" class="edit">
+														<a href="#edit" class="edit jtooltip" title="แก้ไขชุดข้อสอบ">
 															<i class="fa fa-edit"></i>
 														</a>
 														{$fullpagelink}
-														<a href="#remove" class="remove text-danger">
+														<a href="#remove" class="remove text-danger jtooltip" title="ลบชุดข้อสอบ">
 															<i class="fa fa-trash-o"></i>
 														</a>
 													</div>
