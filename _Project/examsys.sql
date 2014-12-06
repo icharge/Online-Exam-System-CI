@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 05, 2014 at 02:34 PM
+-- Generation Time: Dec 06, 2014 at 11:30 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -136,7 +136,27 @@ INSERT INTO `Answer_Papers` (`question_id`, `sco_id`, `answer`) VALUES
 (6, 1, 'f'),
 (7, 1, '2'),
 (8, 1, '4'),
-(13, 1, '');
+(13, 1, ''),
+(23, 2, '3'),
+(24, 2, '2'),
+(25, 2, '3'),
+(26, 2, '3'),
+(27, 2, '3'),
+(28, 2, '1'),
+(29, 2, '4'),
+(30, 2, '2'),
+(31, 2, '3'),
+(32, 2, '4'),
+(33, 3, '3'),
+(34, 3, '4'),
+(35, 3, '3'),
+(36, 3, '4'),
+(37, 3, '1'),
+(38, 3, '1'),
+(39, 3, '2'),
+(40, 3, '1'),
+(41, 3, '1'),
+(42, 3, '4');
 
 -- --------------------------------------------------------
 
@@ -159,10 +179,10 @@ CREATE TABLE IF NOT EXISTS `Branch` (
 
 CREATE TABLE IF NOT EXISTS `Chapter` (
 `chapter_id` int(7) NOT NULL,
-  `name` varchar(30) NOT NULL,
+  `name` varchar(60) NOT NULL,
   `description` text,
   `subject_id` int(5) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `Chapter`
@@ -174,7 +194,11 @@ INSERT INTO `Chapter` (`chapter_id`, `name`, `description`, `subject_id`) VALUES
 (7, 'บทที่ 1 แนะนำ OOP', NULL, 2),
 (8, 'บทที่ 2 Class', NULL, 2),
 (9, 'บทที่ 3', NULL, 1),
-(10, 'Chapter 1', NULL, 4);
+(10, 'Chapter 1', NULL, 4),
+(11, 'เรื่อง ระบบย่อยอาหาร', NULL, 6),
+(12, 'การจัดเรียงอิเล็กตรอนในระดับพลังงานต่างๆ', NULL, 7),
+(13, 'การตลาดระดับโลก ถูกผิด', NULL, 8),
+(14, 'การตลาดระดับโลก ปรนัย', NULL, 8);
 
 -- --------------------------------------------------------
 
@@ -195,8 +219,9 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('c4e56ae0df6016f23cb975283d1c5edb', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417783826, 'a:12:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;s:16:"flash:new:noAnim";b:1;}'),
-('dc49a8375d9196a0615884d8e61b9b7f', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417786438, 'a:14:{s:9:"user_data";s:0:"";s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}');
+('7db1cbdcd37c0b30a4224de7960c2074', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417858723, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('d3ab3b3154338fb020c37d6e57496744', '192.168.1.4', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1417861238, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:2:"64";s:3:"uid";s:1:"5";s:8:"username";s:8:"sittinee";s:8:"fullname";s:43:"สิทธิณี ประภัศร";s:5:"fname";s:21:"สิทธิณี";s:5:"lname";s:21:"ประภัศร";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('d52cdfd58f9c2e8cefd3925919648221', '192.168.1.4', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1417860959, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"1";s:3:"uid";s:1:"1";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;s:18:"flash:old:msg_info";s:51:"เปิดวิชาเรียบร้อย";}');
 
 -- --------------------------------------------------------
 
@@ -211,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `Courses` (
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   `status` varchar(20) NOT NULL,
   `subject_id` int(5) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `Courses`
@@ -220,7 +245,10 @@ CREATE TABLE IF NOT EXISTS `Courses` (
 INSERT INTO `Courses` (`course_id`, `year`, `pwd`, `visible`, `status`, `subject_id`) VALUES
 (1, '2014', NULL, 1, 'active', 1),
 (2, '2014', '12345', 1, 'active', 2),
-(3, '2014', NULL, 0, 'inactive', 4);
+(3, '2014', NULL, 0, 'inactive', 4),
+(4, '2014', NULL, 1, 'active', 6),
+(5, '2014', NULL, 1, 'active', 7),
+(6, '2014', NULL, 1, 'active', 8);
 
 -- --------------------------------------------------------
 
@@ -267,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
   `name` varchar(40) NOT NULL,
   `description` text,
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `Course_Students_group`
@@ -276,7 +304,10 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
 INSERT INTO `Course_Students_group` (`group_id`, `name`, `description`, `course_id`) VALUES
 (1, 'Sec 1', NULL, 1),
 (9, 'Sec 2', 'กลุ่มเพิ่มเติม', 1),
-(11, 'group1', '', 2);
+(11, 'group1', '', 2),
+(12, 'กลุ่ม Sci1', '', 4),
+(13, 'Sci.p 1', '', 5),
+(14, 'GM', '', 6);
 
 -- --------------------------------------------------------
 
@@ -286,7 +317,7 @@ INSERT INTO `Course_Students_group` (`group_id`, `name`, `description`, `course_
 
 CREATE TABLE IF NOT EXISTS `Exam_Papers` (
 `paper_id` int(7) NOT NULL,
-  `title` varchar(30) NOT NULL,
+  `title` varchar(70) NOT NULL,
   `description` text,
   `rules` text,
   `starttime` datetime NOT NULL,
@@ -294,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers` (
   `course_id` int(4) NOT NULL,
   `visible` smallint(6) NOT NULL DEFAULT '1',
   `status` varchar(20) NOT NULL DEFAULT 'active'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `Exam_Papers`
@@ -308,7 +339,10 @@ INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `startti
 (5, 'สอบก่อนเรียน', '', '', '2014-12-08 15:30:00', '2014-12-08 15:45:00', 3, 1, 'active'),
 (6, 'ชุด  ก', '', '', '2014-12-10 09:00:00', '2014-12-10 10:20:00', 2, 1, 'active'),
 (7, 'ชุด ข', 'ไม่ซ้ำ ก', '', '2014-12-10 09:20:00', '2014-12-10 10:30:00', 2, 1, 'active'),
-(8, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 1, 'deleted');
+(8, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 1, 'deleted'),
+(9, 'ระบบย่อยอาหาร', 'จงเลือกคำตอบที่ถูกที่สุดเพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 10 นาที\nห้ามเปิดตำราเรียน\nทุจริตปรับตกวิชานี้', '2014-12-08 13:00:00', '2014-12-08 13:10:00', 4, 1, 'active'),
+(10, 'การจัดเรียงอิเล็กตรอนในระดับพลังงาน', 'เลือกคำตอบที่ถูกต้องที่สุด เพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 20 นาที\nห้ามนำตำราเข้าห้องสอบ\nทุจริตปรับตกวิชานี้', '2014-12-08 09:00:00', '2014-12-08 09:20:00', 5, 1, 'active'),
+(11, 'การตลาดระดับโลก', 'ข้อสอบมี 2 ตอน ทำทุกตอน', '1. ห้ามนำตำราเข้าห้องสอบ\n2.  ทุจริตปรับตกวิชานี้\n3. ใช้เวลาในการสอบ 40 นาที', '2014-12-07 08:00:00', '2014-12-07 08:40:00', 6, 1, 'active');
 
 -- --------------------------------------------------------
 
@@ -332,7 +366,8 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (1, 9, 8, 1),
 (2, 1, 1, 2),
 (2, 8, 8, 2),
-(3, 8, 8, 3),
+(3, 1, 1, 7),
+(3, 8, 8, 7),
 (4, 5, 6, 1),
 (4, 7, 7, 1),
 (5, 5, 6, 2),
@@ -343,16 +378,57 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (7, 7, 7, 2),
 (8, 6, 6, 3),
 (8, 7, 7, 3),
-(10, 1, 1, 2),
-(11, 1, 1, 2),
-(11, 9, 8, 2),
+(9, 1, 1, 6),
+(10, 12, 1, 1),
+(11, 1, 1, 5),
+(11, 9, 8, 5),
+(12, 1, 1, 3),
 (13, 5, 6, 3),
 (13, 7, 7, 3),
 (14, 8, 8, 2),
-(15, 1, 1, 3),
-(15, 9, 8, 3),
-(18, 1, 1, 5),
-(21, 9, 8, 4);
+(14, 12, 1, 2),
+(15, 1, 1, 8),
+(15, 9, 8, 8),
+(16, 12, 1, 3),
+(17, 12, 1, 4),
+(18, 1, 1, 9),
+(19, 12, 1, 5),
+(20, 1, 1, 4),
+(21, 9, 8, 6),
+(21, 12, 1, 6),
+(23, 13, 9, 1),
+(24, 13, 9, 6),
+(25, 13, 9, 7),
+(26, 13, 9, 5),
+(27, 13, 9, 8),
+(28, 13, 9, 4),
+(29, 13, 9, 3),
+(30, 13, 9, 2),
+(31, 13, 9, 9),
+(32, 13, 9, 10),
+(33, 15, 10, 1),
+(34, 15, 10, 2),
+(35, 15, 10, 3),
+(36, 15, 10, 4),
+(37, 15, 10, 5),
+(38, 15, 10, 6),
+(39, 15, 10, 7),
+(40, 15, 10, 8),
+(41, 15, 10, 9),
+(42, 15, 10, 10),
+(43, 16, 11, 1),
+(44, 16, 11, 2),
+(45, 16, 11, 3),
+(46, 16, 11, 4),
+(47, 16, 11, 5),
+(48, 16, 11, 6),
+(49, 16, 11, 7),
+(50, 16, 11, 8),
+(53, 17, 11, 1),
+(54, 17, 11, 2),
+(55, 17, 11, 3),
+(56, 17, 11, 4),
+(57, 17, 11, 5);
 
 -- --------------------------------------------------------
 
@@ -363,11 +439,11 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 CREATE TABLE IF NOT EXISTS `Exam_Papers_Parts` (
 `part_id` int(7) NOT NULL,
   `no` tinyint(3) NOT NULL,
-  `title` varchar(40) NOT NULL,
+  `title` varchar(60) NOT NULL,
   `description` text,
   `israndom` tinyint(1) NOT NULL,
   `paper_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `Exam_Papers_Parts`
@@ -380,7 +456,12 @@ INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `isran
 (6, 1, 'ตัวเลือกอัน2', '', 1, 6),
 (7, 1, 'ตัวเลือก', '', 0, 7),
 (8, 1, 'Choice', 'ตัวเลือก', 1, 8),
-(9, 2, 'Fill the Answer', 'เติมคำตอบให้ถูกต้อง', 1, 8);
+(9, 2, 'Fill the Answer', 'เติมคำตอบให้ถูกต้อง', 1, 8),
+(12, 2, 'xxxx', '', 0, 1),
+(13, 1, 'ระบบย่อยอาหาร', '', 1, 9),
+(15, 1, 'ปรนัย', '', 1, 10),
+(16, 1, '่ถูกผิด', '', 1, 11),
+(17, 2, 'ปรนัย', '', 0, 11);
 
 -- --------------------------------------------------------
 
@@ -424,7 +505,7 @@ CREATE TABLE IF NOT EXISTS `Questions` (
   `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `chapter_id` int(7) NOT NULL,
   `created_by_id` int(8) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
 
 --
 -- Dumping data for table `Questions`
@@ -439,19 +520,55 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (6, '<p><strong>Class</strong> ประกอบไปด้วย <strong>Attribute</strong> และ <strong>Method</strong>  <u><span style="color:#FF0000;">ไม่สามารถสืบทอดได้</span></u></p>', 'boolean', 'inuse', '2014-09-22 08:23:26', 8, 3),
 (7, '<p><span style="font-size:22px;"><span style="font-family:''th sarabun new'', ''th sarabun psk'';">หากมี <strong>Method</strong>  <u>Run() </u> ใน <strong>Class</strong>  ต้องการให้เรียกใช้จากภายนอกได้  จะต้องกำหนด <span style="color:#FF0000;"><strong>Encapsulation</strong></span> อย่างไร</span></span></p>', 'choice', 'active', '2014-09-24 13:20:44', 8, 3),
 (8, '<blockquote>\n<p>Class Fan {</p>\n\n<p>    private int speed;<br /><span style="line-height:1.6em;">    private double power</span><br /><span style="line-height:1.6em;">    private bool isSwing;</span><br /><span style="line-height:1.6em;">    public string name;</span><br /><span style="line-height:1.6em;">}</span></p>\n</blockquote>\n\n<p>จาก Class ดังกล่าว  มีการกำหนด  Attribute กี่ตัว  </p>', 'numeric', 'active', '2014-09-29 09:32:17', 8, 8),
-(9, '<p>Drafting question</p>', 'boolean', 'active', '2014-09-22 09:48:18', 5, 3),
+(9, '<p>Drafting question</p>', 'boolean', 'inuse', '2014-09-22 09:48:18', 5, 3),
 (10, '<p>Drafting 2</p>', 'choice', 'inuse', '2014-10-01 15:20:10', 4, 3),
 (11, '<p>Disabled question</p>', 'numeric', 'inuse', '2014-09-08 21:05:28', 4, 8),
-(12, '<p>Trueeee</p>', 'boolean', 'active', '2014-09-08 21:09:05', 4, 8),
+(12, '<p>Trueeee</p>', 'boolean', 'inuse', '2014-09-08 21:09:05', 4, 8),
 (13, '<p><strong>jhglkdjf;sldkfs;dkjfls;</strong></p>', 'numeric', 'active', '2014-09-09 15:38:00', 7, 8),
 (14, '<p><em>dfkjs;ldkfjs;ldfsoduypofsdjo</em></p>', 'choice', 'inuse', '2014-10-02 13:58:53', 4, 8),
 (15, '<p><span style="background-color:rgb(249,249,249);color:rgb(102,102,102);font-family:''source sans pro'', sans-serif;font-size:17px;">IT Consultancy Method</span></p>\n\n<p><font color="#666666" face="source sans pro, sans-serif"><span style="background-color:rgb(249,249,249);font-size:17px;">รหัสวิชาคืออะไร</span></font></p>', 'numeric', 'inuse', '2014-10-02 14:05:21', 4, 8),
-(16, '<p><span style="font-size:18px;">ITITITITITITITIT</span></p>', 'boolean', 'active', '2014-10-02 14:07:00', 4, 8),
-(17, '<p><strong>bfafrstjvghulkbjklinjkljkl</strong></p>', 'boolean', 'active', '2014-10-02 14:08:47', 4, 8),
+(16, '<p><span style="font-size:18px;">ITITITITITITITIT</span></p>', 'boolean', 'inuse', '2014-10-02 14:07:00', 4, 8),
+(17, '<p><strong>bfafrstjvghulkbjklinjkljkl</strong></p>', 'boolean', 'inuse', '2014-10-02 14:08:47', 4, 8),
 (18, '<p><span style="color:#FF0000;"> bbcbcvxvcxvxccvxcvxcxcvxcv</span></p>', 'numeric', 'inuse', '2014-10-02 15:17:08', 4, 8),
-(19, '<p><u>yrttewewerwe</u></p>', 'boolean', 'active', '2014-10-02 15:23:38', 4, 8),
-(20, '<p>werwertertwertr</p>', 'boolean', 'active', '2014-10-02 15:32:12', 9, 8),
-(21, '<p><span style="font-size:20px;">1+2 = ?</span></p>', 'numeric', 'inuse', '2014-10-09 20:43:29', 4, 8);
+(19, '<p><u>yrttewewerwe</u></p>', 'boolean', 'inuse', '2014-10-02 15:23:38', 4, 8),
+(20, '<p>werwertertwertr</p>', 'boolean', 'inuse', '2014-10-02 15:32:12', 9, 8),
+(21, '<p><span style="font-size:20px;">1+2 = ?</span></p>', 'numeric', 'inuse', '2014-10-09 20:43:29', 4, 8),
+(22, '<p><strong>gtsrtgertyer</strong></p>', 'choice', 'active', '2014-12-06 11:21:00', 4, 8),
+(23, '<p><strong>เพราะเหตุใดเวลาเราเคี้ยวข้าวนานๆ จะรู้สึกข้าวนั้นหวาน</strong></p>', 'choice', 'inuse', '2014-12-06 12:31:47', 11, 8),
+(24, '<p><strong> อนุภาคที่เล็กที่สุดได้จากการย่อยโปรตีนคืออะไร</strong></p>', 'choice', 'inuse', '2014-12-06 12:34:22', 11, 8),
+(25, '<p><strong>ที่กระเพาะอาหารมีการย่อยอาหารประเภทใด และอยู่ในภาวะใด</strong></p>', 'choice', 'inuse', '2014-12-06 12:35:55', 11, 8),
+(26, '<p><strong>ถ้าเป็นโรคตับอักเสบ จะส่งผลกระทบต่อระบบย่อยอาหารประเภทใด</strong></p>', 'choice', 'inuse', '2014-12-06 12:39:24', 11, 8),
+(27, '<p><strong>ถ้าหากเรารับประทานข้าวมันไก่จะมีการย่อยสิ้นสุดที่อวัยวะใดเป็นลำดับสุดท้าย</strong></p>', 'choice', 'inuse', '2014-12-06 12:40:55', 11, 8),
+(28, '<p><strong>อาหารประเภทวิตามินและแร่ธาตุนั้นไม่ต้องผ่านกระบวนการย่อย <u>ใช่</u>หรือ<u>ไม่  </u>เพราะเหตุใด</strong></p>', 'choice', 'inuse', '2014-12-06 12:42:46', 11, 8),
+(29, '<p><strong>ถ้าหากเรากินอาหารไม่เป็นเวลา จะก่อให้เกิดอาการอย่างไร</strong></p>', 'choice', 'inuse', '2014-12-06 12:45:20', 11, 8),
+(30, '<p><strong>ที่อวัยวะบริเวณใดบ้าง เกิดการย่อยอาหารประเภทโปรตีน</strong></p>', 'choice', 'inuse', '2014-12-06 12:47:40', 11, 8),
+(31, '<p><strong>อวัยวะบริเวณใดมีการย่อยอาหารครบทั้ง คาร์โบไฮเดรต โปรตีนและไขมัน</strong></p>', 'choice', 'inuse', '2014-12-06 12:49:56', 11, 8),
+(32, '<p><strong> อวัยวะใดบ้าง ที่สามารถผลิตน้ำย่อยและย่อยอาหารจำพวกแป้งได้</strong></p>', 'choice', 'inuse', '2014-12-06 12:51:55', 11, 8),
+(33, '<p><strong>ระดับพลังงานอิเล็กตรอน K L M N O P Q เป็นแบบจำลองอะตอมของใคร</strong></p>', 'choice', 'inuse', '2014-12-06 14:14:23', 12, 8),
+(34, '<p><strong> จำนวนอิเล็กตรอนที่มีได้มากที่สุดในแต่ละดับชั้นพลังงานคือ</strong></p>', 'choice', 'inuse', '2014-12-06 14:16:11', 12, 8),
+(35, '<p><strong>ระดับพลังงานที่ 3( n=3 ) มีจำนวนอิเล็กตรอนได้มากที่สุดคือเท่าไร</strong></p>', 'choice', 'inuse', '2014-12-06 14:17:39', 12, 8),
+(36, '<p><strong>จัดอิเล็กตรอนของ</strong>  <strong><sub> 11</sub></strong><strong>Na</strong><strong>  ให้ถูกต้อง</strong></p>', 'choice', 'inuse', '2014-12-06 14:19:12', 12, 8),
+(37, '<p><strong>จัดอิเล็กตรอนของ   <sub>20</sub>Ca   ให้ถูกต้อง</strong></p>', 'choice', 'inuse', '2014-12-06 14:22:29', 12, 8),
+(38, '<p><strong>ระดับพลังงานที่ 4( n = 4 ) มี 4 ระดับพลังงานย่อยคือ</strong></p>', 'choice', 'inuse', '2014-12-06 14:23:26', 12, 8),
+(39, '<p><strong>ธาตุ Li มีการจัดเรียงออร์บิทัลอย่างไร</strong></p>', 'choice', 'inuse', '2014-12-06 14:25:17', 12, 8),
+(40, '<p><strong>ธาตุ O มีการจัดเรียงออร์บิทัลอย่างไร</strong></p>', 'choice', 'inuse', '2014-12-06 14:27:37', 12, 8),
+(41, '<p><strong>อิเล็กตรอนที่อยู่ในระดับพลังงานสูงสุดหรือชั้นนอกสุดเรียกว่า</strong></p>', 'choice', 'inuse', '2014-12-06 14:28:25', 12, 8),
+(42, '<p><strong>ระดับพลังงานที่ 4( n=4 ) มีจำนวนอิเล็กตรอนมากที่สุดได้เท่าไร</strong></p>', 'choice', 'inuse', '2014-12-06 14:32:46', 12, 8),
+(43, '<p>ความหมายของราคาคือ จำนวนเงินที่มีมูลค่าเท่ากับสินค้าและบริการที่ลูกค้าต้องการ และมีศักยภาพในการจ่ายไป เพื่อให้ได้รับสินค้าและบริการที่ต้องการ </p>', 'boolean', 'inuse', '2014-12-06 16:57:43', 13, 64),
+(44, '<p>แนวคิดการตั้งราคาที่นิยมใช้ มี 2 แนวคิด คือการตั้งราคาตากต้นทุน และ การตั้งราคาตามคุณค่า </p>', 'boolean', 'inuse', '2014-12-06 16:58:23', 13, 64),
+(45, '<p>ปัจจัยที่มีผลต่อการกำหนดราคาขายในต่างประเทศนั้นมีหลายปัจจัยรวมไปถึง ปัจจัยด้านอายุการใช้งานด้วย</p>', 'boolean', 'inuse', '2014-12-06 16:58:46', 13, 64),
+(46, '<p>นโยบายระดับราคา การตั้งราคา ณ ระดับตลาด เป็นการตั้งราคาสินค้าให้เท่ากับราคาของคู่แข่งขันที่ขายสินค้า ประเภทเดียวกัน คุณภาพด้อยกว่ากัน </p>', 'boolean', 'inuse', '2014-12-06 16:59:08', 13, 64),
+(47, '<p>ปัจจัยที่ต้องพิจารณาในการเลือกใช้เครื่องมือการส่งเสริมการตลาด ประเภทตลาด เพียงอย่างเดียวเท่านั้น </p>', 'boolean', 'inuse', '2014-12-06 17:02:52', 13, 64),
+(48, '<p>Target Group จะแบ่งออกแบบกว้างๆ ได้เป็น 2 กลุ่ม คือ Non – customer และ Customer Group </p>', 'boolean', 'inuse', '2014-12-06 17:03:21', 13, 64),
+(49, '<p>จุดมุ่งหมายของ IMC คือความหลากหลายของเครื่องมือในการสื่อสาร ตลอดจน วิธีการใช้เครื่องมือต่างๆ เพื่อส่งข้อความไปยัง Target Market ให้มีประสิทธิภาพมากที่สุดในกานเข้าถึง แจ้งให้ทราบ และชักชวน และท้ายสุดโน้มน้าวให้เปลี่ยนพฤติกรรม </p>', 'boolean', 'inuse', '2014-12-06 17:03:47', 13, 64),
+(50, '<p>การจำจำหน่ายสินค้าโดยตรงจากธุรกิจไปยัง Target Group โดยไม่ผ่านคนกลางทางการตลาด เช่น TV Direct ที่ขายสินค้าผ่าน TV หรือผ่าน Internet </p>', 'boolean', 'inuse', '2014-12-06 17:04:14', 13, 64),
+(51, '<p>ผู้ค้าส่ง ( Wholesaler ) คือ ผู้ที่ทำหน้าที่กระจายสินค้า ไปยังผู้ค้าปลีก (Retailer) โดยผู้ค้าส่งแบ่งออกเป็น 3 ประเภท คือ ยี่ปั๊ว นายหน้าและตัวแทนขาย กับ ศูนย์กระจายสินค้า </p>', 'boolean', 'active', '2014-12-06 17:04:39', 13, 64),
+(52, '<p>ระบบ EDI คือระบบที่สามารถเช็คสินค้าได้เมื่อสินค้าหมดชั้นวางสินค้า</p>', 'boolean', 'active', '2014-12-06 17:05:02', 13, 64),
+(53, '<p>ปัจจัยภายในใดบ้าง ที่ใช้ในการวางแผนช่องทางการจัดจำหน่าย</p>', 'choice', 'inuse', '2014-12-06 17:09:18', 14, 64),
+(54, '<p>ข้อเสียของการซื้อผ่านอินเตอร์เน็ตคืออะไร</p>', 'choice', 'inuse', '2014-12-06 17:10:31', 14, 64),
+(55, '<p>ข้อใดไม่จัดเป็นวิธีการขนส่งสินค้า</p>', 'choice', 'inuse', '2014-12-06 17:11:57', 14, 64),
+(56, '<p>กระบวนการขนส่งสินค้า สำคัญพอๆกับกระบวนการผลิตเพราะเหตุใด</p>', 'choice', 'inuse', '2014-12-06 17:13:17', 14, 64),
+(57, '<p>ประเทศใดไม่ใช่ประเทศในกลุ่ม ประเทศ MINT </p>', 'choice', 'inuse', '2014-12-06 17:14:36', 14, 64);
 
 -- --------------------------------------------------------
 
@@ -463,7 +580,7 @@ CREATE TABLE IF NOT EXISTS `Question_boolean` (
 `id` int(10) NOT NULL,
   `answer` varchar(20) NOT NULL,
   `question_id` int(10) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `Question_boolean`
@@ -477,7 +594,17 @@ INSERT INTO `Question_boolean` (`id`, `answer`, `question_id`) VALUES
 (5, 'f', 16),
 (6, 't', 17),
 (7, 't', 19),
-(8, 't', 20);
+(8, 't', 20),
+(9, 't', 43),
+(10, 't', 44),
+(11, 'f', 45),
+(12, 'f', 46),
+(13, 'f', 47),
+(14, 't', 48),
+(15, 't', 49),
+(16, 't', 50),
+(17, 't', 51),
+(18, 't', 52);
 
 -- --------------------------------------------------------
 
@@ -495,7 +622,7 @@ CREATE TABLE IF NOT EXISTS `Question_choice` (
   `choice6` text,
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `Question_choice`
@@ -507,7 +634,33 @@ INSERT INTO `Question_choice` (`id`, `choice1`, `choice2`, `choice3`, `choice4`,
 (3, 'Public', 'Function', 'Attribute', 'ถูกทุกข้อ', '', '', '2', 4),
 (4, 'Private', 'Public', 'Protected', 'Void', '', '', '2', 7),
 (5, '5656', '7404', '', '', '', '', '2', 10),
-(6, 'a', 'b', 'c', 'd', '', '', '1', 14);
+(6, 'a', 'b', 'c', 'd', '', '', '1', 14),
+(7, 'rtte', 'ere', 'fgsdf', 'dfg', '', '', '3', 22),
+(8, 'เกิดความรู้สึกไปเอง', 'เพราะในข้าวมีน้ำตาลปนอยู่', 'เพราะข้าวถูกเปลี่ยนไปเป็นน้ำตาล', 'ในปากมีเอนไซม์ที่มีความหวานอย่ในตัวแล้ว', '', '', '3', 23),
+(9, 'กรดไขมัน', 'กรดอะมิโน', 'กลีเซอลอล', 'น้ำตาลมอลโทส', '', '', '2', 24),
+(10, 'แป้ง  ภาวะเป็นกรด', 'โปรตีน  ภาวะเป็นเบส', 'โปรตีน  ภาวะเป็นกรด', 'โปรตีน  ภาวะเป็นกลาง', '', '', '3', 25),
+(11, 'ไขมัน', 'โปรตีน', 'คาร์โบไฮเดรต', 'วิตามินและเกลือแร่', '', '', '1', 26),
+(12, 'ปาก', 'ลำไส้ใหญ่', 'ลำไส้เล็กเล็ก', 'กระเพาะอาหาร', '', '', '3', 27),
+(13, 'ใช่ เพราะมีอนุภาคขนาดเล็กมาก', 'ใช่ เพราะไม่มีอวัยวะช่วยย่อย', 'ไม่ใช่ เพราะต้องผ่านการย่อย', 'ไม่ใช่ เพราะต้องผ่านการย่อยที่ลำไส้เล็ก', '', '', '1', 28),
+(14, 'ท้องผูก', 'ท้องอืด', 'ปวดท้องอุจจาระ', 'ปวดแสบที่ท้อง', '', '', '4', 29),
+(15, 'ปาก กระเพาะ', 'กระเพาะ ลำไส้ใหญ่', 'ลำไส้เล็ก ลำไส้ใหญ่', 'กระเพาะ ลำไส้ใหญ่', '', '', '2', 30),
+(16, 'ปาก', 'กระเพาะ', 'ลำไส้เล็ก', 'ลำไส้ใหญ่', '', '', '3', 31),
+(17, 'ปาก  ลำไส้เล็ก', 'กระเพาะอาหาร  ตับอ่อน', 'ปาก  กระเพาะอาหาร  ลำไส้เล็ก', 'ปากหลอดอาหาร  กระเพาะอาหาร  ลำไส้เล็ก', '', '', '1', 32),
+(18, 'รัทเทอร์ฟอร์ด', 'โบร์', 'ทอมสัน', 'ดอลตัน', '', '', '2', 33),
+(19, '2n^2', '2n^3', '2n^5', '2n^7', '', '', '2', 34),
+(20, '2', '8', '18', '32', '', '', '3', 35),
+(21, '2  2  4', '2  4  5', '1  2  8', '2  8  1', '', '', '4', 36),
+(22, '2  8  10', '2  8  8  2', '2  8  2  8', '2  8  9  1', '', '', '2', 37),
+(23, 's p d f', 's p d y', 's d p f', 's d p y', '', '', '1', 38),
+(24, '1s^0 2s^2', '1s^0 2s^1 2s^2', '1s^2 2s^1', '1s^1 2s^3', '', '', '3', 39),
+(25, '1s^2 2s^2 2s^4', '1s^1 2s^2 3s^5', '1s^1 2s^2 2p^5', '1s^2 2s^2 2p^4', '', '', '4', 40),
+(26, 'เวเลนซ์อิเล็กตรอน', 'โควาเลนซ์อิเล็กตรอน', 'โคออดิเนตอิเล็กตรอน', 'วาเลนซ์ชันอิเล็กตรอน', '', '', '1', 41),
+(27, '2', '16', '18', '32', '', '', '4', 42),
+(28, 'เงินทุน ต้นทุน', 'ลักษณะของลูกค้า', 'การแข่งขัน เงินทุน', 'การควบคุม การแข่งขัน', 'การแข่งขัน ลักษณะของลูกค้า', '', '1', 53),
+(29, 'สามารถเปรียบเทียบราคาได้', 'ทำการ 24 ชั่วโมง', 'ราคาอาจถูกกว่าสำหรับสินค้าที่ไม่ผ่านพ่อค้าคนกลาง', 'ไม่แน่ใจในคุณภาพถ้าไม่ คุ้นเคยสินค้า', 'มีสินค้าและราคาให้เลือกมากมาย', '', '4', 54),
+(30, 'การขนส่งทางเรือ (Ocean Liner)', 'การขนส่งทางอากาศ (Air Freight)', 'การขนส่งทางบก (In – Land Freight)', 'การขนส่งทางนก (Bird Transport)', 'การขนส่งทางตัวกลาง (Electronics)', '', '4', 55),
+(31, 'ต้องใช้พนักงานในการผลิต', 'มีค่าจ้างที่สูงมาก', 'มีหลายขั้นตอน และเอกสารมีรายละเอียดที่ซับซ้อน', 'เพราะต้องใช้เวลานานมากในการผลิต', 'สร้างผลกำไรให้บริษัทได้สูง', '', '3', 56),
+(32, 'Mexico', 'Italy', 'Turkey', 'Indonesia', 'Nigeria', '', '2', 57);
 
 -- --------------------------------------------------------
 
@@ -534,7 +687,7 @@ CREATE TABLE IF NOT EXISTS `question_detail_list` (
 ,`answer_choice` varchar(20)
 ,`answer_numeric` varchar(20)
 ,`answer_boolean` varchar(20)
-,`chapter_name` varchar(30)
+,`chapter_name` varchar(60)
 );
 -- --------------------------------------------------------
 
@@ -558,7 +711,7 @@ CREATE TABLE IF NOT EXISTS `question_list` (
 ,`answer_choice` varchar(20)
 ,`answer_numeric` varchar(20)
 ,`answer_boolean` varchar(20)
-,`chapter_name` varchar(30)
+,`chapter_name` varchar(60)
 );
 -- --------------------------------------------------------
 
@@ -588,6 +741,37 @@ INSERT INTO `Question_numerical` (`id`, `answer`, `question_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `report_courses`
+--
+CREATE TABLE IF NOT EXISTS `report_courses` (
+`course_id` int(4)
+,`subject_id` int(5)
+,`code` varchar(10)
+,`year` varchar(4)
+,`name` varchar(60)
+,`shortname` varchar(15)
+,`description` text
+,`visible` tinyint(1)
+,`status` varchar(20)
+,`examcount` bigint(21)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `report_course_calc`
+--
+CREATE TABLE IF NOT EXISTS `report_course_calc` (
+`sco_id` int(6)
+,`stu_id` int(10)
+,`course_id` int(4)
+,`paper_id` int(7)
+,`average` double
+,`minimum` float
+,`maximum` float
+);
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Scoreboard`
 --
 
@@ -599,14 +783,16 @@ CREATE TABLE IF NOT EXISTS `Scoreboard` (
   `Score` float DEFAULT NULL,
   `Max` float DEFAULT NULL,
   `Min` float DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `Scoreboard`
 --
 
 INSERT INTO `Scoreboard` (`sco_id`, `stu_id`, `course_id`, `paper_id`, `Score`, `Max`, `Min`) VALUES
-(1, 54310104, 2, 6, 5, NULL, NULL);
+(1, 54310104, 2, 6, 5, NULL, NULL),
+(2, 54310104, 4, 9, 8, NULL, NULL),
+(3, 54310104, 5, 10, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -683,14 +869,64 @@ CREATE TABLE IF NOT EXISTS `Student_Enroll` (
 INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('54310104', '1', 1),
 ('54310104', '2', 11),
+('54310104', '4', 12),
+('54310104', '5', 13),
+('54310104', '6', 14),
 ('54311095', '2', 11),
+('54311095', '4', 12),
+('54311095', '5', 13),
+('54311095', '6', 14),
 ('57700188', '1', 1),
+('57700188', '4', 12),
+('57700188', '6', 14),
+('57700189', '4', 12),
+('57700189', '6', 14),
+('57700190', '4', 12),
+('57700191', '4', 12),
+('57700192', '4', 12),
+('57700192', '5', 13),
+('57700193', '4', 12),
+('57700193', '6', 14),
 ('57700194', '1', 9),
+('57700194', '4', 12),
+('57700194', '6', 14),
+('57700195', '4', 12),
+('57700196', '4', 12),
+('57700196', '5', 13),
 ('57700197', '1', 9),
+('57700197', '4', 12),
+('57700198', '4', 12),
+('57700198', '5', 13),
+('57700199', '4', 12),
+('57700200', '4', 12),
+('57700200', '5', 13),
+('58700101', '4', 12),
+('58700101', '5', 13),
+('58700105', '4', 12),
+('58700105', '5', 13),
+('58700112', '4', 12),
+('58700115', '4', 12),
+('58700115', '5', 13),
+('58700115', '6', 14),
+('58700120', '4', 12),
+('58700121', '4', 12),
+('58700121', '6', 14),
 ('58700127', '1', 9),
+('58700127', '4', 12),
+('58700133', '4', 12),
+('58700133', '6', 14),
 ('58700135', '1', 1),
+('58700135', '4', 12),
+('58700135', '6', 14),
 ('58700140', '1', 1),
-('58700157', '1', 9);
+('58700140', '4', 12),
+('58700140', '6', 14),
+('58700141', '4', 12),
+('58700141', '5', 13),
+('58700156', '4', 12),
+('58700157', '1', 9),
+('58700157', '4', 12),
+('58700157', '6', 14);
 
 -- --------------------------------------------------------
 
@@ -723,7 +959,7 @@ CREATE TABLE IF NOT EXISTS `Subjects` (
   `shortname` varchar(15) NOT NULL,
   `description` text,
   `status` varchar(20) DEFAULT 'active'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `Subjects`
@@ -734,7 +970,10 @@ INSERT INTO `Subjects` (`subject_id`, `code`, `name`, `shortname`, `description`
 (2, '291436', 'Object-Oriented Programming', 'OOP', 'ความเป็นมาของการเขียนโปรแกรมเชิงวัตถุ แนวคิดโปรแกรมเชิงวัตถุ คลาส ออปเจก และองค์ประกอบต่างๆ ของออปเจก วงจรชีวิตวัตถุ การสืบทอดคุณสมบัติ โพลีมอร์ฟิซึม การนำคลาสมาใช้งาน เหตุการณ์ต่างๆ ที่ใช้กับวัตถุ การใช้เอพีไอ การเชื่อมต่อฐานข้อมูล การจัดการความผิดปกติโดย Exception ภาคปฏิบัติใช้โปรแกรมเครื่องมือช่วยพัฒนาเพื่อทดลองเขียนโปรแกรมเชิงวัตถุประยุกต์ใช้ในงานธุรกิจ ด้วยภาษาที่กำหนด', 'active'),
 (3, '291472', 'Special Project 1', 'SP1', 'โครงงานปฏิบัติเพื่อการวิเคราะห์และออกแบบระบบงานคอมพิวเตอร์เพื่อช่วยแก้ปัญหาทางธุรกิจต่างๆ ที่น่าสนใจ และได้รับความเห็นชอบของอาจารย์ที่ปรึกษา โดยมุ่งเน้นให้นักศึกษาสามารถวิเคราะห์ปัญหาเพื่อจัดทำเป็นข้อกำหนดรายละเอียดซอฟต์แวร์ที่สามารถนำไปสู่การสร้างซอฟต์แวร์ทางธุรกิจได้', 'active'),
 (4, '291303', 'System Analysis and Design', 'SAD', 'แนวคิดระบบสารสนเทศและประเภทของระบบสารสนเทศในองค์การธุรกิจ วงจรการพัฒนาระบบ ระเบียบวิธีการ เครื่องมือในการวิเคราะห์ระบบ ผังงานระบบ ตารางการตัดสินใจ การกำหนดปัญหาและการศึกษาความเป็นไปได้ของระบบ การวิเคราะห์ความคุ้มค่าในการลงทุน การออกแบบข้อมูลนำเข้า การออกแบบการแสดงผลลัพธ์ของระบบ การออกแบบฐานข้อมูล การออกแบบกระบวนการประมวลผลระบบ และการจัดทำเอกสารคู่มือระบบ', 'active'),
-(5, '1234', '1234n', 'ssss', '<h1><span style="background-color:rgb(255,255,0);"><strong>คำอธิบายวิชา ของ บลาๆๆๆ</strong></span></h1>\n\n<p><img alt="User Image" src="http://localhost/oxproject/img/avatar3.png" style="height:45px;width:45px;" /></p>\n\n<p>รูปภาพ</p>\n', 'active');
+(5, '1234', '1234n', 'ssss', '<h1><span style="background-color:rgb(255,255,0);"><strong>คำอธิบายวิชา ของ บลาๆๆๆ</strong></span></h1>\n\n<p><img alt="User Image" src="http://localhost/oxproject/img/avatar3.png" style="height:45px;width:45px;" /></p>\n\n<p>รูปภาพ</p>\n', 'active'),
+(6, 'Sci32101', 'วิทยาศาสตร(พื้นฐาน)', 'Sci', '<p>ศึกษา วิเคราะห์ สำรวจ สืบค้นข้อมูล และอธิบายโครงสร้างและการทำงานของระบบย่อยอาหาร ระบบหมุนเวียนเลือด ระบบหายใจ  ระบบขับถ่าย ระบบสืบพันธุ์ ของมนุษย์และสัตว์ รวมทั้งระบบประสาทของมนุษย์   ความสัมพันธ์ของระบบต่าง ๆ ของมนุษย์ พฤติกรรมของมนุษย์และสัตว์ที่ตอบสนองต่อสิ่งเร้าภายนอกและภายใน หลักการและผลของการใช้เทคโนโลยีชีวภาพในการขยายพันธุ์ ปรับปรุงพันธุ์ และเพิ่มผลผลิตของสัตว์ สารอาหารในอาหารมีปริมาณพลังงานและสัดส่วนที่เหมาะสมกับเพศและวัย ผลของสารเสพติดต่อระบบต่าง ๆ ของร่างกาย เพื่อให้ให้ผู้เรียนเกิดความรู้ ความคิด ความเข้าใจ สามารถสื่อสารสิ่งที่เรียนรู้ และนำความรู้ไปใช้ประโยชน์ในการดำรงชีวิตและดูแลสิ่งแวดล้อม มีคุณธรรม จริยธรรม ค่านิยมที่เหมาะสม และเข้าใจว่าวิทยาศาสตร์ เทคโนโลยี สังคม และสิ่งแวดล้อมเกี่ยวข้องสัมพันธ์กัน</p>\n', 'active'),
+(7, 'Sci30221', 'วิทยาศาสตร์(เพิ่มเติม)', 'Sci.p', '<p>วิเคราะห์และอธิบายโครงสร้างอะตอมและลักษณะนิวเคลียร์ของธาตุ การจัดเรียงอิเล็กตรอนในอะตอม ความสัมพันธ์ระหว่างอิเล็กตรอนในระดับพลังงานนอกสุดกับสมบัติของธาตุและการเกิดปฏิกิริยา การทำนายแนวโน้มสมบัติของธาตุในตารางธาตุ รวมถึงการเกิดพันธะเคมีในโครงผลึกและโมเลกุลของสาร โดยใช้กระบวนการทางวิทยาศาสตร์ เพื่อให้นักเรียนรักการเรียนรู้วิทยาศาสตร์ และเทคโนโลยี มีทักษะ กระบวนการทางวิทยาศาสตร์ เกิดความรู้ ความเข้าใจและนำความรู้ไปใช้ในชีวิตประจำวัน มีจิตวิทยาศาสตร์ จริยธรรมคุณธรรม และค่านิยมที่เหมาะสม</p>\n', 'active'),
+(8, '276371', 'Global marketing', 'GM', '<p>บทบาทของการตลาดระดับโลกต่อการแข่งขันทางธุรกิจ ทฤษฎีการค้าระหว่างประเทศ สภาพแวดล้อมและสถาบันสำคัญทางการตลาดระดับโลก โครงสร้างและข้อมูลประชากรของตลาดโลก วัฒนธรรมและพฤติกรรมของผู้บริโภคในตลาดโลก กลยุทธ์การตลาดระดับโลกและการสร้างข้อได้เปรียบทางการแข่งขัน การกำหนดส่วนประสมทางการตลาดระดับโลก การจัดสายงานและการควบคุมกิจกรรมการตลาดโลก ประเด็นทางการตลาดระดับโลกที่เกี่ยวเนื่องกับจริยธรรมในการดำเนินธุรกิจ</p>\n', 'active');
 
 -- --------------------------------------------------------
 
@@ -750,7 +989,7 @@ CREATE TABLE IF NOT EXISTS `Teachers` (
   `fac_id` varchar(50) NOT NULL,
   `email` varchar(200) DEFAULT NULL,
   `pic` varchar(40) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `Teachers`
@@ -758,9 +997,10 @@ CREATE TABLE IF NOT EXISTS `Teachers` (
 
 INSERT INTO `Teachers` (`tea_id`, `id`, `name`, `lname`, `fac_id`, `email`, `pic`) VALUES
 (1, 4, 'ดร.สมบัติ', 'ฝอยทอง', 'วิทยาศาสตร์และศิลปศาสตร์', 'sombut@buu.ac.th', NULL),
-(2, 3, 'อ.อุไรวรรณ', 'บัวตูม', 'วิทยาศาสตร์และศิลปศาสตร์', 'ajuraiwan@buu.ac.th', NULL),
+(2, 3, 'อ.อุไรวรรณ', 'บัวตูม', 'วิทยาศาสตร์และศิลปศาสตร์', 'uraiwanu@buu.ac.th', NULL),
 (3, 8, 'อ.ธารารัตน์', 'พวงสุวรรณ', 'วิทยาศาสตร์และศิลปศาสตร์', '', NULL),
-(4, 9, 'อ.อรวรรณ', 'จิตะกาญจน์', 'วิทยาศาสตร์และศิลปศาสตร์', NULL, NULL);
+(4, 9, 'อ.อรวรรณ', 'จิตะกาญจน์', 'วิทยาศาสตร์และศิลปศาสตร์', NULL, NULL),
+(5, 64, 'สิทธิณี', 'ประภัศร', '0', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -781,7 +1021,10 @@ INSERT INTO `Teacher_Course_Detail` (`tea_id`, `course_id`) VALUES
 (1, 1),
 (1, 3),
 (2, 2),
-(3, 1);
+(3, 1),
+(5, 4),
+(5, 5),
+(5, 6);
 
 -- --------------------------------------------------------
 
@@ -793,7 +1036,7 @@ CREATE TABLE IF NOT EXISTS `upcomingtest` (
 ,`group_id` int(6)
 ,`paper_id` int(7)
 ,`course_id` varchar(10)
-,`papertitle` varchar(30)
+,`papertitle` varchar(70)
 ,`paperdesc` text
 ,`rules` text
 ,`starttime` datetime
@@ -817,7 +1060,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(128) NOT NULL,
   `role` varchar(20) DEFAULT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'active'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=65 ;
 
 --
 -- Dumping data for table `users`
@@ -859,7 +1102,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
 (60, '58700141', 'c0064bb3ef67639fb47b1d3632242c02', 'student', 'active'),
 (61, '58700156', '3b66eb863d7180d06c9bdca6e41e2981', 'student', 'active'),
 (62, '58700157', '97648f4805e0f8fdcd68eeb44cd08056', 'student', 'active'),
-(63, '54311095', '81dc9bdb52d04dc20036dbd8313ed055', 'student', 'active');
+(63, '54311095', '81dc9bdb52d04dc20036dbd8313ed055', 'student', 'active'),
+(64, 'sittinee', 'b59c67bf196a4758191e42f76670ceba', 'teacher', 'active');
 
 -- --------------------------------------------------------
 
@@ -896,6 +1140,24 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `question_list`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `question_list` AS select `q`.`question_id` AS `question_id`,`q`.`question` AS `question`,`q`.`type` AS `type`,`q`.`status` AS `status`,`q`.`chapter_id` AS `chapter_id`,`getNameFromUid`(`q`.`created_by_id`) AS `created_by`,`q`.`created_time` AS `created_time`,`qc`.`choice1` AS `choice1`,`qc`.`choice2` AS `choice2`,`qc`.`choice3` AS `choice3`,`qc`.`choice4` AS `choice4`,`qc`.`choice5` AS `choice5`,`qc`.`choice6` AS `choice6`,`qc`.`answer` AS `answer_choice`,`qn`.`answer` AS `answer_numeric`,`qb`.`answer` AS `answer_boolean`,`ch`.`name` AS `chapter_name` from ((((`questions` `q` left join `question_choice` `qc` on((`q`.`question_id` = `qc`.`question_id`))) left join `question_numerical` `qn` on((`q`.`question_id` = `qn`.`question_id`))) left join `question_boolean` `qb` on((`q`.`question_id` = `qb`.`question_id`))) left join `chapter` `ch` on((`q`.`chapter_id` = `ch`.`chapter_id`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `report_courses`
+--
+DROP TABLE IF EXISTS `report_courses`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `report_courses` AS select `cv`.`course_id` AS `course_id`,`cv`.`subject_id` AS `subject_id`,`cv`.`code` AS `code`,`cv`.`year` AS `year`,`cv`.`name` AS `name`,`cv`.`shortname` AS `shortname`,`cv`.`description` AS `description`,`cv`.`visible` AS `visible`,`cv`.`status` AS `status`,count(`ep`.`course_id`) AS `examcount` from (`courseslist_view` `cv` left join `exam_papers` `ep` on((`cv`.`course_id` = `ep`.`course_id`))) group by `cv`.`course_id`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `report_course_calc`
+--
+DROP TABLE IF EXISTS `report_course_calc`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `report_course_calc` AS select `scoreboard`.`sco_id` AS `sco_id`,`scoreboard`.`stu_id` AS `stu_id`,`scoreboard`.`course_id` AS `course_id`,`scoreboard`.`paper_id` AS `paper_id`,avg(`scoreboard`.`Score`) AS `average`,min(`scoreboard`.`Score`) AS `minimum`,max(`scoreboard`.`Score`) AS `maximum` from `scoreboard` group by `scoreboard`.`course_id`;
 
 -- --------------------------------------------------------
 
@@ -1066,27 +1328,27 @@ MODIFY `branch_id` int(4) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `Chapter`
 --
 ALTER TABLE `Chapter`
-MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `Courses`
 --
 ALTER TABLE `Courses`
-MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `Course_Students_group`
 --
 ALTER TABLE `Course_Students_group`
-MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `Exam_Papers`
 --
 ALTER TABLE `Exam_Papers`
-MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `Exam_Papers_Parts`
 --
 ALTER TABLE `Exam_Papers_Parts`
-MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `Faculty`
 --
@@ -1096,17 +1358,17 @@ MODIFY `fac_id` int(4) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `Questions`
 --
 ALTER TABLE `Questions`
-MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `Question_boolean`
 --
 ALTER TABLE `Question_boolean`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `Question_choice`
 --
 ALTER TABLE `Question_choice`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `Question_numerical`
 --
@@ -1116,22 +1378,22 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `Scoreboard`
 --
 ALTER TABLE `Scoreboard`
-MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `Subjects`
 --
 ALTER TABLE `Subjects`
-MODIFY `subject_id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `subject_id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `Teachers`
 --
 ALTER TABLE `Teachers`
-MODIFY `tea_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `tea_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
+MODIFY `id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

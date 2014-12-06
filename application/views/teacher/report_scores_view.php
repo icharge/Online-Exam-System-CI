@@ -4,12 +4,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<span class="fa fa-rss"></span> วิชาที่เปิดสอบ
+			<span class="fa fa-bar-chart-o"></span> รายงาน
 			<small></small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><?php echo anchor('teacher', '<i class="fa fa-dashboard"></i> หน้าแรก');?></li>
-			<li class="active">วิชาที่เปิดสอบ</li>
+			<li class="active">รายงาน</li>
 		</ol>
 	</section>
 
@@ -65,14 +65,14 @@ if ($this->session->flashdata('msg_error')) {
 	<div class="col-md-12">
 		<div class="box box-info nav-tabs-custom">
 			<ul class="nav nav-tabs  pull-right">
-				<li class="dropdown pull-right">
+				<!-- <li class="dropdown pull-right">
 					<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><?php echo anchor('teacher/reqcourse', 'ร้องขอวิชา');?></li>
 					</ul>
-				</li>
+				</li> -->
 				<li class="pull-left header">
-					<i class="glyphicon glyphicon-th"></i> รายการวิชาที่เปิดสอบ
+					<i class="glyphicon glyphicon-th"></i> <?=$pagetitle?>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -86,7 +86,7 @@ if ($this->session->flashdata('msg_error')) {
 							'role' => 'search',
 							'method' => 'get'
 							);
-						echo form_open('admin/courses', $attr); ?>
+						echo form_open('teacher/reports', $attr); ?>
 							<div class="col-sm-6" style="z-index:500;">
 								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
 								<label><?php
@@ -94,7 +94,7 @@ if ($this->session->flashdata('msg_error')) {
 										'all' => 'ทั้งหมด',
 										'วิทยาศาสตร์และศิลปศาสตร์' =>
 										array(
-											'all' => 'วิทยาศาสตร์และศิลปศาสตร (ทั้งหมด)',
+											'all' => 'วิทยาศาสตร์และศิลปศาสตร์ (ทั้งหมด)',
 											'it' => 'เทคโนโลยีสารสนเทศ',
 											'at' => 'เทคโนโลยีการเกษตร',
 											'is' => 'ระบบสารสนเทศ',
@@ -120,9 +120,9 @@ if ($this->session->flashdata('msg_error')) {
 										'2012' => '2555',
 										'2011' => '2554'
 										);
-									echo form_dropdown('perpage',
+									echo form_dropdown('year',
 										$attr_year,
-										"2557",
+										($this->input->get('year')!=''?$this->input->get('year'):'default'),
 										'class="form-control input-sm" onchange="submitFrm(document.forms.mycourses)"');
 										?>
 								</label>
@@ -171,13 +171,12 @@ if ($this->session->flashdata('msg_error')) {
 					<table class="table table-striped table-hover rowclick">
 						<thead>
 							<tr>
-								<th>สถานะ</th>
-								<th style="width: 70px;">รหัสวิชา</th>
+								<th style="width: 55px;">สถานะ</th>
 								<th style="width: 87px;">ปีการศึกษา</th>
-								<!-- <th style="width: 95px;">...</th> -->
-								<th style="width: 25%;">ชื่อ</th>
+								<th style="width: 70px;">รหัสวิชา</th>
+								<th style="width: 40%;">ชื่อ</th>
 								<th style="width: 88px;">ชื่อย่อ</th>
-								<th class="hidden-xs">คำอธิบาย</th>
+								<th style="width: 55px;" class="">เปิดสอบ (จำนวน)</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -185,15 +184,14 @@ if ($this->session->flashdata('msg_error')) {
 							if (($courseslist)) {
 								foreach ($courseslist as $item) {
 									echo "
-									<tr href=\"".$this->misc->getHref('teacher/courses/view')."/$item[course_id]\">
+									<tr href=\"".$this->misc->getHref('teacher/reports/bypaper')."/$item[course_id]\">
 									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status']).
 									' '.$this->misc->getVisibilityStatusIcon($item['visible'])."</td>
-									<td>$item[code]</td>
 									<td>".($item['year']+543)."</td>
-									<!-- <td>...</td> -->
+									<td>$item[code]</td>
 									<td>$item[name]</td>
 									<td>$item[shortname]</td>
-									<td class=\"hidden-xs\">".$this->misc->getShortText(strip_tags($item['description']))."</td>
+									<td class=\"\">$item[examcount]</td>
 									</tr>
 									";
 								}

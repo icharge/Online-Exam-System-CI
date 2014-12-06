@@ -156,7 +156,7 @@ class Users extends CI_Controller {
 					$this->form_validation->set_rules('passwordconfirm', 'รหัสผ่าน', 'required|callback__password_check['.$this->input->post('password').']');
 					$this->form_validation->set_rules('fname', 'ชื่อ', 'required|trim');
 					$this->form_validation->set_rules('surname', 'นามสกุล', 'required|trim');
-					$this->form_validation->set_rules('faculty', 'คณะ', 'required');
+					//$this->form_validation->set_rules('faculty', 'คณะ', 'required');
 					$this->form_validation->set_message('required', 'คุณต้องกรอก %s');
 					if ($this->form_validation->run())
 					{
@@ -184,6 +184,17 @@ class Users extends CI_Controller {
 					}
 					else
 					{
+						$data['userData'] = array(
+							'username' => set_value('username'),
+							'name' => set_value('fname'),
+							'lname' => set_value('surname'),
+							'birth' => set_value('birth'),
+							'gender' => set_value('gender'),
+							'year' => set_value('year'),
+							//'fac_id' => set_value('faculty'),
+							//'branch_id' => set_value('branch'),
+							'email' => set_value('email'),
+						);
 						$data['msg_error'] = 'ตรวจสอบความถูกต้องของข้อมูล';
 						$this->load->view('admin/userfield_teacher_view', $data);
 					}

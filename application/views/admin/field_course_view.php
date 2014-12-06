@@ -193,7 +193,11 @@ EOL;
 						<div class="box-body tab-pane" id="students">
 							<div class="row">
 								<div class="col-md-12 text-center">
-									<h3 class="" contenteditable="false">ผู้ที่ลงเรียน <?php echo $courseInfo['code'] . ' ' . $courseInfo['name']; ?></h3>
+									<h3 class="" contenteditable="false">ผู้ที่ลงเรียน <?php 
+									if (isset($courseInfo['code']) && isset($courseInfo['name']))
+									echo $courseInfo['code'] . ' ' . $courseInfo['name']; 
+
+									?></h3>
 								</div>
 								<select name="stdselected[]" id="studentList" class="def" size="10" multiple style="width:200px;height:300px">
 									<?php

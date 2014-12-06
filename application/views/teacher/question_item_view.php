@@ -58,7 +58,7 @@
 		<?php }
 			if ($type == "boolean")
 			{
-				if (strtolower($answer_boolean) == "b")
+				if (strtolower($answer_boolean) == "t")
 					$answer = "ถูก";
 				else
 					$answer = "ผิด";

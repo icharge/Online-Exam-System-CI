@@ -440,7 +440,7 @@ HTML;
 														}
 														if ($item['type'] == "boolean")
 														{
-															if (strtolower($item['answer_boolean']) == "b")
+															if (strtolower($item['answer_boolean']) == "t")
 																$answer = "ถูก";
 															else
 																$answer = "ผิด";
