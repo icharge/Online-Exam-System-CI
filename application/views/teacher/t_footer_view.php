@@ -77,6 +77,7 @@
 		};
 		
 		$('body').delegate('tr[href]', 'mouseup', function(e){
+			if ($(this).attr('data-toggle') == "modal") return false;
 			var click = e.which;
 			var url = $(this).attr('href');
 			if(url){
@@ -101,6 +102,10 @@
 
 		$(window).on('hashchange', function() {
 			hashwithtabs();
+		});
+
+		$(document).on('hidden.bs.modal', function (e) {
+			$(e.target).removeData('bs.modal');
 		});
 
 		$('select.input-sm').selectpicker({

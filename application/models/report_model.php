@@ -48,21 +48,55 @@ class Report_model extends CI_Model {
 		return $query['scount'];
 	}
 
-	function getReportCourseCalc($course_id)
+	function getReportCourseCalc($course_id, $paperid=null)
 	{
+		$criteria['course_id'] = $course_id;
+		if ($paperid !== null) $criteria['paper_id'] = $paperid;
 		$query = $this->db
-			->where('course_id', $course_id)
+			->where($criteria)
 			->get('report_course_calc')
 			->result_array();
+		// die( $this->db->last_query());
 		return $query;
 	}
 
 	function getStdScoreByPaper($paperid)
 	{
 		$query = $this->db
+			->select(array('sco_id','scoreboard.stu_id','title','name','lname','course_id','paper_id','Score'))
+			->from('Scoreboard')
+			->join('Students','Scoreboard.stu_id = Students.stu_id','left')
 			->where('paper_id', $paperid)
-			->order_by('stu_id', 'asc')
-			->get('Scoreboard')
+			->order_by('scoreboard.stu_id', 'asc')
+			->get()
+			->result_array();
+		return $query;
+	}
+
+	function getPapersByCourseId($courseid)
+	{
+		$query = $this->db
+			->select('*')
+			->from('Exam_Papers')
+			->where('course_id', $courseid)
+			->get()
+			->result_array();
+		return $query;
+	}
+
+	function getReportByStudent($courseid)
+	{
+/*
+SELECT stu_id, getScoreByPaperId(11,stu_id) as paper_1 FROM `Student_Enroll` WHERE `course_id` = 6
+*/
+		$selcol[] = "stu_id";
+		foreach ($this->getPapersByCourseId($courseid) as $item) {
+			$selcol[] = "getScoreByPaperId($item[paper_id],stu_id) as paper_$item[paper_id]";
+		}
+		$query = $this->db
+			->select($selcol)
+			->where('course_id', $courseid)
+			->get('Student_Enroll')
 			->result_array();
 		return $query;
 	}

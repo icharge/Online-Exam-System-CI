@@ -53,6 +53,10 @@ td.ellipsis {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+table.textvertmid td,
+.table.textvertmid td {
+	vertical-align: middle !important;
+}
 
 .navbar {
 	min-width: 330px;
@@ -606,4 +610,8 @@ input[type=text].date {
 .exampapergroup .panel-title > a {
 	display: block;
 	padding: 10px 15px;
+}
+
+.summary , .summary .badge {
+	font-size: 22px;
 }

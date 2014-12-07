@@ -168,11 +168,11 @@ if ($this->session->flashdata('msg_error')) {
 				</div>
 				<!-- /Search box -->
 				<div class="box-body no-padding">
-					<table class="table table-striped table-hover rowclick">
+					<table class="table table-striped table-hover textvertmid rowclick">
 						<thead>
 							<tr>
-								<th style="width: 55px;">สถานะ</th>
-								<th style="width: 87px;">ปีการศึกษา</th>
+								<th style="width: 55px;">รายงาน</th>
+								<th style="width: 60px;">ปีการศึกษา</th>
 								<th style="width: 70px;">รหัสวิชา</th>
 								<th style="width: 40%;">ชื่อ</th>
 								<th style="width: 88px;">ชื่อย่อ</th>
@@ -181,19 +181,30 @@ if ($this->session->flashdata('msg_error')) {
 						</thead>
 						<tbody>
 						<?php
-							if (($courseslist)) {
+							if ($courseslist) {
 								foreach ($courseslist as $item) {
-									echo "
-									<tr href=\"".$this->misc->getHref('teacher/reports/bypaper')."/$item[course_id]\">
-									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status']).
-									' '.$this->misc->getVisibilityStatusIcon($item['visible'])."</td>
-									<td>".($item['year']+543)."</td>
+									$year = $item['year']+543;
+									echo <<<html
+									<tr>
+									<td class="status">
+										<div class="btn-group">
+											<a href="{$this->misc->getHref('teacher/reports/bypaper')}/{$item['course_id']}" class="btn btn-sm btn-default btn-flat">ชุดข้อสอบ</a>
+											<button type="button" class="btn btn-sm btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
+												<span class="caret"></span>
+												<span class="sr-only">Toggle Dropdown</span>
+											</button>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="{$this->misc->getHref('teacher/reports/bystudent')}/{$item['course_id']}">บุคคล</a></li>
+											</ul>
+										</div>
+									</td>
+									<td>{$year}</td>
 									<td>$item[code]</td>
 									<td>$item[name]</td>
 									<td>$item[shortname]</td>
-									<td class=\"\">$item[examcount]</td>
+									<td>$item[examcount]</td>
 									</tr>
-									";
+html;
 								}
 							} else {
 								echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";

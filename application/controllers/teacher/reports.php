@@ -78,10 +78,36 @@ class Reports extends CI_Controller {
 		$this->load->view('teacher/t_footer_view');
 	}
 
+	// AJAX 
 	public function paperstdscore($paperid)
 	{
 		$data['reportRows'] = $this->reports->getStdScoreByPaper($paperid);
+		$data['paperInfo'] = $this->courses->getPaper($paperid);
+		$paperCalc = $this->reports->getReportCourseCalc($data['paperInfo']['course_id']);
+		$data['paperCalc'] = $paperCalc[0];
 		$this->load->view('teacher/report_paper_studentscore_view', $data);
+	}
+
+	public function bystudent($courseId)
+	{
+		$this->load->view('teacher/t_header_view');
+		$this->load->view('teacher/t_headerbar_view');
+		$this->load->view('teacher/t_sidebar_view');
+
+		// $data['formlink'] = 'teacher/reqcourse/add';
+		$data['pagetitle'] = '';
+		$data['pagesubtitle'] = '';
+
+		$data['courseInfo'] = $this->courses->getCourseById($courseId);
+		// SET Default Per page
+		$data['perpage'] = '10';
+
+		$data['reportRows'] = $this->reports->getReportByStudent($courseId);
+		$data['reportCols'] = $this->reports->getPapersByCourseId($courseId);
+
+		$this->load->view('teacher/report_scores_bystudents_view', $data);
+		
+		$this->load->view('teacher/t_footer_view');
 	}
 
 }

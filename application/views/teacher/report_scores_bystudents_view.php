@@ -127,39 +127,39 @@ if ($this->session->flashdata('msg_error')) {
 					<table class="table table-striped table-hover rowclick">
 						<thead>
 							<tr>
-								<th>ชุดข้อสอบ</th>
-								<th>ลงสอบ</th>
-								<th>เข้าสอบ</th>
-								<th>ค่าเฉลี่ย</th>
-								<th>ต่ำสุด</th>
-								<th>สูงสุด</th>
+								<th>ผู้สอบ</th>
+								<?php
+									$ColCount = sizeof($reportCols);
+									foreach ($reportCols as $col) {
+										echo "<th>$col[title]</th>";
+									}
+								?>
+								<th>รวมคะแนน</th>
 							</tr>
 						</thead>
 						<tbody>
 						<?php
 							if (($reportRows)) {
 								foreach ($reportRows as $item) {
-									$year = $item['year']+543;
-									list($startdate, $starttime) = explode(' ', $item['starttime']);
-									$item['startdate'] = date('d/m/Y',strtotime($startdate));
-									$item['starttime'] = date('h:i',strtotime($starttime));
-
-									list($enddate, $endtime) = explode(' ', $item['endtime']);
-									$item['enddate'] = date('d/m/Y',strtotime($enddate));
-									$item['endtime'] = date('h:i',strtotime($endtime));
-
-									$daterange = $this->misc->getFullDateTH($item['startdate'])." $item[starttime] - ".($item['startdate']!=$item['enddate']?$this->misc->getFullDateTH($item['enddate']):'').
-									" $item[endtime]";
+									
 									echo <<<html
-									<tr data-toggle="modal" data-target=".paperstdscore" href="{$this->misc->getHref('teacher/reports/paperstdscore')}/{$item['paper_id']}">
-									<td>{$item['papername']}<br>{$daterange}</td>
-									<td>{$item['enrollcount']}</td>
-									<td>{$item['testedcount']}</td>
-									<td>{$item['average']}</td>
-									<td>{$item['minimum']}</td>
-									<td>{$item['maximum']}</td>
-									</tr>
+									<tr>
+									<td>{$item['stu_id']}</td>
 html;
+		$sum = 0;
+		foreach ($reportCols as $col) {
+			$colname = 'paper_'.$col['paper_id'];
+			if ($item[$colname] !== null)
+			{
+				echo "<td>".$item[$colname]."</td>";
+				$sum += $item[$colname];
+			}
+			else
+				echo "<td><i class='fa fa-square jtooltip' title='ยังไม่ได้สอบ'></i></td>";
+		}
+		
+									echo "<td>$sum</td>
+									</tr>";
 								}
 							} else {
 								echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
