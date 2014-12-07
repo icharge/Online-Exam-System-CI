@@ -7,6 +7,7 @@
 								<li><?php echo anchor('subject-list', 'รายการวิชาทั้งหมด'); ?></li>
 							</ul>
 						</li>
+						<li><?php echo anchor('student/stats', 'สถิติ'); ?></li>
 						<li><?php echo anchor('news', 'ข่าวสาร'); ?></li>
 						<li><?php echo anchor('contact', 'ติดต่อ'); ?></li>
 						<li class="sign-in-btn"><?php

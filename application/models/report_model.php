@@ -89,14 +89,45 @@ class Report_model extends CI_Model {
 /*
 SELECT stu_id, getScoreByPaperId(11,stu_id) as paper_1 FROM `Student_Enroll` WHERE `course_id` = 6
 */
-		$selcol[] = "stu_id";
+		$selcol[] = "Students.stu_id";
+		$selcol[] = "title";
+		$selcol[] = "name";
+		$selcol[] = "lname";
 		foreach ($this->getPapersByCourseId($courseid) as $item) {
-			$selcol[] = "getScoreByPaperId($item[paper_id],stu_id) as paper_$item[paper_id]";
+			$selcol[] = "getScoreByPaperId($item[paper_id],Student_Enroll.stu_id) as paper_$item[paper_id]";
 		}
 		$query = $this->db
 			->select($selcol)
+			->join('Students','Student_Enroll.stu_id = Students.stu_id','left')
 			->where('course_id', $courseid)
 			->get('Student_Enroll')
+			->result_array();
+		return $query;
+	}
+
+	// =================
+	// STUDENT's STATS
+	// =================
+	function getReportTestedCourses($stu_id)
+	{
+		$query = $this->db
+			->select(array('course_id','code','year','name','shortname','description'))
+			->join('courseslist_view','course_id','left')
+			->where('stu_id',$stu_id)
+			->group_by('paper_id')
+			->get('Scoreboard')
+			->result_array();
+		return $query;
+	}
+
+	function getReportTestedPapers($stu_id, $courseid)
+	{
+		$query = $this->db
+			->select(array('sco_id','stu_id','course_id','scoreboard.paper_id','Score','average'))
+			->join('report_course_calc', 'scoreboard.paper_id = report_course_calc.paper_id','left')
+			->where('stu_id', $stu_id)
+			->where('course_id', $courseid)
+			->get('Scoreboard')
 			->result_array();
 		return $query;
 	}

@@ -124,7 +124,7 @@ if ($this->session->flashdata('msg_error')) {
 				</div>
 				<!-- /Search box -->
 				<div class="box-body no-padding">
-					<table class="table table-striped table-hover rowclick">
+					<table class="table table-striped table-hover">
 						<thead>
 							<tr>
 								<th>ผู้สอบ</th>
@@ -144,7 +144,7 @@ if ($this->session->flashdata('msg_error')) {
 									
 									echo <<<html
 									<tr>
-									<td>{$item['stu_id']}</td>
+									<td>{$item['stu_id']} {$item['title']}{$item['name']} {$item['lname']}</td>
 html;
 		$sum = 0;
 		foreach ($reportCols as $col) {
