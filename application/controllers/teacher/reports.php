@@ -38,8 +38,9 @@ class Reports extends CI_Controller {
 		$data['perpage'] = '10';
 		if ($this->input->get('perpage')!='') $data['perpage'] = $this->input->get('perpage');
 
-		$data['total'] = $this->reports->countCoursesListCount(NULL, $this->input->get('q'),null,null,$this->input->get('year'));
-		$data['courseslist'] = $this->reports->getCoursesListCount(NULL, $this->input->get('q'),
+		$teaid = $this->session->userdata('uid');
+		$data['total'] = $this->reports->countCoursesListCount($teaid, $this->input->get('q'),null,null,$this->input->get('year'));
+		$data['courseslist'] = $this->reports->getCoursesListCount($teaid, $this->input->get('q'),
 			$data['perpage'],
 			$this->misc->PageOffset($data['perpage'],$this->input->get('p')),
 			$this->input->get('year'));

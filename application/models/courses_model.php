@@ -48,7 +48,7 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
-	function getCourseList($keyword='', $perpage=0, $offset=0, $visible="*")
+	function getCourseList($keyword='', $perpage=0, $offset=0, $visible=null, $year=0)
 	{
 // SELECT course_id, year, tea_id, startdate, name, shortname, description, visible, enabled
 // FROM Course c
@@ -60,21 +60,22 @@ class Courses_model extends CI_Model {
 		settype($perpage, "integer");
 
 		if ($perpage > 0) $this->db->limit($perpage, $offset);
-		if ($visible != "*") $cause = array('visible' => $visible);
+		if ($visible !== null) $cause = array('visible' => $visible);
 		else $cause = array('visible >=' => '0');
+		if ($year != 0) $cause['year'] = $year;
 		$query = $this->db
 			// ->select($fields)
-			->like("CONCAT(code,year,name,shortname,description)",$keyword,'both')
+			->like("CONCAT(code,name,shortname,description)",$keyword,'both')
 			->where($cause)
 			->order_by('year','desc')
 			->order_by('code','asc')
 			->get('courseslist_view')
 			->result_array();
-			// die($this->db->last_query());
+			// die($this->db->last_query().$year);
 		return $query;
 	}
 
-	function getMyCourseList($teaid, $keyword='', $perpage=0, $offset=0)
+	function getMyCourseList($teaid, $keyword='', $perpage=0, $offset=0, $year=0)
 	{
 		if ($perpage=='') $perpage=0;
 		if ($offset=='') $offset=0;
@@ -96,7 +97,24 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
-	function countMyCourseList($teaid, $keyword='')
+	function countCourseList($keyword='', $visible=null, $year=0)
+	{
+		$fields = array(
+			'count(*) as scount'
+		);
+		if ($visible !== null) $cause = array('visible' => $visible);
+		else $cause = array('visible >=' => '0');
+		if ($year != 0) $cause['year'] = $year;
+		$query = $this->db
+			->select($fields)
+			->like("CONCAT(code,name,shortname,description)",$keyword,'both')
+			->where($cause)
+			->get('courseslist_view')
+			->row_array();
+		return $query['scount'];
+	}
+
+	function countMyCourseList($teaid, $keyword='', $year=0)
 	{
 		$fields = array(
 			'count(*) as scount'
@@ -130,22 +148,6 @@ class Courses_model extends CI_Model {
 			$options[$item['group_id']] = $item['name'];
 		}
 		return $options;
-	}
-
-	function countCourseList($keyword='', $visible="*")
-	{
-		$fields = array(
-			'count(*) as scount'
-		);
-		if ($visible != "*") $cause = array('visible' => $visible);
-		else $cause = array('visible >=' => '0');
-		$query = $this->db
-			->select($fields)
-			->like("CONCAT(code,year,name,shortname,description)",$keyword,'both')
-			->where($cause)
-			->get('courseslist_view')
-			->row_array();
-		return $query['scount'];
 	}
 
 	function getCourseById($CourseId)

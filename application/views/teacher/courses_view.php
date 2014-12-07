@@ -86,7 +86,7 @@ if ($this->session->flashdata('msg_error')) {
 							'role' => 'search',
 							'method' => 'get'
 							);
-						echo form_open('admin/courses', $attr); ?>
+						echo form_open('teacher/courses', $attr); ?>
 							<div class="col-sm-6" style="z-index:500;">
 								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
 								<label><?php
@@ -120,9 +120,9 @@ if ($this->session->flashdata('msg_error')) {
 										'2012' => '2555',
 										'2011' => '2554'
 										);
-									echo form_dropdown('perpage',
+									echo form_dropdown('year',
 										$attr_year,
-										"2557",
+										($this->input->get('year')!=''?$this->input->get('year'):'default'),
 										'class="form-control input-sm" onchange="submitFrm(document.forms.mycourses)"');
 										?>
 								</label>

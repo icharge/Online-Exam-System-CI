@@ -800,10 +800,10 @@ HTML;
 		$data['perpage'] = '10';
 		if ($this->input->get('perpage')!='') $data['perpage'] = $this->input->get('perpage');
 
-		$data['total'] = $this->courses->countCourseList($this->input->get('q'));
+		$data['total'] = $this->courses->countCourseList($this->input->get('q'), null, $this->input->get('year'));
 		$data['courseslist'] = $this->courses->getCourseList($this->input->get('q'),
 			$data['perpage'],
-			$this->misc->PageOffset($data['perpage'],$this->input->get('p')));
+			$this->misc->PageOffset($data['perpage'],$this->input->get('p')), null,$this->input->get('year'));
 
 		$this->misc->PaginationInit(
 			$this->role.'/courses?perpage='.

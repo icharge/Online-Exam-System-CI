@@ -18,10 +18,10 @@ class Report_model extends CI_Model {
 		if ($perpage > 0) $this->db->limit($perpage, $offset);
 		$cause = array();
 		if ($year != 0) $cause['year'] = $year;
+		if ($teaid != '') $this->db->where('course_id IN', "( SELECT course_id FROM Teacher_Course_Detail WHERE tea_id = '$teaid')", false);
 
 		$query = $this->db
 			->like("CONCAT(code,name,shortname,description)",$keyword,'both')
-			// ->where(array('tea_id'=>$teaid))
 			->where($cause)
 			->order_by('year','desc')
 			->order_by('examcount','desc')
@@ -32,21 +32,16 @@ class Report_model extends CI_Model {
 		return $query;
 	}
 
-	function countCoursesListCount($teaid='', $keyword='', $perpage=0, $offset=0, $year=0)
+	function countCoursesListCount($teaid='', $keyword='', $year=0)
 	{
-		if ($perpage=='') $perpage=0;
-		if ($offset=='') $offset=0;
-		settype($offset, "integer");
-		settype($perpage, "integer");
 
-		if ($perpage > 0) $this->db->limit($perpage, $offset);
 		$cause = array();
 		if ($year != 0) $cause['year'] = $year;
+		if ($teaid != '') $this->db->where('course_id IN', "( SELECT course_id FROM Teacher_Course_Detail WHERE tea_id = '$teaid')", false);
 
 		$query = $this->db
 			->select("count(*) as scount")
 			->like("CONCAT(code,name,shortname,description)",$keyword,'both')
-			// ->where(array('tea_id'=>$teaid))
 			->where($cause)
 			->get('report_courses')
 			->row_array();

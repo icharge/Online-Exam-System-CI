@@ -176,7 +176,7 @@ if ($this->session->flashdata('msg_error')) {
 								<th style="width: 70px;">รหัสวิชา</th>
 								<th style="width: 40%;">ชื่อ</th>
 								<th style="width: 88px;">ชื่อย่อ</th>
-								<th style="width: 55px;" class="">เปิดสอบ (จำนวน)</th>
+								<th style="width: 80px;" class="">เปิดสอบ (จำนวน)</th>
 							</tr>
 						</thead>
 						<tbody>
