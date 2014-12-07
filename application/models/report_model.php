@@ -48,6 +48,15 @@ class Report_model extends CI_Model {
 		return $query['scount'];
 	}
 
+	function getReportCourseCalc($course_id)
+	{
+		$query = $this->db
+			->where('course_id', $course_id)
+			->get('report_course_calc')
+			->result_array();
+		return $query;
+	}
+
 }
 
 /* End of file report_model.php */

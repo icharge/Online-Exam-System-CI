@@ -57,17 +57,23 @@ class Reports extends CI_Controller {
 		$this->load->view('teacher/t_footer_view');
 	}
 
-	public function bypaper($courseid)
+	public function bypaper($courseId)
 	{
 		$this->load->view('teacher/t_header_view');
 		$this->load->view('teacher/t_headerbar_view');
 		$this->load->view('teacher/t_sidebar_view');
 
 		// $data['formlink'] = 'teacher/reqcourse/add';
-		$data['pagetitle'] = 'แบบฟอร์มร้องขอวิชา';
+		$data['pagetitle'] = 'ชุดข้อสอบ';
 		$data['pagesubtitle'] = '';
 
-		$this->load->view('teacher/report_scores_view', $data);
+		$data['courseInfo'] = $this->courses->getCourseById($courseId);
+		// SET Default Per page
+		$data['perpage'] = '10';
+
+		$data['reportRows'] = $this->reports->getReportCourseCalc($courseId);
+
+		$this->load->view('teacher/report_scores_bypapers_view', $data);
 		
 		$this->load->view('teacher/t_footer_view');
 	}
