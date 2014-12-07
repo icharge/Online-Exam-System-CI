@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2014 at 07:11 PM
+-- Generation Time: Dec 07, 2014 at 07:37 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -69,6 +69,20 @@ left join students on (users.id = students.id)
     ELSE
     	RETURN "false";
     END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `getScoreByPaperId`(`paperid` INT, `stuid` INT) RETURNS float
+    NO SQL
+BEGIN
+declare rscore float;
+SELECT Score INTO @rscore FROM Scoreboard WHERE paper_id = paperid and stu_id = stuid;
+
+IF FOUND_ROWS() > 0 THEN
+		RETURN @rscore;
+    ELSE
+    	RETURN null;
+    END IF;
+
 END$$
 
 CREATE DEFINER=`root`@`localhost` FUNCTION `getSubjectIdFromCourseId`(`CourseId` INT) RETURNS int(5)
@@ -346,8 +360,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('a8b52ec95d9b15d0725dd529575780d3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417889249, 'a:11:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;}'),
-('c33ab63fcf0a5c642b4fc5e08f07e1fd', '192.168.1.4', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1417888137, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:2:"64";s:3:"uid";s:1:"5";s:8:"username";s:8:"sittinee";s:8:"fullname";s:43:"สิทธิณี ประภัศร";s:5:"fname";s:21:"สิทธิณี";s:5:"lname";s:21:"ประภัศร";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
+('48ca6b697c12d333e4f6bf3392d39436', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1417977357, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -931,8 +944,11 @@ CREATE TABLE IF NOT EXISTS `report_course_calc` (
 ,`subject_id` int(5)
 ,`code` varchar(10)
 ,`year` varchar(4)
-,`name` varchar(60)
+,`subjectname` varchar(60)
 ,`shortname` varchar(15)
+,`papername` varchar(70)
+,`starttime` datetime
+,`endtime` datetime
 ,`visible` tinyint(1)
 ,`status` varchar(20)
 ,`paper_id` int(7)
@@ -1006,7 +1022,7 @@ CREATE TABLE IF NOT EXISTS `Students` (
 
 INSERT INTO `Students` (`stu_id`, `id`, `title`, `name`, `lname`, `birth`, `gender`, `idcard`, `year`, `fac_id`, `branch_id`, `email`, `pic`) VALUES
 ('54310104', 2, 'นาย', 'นรภัทร', 'นิ่มมณี', '1992-09-14', 'male', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', 'charge_n@hotmail.com', NULL),
-('54311095', 63, '', 'นลินนิภา', 'โพธิ์มี', '1992-12-02', 'female', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', 'nalinnipa.pm@gmail.com', NULL),
+('54311095', 63, 'นางสาว', 'นลินนิภา', 'โพธิ์มี', '1992-12-02', 'female', NULL, 2011, 'วิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', 'nalinnipa.pm@gmail.com', NULL),
 ('57700188', 36, 'นาย', 'ธรลักษณ์', 'แก้วดี', NULL, 'male', '5770000000188', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
 ('57700189', 37, 'นาย', 'นามเหมือน', 'แก้วทอง', NULL, 'male', '5770000000189', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
 ('57700190', 38, 'นาย', 'นามไม่เหมือน', 'แก้วเงิน', NULL, 'male', '5770000000190', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
@@ -1351,7 +1367,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `report_course_calc`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `report_course_calc` AS select `c`.`course_id` AS `course_id`,`c`.`subject_id` AS `subject_id`,`c`.`code` AS `code`,`c`.`year` AS `year`,`c`.`name` AS `name`,`c`.`shortname` AS `shortname`,`c`.`visible` AS `visible`,`c`.`status` AS `status`,`s`.`paper_id` AS `paper_id`,`getEnrollCount`(`c`.`course_id`) AS `enrollcount`,count(`s`.`stu_id`) AS `testedcount`,avg(`s`.`Score`) AS `average`,min(`s`.`Score`) AS `minimum`,max(`s`.`Score`) AS `maximum` from (`courseslist_view` `c` left join `scoreboard` `s` on((`c`.`course_id` = `s`.`course_id`))) group by `s`.`course_id` order by `c`.`code`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `report_course_calc` AS select `c`.`course_id` AS `course_id`,`c`.`subject_id` AS `subject_id`,`c`.`code` AS `code`,`c`.`year` AS `year`,`c`.`name` AS `subjectname`,`c`.`shortname` AS `shortname`,`ep`.`title` AS `papername`,`ep`.`starttime` AS `starttime`,`ep`.`endtime` AS `endtime`,`c`.`visible` AS `visible`,`c`.`status` AS `status`,`s`.`paper_id` AS `paper_id`,`getEnrollCount`(`c`.`course_id`) AS `enrollcount`,count(`s`.`stu_id`) AS `testedcount`,avg(`s`.`Score`) AS `average`,min(`s`.`Score`) AS `minimum`,max(`s`.`Score`) AS `maximum` from ((`courseslist_view` `c` left join `scoreboard` `s` on((`c`.`course_id` = `s`.`course_id`))) left join `exam_papers` `ep` on((`s`.`paper_id` = `ep`.`paper_id`))) group by `s`.`paper_id` order by `c`.`code`;
 
 -- --------------------------------------------------------
 
