@@ -57,6 +57,16 @@ class Report_model extends CI_Model {
 		return $query;
 	}
 
+	function getStdScoreByPaper($paperid)
+	{
+		$query = $this->db
+			->where('paper_id', $paperid)
+			->order_by('stu_id', 'asc')
+			->get('Scoreboard')
+			->result_array();
+		return $query;
+	}
+
 }
 
 /* End of file report_model.php */

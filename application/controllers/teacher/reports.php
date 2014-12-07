@@ -78,6 +78,12 @@ class Reports extends CI_Controller {
 		$this->load->view('teacher/t_footer_view');
 	}
 
+	public function paperstdscore($paperid)
+	{
+		$data['reportRows'] = $this->reports->getStdScoreByPaper($paperid);
+		$this->load->view('teacher/report_paper_studentscore_view', $data);
+	}
+
 }
 
 /* End of file reports.php */
