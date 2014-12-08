@@ -418,11 +418,11 @@ a {
             .lessons-list .media a.icon-audio:before {
                 content: "\f001";
             }
-
+/*
 .span3.course-item:first-child, .course-item-small:first-child {
     margin-left: 15px;
 }
-
+*/
 .course-item, .course-item-small, .trainer-list img {
     box-shadow: 1px 1px 3px #d5d5d5;
     -moz-box-shadow: 1px 1px 3px #d5d5d5;
@@ -1896,6 +1896,10 @@ h5, h6 {
   font-size: 10.5px;
 }
 
+.row.fix {
+    margin-left: -30px;
+    margin-right: -15px;
+}
 
 /*
  * BlockQuote Fix

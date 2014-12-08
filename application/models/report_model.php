@@ -111,24 +111,26 @@ SELECT stu_id, getScoreByPaperId(11,stu_id) as paper_1 FROM `Student_Enroll` WHE
 	function getReportTestedCourses($stu_id)
 	{
 		$query = $this->db
-			->select(array('course_id','code','year','name','shortname','description'))
-			->join('courseslist_view','course_id','left')
+			->select(array('Scoreboard.course_id','code','year','name','shortname','description'))
+			->join('courseslist_view','Scoreboard.course_id = courseslist_view.course_id','left')
 			->where('stu_id',$stu_id)
-			->group_by('paper_id')
+			->group_by('Scoreboard.paper_id')
 			->get('Scoreboard')
 			->result_array();
+		// echo $this->db->last_query();
 		return $query;
 	}
 
 	function getReportTestedPapers($stu_id, $courseid)
 	{
 		$query = $this->db
-			->select(array('sco_id','stu_id','course_id','scoreboard.paper_id','Score','average'))
+			->select(array('sco_id','stu_id','scoreboard.course_id','scoreboard.paper_id','papername','starttime','endtime', 'Score','average'))
 			->join('report_course_calc', 'scoreboard.paper_id = report_course_calc.paper_id','left')
 			->where('stu_id', $stu_id)
-			->where('course_id', $courseid)
+			->where('scoreboard.course_id', $courseid)
 			->get('Scoreboard')
 			->result_array();
+		// echo $this->db->last_query();
 		return $query;
 	}
 

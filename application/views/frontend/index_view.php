@@ -1,7 +1,7 @@
 	<!-- content begin -->
 	<div id="content">
 		<div class="container">
-			<div class="row">
+			<div class="row fix">
 				<div class="span3 course-item">
 					<div class="inner">
 						<div class="hover">
@@ -130,7 +130,7 @@
 
 				<div class="col-md-8">
 					<h3>Latest Courses</h3>
-					<div class="row">
+					<div class="row fix">
 						<?php 
 							foreach ($coursesList as $courseItem) {
 								$desc = strip_tags($courseItem['description']);

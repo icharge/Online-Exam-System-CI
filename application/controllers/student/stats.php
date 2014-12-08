@@ -31,7 +31,22 @@ class Stats extends CI_Controller {
 
 		$this->load->view('frontend/t_header_view', $headerData);
 
+
+		$data['reportRows'] = $this->reports->getReportTestedCourses($this->session->userdata('uid'));
+
+		$this->load->view('student/stats_view', $data);
+
 		$this->load->view('frontend/t_footer_view');
+	}
+
+	// AJAX 
+	public function paperscore($course_id)
+	{
+		$data['courseInfo'] = $this->courses->getCourseById($course_id);
+		$data['reportRows'] = $this->reports->getReportTestedPapers($this->session->userdata('uid'), $course_id);
+		$this->load->view('student/stats_studentscore_view', $data);
+
+		$this->load->view('teacher/t_footer_view');
 	}
 
 }
