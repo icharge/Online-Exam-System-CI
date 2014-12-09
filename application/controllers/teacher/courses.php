@@ -837,6 +837,7 @@ HTML;
 			else
 			{
 				$data['courseInfo'] = $this->courses->getCourseById($courseId);
+				$data['role'] = $this->role;
 				// Load Teachers
 				$data['teacherListinCourse'] = $this->courses->getTeacherlist($courseId);
 				$data['teacherListAvaliable'] = $this->courses->getTeacherlist($courseId, 'exclude');

@@ -379,7 +379,7 @@ HTML;
 													</li>
 HTML;
 												}
-												$fullpagelink = anchor('teacher/courses/exampaper/'.$item['paper_id'], '<i class="fa fa-file-text-o"></i>','class="jtooltip" title="ดูชุดข้อสอบ"');
+												$fullpagelink = anchor($role.'/courses/exampaper/'.$item['paper_id'], '<i class="fa fa-file-text-o"></i>','class="jtooltip" title="ดูชุดข้อสอบ"');
 												echo <<<HTML
 												<li class="list-group-item" data-paperid="{$item['paper_id']}">
 													<span class="badge"><i class="fa fa-clock-o"></i> {$datediff}</span>
