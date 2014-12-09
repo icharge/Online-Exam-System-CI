@@ -167,47 +167,47 @@ if ($this->session->flashdata('msg_error')) {
 					</div>
 				</div>
 				<!-- /Search box -->
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover rowclick">
-						<thead>
-							<tr>
-								<th>สถานะ</th>
-								<th style="width: 70px;">รหัสวิชา</th>
-								<th style="width: 87px;">ปีการศึกษา</th>
-								<th style="width: 95px;">...</th>
-								<th style="width: 25%;">ชื่อ</th>
-								<th style="width: 88px;">ชื่อย่อ</th>
-								<th class="hidden-xs">คำอธิบาย</th>
-							</tr>
-						</thead>
-						<tbody>
-						<?php
-							if (($courseslist)) {
-								foreach ($courseslist as $item) {
-									echo "
-									<tr href=\"".$this->misc->getHref('teacher/courses/view')."/$item[course_id]\">
-									<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status']).
-									' '.$this->misc->getVisibilityStatusIcon($item['visible'])."</td>
-									<td>$item[code]</td>
-									<td>".($item['year']+543)."</td>
-									<td>...</td>
-									<td>$item[name]</td>
-									<td>$item[shortname]</td>
-									<td class=\"hidden-xs\">".$this->misc->getShortText(strip_tags($item['description']))."</td>
-									</tr>
-									";
-								}
-							} else {
-								echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
+			</div>
+			<div class="box-body no-padding">
+				<table class="table table-striped table-hover rowclick">
+					<thead>
+						<tr>
+							<th>สถานะ</th>
+							<th style="width: 70px;">รหัสวิชา</th>
+							<th style="width: 87px;">ปีการศึกษา</th>
+							<th style="width: 95px;">...</th>
+							<th style="width: 25%;">ชื่อ</th>
+							<th style="width: 88px;">ชื่อย่อ</th>
+							<th class="hidden-xs">คำอธิบาย</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php
+						if (($courseslist)) {
+							foreach ($courseslist as $item) {
+								echo "
+								<tr href=\"".$this->misc->getHref('teacher/courses/view')."/$item[course_id]\">
+								<td class=\"status\">".$this->misc->getActiveStatusIcon($item['status']).
+								' '.$this->misc->getVisibilityStatusIcon($item['visible'])."</td>
+								<td>$item[code]</td>
+								<td>".($item['year']+543)."</td>
+								<td>...</td>
+								<td>$item[name]</td>
+								<td>$item[shortname]</td>
+								<td class=\"hidden-xs\">".$this->misc->getShortText(strip_tags($item['description']))."</td>
+								</tr>
+								";
 							}
+						} else {
+							echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
+						}
 
-						?>
-						</tbody>
-					</table>
-				</div>
-				<div class="box-footer clearfix">
-					<?php echo $pagin;?>
-				</div>
+					?>
+					</tbody>
+				</table>
+			</div>
+			<div class="box-footer clearfix">
+				<?php echo $pagin;?>
 			</div>
 		</div>
 	</div>

@@ -112,43 +112,43 @@
 					</div>
 				</div>
 				<!-- /Search box -->
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover rowclick">
-						<thead>
-							<tr>
-								<th>สถานะ</th>
-								<th style="width: 79px;">รหัสวิชา</th>
-								<th style="width: 25%;">ชื่อ</th>
-								<th style="width: 88px;">ชื่อย่อ</th>
-								<th>คำอธิบาย</th>
-							</tr>
-						</thead>
-						<tbody>
-						<?php
-							if (($subjectlist)) {
-								foreach ($subjectlist as $item) {
-									echo "
-									<tr href=\"".$this->misc->getHref('teacher/qwarehouse/view')."/$item[code]\">
-									<td class=\"status\">".$this->qwh->getSubjectStatus($item['hasQuestion']).
-									"</td>
-									<td>$item[code]</td>
-									<td>$item[name]</td>
-									<td>$item[shortname]</td>
-									<td class=\"hidden-xs\">".$this->misc->getShortText(strip_tags($item['description']))."</td>
-									</tr>
-									";
-								}
-							} else {
-								echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
+			</div>
+			<div class="box-body no-padding">
+				<table class="table table-striped table-hover rowclick">
+					<thead>
+						<tr>
+							<th>สถานะ</th>
+							<th style="width: 79px;">รหัสวิชา</th>
+							<th style="width: 25%;">ชื่อ</th>
+							<th style="width: 88px;">ชื่อย่อ</th>
+							<th>คำอธิบาย</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php
+						if (($subjectlist)) {
+							foreach ($subjectlist as $item) {
+								echo "
+								<tr href=\"".$this->misc->getHref('teacher/qwarehouse/view')."/$item[code]\">
+								<td class=\"status\">".$this->qwh->getSubjectStatus($item['hasQuestion']).
+								"</td>
+								<td>$item[code]</td>
+								<td>$item[name]</td>
+								<td>$item[shortname]</td>
+								<td class=\"hidden-xs\">".$this->misc->getShortText(strip_tags($item['description']))."</td>
+								</tr>
+								";
 							}
+						} else {
+							echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
+						}
 
-						?>
-						</tbody>
-					</table>
-				</div>
-				<div class="box-footer clearfix">
-					<?php echo $pagin;?>
-				</div>
+					?>
+					</tbody>
+				</table>
+			</div>
+			<div class="box-footer clearfix">
+				<?php echo $pagin;?>
 			</div>
 		</div>
 	</div>

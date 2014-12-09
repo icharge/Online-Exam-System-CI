@@ -123,55 +123,55 @@ if ($this->session->flashdata('msg_error')) {
 					</div>
 				</div>
 				<!-- /Search box -->
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>ผู้สอบ</th>
-								<?php
-									$ColCount = sizeof($reportCols);
-									foreach ($reportCols as $col) {
-										echo "<th>$col[title]</th>";
-									}
-								?>
-								<th>รวมคะแนน</th>
-							</tr>
-						</thead>
-						<tbody>
-						<?php
-							if (($reportRows)) {
-								foreach ($reportRows as $item) {
-									
-									echo <<<html
-									<tr>
-									<td>{$item['stu_id']} {$item['title']}{$item['name']} {$item['lname']}</td>
-html;
-		$sum = 0;
-		foreach ($reportCols as $col) {
-			$colname = 'paper_'.$col['paper_id'];
-			if ($item[$colname] !== null)
-			{
-				echo "<td>".$item[$colname]."</td>";
-				$sum += $item[$colname];
-			}
-			else
-				echo "<td><i class='fa fa-square jtooltip' title='ยังไม่ได้สอบ'></i></td>";
-		}
-		
-									echo "<td>$sum</td>
-									</tr>";
+			</div>
+			<div class="box-body no-padding">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>ผู้สอบ</th>
+							<?php
+								$ColCount = sizeof($reportCols);
+								foreach ($reportCols as $col) {
+									echo "<th>$col[title]</th>";
 								}
-							} else {
-								echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
+							?>
+							<th>รวมคะแนน</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php
+						if (($reportRows)) {
+							foreach ($reportRows as $item) {
+								
+								echo <<<html
+								<tr>
+								<td>{$item['stu_id']} {$item['title']}{$item['name']} {$item['lname']}</td>
+html;
+	$sum = 0;
+	foreach ($reportCols as $col) {
+		$colname = 'paper_'.$col['paper_id'];
+		if ($item[$colname] !== null)
+		{
+			echo "<td>".$item[$colname]."</td>";
+			$sum += $item[$colname];
+		}
+		else
+			echo "<td><i class='fa fa-square jtooltip' title='ยังไม่ได้สอบ'></i></td>";
+	}
+	
+								echo "<td>$sum</td>
+								</tr>";
 							}
+						} else {
+							echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
+						}
 
-						?>
-						</tbody>
-					</table>
-				</div>
-				<div class="box-footer clearfix">
-					<?php //echo $pagin;?>
-				</div>
+					?>
+					</tbody>
+				</table>
+			</div>
+			<div class="box-footer clearfix">
+				<?php //echo $pagin;?>
 			</div>
 		</div>
 	</div>

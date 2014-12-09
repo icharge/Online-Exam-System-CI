@@ -123,55 +123,55 @@ if ($this->session->flashdata('msg_error')) {
 					</div>
 				</div>
 				<!-- /Search box -->
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover rowclick">
-						<thead>
-							<tr>
-								<th>ชุดข้อสอบ</th>
-								<th>ลงสอบ</th>
-								<th>เข้าสอบ</th>
-								<th>ค่าเฉลี่ย</th>
-								<th>ต่ำสุด</th>
-								<th>สูงสุด</th>
-							</tr>
-						</thead>
-						<tbody>
-						<?php
-							if (($reportRows)) {
-								foreach ($reportRows as $item) {
-									$year = $item['year']+543;
-									list($startdate, $starttime) = explode(' ', $item['starttime']);
-									$item['startdate'] = date('d/m/Y',strtotime($startdate));
-									$item['starttime'] = date('h:i',strtotime($starttime));
+			</div>
+			<div class="box-body no-padding">
+				<table class="table table-striped table-hover rowclick">
+					<thead>
+						<tr>
+							<th>ชุดข้อสอบ</th>
+							<th>ลงสอบ</th>
+							<th>เข้าสอบ</th>
+							<th>ค่าเฉลี่ย</th>
+							<th>ต่ำสุด</th>
+							<th>สูงสุด</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php
+						if (($reportRows)) {
+							foreach ($reportRows as $item) {
+								$year = $item['year']+543;
+								list($startdate, $starttime) = explode(' ', $item['starttime']);
+								$item['startdate'] = date('d/m/Y',strtotime($startdate));
+								$item['starttime'] = date('h:i',strtotime($starttime));
 
-									list($enddate, $endtime) = explode(' ', $item['endtime']);
-									$item['enddate'] = date('d/m/Y',strtotime($enddate));
-									$item['endtime'] = date('h:i',strtotime($endtime));
+								list($enddate, $endtime) = explode(' ', $item['endtime']);
+								$item['enddate'] = date('d/m/Y',strtotime($enddate));
+								$item['endtime'] = date('h:i',strtotime($endtime));
 
-									$daterange = $this->misc->getFullDateTH($item['startdate'])." $item[starttime] - ".($item['startdate']!=$item['enddate']?$this->misc->getFullDateTH($item['enddate']):'').
-									" $item[endtime]";
-									echo <<<html
-									<tr data-toggle="modal" data-target=".paperstdscore" href="{$this->misc->getHref('teacher/reports/paperstdscore')}/{$item['paper_id']}">
-									<td>{$item['papername']}<br>{$daterange}</td>
-									<td>{$item['enrollcount']}</td>
-									<td>{$item['testedcount']}</td>
-									<td>{$item['average']}</td>
-									<td>{$item['minimum']}</td>
-									<td>{$item['maximum']}</td>
-									</tr>
+								$daterange = $this->misc->getFullDateTH($item['startdate'])." $item[starttime] - ".($item['startdate']!=$item['enddate']?$this->misc->getFullDateTH($item['enddate']):'').
+								" $item[endtime]";
+								echo <<<html
+								<tr data-toggle="modal" data-target=".paperstdscore" href="{$this->misc->getHref('teacher/reports/paperstdscore')}/{$item['paper_id']}">
+								<td>{$item['papername']}<br>{$daterange}</td>
+								<td>{$item['enrollcount']}</td>
+								<td>{$item['testedcount']}</td>
+								<td>{$item['average']}</td>
+								<td>{$item['minimum']}</td>
+								<td>{$item['maximum']}</td>
+								</tr>
 html;
-								}
-							} else {
-								echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
 							}
+						} else {
+							echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";
+						}
 
-						?>
-						</tbody>
-					</table>
-				</div>
-				<div class="box-footer clearfix">
-					<?php //echo $pagin;?>
-				</div>
+					?>
+					</tbody>
+				</table>
+			</div>
+			<div class="box-footer clearfix">
+				<?php //echo $pagin;?>
 			</div>
 		</div>
 	</div>
