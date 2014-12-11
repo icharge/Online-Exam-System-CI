@@ -81,18 +81,16 @@
 				<?php
 				if (isset($adminlist)) {
 				?>
-				<div class="box box-danger nav-tabs-custom">
-					<ul class="nav nav-tabs pull-right">
-						<li class="dropdown pull-right">
-							<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><?php echo anchor('admin/users/adduser/admin', 'เพิ่ม');?></li>
-							</ul>
-						</li>
-						<li class="pull-left header">
-							<i class="glyphicon glyphicon-th"></i> ผู้ดูแล
-						</li>
-					</ul>
+				<div class="box box-danger">
+					<div class="box-header">
+						<i class="fa fa-users"></i>
+						<h3 class="box-title">Admin</h3>
+						<div class="box-tools pull-right">
+							<div class="btn-group">
+								<?php echo anchor('admin/users/adduser/admin', '<i class="fa fa-plus text-green"></i> Add','class="btn btn-default "');?>
+							</div>
+						</div>
+					</div>
 					<div class="row box-body">
 						<?php
 							$attr = array(
@@ -178,18 +176,16 @@
 				<?php
 				if (isset($teacherlist)) {
 				?>
-				<div class="box box-primary nav-tabs-custom">
-					<ul class="nav nav-tabs  pull-right">
-						<li class="dropdown pull-right">
-							<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><?php echo anchor('admin/users/adduser/teacher', 'เพิ่ม');?></li>
-							</ul>
-						</li>
-						<li class="pull-left header">
-							<i class="glyphicon glyphicon-th"></i> ผู้สอน
-						</li>
-					</ul>
+				<div class="box box-primary">
+					<div class="box-header">
+						<i class="fa fa-users"></i>
+						<h3 class="box-title">Teacher</h3>
+						<div class="box-tools pull-right">
+							<div class="btn-group">
+								<?php echo anchor('admin/users/adduser/teacher', '<i class="fa fa-plus text-green"></i> Add','class="btn btn-default "');?>
+							</div>
+						</div>
+					</div>
 					<div class="row box-body">
 					<?php
 						$attr = array(
@@ -276,19 +272,17 @@
 				<?php
 				if (isset($studentlist)) {
 					?>
-					<div class="box box-info nav-tabs-custom">
-						<ul class="nav nav-tabs  pull-right">
-							<li class="dropdown pull-right">
-								<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
-								<ul class="dropdown-menu" role="menu">
-									<li><?php echo anchor('admin/users/adduser/student', 'เพิ่ม');?></li>
-									<li><?php echo anchor('admin/users/import/student', 'นำเข้า');?></li>
-								</ul>
-							</li>
-							<li class="pull-left header">
-								<i class="glyphicon glyphicon-th"></i> นักเรียน
-							</li>
-						</ul>
+					<div class="box box-info">
+						<div class="box-header">
+							<i class="fa fa-users"></i>
+							<h3 class="box-title">Student</h3>
+							<div class="box-tools pull-right">
+								<div class="btn-group">
+									<?php echo anchor('admin/users/adduser/student', '<i class="fa fa-plus text-green"></i> Add','class="btn btn-default"');?>
+									<?php echo anchor('admin/users/import/student', '<i class="fa fa-send text-green"></i> Import','class="btn btn-default"');?>
+								</div>
+							</div>
+						</div>
 						<div class="row box-body">
 					<?php
 						$attr = array(

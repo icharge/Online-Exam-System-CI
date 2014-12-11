@@ -62,12 +62,11 @@ if ($this->session->flashdata('msg_error')) {
 ?>
 <div class="row <?php if($this->session->flashdata('noAnim')) echo "animate-fade-up";?>">
 	<div class="col-md-12">
-		<div class="box box-info nav-tabs-custom">
-			<ul class="nav nav-tabs  pull-right">
-				<li class="pull-left header">
-					<i class="glyphicon glyphicon-th"></i> <?=$pagetitle?>
-				</li>
-			</ul>
+		<div class="box box-info">
+			<div class="box-header">
+				<i class="fa fa-users"></i>
+				<h3 class="box-title"><?=$pagetitle?></h3>
+			</div>
 			<div class="tab-content">
 				<!-- Search Box -->
 				<div class="box-body">
@@ -140,6 +139,7 @@ if ($this->session->flashdata('msg_error')) {
 					<?php
 						if (($reportRows)) {
 							foreach ($reportRows as $item) {
+								var_dump($item);
 								$year = $item['year']+543;
 								list($startdate, $starttime) = explode(' ', $item['starttime']);
 								$item['startdate'] = date('d/m/Y',strtotime($startdate));

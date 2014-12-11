@@ -52,6 +52,7 @@ class Report_model extends CI_Model {
 	{
 		$criteria['course_id'] = $course_id;
 		if ($paperid !== null) $criteria['paper_id'] = $paperid;
+		$criteria['paper_id >='] = '0';
 		$query = $this->db
 			->where($criteria)
 			->get('report_course_calc')

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 08, 2014 at 02:06 PM
+-- Generation Time: Dec 11, 2014 at 04:50 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -322,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `Chapter` (
   `name` varchar(60) NOT NULL,
   `description` text,
   `subject_id` int(5) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `Chapter`
@@ -339,7 +339,8 @@ INSERT INTO `Chapter` (`chapter_id`, `name`, `description`, `subject_id`) VALUES
 (12, 'การจัดเรียงอิเล็กตรอนในระดับพลังงานต่างๆ', NULL, 7),
 (13, 'การตลาดระดับโลก ถูกผิด', NULL, 8),
 (14, 'การตลาดระดับโลก ปรนัย', NULL, 8),
-(15, 'reading comprehension', NULL, 9);
+(15, 'reading comprehension', NULL, 9),
+(16, 'สัตว์เลี้ยงลูกด้วยนม', NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -360,7 +361,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('057f2cf9d510606645f46aeaaac0236d', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418043948, 'a:14:{s:9:"user_data";s:0:"";s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}');
+('565dcbbcf23916e983e3ce4eb4b18836', '192.168.1.18', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418312716, 'a:12:{s:9:"user_data";s:0:"";s:2:"id";s:1:"4";s:3:"uid";s:1:"1";s:8:"username";s:6:"sombut";s:8:"fullname";s:44:"ดร.สมบัติ ฝอยทอง";s:5:"fname";s:25:"ดร.สมบัติ";s:5:"lname";s:18:"ฝอยทอง";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;s:16:"flash:new:noAnim";b:1;}'),
+('f0d53a66e97ec454d596ded26e7d2502', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418312481, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"1";s:3:"uid";s:1:"1";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;s:16:"flash:new:noAnim";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -435,7 +437,7 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
   `name` varchar(40) NOT NULL,
   `description` text,
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `Course_Students_group`
@@ -448,7 +450,8 @@ INSERT INTO `Course_Students_group` (`group_id`, `name`, `description`, `course_
 (12, 'กลุ่ม Sci1', '', 4),
 (13, 'Sci.p 1', '', 5),
 (14, 'GM', '', 6),
-(15, 'TOEIC 1', 'เฉพาะผู้ที่ลงเรียนเท่านั้น', 7);
+(15, 'TOEIC 1', 'เฉพาะผู้ที่ลงเรียนเท่านั้น', 7),
+(16, 'TOEIC 2', 'ลงเพิ่มเติม', 7);
 
 -- --------------------------------------------------------
 
@@ -466,7 +469,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers` (
   `course_id` int(4) NOT NULL,
   `visible` smallint(6) NOT NULL DEFAULT '1',
   `status` varchar(20) NOT NULL DEFAULT 'active'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `Exam_Papers`
@@ -484,7 +487,9 @@ INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `startti
 (9, 'ระบบย่อยอาหาร', 'จงเลือกคำตอบที่ถูกที่สุดเพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 10 นาที\nห้ามเปิดตำราเรียน\nทุจริตปรับตกวิชานี้', '2014-12-08 13:00:00', '2014-12-08 13:10:00', 4, 1, 'active'),
 (10, 'การจัดเรียงอิเล็กตรอนในระดับพลังงาน', 'เลือกคำตอบที่ถูกต้องที่สุด เพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 20 นาที\nห้ามนำตำราเข้าห้องสอบ\nทุจริตปรับตกวิชานี้', '2014-12-08 09:00:00', '2014-12-08 09:20:00', 5, 1, 'active'),
 (11, 'การตลาดระดับโลก', 'ข้อสอบมี 2 ตอน ทำทุกตอน', '1. ห้ามนำตำราเข้าห้องสอบ\n2.  ทุจริตปรับตกวิชานี้\n3. ใช้เวลาในการสอบ 40 นาที', '2014-12-07 08:00:00', '2014-12-07 08:40:00', 6, 1, 'active'),
-(12, 'TOEIC TEST', 'Reading Comprehension', '60 minutes for testing', '2014-12-09 09:00:00', '2014-12-09 10:00:00', 7, 1, 'active');
+(12, 'TOEIC TEST', 'Reading Comprehension', '60 minutes for testing', '2014-12-09 09:00:00', '2014-12-09 10:00:00', 7, 1, 'active'),
+(13, 'ทดสอบความรู้สัตว์เลี้ยงลูกด้วยนม', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 4, 1, 'active'),
+(14, 'ทดสอบความรู้สัตว์เลี้ยงลูกด้วยนม', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 4, 1, 'deleted');
 
 -- --------------------------------------------------------
 
@@ -539,10 +544,10 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (21, 9, 8, 6),
 (21, 12, 1, 6),
 (23, 13, 9, 1),
-(24, 13, 9, 6),
-(25, 13, 9, 7),
-(26, 13, 9, 5),
-(27, 13, 9, 8),
+(24, 13, 9, 1),
+(25, 13, 9, 1),
+(26, 13, 9, 1),
+(27, 13, 9, 1),
 (28, 13, 9, 4),
 (29, 13, 9, 3),
 (30, 13, 9, 2),
@@ -597,7 +602,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Parts` (
   `description` text,
   `israndom` tinyint(1) NOT NULL,
   `paper_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `Exam_Papers_Parts`
@@ -616,7 +621,8 @@ INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `isran
 (15, 1, 'ปรนัย', '', 1, 10),
 (16, 1, 'ถูกผิด', '', 1, 11),
 (17, 2, 'ปรนัย', '', 0, 11),
-(18, 1, 'reading comprehension', '', 0, 12);
+(18, 1, 'reading comprehension', '', 0, 12),
+(19, 1, 'เลือกตอบ', '', 1, 13);
 
 -- --------------------------------------------------------
 
@@ -1072,10 +1078,12 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('54310104', '4', 12),
 ('54310104', '5', 13),
 ('54310104', '6', 14),
+('54310104', '7', 16),
 ('54311095', '2', 11),
 ('54311095', '4', 12),
 ('54311095', '5', 13),
 ('54311095', '6', 14),
+('54311095', '7', 16),
 ('57700188', '1', 1),
 ('57700188', '4', 12),
 ('57700188', '6', 14),
@@ -1089,6 +1097,7 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('57700192', '5', 13),
 ('57700193', '4', 12),
 ('57700193', '6', 14),
+('57700193', '7', 16),
 ('57700194', '1', 9),
 ('57700194', '4', 12),
 ('57700194', '6', 14),
@@ -1102,12 +1111,16 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('57700198', '5', 13),
 ('57700198', '7', 15),
 ('57700199', '4', 12),
+('57700199', '7', 16),
 ('57700200', '4', 12),
 ('57700200', '5', 13),
+('57700200', '7', 16),
 ('58700101', '4', 12),
 ('58700101', '5', 13),
+('58700101', '7', 16),
 ('58700105', '4', 12),
 ('58700105', '5', 13),
+('58700105', '7', 16),
 ('58700112', '4', 12),
 ('58700115', '4', 12),
 ('58700115', '5', 13),
@@ -1119,6 +1132,7 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('58700121', '7', 15),
 ('58700127', '1', 9),
 ('58700127', '4', 12),
+('58700127', '7', 16),
 ('58700133', '4', 12),
 ('58700133', '6', 14),
 ('58700133', '7', 15),
@@ -1129,6 +1143,7 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('58700140', '1', 1),
 ('58700140', '4', 12),
 ('58700140', '6', 14),
+('58700140', '7', 16),
 ('58700141', '4', 12),
 ('58700141', '5', 13),
 ('58700156', '4', 12),
@@ -1367,7 +1382,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `report_course_calc`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `report_course_calc` AS select `c`.`course_id` AS `course_id`,`c`.`subject_id` AS `subject_id`,`c`.`code` AS `code`,`c`.`year` AS `year`,`c`.`name` AS `subjectname`,`c`.`shortname` AS `shortname`,`ep`.`title` AS `papername`,`ep`.`starttime` AS `starttime`,`ep`.`endtime` AS `endtime`,`c`.`visible` AS `visible`,`c`.`status` AS `status`,`s`.`paper_id` AS `paper_id`,`getEnrollCount`(`c`.`course_id`) AS `enrollcount`,count(`s`.`stu_id`) AS `testedcount`,avg(`s`.`Score`) AS `average`,min(`s`.`Score`) AS `minimum`,max(`s`.`Score`) AS `maximum` from ((`courseslist_view` `c` left join `scoreboard` `s` on((`c`.`course_id` = `s`.`course_id`))) left join `exam_papers` `ep` on((`s`.`paper_id` = `ep`.`paper_id`))) group by `s`.`paper_id` order by `c`.`code`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `report_course_calc` AS select `c`.`course_id` AS `course_id`,`c`.`subject_id` AS `subject_id`,`c`.`code` AS `code`,`c`.`year` AS `year`,`c`.`name` AS `subjectname`,`c`.`shortname` AS `shortname`,`ep`.`title` AS `papername`,`ep`.`starttime` AS `starttime`,`ep`.`endtime` AS `endtime`,`c`.`visible` AS `visible`,`c`.`status` AS `status`,`s`.`paper_id` AS `paper_id`,`getEnrollCount`(`c`.`course_id`) AS `enrollcount`,count(`s`.`stu_id`) AS `testedcount`,avg(`s`.`Score`) AS `average`,min(`s`.`Score`) AS `minimum`,max(`s`.`Score`) AS `maximum` from ((`courseslist_view` `c` left join `scoreboard` `s` on((`c`.`course_id` = `s`.`course_id`))) left join `exam_papers` `ep` on((`s`.`paper_id` = `ep`.`paper_id`))) group by `s`.`course_id` order by `c`.`code`;
 
 -- --------------------------------------------------------
 
@@ -1538,7 +1553,7 @@ MODIFY `branch_id` int(4) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `Chapter`
 --
 ALTER TABLE `Chapter`
-MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `Courses`
 --
@@ -1548,17 +1563,17 @@ MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `Course_Students_group`
 --
 ALTER TABLE `Course_Students_group`
-MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `Exam_Papers`
 --
 ALTER TABLE `Exam_Papers`
-MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `Exam_Papers_Parts`
 --
 ALTER TABLE `Exam_Papers_Parts`
-MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `Faculty`
 --

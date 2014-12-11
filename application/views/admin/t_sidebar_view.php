@@ -50,7 +50,7 @@
 					<i class="fa fa-angle-left pull-right"></i>
 				</a>
 				<ul class="treeview-menu">
-					<li<?php echo $this->misc->listCActive("faculty");?>><?php echo anchor('admin/faculty', '<i class="fa fa-angle-double-right"></i> จัดการคณะ');?></li>
+					<!-- <li<?php echo $this->misc->listCActive("faculty");?>><?php echo anchor('admin/faculty', '<i class="fa fa-angle-double-right"></i> จัดการคณะ');?></li> -->
 					<li<?php echo $this->misc->listCActive("users");?>><?php echo anchor('admin/users', '<i class="fa fa-angle-double-right"></i> จัดการผู้ใช้');?></li>
 					<li<?php echo $this->misc->listCActive("subjects");?>><?php echo anchor('admin/subjects', '<i class="fa fa-angle-double-right"></i> จัดการวิชา');?></li>
 				</ul>

@@ -61,10 +61,10 @@ if ($this->session->flashdata('msg_error')) {
 }
 
 ?>
-<div class="row <?php if($this->session->flashdata('noAnim')) echo "animate-fade-up";?>">
+<div class="row">
 	<div class="col-md-12">
 		<div class="box box-info nav-tabs-custom">
-			<ul class="nav nav-tabs  pull-right">
+			<!-- <ul class="nav nav-tabs  pull-right">
 				<li class="dropdown pull-right">
 					<a href="#" class="text-muted" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
 					<ul class="dropdown-menu" role="menu">
@@ -74,7 +74,16 @@ if ($this->session->flashdata('msg_error')) {
 				<li class="pull-left header">
 					<i class="glyphicon glyphicon-th"></i> รายการวิชาที่เปิดสอบ
 				</li>
-			</ul>
+			</ul> -->
+			<div class="box-header">
+				<i class="fa fa-newspaper-o"></i>
+				<h3 class="box-title">รายการวิชาที่เปิดสอบ</h3>
+				<div class="box-tools pull-right">
+					<div class="btn-group">
+						<?php echo anchor('admin/courses/add', '<i class="fa fa-plus text-green"></i> เพิ่ม','class="btn btn-default "');?>
+					</div>
+				</div>
+			</div>
 			<div class="tab-content">
 				<!-- Search Box -->
 				<div class="box-body">

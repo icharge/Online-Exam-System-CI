@@ -1322,7 +1322,7 @@ body > .header .logo .icon {
   color: #444;
 }
 .box .box-header > .box-tools {
-  padding: 5px 10px 5px 5px;
+  padding: 5px 5px 5px 5px; /*5px 10px 5px 5px;*/
 }
 .box .box-body {
   padding: 10px;
