@@ -1919,7 +1919,8 @@ h5, h6 {
 .exampaper {
     border: solid 1px #C5C5C5;
     background: #fff;
-    margin: 20px 10px 60px 10px;
+    margin-top: 20px;
+    margin-bottom: 60px;
     box-shadow: 0 12px 49px #989898;
     padding-top: 30px;
     padding-bottom: 60px;

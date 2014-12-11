@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 11, 2014 at 04:50 PM
+-- Generation Time: Dec 11, 2014 at 08:40 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -195,49 +195,79 @@ INSERT INTO `Answer_Papers` (`question_id`, `sco_id`, `answer`) VALUES
 (23, 11, '3'),
 (23, 13, '2'),
 (23, 14, '1'),
+(23, 15, '3'),
+(23, 17, '3'),
+(23, 18, '2'),
 (24, 2, '2'),
 (24, 6, '3'),
 (24, 11, '1'),
 (24, 13, '2'),
 (24, 14, '2'),
+(24, 15, '2'),
+(24, 17, '2'),
+(24, 18, '3'),
 (25, 2, '3'),
 (25, 6, '3'),
 (25, 11, '3'),
 (25, 13, '1'),
 (25, 14, '4'),
+(25, 15, '3'),
+(25, 17, '3'),
+(25, 18, '2'),
 (26, 2, '3'),
 (26, 6, '1'),
 (26, 11, '1'),
 (26, 13, '1'),
 (26, 14, '4'),
+(26, 15, '4'),
+(26, 17, '2'),
+(26, 18, '4'),
 (27, 2, '3'),
 (27, 6, '2'),
 (27, 11, '1'),
 (27, 13, '2'),
+(27, 15, '3'),
+(27, 17, '2'),
+(27, 18, '4'),
 (28, 2, '1'),
 (28, 6, '1'),
 (28, 11, '1'),
 (28, 13, '1'),
+(28, 15, '4'),
+(28, 17, '3'),
+(28, 18, '2'),
 (29, 2, '4'),
 (29, 6, '4'),
 (29, 11, '4'),
 (29, 13, '4'),
 (29, 14, '2'),
+(29, 15, '4'),
+(29, 17, '4'),
+(29, 18, '4'),
 (30, 2, '2'),
 (30, 6, '2'),
 (30, 11, '4'),
 (30, 13, '1'),
 (30, 14, '2'),
+(30, 15, '2'),
+(30, 17, '2'),
+(30, 18, '2'),
 (31, 2, '3'),
 (31, 6, '2'),
 (31, 11, '2'),
 (31, 13, '2'),
 (31, 14, '3'),
+(31, 15, '2'),
+(31, 17, '4'),
+(31, 18, '2'),
 (32, 2, '4'),
 (32, 6, '1'),
 (32, 11, '1'),
 (32, 13, '3'),
 (32, 14, '1'),
+(32, 15, '3'),
+(32, 17, '3'),
+(32, 18, '2'),
 (33, 3, '3'),
 (33, 5, '1'),
 (34, 3, '4'),
@@ -261,42 +291,75 @@ INSERT INTO `Answer_Papers` (`question_id`, `sco_id`, `answer`) VALUES
 (43, 4, 't'),
 (43, 9, 't'),
 (43, 12, 't'),
+(43, 19, 'f'),
 (44, 4, 't'),
 (44, 9, 't'),
 (44, 12, 't'),
+(44, 19, 'f'),
 (45, 4, 'f'),
 (45, 9, 't'),
 (45, 12, 'f'),
+(45, 19, 't'),
 (46, 4, 'f'),
 (46, 9, 'f'),
 (46, 12, 't'),
+(46, 19, 'f'),
 (47, 4, 'f'),
 (47, 9, 't'),
 (47, 12, 'f'),
+(47, 19, 'f'),
 (48, 4, 't'),
 (48, 9, 'f'),
 (48, 12, 't'),
+(48, 19, 't'),
 (49, 4, 't'),
 (49, 9, 'f'),
 (49, 12, 't'),
+(49, 19, 't'),
 (50, 4, 't'),
 (50, 9, 't'),
 (50, 12, 't'),
+(50, 19, 't'),
 (53, 4, '1'),
 (53, 9, '1'),
 (53, 12, '1'),
+(53, 19, '4'),
 (54, 4, '4'),
 (54, 9, '4'),
 (54, 12, '4'),
+(54, 19, '4'),
 (55, 4, '4'),
 (55, 9, '4'),
 (55, 12, '4'),
+(55, 19, '3'),
 (56, 4, '3'),
 (56, 9, '2'),
 (56, 12, '3'),
+(56, 19, '3'),
 (57, 4, '2'),
 (57, 9, '2'),
-(57, 12, '2');
+(57, 12, '2'),
+(57, 19, '4'),
+(80, 16, '3'),
+(81, 16, '2'),
+(82, 16, '2'),
+(83, 16, '4'),
+(84, 16, '2'),
+(85, 16, '3'),
+(86, 16, '2'),
+(87, 16, '2'),
+(88, 16, '2'),
+(89, 16, '3'),
+(90, 16, '1'),
+(91, 16, '2'),
+(92, 16, '3'),
+(93, 16, '3'),
+(94, 16, '2'),
+(95, 16, '3'),
+(96, 16, '1'),
+(97, 16, '2'),
+(98, 16, '3'),
+(99, 16, '2');
 
 -- --------------------------------------------------------
 
@@ -322,7 +385,7 @@ CREATE TABLE IF NOT EXISTS `Chapter` (
   `name` varchar(60) NOT NULL,
   `description` text,
   `subject_id` int(5) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `Chapter`
@@ -340,7 +403,8 @@ INSERT INTO `Chapter` (`chapter_id`, `name`, `description`, `subject_id`) VALUES
 (13, 'การตลาดระดับโลก ถูกผิด', NULL, 8),
 (14, 'การตลาดระดับโลก ปรนัย', NULL, 8),
 (15, 'reading comprehension', NULL, 9),
-(16, 'สัตว์เลี้ยงลูกด้วยนม', NULL, 6);
+(16, 'การเจริญเติบโตของร่างกาย', NULL, 6),
+(17, 'กีฬาเทควันโด', NULL, 10);
 
 -- --------------------------------------------------------
 
@@ -361,8 +425,9 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('565dcbbcf23916e983e3ce4eb4b18836', '192.168.1.18', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418312716, 'a:12:{s:9:"user_data";s:0:"";s:2:"id";s:1:"4";s:3:"uid";s:1:"1";s:8:"username";s:6:"sombut";s:8:"fullname";s:44:"ดร.สมบัติ ฝอยทอง";s:5:"fname";s:25:"ดร.สมบัติ";s:5:"lname";s:18:"ฝอยทอง";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;s:16:"flash:new:noAnim";b:1;}'),
-('f0d53a66e97ec454d596ded26e7d2502', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418312481, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"1";s:3:"uid";s:1:"1";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;s:16:"flash:new:noAnim";b:1;}');
+('7c29c175fdc3d1406bd31961d24bc33d', '192.168.1.18', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418324467, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:2:"64";s:3:"uid";s:1:"5";s:8:"username";s:8:"sittinee";s:8:"fullname";s:43:"สิทธิณี ประภัศร";s:5:"fname";s:21:"สิทธิณี";s:5:"lname";s:21:"ประภัศร";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
+('7fe2d65f4961051737b7f81f72d1c2a1', '192.168.1.18', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418324457, 'a:14:{s:9:"user_data";s:0:"";s:2:"id";s:2:"41";s:3:"uid";s:8:"57700193";s:8:"username";s:8:"57700193";s:8:"fullname";s:34:"ขำ ไม่เหมือน";s:5:"fname";s:6:"ขำ";s:5:"lname";s:27:"ไม่เหมือน";s:5:"birth";N;s:6:"gender";s:4:"male";s:4:"year";s:4:"2014";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}'),
+('9df60cecfbe64bd1517874d8a54520b7', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418325650, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"1";s:3:"uid";s:1:"1";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -377,7 +442,7 @@ CREATE TABLE IF NOT EXISTS `Courses` (
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   `status` varchar(20) NOT NULL,
   `subject_id` int(5) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `Courses`
@@ -390,7 +455,8 @@ INSERT INTO `Courses` (`course_id`, `year`, `pwd`, `visible`, `status`, `subject
 (4, '2014', NULL, 1, 'active', 6),
 (5, '2014', NULL, 1, 'active', 7),
 (6, '2014', NULL, 1, 'active', 8),
-(7, '2014', NULL, 1, 'active', 9);
+(7, '2014', NULL, 1, 'active', 9),
+(8, '2014', NULL, 1, 'active', 10);
 
 -- --------------------------------------------------------
 
@@ -437,7 +503,7 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
   `name` varchar(40) NOT NULL,
   `description` text,
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `Course_Students_group`
@@ -451,7 +517,8 @@ INSERT INTO `Course_Students_group` (`group_id`, `name`, `description`, `course_
 (13, 'Sci.p 1', '', 5),
 (14, 'GM', '', 6),
 (15, 'TOEIC 1', 'เฉพาะผู้ที่ลงเรียนเท่านั้น', 7),
-(16, 'TOEIC 2', 'ลงเพิ่มเติม', 7);
+(16, 'TOEIC 2', 'ลงเพิ่มเติม', 7),
+(17, 'กลุ่ม 1', '', 8);
 
 -- --------------------------------------------------------
 
@@ -469,7 +536,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers` (
   `course_id` int(4) NOT NULL,
   `visible` smallint(6) NOT NULL DEFAULT '1',
   `status` varchar(20) NOT NULL DEFAULT 'active'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `Exam_Papers`
@@ -486,10 +553,11 @@ INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `startti
 (8, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 1, 'deleted'),
 (9, 'ระบบย่อยอาหาร', 'จงเลือกคำตอบที่ถูกที่สุดเพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 10 นาที\nห้ามเปิดตำราเรียน\nทุจริตปรับตกวิชานี้', '2014-12-08 13:00:00', '2014-12-08 13:10:00', 4, 1, 'active'),
 (10, 'การจัดเรียงอิเล็กตรอนในระดับพลังงาน', 'เลือกคำตอบที่ถูกต้องที่สุด เพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 20 นาที\nห้ามนำตำราเข้าห้องสอบ\nทุจริตปรับตกวิชานี้', '2014-12-08 09:00:00', '2014-12-08 09:20:00', 5, 1, 'active'),
-(11, 'การตลาดระดับโลก', 'ข้อสอบมี 2 ตอน ทำทุกตอน', '1. ห้ามนำตำราเข้าห้องสอบ\n2.  ทุจริตปรับตกวิชานี้\n3. ใช้เวลาในการสอบ 40 นาที', '2014-12-07 08:00:00', '2014-12-07 08:40:00', 6, 1, 'active'),
+(11, 'การตลาดระดับโลก', 'ข้อสอบมี 2 ตอน ทำทุกตอน', '1. ห้ามนำตำราเข้าห้องสอบ\n2.  ทุจริตปรับตกวิชานี้\n3. ใช้เวลาในการสอบ 40 นาที', '2014-12-27 08:00:00', '2014-12-27 08:40:00', 6, 1, 'active'),
 (12, 'TOEIC TEST', 'Reading Comprehension', '60 minutes for testing', '2014-12-09 09:00:00', '2014-12-09 10:00:00', 7, 1, 'active'),
-(13, 'ทดสอบความรู้สัตว์เลี้ยงลูกด้วยนม', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 4, 1, 'active'),
-(14, 'ทดสอบความรู้สัตว์เลี้ยงลูกด้วยนม', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 4, 1, 'deleted');
+(13, 'การเจริญเติบโตของร่างกาย', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 4, 1, 'active'),
+(14, 'ทดสอบความรู้สัตว์เลี้ยงลูกด้วยนม', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 4, 1, 'deleted'),
+(15, 'กีฬาเทควันโด', '', '', '2014-12-25 13:00:00', '2014-12-25 14:30:00', 8, 1, 'active');
 
 -- --------------------------------------------------------
 
@@ -544,15 +612,25 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (21, 9, 8, 6),
 (21, 12, 1, 6),
 (23, 13, 9, 1),
-(24, 13, 9, 1),
-(25, 13, 9, 1),
-(26, 13, 9, 1),
-(27, 13, 9, 1),
-(28, 13, 9, 4),
-(29, 13, 9, 3),
-(30, 13, 9, 2),
+(23, 19, 13, 1),
+(24, 13, 9, 2),
+(24, 19, 13, 2),
+(25, 13, 9, 4),
+(25, 19, 13, 4),
+(26, 13, 9, 3),
+(26, 19, 13, 3),
+(27, 13, 9, 5),
+(27, 19, 13, 5),
+(28, 13, 9, 6),
+(28, 19, 13, 6),
+(29, 13, 9, 7),
+(29, 19, 13, 7),
+(30, 13, 9, 8),
+(30, 19, 13, 8),
 (31, 13, 9, 9),
+(31, 19, 13, 9),
 (32, 13, 9, 10),
+(32, 19, 13, 10),
 (33, 15, 10, 1),
 (34, 15, 10, 2),
 (35, 15, 10, 3),
@@ -587,7 +665,27 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (66, 18, 12, 9),
 (67, 18, 12, 10),
 (68, 18, 12, 11),
-(69, 18, 12, 12);
+(69, 18, 12, 12),
+(80, 20, 15, 1),
+(81, 20, 15, 2),
+(82, 20, 15, 3),
+(83, 20, 15, 4),
+(84, 20, 15, 5),
+(85, 20, 15, 6),
+(86, 20, 15, 7),
+(87, 20, 15, 8),
+(88, 20, 15, 9),
+(89, 20, 15, 10),
+(90, 20, 15, 11),
+(91, 20, 15, 12),
+(92, 20, 15, 13),
+(93, 20, 15, 14),
+(94, 20, 15, 15),
+(95, 20, 15, 16),
+(96, 20, 15, 17),
+(97, 20, 15, 18),
+(98, 20, 15, 19),
+(99, 20, 15, 20);
 
 -- --------------------------------------------------------
 
@@ -602,7 +700,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Parts` (
   `description` text,
   `israndom` tinyint(1) NOT NULL,
   `paper_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `Exam_Papers_Parts`
@@ -622,7 +720,8 @@ INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `isran
 (16, 1, 'ถูกผิด', '', 1, 11),
 (17, 2, 'ปรนัย', '', 0, 11),
 (18, 1, 'reading comprehension', '', 0, 12),
-(19, 1, 'เลือกตอบ', '', 1, 13);
+(19, 1, 'เลือกตอบ', '', 1, 13),
+(20, 1, 'เลือกตอบ', '', 1, 15);
 
 -- --------------------------------------------------------
 
@@ -666,7 +765,7 @@ CREATE TABLE IF NOT EXISTS `Questions` (
   `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `chapter_id` int(7) NOT NULL,
   `created_by_id` int(8) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=70 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=100 ;
 
 --
 -- Dumping data for table `Questions`
@@ -741,7 +840,37 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (66, '<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p>\n\n<p>Where will Brianna Herbert be next week?</p>', 'choice', 'inuse', '2014-12-07 00:37:21', 15, 64),
 (67, '<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p>\n\n<p>Who is Sherry Noyes?</p>', 'choice', 'inuse', '2014-12-07 00:41:22', 15, 64),
 (68, '<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p>\n\n<p>The word "<u>contact</u>" in  the line 8 is closest in meaning to...</p>', 'choice', 'inuse', '2014-12-07 00:43:50', 15, 64),
-(69, '<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p>\n\n<p>Who should read the memo?</p>', 'choice', 'inuse', '2014-12-07 00:46:32', 15, 64);
+(69, '<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p>\n\n<p>Who should read the memo?</p>', 'choice', 'inuse', '2014-12-07 00:46:32', 15, 64),
+(70, '<p>สารอาหาร หมายถึง</p>', 'choice', 'active', '2014-12-11 22:58:32', 16, 4),
+(71, '<p>ร่างกายคนเรามีการเจริญเติบโตเมื่อใด</p>', 'choice', 'active', '2014-12-11 23:03:10', 16, 4),
+(72, '<p>สิ่งใดที่บอกความเจริญเติบโตร่างกาย</p>', 'choice', 'active', '2014-12-11 23:07:30', 16, 4),
+(73, '<p>ในวัยใดที่ร่างกายคนเราจะหยุดการเจริญเติบโต</p>', 'choice', 'active', '2014-12-11 23:08:54', 16, 4),
+(74, '<p>ถ้าพลังงานที่เราได้รับจากอาหารใน 1 วัน เกินความต้องการของร่างกาย เราควรทำอย่างไร</p>', 'choice', 'active', '2014-12-11 23:11:23', 16, 4),
+(75, '<p>ใคร น่าจะต้องการสารอาหารประเภท คาร์โบไฮเดรตมากที่สุด</p>', 'choice', 'active', '2014-12-11 23:14:17', 16, 4),
+(76, '<p>ถ้าไม่รับประทานไขมันเลย ร่างกายจะไม่สามารถดูดซึมวิตามินใดได้</p>', 'choice', 'active', '2014-12-11 23:18:33', 16, 4),
+(77, '<p>อาหารกลุ่มใดมีสารอาหารชนิดเดียวกันทั้งหมด</p>', 'choice', 'active', '2014-12-11 23:25:07', 16, 4),
+(78, '<p>โรค เอ๋อ เกิดจากสาเหตุใด</p>', 'choice', 'active', '2014-12-11 23:37:13', 16, 4),
+(79, '<p>ปริมาณอาหารประเภทใด ที่มีผลต่อการเจริญเติบโตของร่างกายมากที่สุด</p>', 'choice', 'active', '2014-12-11 23:38:48', 16, 4),
+(80, '<p>เทควันโดมีการตั้งสมาคมและการแข่งขันครั้งแรกในปีใด</p>', 'choice', 'inuse', '2014-12-12 00:29:09', 17, 4),
+(81, '<p>ใครเป็นผู้นำเทควันโดเข้ามาในประเทศไทยเป็นคนแรก</p>', 'choice', 'inuse', '2014-12-12 00:30:51', 17, 4),
+(82, '<p>ข้อใดไม่ใช่บทบัญญัติของเทควันโด</p>', 'choice', 'inuse', '2014-12-12 00:32:07', 17, 4),
+(83, '<p>สนามการแข่งขันมาตรฐานของกีฬาเทควันโดมีขนาดเท่าใด</p>', 'choice', 'inuse', '2014-12-12 00:34:05', 17, 4),
+(84, '<p>การแบ่งน้ำหนักของนักกีฬาประเภทประชาชนชาย ในช่วง 62 กก. แต่ไม่เกิน 67 กก. จัดอยู่ในรุ่นแข่งขันใด</p>', 'choice', 'inuse', '2014-12-12 00:37:50', 17, 4),
+(85, '<p><span style="background-color:rgb(248,248,248);color:rgb(0,0,0);font-family:tahoma;font-size:14px;">การแบ่งน้ำหนักของนักกีฬาประเภทประชาชนชาย ในช่วง 63 กก. แต่ไม่เกิน 67 กก. จัดอยู่ในรุ่นแข่งขันใด</span></p>', 'choice', 'inuse', '2014-12-12 00:40:40', 17, 4),
+(86, '<p>ในกรณีใด ที่ถือเป็นการเตะที่ได้แต้ม</p>', 'choice', 'inuse', '2014-12-12 00:43:57', 17, 4),
+(87, '<p>บริเวณใดที่กระทำแล้วไม่ได้คะแนน</p>', 'choice', 'inuse', '2014-12-12 00:49:12', 17, 4),
+(88, '<p>ภาพต่อไปนี้มีชื่อท่าว่าอะไร <img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/Q000025637.jpg" style="height:334px;width:500px;" /></p>', 'choice', 'inuse', '2014-12-12 00:53:32', 17, 4),
+(89, '<p>ภาพต่อไปนี้มีชื่อท่าว่าอะไร<img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/Q000025638.jpg" style="height:282px;width:424px;" /></p>', 'choice', 'inuse', '2014-12-12 00:56:13', 17, 4),
+(90, '<p>ภาพต่อไปนี้มีชื่อท่าว่าอะไร<img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/Q000025641.gif" style="height:424px;width:290px;" /></p>', 'choice', 'inuse', '2014-12-12 00:58:47', 17, 4),
+(91, '<p>การกระทำใดไม่ถูกตัด Kyong go</p>', 'choice', 'inuse', '2014-12-12 01:00:33', 17, 4),
+(92, '<p>ข้อใดลำดับสายเทควันโดได้ถูกต้อง</p>', 'choice', 'inuse', '2014-12-12 01:02:04', 17, 4),
+(93, '<p>สายดำ ดั้งใดถึงสามารถออกใบประกาศการสอบสายได้ (อย่างน้อยดั้งใด)</p>', 'choice', 'inuse', '2014-12-12 01:10:22', 17, 4),
+(94, '<p>สายดำมีทั้งหมดกี่ดั้ง</p>', 'choice', 'inuse', '2014-12-12 01:11:54', 17, 4),
+(95, '<p>จำนวณการแข่งขันแบบทีมมีนักกีฬากี่คนต่อทีม</p>', 'choice', 'inuse', '2014-12-12 01:14:50', 17, 4),
+(96, '<p>ข้อใดไม่ใช้ส่วนประกอบการเรียนรู้กีฬาเทควันโด</p>', 'choice', 'inuse', '2014-12-12 01:16:50', 17, 4),
+(97, '<p>Taekwondo  มาจากคำว่าอะไร</p>', 'choice', 'inuse', '2014-12-12 01:19:24', 17, 4),
+(98, '<p>ต้นกำเนิดจริงๆของศิลปะการป้องกันตัวขนิดนี้มาจากประเทศอะไร (แรกเริ่มเลย)</p>', 'choice', 'inuse', '2014-12-12 01:23:48', 17, 4),
+(99, '<p>คำอ่านที่ถูกต้องของคำว่า Tae-Kwon-Do คือข้อใด</p>', 'choice', 'inuse', '2014-12-12 01:25:55', 17, 4);
 
 -- --------------------------------------------------------
 
@@ -795,7 +924,7 @@ CREATE TABLE IF NOT EXISTS `Question_choice` (
   `choice6` text,
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=75 ;
 
 --
 -- Dumping data for table `Question_choice`
@@ -845,7 +974,37 @@ INSERT INTO `Question_choice` (`id`, `choice1`, `choice2`, `choice3`, `choice4`,
 (41, 'In the office', 'At a conference', 'On vacation', 'At the XYZ Company', '', '', '2', 66),
 (42, 'An  accountant', 'The writer of the memo', 'The owner of the XYZ Company', 'Brianna Herbert''s assistant', '', '', '4', 67),
 (43, 'work with', 'call', 'touch', 'look at', '', '', '2', 68),
-(44, 'All staff at the XYZ company', 'Brianna Herbert', 'People who work in the accounting department', 'Conference planners', '', '', '3', 69);
+(44, 'All staff at the XYZ company', 'Brianna Herbert', 'People who work in the accounting department', 'Conference planners', '', '', '3', 69),
+(45, 'สิ่งที่ให้พลังงานน้อย', 'สิ่งที่ไม่ให้พลังงาน', 'สารเคมีที่เป็นองค์ประกอบของอาหาร', 'สิ่งที่กินได้และก่อให้เกิดประโยชน์กับร่างกาย', '', '', '3', 70),
+(46, 'หลังปฎิสนธิ', 'หลังอายุได้ 1 สัปดาห์', 'หลังจากที่ลืมตาได้', 'หลังจากคลอดจากครรภ์มารดา', '', '', '1', 71),
+(47, 'การเดิน', 'การพูด', 'ลักษณะนิสัย', 'การขึ้นฟันแท้', '', '', '4', 72),
+(48, 'วัยชรา', 'วัยรุ่น', 'วัยเด็ก', 'วัยทารก', '', '', '1', 73),
+(49, 'กินอาหารมาก', 'งดกินอาหาร', 'ออกกำลังกาย', 'นั่งนิ่งๆ', '', '', '3', 74),
+(50, 'นิดชอบเล่นคอมพิวเตอร์', 'ภูมิชอบเล่นกีฬา', 'ธิดาชอบอ่านหนังสือ', 'สุชาติชอบวาดภาพ', '', '', '2', 75),
+(51, 'วิตามินบี 2', 'วิตามินบี 6', 'วิตามินดี', 'วิตามินซี', '', '', '3', 76),
+(52, 'ข้าวเจ้า ข้าวเหนียว นมข้นหวาน', 'นมสด น้ำตาลทราย น้ำมันพืช', 'เนื้อปลา ข้าวเหนียว น้ำเต้าหู้', 'เนื้อหมู มันหมู ไขดาว', '', '', '1', 77),
+(53, 'ขาดธาตุเหล็ก', 'ขาดธาตุไอโอดีน', 'ขาดธาตุแคลเซียม', 'ได้รับสารปรอทมาก', '', '', '2', 78),
+(54, 'วิตามินและเกลือแร่', 'คาร์โบไฮเดรต', 'ไขมัน', 'โปรตีน', '', '', '4', 79),
+(55, '1971', '1972', '1973', '1974', '', '', '3', 80),
+(56, 'ซอง คุก ดี', 'ยนอง แมน รี', 'มุล ซู คิม', 'ซอง กี ยอง', '', '', '4', 81),
+(57, 'เคารพพ่อแม่ ครูอาจารย์และผู้มีพระคุณ', 'อย่าทำร้ายผู้อื่น โดยไม่จำเป็น', 'กระทำตนให้ดีที่สุดอย่างสม่ำเสมอ', 'จงรักภักดีต่อประเทศชาติของตน', '', '', '3', 82),
+(58, '10 X 10 ม.', '11 X 11 ม.', '12 X 12 ม.', '13 X 13 ม.', '', '', '3', 83),
+(59, 'รุ่นเฟเธอร์เวท', 'รุ่นไลท์เวท', 'รุ่นเวลเธอร์เวท', 'รุ่นมิดเดิลเวท', '', '', '1', 84),
+(60, 'รุ่นเฟเธอร์เวท', 'รุ่นไลท์เวท', 'รุ่นเวลเธอร์เวท', 'รุ่นมิดเดิลเวท', '', '', '3', 85),
+(61, 'ผู้แข่งขัน เตะเข้าที่ลำตัว และล้มตัวลงทันที', 'ผู้แข่งขัน เตะเข้าที่ลำตัว และเข้ากอดทันที', 'ผู้แข่งขัน เตะเข้าที่ลำตัว และร้องดีใจที่เตะได้ทันที', 'ผู้แข่งขัน เตะเข้าที่ลำตัว โดยใช้หน้าแข้งเข้าเป้าดังสนั่น', '', '', '2', 86),
+(62, 'ลำตัว หน้าท้อง', 'ลำตัว ชายโครง', 'ใบหน้า ด้านหน้า', 'ใบหน้า ด้านหลัง', '', '', '4', 87),
+(63, 'Front Kick', 'Side Kick', 'Round House Kick', 'Chop Kick', '', '', '4', 88),
+(64, 'Front Kick', 'Side Kick', 'Round House Kick', 'Chop Kick', '', '', '2', 89),
+(65, 'Front Kick', 'Side Kick', 'Round House Kick', 'Chop Kick', '', '', '1', 90),
+(66, 'การออกนอกเส้นสนามแข่งทั้งสองเท้าไม่ว่าด้วยกรณีใด ๆ', 'การล้มที่เกิดจากการต่อสู้', 'ไม่ทำการต่อสู้ภายใน 10 วินาที', 'การยกเข่าขึ้นบังหรือ Block การเตะของคู่ต่อสู้ด้วยเข่า', '', '', '2', 91),
+(67, 'ขาว เหลือง ฟ้า เขียว น้ำตาล แดง ดำ', 'ขาว เหลือง เขียว น้ำตาล ฟ้า แดง ดำ', 'ขาว เหลือง เขียว ฟ้า น้ำตาล แดง ดำ', 'ขาว ฟ้า เขียว เหลือง แดง น้ำตาล ดำ', '', '', '3', 92),
+(68, 'ดั้ง 3', 'ดั้ง 4', 'ดั้ง 5', 'ดั้ง 6', '', '', '2', 93),
+(69, '7 ดั้ง', '8 ดั้ง', '9 ดั้ง', '10 ดั้ง', '', '', '4', 94),
+(70, '3 คน', '4คน', '5 คน', '6 คน', '', '', '3', 95),
+(71, 'โคยังมูล', 'เคียกพ่า', 'เคียวรูกิ', 'โฮชินซูล', '', '', '1', 96),
+(72, 'Takkwon + Kongsoodo', 'Takkyon + Kongsondo', 'Takkwon + Kongsondo', 'Takkyon + Kongsoodo', '', '', '4', 97),
+(73, 'ประเทศจีน', 'ประเทศญี่ปุ่น', 'ประเทศเกาหลี', 'ประเทศมองโกเลีย', '', '', '3', 98),
+(74, 'เท - ควัน - โด', 'เท - ควอน - โด', 'แท - ควัน - โด', 'แท - ควอน - โด', '', '', '4', 99);
 
 -- --------------------------------------------------------
 
@@ -978,7 +1137,7 @@ CREATE TABLE IF NOT EXISTS `Scoreboard` (
   `Score` float DEFAULT NULL,
   `Max` float DEFAULT NULL,
   `Min` float DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `Scoreboard`
@@ -998,7 +1157,12 @@ INSERT INTO `Scoreboard` (`sco_id`, `stu_id`, `course_id`, `paper_id`, `Score`, 
 (11, 57700188, 4, 9, 6, NULL, NULL),
 (12, 57700189, 6, 11, 12, NULL, NULL),
 (13, 57700189, 4, 9, 4, NULL, NULL),
-(14, 57700190, 4, 9, 4, NULL, NULL);
+(14, 57700190, 4, 9, 4, NULL, NULL),
+(15, 54310104, 4, 13, 6, NULL, NULL),
+(16, 54311095, 8, 15, 9, NULL, NULL),
+(17, 57700192, 4, 13, 5, NULL, NULL),
+(18, 57700196, 4, 13, 2, NULL, NULL),
+(19, 57700193, 6, 11, 7, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1084,6 +1248,7 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('54311095', '5', 13),
 ('54311095', '6', 14),
 ('54311095', '7', 16),
+('54311095', '8', 17),
 ('57700188', '1', 1),
 ('57700188', '4', 12),
 ('57700188', '6', 14),
@@ -1095,6 +1260,7 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('57700191', '7', 15),
 ('57700192', '4', 12),
 ('57700192', '5', 13),
+('57700192', '8', 17),
 ('57700193', '4', 12),
 ('57700193', '6', 14),
 ('57700193', '7', 16),
@@ -1105,6 +1271,7 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('57700196', '4', 12),
 ('57700196', '5', 13),
 ('57700196', '7', 15),
+('57700196', '8', 17),
 ('57700197', '1', 9),
 ('57700197', '4', 12),
 ('57700198', '4', 12),
@@ -1182,7 +1349,7 @@ CREATE TABLE IF NOT EXISTS `Subjects` (
   `shortname` varchar(15) NOT NULL,
   `description` text,
   `status` varchar(20) DEFAULT 'active'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `Subjects`
@@ -1197,7 +1364,8 @@ INSERT INTO `Subjects` (`subject_id`, `code`, `name`, `shortname`, `description`
 (6, 'Sci32101', 'วิทยาศาสตร(พื้นฐาน)', 'Sci', '<p>ศึกษา วิเคราะห์ สำรวจ สืบค้นข้อมูล และอธิบายโครงสร้างและการทำงานของระบบย่อยอาหาร ระบบหมุนเวียนเลือด ระบบหายใจ  ระบบขับถ่าย ระบบสืบพันธุ์ ของมนุษย์และสัตว์ รวมทั้งระบบประสาทของมนุษย์   ความสัมพันธ์ของระบบต่าง ๆ ของมนุษย์ พฤติกรรมของมนุษย์และสัตว์ที่ตอบสนองต่อสิ่งเร้าภายนอกและภายใน หลักการและผลของการใช้เทคโนโลยีชีวภาพในการขยายพันธุ์ ปรับปรุงพันธุ์ และเพิ่มผลผลิตของสัตว์ สารอาหารในอาหารมีปริมาณพลังงานและสัดส่วนที่เหมาะสมกับเพศและวัย ผลของสารเสพติดต่อระบบต่าง ๆ ของร่างกาย เพื่อให้ให้ผู้เรียนเกิดความรู้ ความคิด ความเข้าใจ สามารถสื่อสารสิ่งที่เรียนรู้ และนำความรู้ไปใช้ประโยชน์ในการดำรงชีวิตและดูแลสิ่งแวดล้อม มีคุณธรรม จริยธรรม ค่านิยมที่เหมาะสม และเข้าใจว่าวิทยาศาสตร์ เทคโนโลยี สังคม และสิ่งแวดล้อมเกี่ยวข้องสัมพันธ์กัน</p>\n', 'active'),
 (7, 'Sci30221', 'วิทยาศาสตร์(เพิ่มเติม)', 'Sci.p', '<p>วิเคราะห์และอธิบายโครงสร้างอะตอมและลักษณะนิวเคลียร์ของธาตุ การจัดเรียงอิเล็กตรอนในอะตอม ความสัมพันธ์ระหว่างอิเล็กตรอนในระดับพลังงานนอกสุดกับสมบัติของธาตุและการเกิดปฏิกิริยา การทำนายแนวโน้มสมบัติของธาตุในตารางธาตุ รวมถึงการเกิดพันธะเคมีในโครงผลึกและโมเลกุลของสาร โดยใช้กระบวนการทางวิทยาศาสตร์ เพื่อให้นักเรียนรักการเรียนรู้วิทยาศาสตร์ และเทคโนโลยี มีทักษะ กระบวนการทางวิทยาศาสตร์ เกิดความรู้ ความเข้าใจและนำความรู้ไปใช้ในชีวิตประจำวัน มีจิตวิทยาศาสตร์ จริยธรรมคุณธรรม และค่านิยมที่เหมาะสม</p>\n', 'active'),
 (8, '276371', 'Global marketing', 'GM', '<p>บทบาทของการตลาดระดับโลกต่อการแข่งขันทางธุรกิจ ทฤษฎีการค้าระหว่างประเทศ สภาพแวดล้อมและสถาบันสำคัญทางการตลาดระดับโลก โครงสร้างและข้อมูลประชากรของตลาดโลก วัฒนธรรมและพฤติกรรมของผู้บริโภคในตลาดโลก กลยุทธ์การตลาดระดับโลกและการสร้างข้อได้เปรียบทางการแข่งขัน การกำหนดส่วนประสมทางการตลาดระดับโลก การจัดสายงานและการควบคุมกิจกรรมการตลาดโลก ประเด็นทางการตลาดระดับโลกที่เกี่ยวเนื่องกับจริยธรรมในการดำเนินธุรกิจ</p>\n', 'active'),
-(9, '271232', 'English for Standardized Tests', 'TOEIC', '<p>Language patterns, test structures, grammar and vocabularies, reading excerpts, conversation styles and dialogues, and statements, commonly used in standardized tests</p>\n', 'active');
+(9, '271232', 'English for Standardized Tests', 'TOEIC', '<p>Language patterns, test structures, grammar and vocabularies, reading excerpts, conversation styles and dialogues, and statements, commonly used in standardized tests</p>\n', 'active'),
+(10, 'TkD22476', 'สุขศึกษาและพลศึกษา', 'HEMB', '', 'active');
 
 -- --------------------------------------------------------
 
@@ -1244,6 +1412,8 @@ CREATE TABLE IF NOT EXISTS `Teacher_Course_Detail` (
 INSERT INTO `Teacher_Course_Detail` (`tea_id`, `course_id`) VALUES
 (1, 1),
 (1, 3),
+(1, 4),
+(1, 8),
 (2, 2),
 (3, 1),
 (5, 4),
@@ -1553,27 +1723,27 @@ MODIFY `branch_id` int(4) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `Chapter`
 --
 ALTER TABLE `Chapter`
-MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `Courses`
 --
 ALTER TABLE `Courses`
-MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `Course_Students_group`
 --
 ALTER TABLE `Course_Students_group`
-MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `Exam_Papers`
 --
 ALTER TABLE `Exam_Papers`
-MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `Exam_Papers_Parts`
 --
 ALTER TABLE `Exam_Papers_Parts`
-MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `Faculty`
 --
@@ -1583,7 +1753,7 @@ MODIFY `fac_id` int(4) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `Questions`
 --
 ALTER TABLE `Questions`
-MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=70;
+MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100;
 --
 -- AUTO_INCREMENT for table `Question_boolean`
 --
@@ -1593,7 +1763,7 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 -- AUTO_INCREMENT for table `Question_choice`
 --
 ALTER TABLE `Question_choice`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT for table `Question_numerical`
 --
@@ -1603,12 +1773,12 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `Scoreboard`
 --
 ALTER TABLE `Scoreboard`
-MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `Subjects`
 --
 ALTER TABLE `Subjects`
-MODIFY `subject_id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `subject_id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `Teachers`
 --
