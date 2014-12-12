@@ -1193,7 +1193,7 @@ HTML;
 	});
 HTML;
 
-		$this->load->view($this->role.'/field_parteditor_view', $data);
+		$this->load->view('teacher/field_parteditor_view', $data);
 		// Send additional script to footer
 		$footdata['additionScript'] = $this->getAddScripts();
 		$this->load->view($this->role.'/t_footer_view', $footdata);

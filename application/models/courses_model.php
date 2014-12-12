@@ -33,6 +33,7 @@ class Courses_model extends CI_Model {
 		$query = $this->db
 			// ->select($fields)
 			->like("status",$status)
+			->order_by('code','asc')
 			->get('subjects')
 			->result_array();
 			// die($this->db->last_query());

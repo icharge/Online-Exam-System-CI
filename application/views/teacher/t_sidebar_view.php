@@ -36,8 +36,8 @@
 				</a>
 				<ul class="treeview-menu">
 					<li<?php echo $this->misc->listCActive("reports");?>><?php echo anchor('teacher/reports', '<i class="fa fa-angle-double-right"></i> สรุปคะแนน');?></li>
-					<li<?php echo $this->misc->listCActive("reportenroll");?>><?php echo anchor('teacher/reportenroll', '<i class="fa fa-angle-double-right"></i> ผู้เข้าสอบ');?></li>
-					<li<?php echo $this->misc->listCActive("logreport");?>><?php echo anchor('teacher/logreport', '<i class="fa fa-angle-double-right"></i> ประวัติการใข้งาน');?></li>
+					<!-- <li<?php echo $this->misc->listCActive("reportenroll");?>><?php echo anchor('teacher/reportenroll', '<i class="fa fa-angle-double-right"></i> ผู้เข้าสอบ');?></li>
+					<li<?php echo $this->misc->listCActive("logreport");?>><?php echo anchor('teacher/logreport', '<i class="fa fa-angle-double-right"></i> ประวัติการใข้งาน');?></li> -->
 				</ul>
 			</li>
 			<li class="treeview <?php echo $this->misc->listCActiveAry(array("mycourses","courses","reqcourse"),false);?>">
@@ -48,8 +48,8 @@
 				</a>
 				<ul class="treeview-menu">
 					<li<?php echo $this->misc->listCActive("mycourses");?>><?php echo anchor('teacher/mycourses', '<i class="fa fa-angle-double-right"></i> วิชาของฉัน');?></li>
-					<li<?php echo $this->misc->listCActive("courses");?>><?php echo anchor('teacher/courses', '<i class="fa fa-angle-double-right"></i> วิชาที่เปิดสอบ');?></li>
-					<li<?php echo $this->misc->listCActive("reqcourse");?>><?php echo anchor('teacher/reqcourse', '<i class="fa fa-angle-double-right"></i> ร้องขอวิชาใหม่');?></li>
+					<!-- <li<?php echo $this->misc->listCActive("courses");?>><?php echo anchor('teacher/courses', '<i class="fa fa-angle-double-right"></i> วิชาที่เปิดสอบ');?></li> -->
+					<!-- <li<?php echo $this->misc->listCActive("reqcourse");?>><?php echo anchor('teacher/reqcourse', '<i class="fa fa-angle-double-right"></i> ร้องขอวิชาใหม่');?></li> -->
 				</ul>
 			</li>
 			<li<?php echo $this->misc->listCActive("qwarehouse");?>>

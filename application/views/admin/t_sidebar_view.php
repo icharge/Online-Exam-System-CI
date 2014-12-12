@@ -62,9 +62,12 @@
 				</a>
 				<ul class="treeview-menu">
 					<li<?php echo $this->misc->listCActive("courses");?>><?php echo anchor('admin/courses', '<i class="fa fa-angle-double-right"></i> วิชาที่เปิดสอบ');?></li>
-					<li<?php echo $this->misc->listCActive("examswitch");?>><?php echo anchor('admin/examswitch', '<i class="fa fa-angle-double-right"></i> เปิดการสอบ');?></li>
-					<li<?php echo $this->misc->listCActive("examreset");?>><?php echo anchor('admin/examreset', '<i class="fa fa-angle-double-right"></i> รีเซตการสอบ');?></li>
+					<li<?php echo $this->misc->listCActive("examswitch");?>><?php echo anchor('admin/courses/add', '<i class="fa fa-angle-double-right"></i> เปิดการสอบ');?></li>
+					<!-- <li<?php echo $this->misc->listCActive("examreset");?>><?php echo anchor('admin/examreset', '<i class="fa fa-angle-double-right"></i> รีเซตการสอบ');?></li> -->
 			</ul>
+			</li>
+			<li<?php echo $this->misc->listCActive("qwarehouse");?>>
+				<?php echo anchor('teacher/qwarehouse', '<i class="fa fa-edit"></i> <span>คลังข้อสอบ</span>');?>
 			</li>
 		</ul>
 	</section>
