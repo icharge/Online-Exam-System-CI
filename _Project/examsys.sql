@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 11, 2014 at 08:40 PM
+-- Generation Time: Dec 15, 2014 at 10:14 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -364,19 +364,6 @@ INSERT INTO `Answer_Papers` (`question_id`, `sco_id`, `answer`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Branch`
---
-
-CREATE TABLE IF NOT EXISTS `Branch` (
-`branch_id` int(4) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `description` text,
-  `fac_id` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `Chapter`
 --
 
@@ -385,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `Chapter` (
   `name` varchar(60) NOT NULL,
   `description` text,
   `subject_id` int(5) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `Chapter`
@@ -425,9 +412,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('7c29c175fdc3d1406bd31961d24bc33d', '192.168.1.18', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418324467, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:2:"64";s:3:"uid";s:1:"5";s:8:"username";s:8:"sittinee";s:8:"fullname";s:43:"สิทธิณี ประภัศร";s:5:"fname";s:21:"สิทธิณี";s:5:"lname";s:21:"ประภัศร";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
-('7fe2d65f4961051737b7f81f72d1c2a1', '192.168.1.18', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418324457, 'a:14:{s:9:"user_data";s:0:"";s:2:"id";s:2:"41";s:3:"uid";s:8:"57700193";s:8:"username";s:8:"57700193";s:8:"fullname";s:34:"ขำ ไม่เหมือน";s:5:"fname";s:6:"ขำ";s:5:"lname";s:27:"ไม่เหมือน";s:5:"birth";N;s:6:"gender";s:4:"male";s:4:"year";s:4:"2014";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}'),
-('9df60cecfbe64bd1517874d8a54520b7', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418325650, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"1";s:3:"uid";s:1:"1";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;}');
+('2ff439875229b29081f0ff02681a466e', '192.168.1.11', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418654924, 'a:13:{s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}'),
+('c10056df97fbe37018517baea5633728', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418661189, '');
 
 -- --------------------------------------------------------
 
@@ -503,7 +489,7 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
   `name` varchar(40) NOT NULL,
   `description` text,
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `Course_Students_group`
@@ -548,8 +534,8 @@ INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `startti
 (3, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 1, 'deleted'),
 (4, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 1, 'deleted'),
 (5, 'สอบก่อนเรียน', '', '', '2014-12-08 15:30:00', '2014-12-08 15:45:00', 3, 1, 'active'),
-(6, 'ชุด  ก', '', '', '2014-12-10 09:00:00', '2014-12-10 10:20:00', 2, 1, 'active'),
-(7, 'ชุด ข', 'ไม่ซ้ำ ก', '', '2014-12-10 09:20:00', '2014-12-10 10:30:00', 2, 1, 'active'),
+(6, 'สอบก่อนเรียน', '', '', '2014-12-10 09:00:00', '2014-12-10 10:20:00', 2, 1, 'active'),
+(7, 'สอบกลางภาค', '', '', '2014-12-16 09:20:00', '2014-12-16 10:30:00', 2, 1, 'active'),
 (8, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 1, 'deleted'),
 (9, 'ระบบย่อยอาหาร', 'จงเลือกคำตอบที่ถูกที่สุดเพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 10 นาที\nห้ามเปิดตำราเรียน\nทุจริตปรับตกวิชานี้', '2014-12-08 13:00:00', '2014-12-08 13:10:00', 4, 1, 'active'),
 (10, 'การจัดเรียงอิเล็กตรอนในระดับพลังงาน', 'เลือกคำตอบที่ถูกต้องที่สุด เพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 20 นาที\nห้ามนำตำราเข้าห้องสอบ\nทุจริตปรับตกวิชานี้', '2014-12-08 09:00:00', '2014-12-08 09:20:00', 5, 1, 'active'),
@@ -591,26 +577,19 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (6, 7, 7, 1),
 (7, 6, 6, 2),
 (7, 7, 7, 2),
-(8, 6, 6, 3),
-(8, 7, 7, 3),
+(8, 7, 7, 1),
 (9, 1, 1, 6),
-(10, 12, 1, 1),
 (11, 1, 1, 5),
 (11, 9, 8, 5),
 (12, 1, 1, 3),
 (13, 5, 6, 3),
 (13, 7, 7, 3),
-(14, 8, 8, 2),
-(14, 12, 1, 2),
+(14, 8, 8, 1),
 (15, 1, 1, 8),
 (15, 9, 8, 8),
-(16, 12, 1, 3),
-(17, 12, 1, 4),
 (18, 1, 1, 9),
-(19, 12, 1, 5),
 (20, 1, 1, 4),
-(21, 9, 8, 6),
-(21, 12, 1, 6),
+(21, 9, 8, 1),
 (23, 13, 9, 1),
 (23, 19, 13, 1),
 (24, 13, 9, 2),
@@ -714,7 +693,6 @@ INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `isran
 (7, 1, 'ตัวเลือก', '', 0, 7),
 (8, 1, 'Choice', 'ตัวเลือก', 1, 8),
 (9, 2, 'Fill the Answer', 'เติมคำตอบให้ถูกต้อง', 1, 8),
-(12, 2, 'xxxx', '', 0, 1),
 (13, 1, 'ระบบย่อยอาหาร', '', 1, 9),
 (15, 1, 'ปรนัย', '', 1, 10),
 (16, 1, 'ถูกผิด', '', 1, 11),
@@ -722,18 +700,6 @@ INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `isran
 (18, 1, 'reading comprehension', '', 0, 12),
 (19, 1, 'เลือกตอบ', '', 1, 13),
 (20, 1, 'เลือกตอบ', '', 1, 15);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Faculty`
---
-
-CREATE TABLE IF NOT EXISTS `Faculty` (
-`fac_id` int(4) NOT NULL,
-  `name` varchar(40) NOT NULL,
-  `description` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -778,8 +744,8 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (4, '<p><span style="font-size:16px;"><u><strong>Method</strong></u> มีอีกชื่อเรียกหนึ่งว่าอะไร</span></p>', 'choice', 'active', '2014-09-17 19:41:24', 7, 3),
 (5, '<p>VB.NET ถือเป็นการเขียนโปรแกรมแบบ OOP</p>', 'boolean', 'active', '2014-09-08 16:35:48', 7, 8),
 (6, '<p><strong>Class</strong> ประกอบไปด้วย <strong>Attribute</strong> และ <strong>Method</strong>  <u><span style="color:#FF0000;">ไม่สามารถสืบทอดได้</span></u></p>', 'boolean', 'inuse', '2014-09-22 08:23:26', 8, 3),
-(7, '<p><span style="font-size:22px;"><span style="font-family:''th sarabun new'', ''th sarabun psk'';">หากมี <strong>Method</strong>  <u>Run() </u> ใน <strong>Class</strong>  ต้องการให้เรียกใช้จากภายนอกได้  จะต้องกำหนด <span style="color:#FF0000;"><strong>Encapsulation</strong></span> อย่างไร</span></span></p>', 'choice', 'active', '2014-09-24 13:20:44', 8, 3),
-(8, '<blockquote>\n<p>Class Fan {</p>\n\n<p>    private int speed;<br /><span style="line-height:1.6em;">    private double power</span><br /><span style="line-height:1.6em;">    private bool isSwing;</span><br /><span style="line-height:1.6em;">    public string name;</span><br /><span style="line-height:1.6em;">}</span></p>\n</blockquote>\n\n<p>จาก Class ดังกล่าว  มีการกำหนด  Attribute กี่ตัว  </p>', 'numeric', 'active', '2014-09-29 09:32:17', 8, 8),
+(7, '<p><span style="font-size:22px;"><span style="font-family:''th sarabun new'', ''th sarabun psk'';">หากมี <strong>Method</strong>  <u>Run() </u> ใน <strong>Class</strong>  ต้องการให้เรียกใช้จากภายนอกได้  จะต้องกำหนด <span style="color:#FF0000;"><strong>Encapsulation</strong></span> อย่างไร</span></span></p>', 'choice', 'inuse', '2014-09-24 13:20:44', 8, 3),
+(8, '<blockquote>\n<p>Class Fan {</p>\n\n<p>    private int speed;<br /><span style="line-height:1.6em;">    private double power</span><br /><span style="line-height:1.6em;">    private bool isSwing;</span><br /><span style="line-height:1.6em;">    public string name;</span><br /><span style="line-height:1.6em;">}</span></p>\n</blockquote>\n\n<p>จาก Class ดังกล่าว  มีการกำหนด  Attribute กี่ตัว  </p>', 'numeric', 'inuse', '2014-09-29 09:32:17', 8, 8),
 (9, '<p>Drafting question</p>', 'boolean', 'inuse', '2014-09-22 09:48:18', 5, 3),
 (10, '<p>Drafting 2</p>', 'choice', 'inuse', '2014-10-01 15:20:10', 4, 3),
 (11, '<p>Disabled question</p>', 'numeric', 'inuse', '2014-09-08 21:05:28', 4, 8),
@@ -837,10 +803,10 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (63, '<p style="text-align:center;">CITY ZOO</p>\n\n<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-000838.png" style="height:209px;width:485px;" /></p>\n\n<p>How many people visited the zoo in February?</p>', 'choice', 'inuse', '2014-12-07 00:16:54', 15, 64),
 (64, '<p style="text-align:center;">CITY ZOO</p>\n\n<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-000838.png" style="height:209px;width:485px;" /></p>\n\n<p>When did 4,980 people visit the zoo?</p>', 'choice', 'inuse', '2014-12-07 00:18:40', 15, 64),
 (65, '<p style="text-align:center;">CITY ZOO</p>\n\n<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-000838.png" style="height:209px;width:485px;" /></p>\n\n<p>Which was the most popular month to visit the zoo?</p>', 'choice', 'inuse', '2014-12-07 00:20:09', 15, 64),
-(66, '<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p>\n\n<p>Where will Brianna Herbert be next week?</p>', 'choice', 'inuse', '2014-12-07 00:37:21', 15, 64),
-(67, '<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p>\n\n<p>Who is Sherry Noyes?</p>', 'choice', 'inuse', '2014-12-07 00:41:22', 15, 64),
-(68, '<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p>\n\n<p>The word "<u>contact</u>" in  the line 8 is closest in meaning to...</p>', 'choice', 'inuse', '2014-12-07 00:43:50', 15, 64),
-(69, '<p><img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p>\n\n<p>Who should read the memo?</p>', 'choice', 'inuse', '2014-12-07 00:46:32', 15, 64),
+(66, '<p><img alt="" src="vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p><p>Where will Brianna Herbert be next week?</p>', 'choice', 'inuse', '2014-12-07 00:37:21', 15, 64),
+(67, '<p><img alt="" src="vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p><p>Who is Sherry Noyes?</p>', 'choice', 'inuse', '2014-12-07 00:41:22', 15, 64),
+(68, '<p><img alt="" src="vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p><p>The word "<u>contact</u>" in  the line 8 is closest in meaning to...</p>', 'choice', 'inuse', '2014-12-07 00:43:50', 15, 64),
+(69, '<p><img alt="" src="vendor/js/plugins/ckeditor/plugins/uploads/capture-20141207-003144.jpg" style="height:300px;width:454px;" /></p><p>Who should read the memo?</p>', 'choice', 'inuse', '2014-12-07 00:46:32', 15, 64),
 (70, '<p>สารอาหาร หมายถึง</p>', 'choice', 'active', '2014-12-11 22:58:32', 16, 4),
 (71, '<p>ร่างกายคนเรามีการเจริญเติบโตเมื่อใด</p>', 'choice', 'active', '2014-12-11 23:03:10', 16, 4),
 (72, '<p>สิ่งใดที่บอกความเจริญเติบโตร่างกาย</p>', 'choice', 'active', '2014-12-11 23:07:30', 16, 4),
@@ -859,9 +825,9 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (85, '<p><span style="background-color:rgb(248,248,248);color:rgb(0,0,0);font-family:tahoma;font-size:14px;">การแบ่งน้ำหนักของนักกีฬาประเภทประชาชนชาย ในช่วง 63 กก. แต่ไม่เกิน 67 กก. จัดอยู่ในรุ่นแข่งขันใด</span></p>', 'choice', 'inuse', '2014-12-12 00:40:40', 17, 4),
 (86, '<p>ในกรณีใด ที่ถือเป็นการเตะที่ได้แต้ม</p>', 'choice', 'inuse', '2014-12-12 00:43:57', 17, 4),
 (87, '<p>บริเวณใดที่กระทำแล้วไม่ได้คะแนน</p>', 'choice', 'inuse', '2014-12-12 00:49:12', 17, 4),
-(88, '<p>ภาพต่อไปนี้มีชื่อท่าว่าอะไร <img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/Q000025637.jpg" style="height:334px;width:500px;" /></p>', 'choice', 'inuse', '2014-12-12 00:53:32', 17, 4),
-(89, '<p>ภาพต่อไปนี้มีชื่อท่าว่าอะไร<img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/Q000025638.jpg" style="height:282px;width:424px;" /></p>', 'choice', 'inuse', '2014-12-12 00:56:13', 17, 4),
-(90, '<p>ภาพต่อไปนี้มีชื่อท่าว่าอะไร<img alt="" src="http://192.168.1.9/oxproject/vendor/js/plugins/ckeditor/plugins/uploads/Q000025641.gif" style="height:424px;width:290px;" /></p>', 'choice', 'inuse', '2014-12-12 00:58:47', 17, 4),
+(88, '<p>ภาพต่อไปนี้มีชื่อท่าว่าอะไร <img alt="" src="vendor/js/plugins/ckeditor/plugins/uploads/Q000025637.jpg" style="height:334px;width:500px;" /></p>', 'choice', 'inuse', '2014-12-12 00:53:32', 17, 4),
+(89, '<p>ภาพต่อไปนี้มีชื่อท่าว่าอะไร<img alt="" src="vendor/js/plugins/ckeditor/plugins/uploads/Q000025638.jpg" style="height:282px;width:424px;" /></p>', 'choice', 'inuse', '2014-12-12 00:56:13', 17, 4),
+(90, '<p>ภาพต่อไปนี้มีชื่อท่าว่าอะไร<img alt="" src="vendor/js/plugins/ckeditor/plugins/uploads/Q000025641.gif" style="height:424px;width:290px;" /></p>', 'choice', 'inuse', '2014-12-12 00:58:47', 17, 4),
 (91, '<p>การกระทำใดไม่ถูกตัด Kyong go</p>', 'choice', 'inuse', '2014-12-12 01:00:33', 17, 4),
 (92, '<p>ข้อใดลำดับสายเทควันโดได้ถูกต้อง</p>', 'choice', 'inuse', '2014-12-12 01:02:04', 17, 4),
 (93, '<p>สายดำ ดั้งใดถึงสามารถออกใบประกาศการสอบสายได้ (อย่างน้อยดั้งใด)</p>', 'choice', 'inuse', '2014-12-12 01:10:22', 17, 4),
@@ -1137,7 +1103,7 @@ CREATE TABLE IF NOT EXISTS `Scoreboard` (
   `Score` float DEFAULT NULL,
   `Max` float DEFAULT NULL,
   `Min` float DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `Scoreboard`
@@ -1162,7 +1128,8 @@ INSERT INTO `Scoreboard` (`sco_id`, `stu_id`, `course_id`, `paper_id`, `Score`, 
 (16, 54311095, 8, 15, 9, NULL, NULL),
 (17, 57700192, 4, 13, 5, NULL, NULL),
 (18, 57700196, 4, 13, 2, NULL, NULL),
-(19, 57700193, 6, 11, 7, NULL, NULL);
+(19, 57700193, 6, 11, 7, NULL, NULL),
+(20, 54310104, 6, 11, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1580,12 +1547,6 @@ ALTER TABLE `Answer_Papers`
  ADD PRIMARY KEY (`question_id`,`sco_id`);
 
 --
--- Indexes for table `Branch`
---
-ALTER TABLE `Branch`
- ADD PRIMARY KEY (`branch_id`);
-
---
 -- Indexes for table `Chapter`
 --
 ALTER TABLE `Chapter`
@@ -1626,12 +1587,6 @@ ALTER TABLE `Exam_Papers_Detail`
 --
 ALTER TABLE `Exam_Papers_Parts`
  ADD PRIMARY KEY (`part_id`);
-
---
--- Indexes for table `Faculty`
---
-ALTER TABLE `Faculty`
- ADD PRIMARY KEY (`fac_id`);
 
 --
 -- Indexes for table `Questions`
@@ -1715,15 +1670,10 @@ ALTER TABLE `users`
 ALTER TABLE `admins`
 MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `Branch`
---
-ALTER TABLE `Branch`
-MODIFY `branch_id` int(4) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `Chapter`
 --
 ALTER TABLE `Chapter`
-MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `Courses`
 --
@@ -1733,7 +1683,7 @@ MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 -- AUTO_INCREMENT for table `Course_Students_group`
 --
 ALTER TABLE `Course_Students_group`
-MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `Exam_Papers`
 --
@@ -1744,11 +1694,6 @@ MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 ALTER TABLE `Exam_Papers_Parts`
 MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
---
--- AUTO_INCREMENT for table `Faculty`
---
-ALTER TABLE `Faculty`
-MODIFY `fac_id` int(4) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `Questions`
 --
@@ -1773,7 +1718,7 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `Scoreboard`
 --
 ALTER TABLE `Scoreboard`
-MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `Subjects`
 --
