@@ -2,6 +2,8 @@
 
 class Teacher extends CI_Controller {
 
+	private $role;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -17,6 +19,7 @@ class Teacher extends CI_Controller {
 		} else {
 			redirect('auth/login');
 		}
+		$this->role = $this->session->userdata('role');
 	}
 
 	public function index()

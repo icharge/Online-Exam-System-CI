@@ -54,7 +54,7 @@ EOL;
 				<div class="box nav-tabs-custom" style="border: none;">
 					<ul class="nav nav-tabs">
 						<li><?php echo anchor('teacher/qwarehouse/view/'.$subjectInfo['code'], 'พื้นฐาน');?>
-						<li><?php echo anchor('teacher/qwarehouse/view/'.$subjectInfo['code'].'#chapter', 'บท / ตอน');?></li>
+						<li><?php echo anchor('teacher/qwarehouse/view/'.$subjectInfo['code'].'#chapter', 'Chapter');?></li>
 						<li class="active"><a href="#questions" data-toggle="tab">โจทย์คำถาม</a></li>
 					</ul>
 

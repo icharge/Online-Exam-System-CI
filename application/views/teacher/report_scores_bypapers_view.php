@@ -139,7 +139,7 @@ if ($this->session->flashdata('msg_error')) {
 					<?php
 						if (($reportRows)) {
 							foreach ($reportRows as $item) {
-								var_dump($item);
+								// var_dump($item);
 								$year = $item['year']+543;
 								list($startdate, $starttime) = explode(' ', $item['starttime']);
 								$item['startdate'] = date('d/m/Y',strtotime($startdate));

@@ -831,9 +831,9 @@ class Qwarehouse extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('teacher/t_header_view');
-		$this->load->view('teacher/t_headerbar_view');
-		$this->load->view('teacher/t_sidebar_view');
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
 
 		$data['pagetitle'] = "คลังข้อสอบ";
 		$data['pagesubtitle'] = "";
@@ -859,9 +859,9 @@ class Qwarehouse extends CI_Controller {
 	public function view($subjectId)
 	{
 		$this->session->set_flashdata('noAnim', true);
-		$this->load->view('teacher/t_header_view');
-		$this->load->view('teacher/t_headerbar_view');
-		$this->load->view('teacher/t_sidebar_view');
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
 
 		if ($this->input->post('submit'))
 		{
@@ -904,9 +904,9 @@ class Qwarehouse extends CI_Controller {
 	public function viewq($subjectId,$chapterid='')
 	{
 		$this->session->set_flashdata('noAnim', true);
-		$this->load->view('teacher/t_header_view');
-		$this->load->view('teacher/t_headerbar_view');
-		$this->load->view('teacher/t_sidebar_view');
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
 
 		if ($this->input->post('submit'))
 		{
