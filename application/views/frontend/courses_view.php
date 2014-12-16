@@ -1,7 +1,7 @@
 	<!-- content begin -->
 	<div id="content">
 		<div class="container">
-			<div class="row course-list">
+			<div class="row fix course-list">
 			<?php
 				foreach ($courseslist as $item) {
 					$desc = strip_tags($item['description']);

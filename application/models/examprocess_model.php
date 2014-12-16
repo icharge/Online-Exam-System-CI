@@ -31,6 +31,8 @@ class Examprocess_model extends CI_Model {
 			->where('sco_id' ,$sco_id)
 			->get('Answer_Papers');
 		//die($this->db->last_query());
+
+		// นับข้อที่ถูก
 		return $query->num_rows();
 	}
 

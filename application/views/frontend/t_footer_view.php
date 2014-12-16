@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="inner">
-						&copy; Copyiright 2014 - Ecourse by Aveothemes
+						&copy; Copyright 2015 - Norrapat Nimmanee | Ecourse template by Aveothemes
 					</div>
 				</div>
 				<div class="col-md-6">

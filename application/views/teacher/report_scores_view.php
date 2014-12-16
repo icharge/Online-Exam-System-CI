@@ -88,7 +88,7 @@ if ($this->session->flashdata('msg_error')) {
 							);
 						echo form_open('teacher/reports', $attr); ?>
 							<div class="col-sm-6" style="z-index:500;">
-								<label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
+								<!-- <label for="faculty" class="hidden-xs visible-md-inline-block visible-lg-inline-block">เลือกดูจาก </label>
 								<label><?php
 									$options = array(
 										'all' => 'ทั้งหมด',
@@ -111,7 +111,7 @@ if ($this->session->flashdata('msg_error')) {
 										)
 									);
 									echo form_dropdown('faculty', $options, 'default', 'id="faculty" class="form-control input-sm"');
-							?></label>
+							?></label> -->
 								<label>
 									<?php
 									$attr_year = array(
@@ -189,13 +189,13 @@ if ($this->session->flashdata('msg_error')) {
 								<tr>
 								<td class="status">
 									<div class="btn-group">
-										<a href="{$this->misc->getHref('teacher/reports/bypaper')}/{$item['course_id']}" class="btn btn-sm btn-default btn-flat">ชุดข้อสอบ</a>
+										<a href="{$this->misc->getHref('teacher/reports/bypaper')}/{$item['course_id']}" class="btn btn-sm btn-default btn-flat">จำแนกตามชุดข้อสอบ</a>
 										<button type="button" class="btn btn-sm btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
 											<span class="caret"></span>
 											<span class="sr-only">Toggle Dropdown</span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
-											<li><a href="{$this->misc->getHref('teacher/reports/bystudent')}/{$item['course_id']}">บุคคล</a></li>
+											<li><a href="{$this->misc->getHref('teacher/reports/bystudent')}/{$item['course_id']}">จำแนกตามบุคคล</a></li>
 										</ul>
 									</div>
 								</td>

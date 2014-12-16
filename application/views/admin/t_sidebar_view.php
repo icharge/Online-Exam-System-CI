@@ -28,19 +28,17 @@
 			<li<?php echo $this->misc->listCActive("admin");?>>
 				<?php echo anchor('admin', '<i class="fa fa-dashboard"></i> <span>Dashboard</span>');?>
 			</li>
-			<li<?php echo $this->misc->listCActive("widgets");?>>
+			<!-- <li<?php echo $this->misc->listCActive("widgets");?>>
 				<?php echo anchor('admin/widgets', '<i class="fa fa-th"></i> <span>เครื่องมือ</span> <small class="badge pull-right bg-green">new</small>');?>
-			</li>
-			<li class="treeview <?php echo $this->misc->listCActive("report",false,"end");?>">
+			</li> -->
+			<li class="treeview <?php echo $this->misc->listCActive("report",false,"start");?>">
 				<a href="#">
 					<i class="fa fa-bar-chart-o"></i>
 					<span>รายงาน</span>
 					<i class="fa fa-angle-left pull-right"></i>
 				</a>
 				<ul class="treeview-menu">
-					<li<?php echo $this->misc->listCActive("examreport");?>><?php echo anchor('admin/examreport', '<i class="fa fa-angle-double-right"></i> การสอบ');?></li>
-					<li<?php echo $this->misc->listCActive("scorereport");?>><?php echo anchor('admin/scorereport', '<i class="fa fa-angle-double-right"></i> คะแนนสอบ');?></li>
-					<li<?php echo $this->misc->listCActive("logreport");?>><?php echo anchor('admin/logreport', '<i class="fa fa-angle-double-right"></i> ประวัติการใข้งาน');?></li>
+					<li<?php echo $this->misc->listCActive("reports");?>><?php echo anchor('teacher/reports', '<i class="fa fa-angle-double-right"></i> การสอบ');?></li>
 				</ul>
 			</li>
 			<li class="treeview <?php echo $this->misc->listCActiveAry(array("faculty","users","subjects"),false);?>">

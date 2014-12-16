@@ -49,7 +49,7 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
-	function getCourseList($keyword='', $perpage=0, $offset=0, $visible=null, $year=0)
+	function getCourseList($keyword='', $perpage=0, $offset=0, $visible=null, $year=0, $status=null)
 	{
 // SELECT course_id, year, tea_id, startdate, name, shortname, description, visible, enabled
 // FROM Course c
@@ -64,6 +64,7 @@ class Courses_model extends CI_Model {
 		if ($visible !== null) $cause = array('visible' => $visible);
 		else $cause = array('visible >=' => '0');
 		if ($year != 0) $cause['year'] = $year;
+		if ($status !== null) $cause['status'] = $status;
 		$query = $this->db
 			// ->select($fields)
 			->like("CONCAT(code,name,shortname,description)",$keyword,'both')
@@ -98,7 +99,7 @@ class Courses_model extends CI_Model {
 		return $query;
 	}
 
-	function countCourseList($keyword='', $visible=null, $year=0)
+	function countCourseList($keyword='', $visible=null, $year=0, $status=null)
 	{
 		$fields = array(
 			'count(*) as scount'
@@ -106,6 +107,7 @@ class Courses_model extends CI_Model {
 		if ($visible !== null) $cause = array('visible' => $visible);
 		else $cause = array('visible >=' => '0');
 		if ($year != 0) $cause['year'] = $year;
+		if ($status !== null) $cause['status'] = $status;
 		$query = $this->db
 			->select($fields)
 			->like("CONCAT(code,name,shortname,description)",$keyword,'both')

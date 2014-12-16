@@ -177,7 +177,7 @@
 						</div>
 						<div class="form-group<?php if(form_error('birth')) echo ' has-error';?>">
 							<?php 
-							echo form_label('วันเกิด <span class="text-danger">*</span>', 'birth');
+							echo form_label('วันเกิด', 'birth');
 							echo form_input(array(
 								'id'=>'birth',
 								'name'=>'birth',

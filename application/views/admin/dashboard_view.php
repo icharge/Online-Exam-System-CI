@@ -1,23 +1,3 @@
-<!-- Begin content -->
-<!-- <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-	<ol class="breadcrumb">
-		<li class="active">หน้าแรก</li>
-	</ol>
-</div>
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main animate-fade-up">
-
-	<div class="page-header">
-		<h1><span class="glyphicon glyphicon-dashboard"></span> การจัดการระบบ <small>System Management</small></h1>
-		<p>
-			สวัสดีคุณ <?php echo $this->session->userdata('fullname');?>, ผู้ดูแลระบบ 
-			
-		</p>
-		<p>
-			
-		</p>
-	</div>
-</div> -->
-
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
@@ -34,7 +14,76 @@
 
 	<!-- Main content -->
 	<section class="content">
-
+		<div class="row">
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-aqua">
+					<div class="inner">
+						<h3>
+							<?=$coursecount?> วิชา
+						</h3>
+						<p>
+							วิชาที่เปิดทั้งหมด
+						</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-bag"></i>
+					</div>
+					<?php echo anchor('admin/courses', 'เพิ่มเติม <i class="fa fa-arrow-circle-right"></i>', 'class="small-box-footer"');?>
+				</div>
+			</div><!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-green">
+					<div class="inner">
+						<h3>
+							<?=$qcount?> ข้อ
+						</h3>
+						<p>
+							โจทย์ข้อสอบทั้งหมด
+						</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-stats-bars"></i>
+					</div>
+					<?php echo anchor('teacher/qwarehouse', 'เพิ่มเติม <i class="fa fa-arrow-circle-right"></i>', 'class="small-box-footer"');?>
+				</div>
+			</div><!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-yellow">
+					<div class="inner">
+						<h3>
+							<?=$usercount?> คน
+						</h3>
+						<p>
+							ผู้ใช้ทั้งหมด
+						</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+					<?php echo anchor('admin/users', 'เพิ่มเติม <i class="fa fa-arrow-circle-right"></i>', 'class="small-box-footer"');?>
+				</div>
+			</div><!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-red">
+					<div class="inner">
+						<h3>
+							<?=$testedcount?> ครั้ง
+						</h3>
+						<p>
+							การสอบทั้งหมด
+						</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-pie-graph"></i>
+					</div>
+					<?php echo anchor('teacher/reports', 'เพิ่มเติม <i class="fa fa-arrow-circle-right"></i>', 'class="small-box-footer"');?>
+				</div>
+			</div><!-- ./col -->
+		</div>
 	</section><!-- /.content -->
 </aside><!-- /.right-side -->
 

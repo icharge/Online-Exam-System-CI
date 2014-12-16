@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 15, 2014 at 10:14 PM
+-- Generation Time: Dec 16, 2014 at 08:17 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -372,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `Chapter` (
   `name` varchar(60) NOT NULL,
   `description` text,
   `subject_id` int(5) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `Chapter`
@@ -412,8 +412,11 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('2ff439875229b29081f0ff02681a466e', '192.168.1.11', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418654924, 'a:13:{s:2:"id";s:1:"2";s:3:"uid";s:8:"54310104";s:8:"username";s:8:"54310104";s:8:"fullname";s:40:"นรภัทร นิ่มมณี";s:5:"fname";s:18:"นรภัทร";s:5:"lname";s:21:"นิ่มมณี";s:5:"birth";s:10:"1992-09-14";s:6:"gender";s:4:"male";s:4:"year";s:4:"2011";s:7:"faculty";N;s:6:"branch";N;s:4:"role";s:7:"student";s:6:"logged";b:1;}'),
-('c10056df97fbe37018517baea5633728', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418661189, '');
+('0d0ae9965daf98ca3583503e347b03d1', '192.168.1.11', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418722918, ''),
+('137ae4a351cd64289741e3ecff777156', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418713669, ''),
+('4ce8dd72d2722515c89599f2c3b074e4', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418736466, ''),
+('563fe65a94fb712452a921cac935d6bb', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418752069, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"1";s:3:"uid";s:1:"1";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;}'),
+('deeeeff3c40e697d0d2ab91ae56dc4fd', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418709205, '');
 
 -- --------------------------------------------------------
 
@@ -489,7 +492,7 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
   `name` varchar(40) NOT NULL,
   `description` text,
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `Course_Students_group`
@@ -519,31 +522,31 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers` (
   `rules` text,
   `starttime` datetime NOT NULL,
   `endtime` datetime NOT NULL,
-  `course_id` int(4) NOT NULL,
-  `visible` smallint(6) NOT NULL DEFAULT '1',
-  `status` varchar(20) NOT NULL DEFAULT 'active'
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  `status` varchar(20) NOT NULL DEFAULT 'active',
+  `course_id` int(4) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `Exam_Papers`
 --
 
-INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `starttime`, `endtime`, `course_id`, `visible`, `status`) VALUES
-(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-07 09:00:00', '2014-12-07 10:00:00', 1, 1, 'active'),
-(2, 'A', 'ชุดข้อสอบ', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-08 09:00:00', '2014-12-08 10:00:00', 1, 1, 'deleted'),
-(3, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 1, 'deleted'),
-(4, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 1, 'deleted'),
-(5, 'สอบก่อนเรียน', '', '', '2014-12-08 15:30:00', '2014-12-08 15:45:00', 3, 1, 'active'),
-(6, 'สอบก่อนเรียน', '', '', '2014-12-10 09:00:00', '2014-12-10 10:20:00', 2, 1, 'active'),
-(7, 'สอบกลางภาค', '', '', '2014-12-16 09:20:00', '2014-12-16 10:30:00', 2, 1, 'active'),
-(8, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 1, 'deleted'),
-(9, 'ระบบย่อยอาหาร', 'จงเลือกคำตอบที่ถูกที่สุดเพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 10 นาที\nห้ามเปิดตำราเรียน\nทุจริตปรับตกวิชานี้', '2014-12-08 13:00:00', '2014-12-08 13:10:00', 4, 1, 'active'),
-(10, 'การจัดเรียงอิเล็กตรอนในระดับพลังงาน', 'เลือกคำตอบที่ถูกต้องที่สุด เพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 20 นาที\nห้ามนำตำราเข้าห้องสอบ\nทุจริตปรับตกวิชานี้', '2014-12-08 09:00:00', '2014-12-08 09:20:00', 5, 1, 'active'),
-(11, 'การตลาดระดับโลก', 'ข้อสอบมี 2 ตอน ทำทุกตอน', '1. ห้ามนำตำราเข้าห้องสอบ\n2.  ทุจริตปรับตกวิชานี้\n3. ใช้เวลาในการสอบ 40 นาที', '2014-12-27 08:00:00', '2014-12-27 08:40:00', 6, 1, 'active'),
-(12, 'TOEIC TEST', 'Reading Comprehension', '60 minutes for testing', '2014-12-09 09:00:00', '2014-12-09 10:00:00', 7, 1, 'active'),
-(13, 'การเจริญเติบโตของร่างกาย', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 4, 1, 'active'),
-(14, 'ทดสอบความรู้สัตว์เลี้ยงลูกด้วยนม', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 4, 1, 'deleted'),
-(15, 'กีฬาเทควันโด', '', '', '2014-12-25 13:00:00', '2014-12-25 14:30:00', 8, 1, 'active');
+INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `starttime`, `endtime`, `visible`, `status`, `course_id`) VALUES
+(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-07 09:00:00', '2014-12-07 10:00:00', 1, 'active', 1),
+(2, 'A', 'ชุดข้อสอบ', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-08 09:00:00', '2014-12-08 10:00:00', 1, 'deleted', 1),
+(3, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 'deleted', 1),
+(4, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 'deleted', 1),
+(5, 'สอบก่อนเรียน', '', '', '2014-12-08 15:30:00', '2014-12-08 15:45:00', 1, 'active', 3),
+(6, 'สอบก่อนเรียน', '', '', '2014-12-10 09:00:00', '2014-12-10 10:20:00', 1, 'active', 2),
+(7, 'สอบกลางภาค', '', '', '2014-12-16 09:20:00', '2014-12-16 10:30:00', 1, 'active', 2),
+(8, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 'deleted', 1),
+(9, 'ระบบย่อยอาหาร', 'จงเลือกคำตอบที่ถูกที่สุดเพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 10 นาที\nห้ามเปิดตำราเรียน\nทุจริตปรับตกวิชานี้', '2014-12-08 13:00:00', '2014-12-08 13:10:00', 1, 'active', 4),
+(10, 'การจัดเรียงอิเล็กตรอนในระดับพลังงาน', 'เลือกคำตอบที่ถูกต้องที่สุด เพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 20 นาที\nห้ามนำตำราเข้าห้องสอบ\nทุจริตปรับตกวิชานี้', '2014-12-08 09:00:00', '2014-12-08 09:20:00', 1, 'active', 5),
+(11, 'การตลาดระดับโลก', 'ข้อสอบมี 2 ตอน ทำทุกตอน', '1. ห้ามนำตำราเข้าห้องสอบ\n2.  ทุจริตปรับตกวิชานี้\n3. ใช้เวลาในการสอบ 40 นาที', '2014-12-27 08:00:00', '2014-12-27 08:40:00', 1, 'active', 6),
+(12, 'TOEIC TEST', 'Reading Comprehension', '60 minutes for testing', '2014-12-09 09:00:00', '2014-12-09 10:00:00', 1, 'active', 7),
+(13, 'การเจริญเติบโตของร่างกาย', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 1, 'active', 4),
+(14, 'ทดสอบความรู้สัตว์เลี้ยงลูกด้วยนม', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 1, 'deleted', 4),
+(15, 'กีฬาเทควันโด', '', '', '2014-12-25 13:00:00', '2014-12-25 14:30:00', 1, 'active', 8);
 
 -- --------------------------------------------------------
 
@@ -1673,7 +1676,7 @@ MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `Chapter`
 --
 ALTER TABLE `Chapter`
-MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `Courses`
 --
@@ -1683,7 +1686,7 @@ MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 -- AUTO_INCREMENT for table `Course_Students_group`
 --
 ALTER TABLE `Course_Students_group`
-MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `Exam_Papers`
 --

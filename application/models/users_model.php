@@ -368,7 +368,15 @@ class Users_model extends CI_Model {
 		return $this->_getMethodName()=="adduser"?'เพิ่มผู้ใช้':'แก้ไขข้อมูล';
 	}
 
-
+	function countAllUser()
+	{
+		$query = $this->db
+			->select('count(id) as ucount')
+			->from('Users')
+			->get()
+			->row_array();
+		return $query['ucount'];
+	}
 	
 }
 

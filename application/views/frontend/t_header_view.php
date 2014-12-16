@@ -47,7 +47,7 @@
 				<div class="col-md-12">
 					<div class="inner">
 						<h1>มีวิชาให้ลงสอบ <?php echo $coursesNum;?> รายการ จากทั้งหมด</h1>
-						<a class="btn btn-large btn-blue pull-right">ลงทะเบียนเดี๋ยวนี้</a>
+						<!-- <a class="btn btn-large btn-blue pull-right">ลงทะเบียนเดี๋ยวนี้</a> -->
 						<div class="clearfix"></div>
 					</div>
 				</div>

@@ -156,7 +156,7 @@ class Users extends CI_Controller {
 					$this->form_validation->set_rules('passwordconfirm', 'รหัสผ่าน', 'required|callback__password_check['.$this->input->post('password').']');
 					$this->form_validation->set_rules('fname', 'ชื่อ', 'required|trim');
 					$this->form_validation->set_rules('surname', 'นามสกุล', 'required|trim');
-					//$this->form_validation->set_rules('faculty', 'คณะ', 'required');
+					$this->form_validation->set_rules('faculty', 'คณะ', 'required');
 					$this->form_validation->set_message('required', 'คุณต้องกรอก %s');
 					if ($this->form_validation->run())
 					{
@@ -191,7 +191,7 @@ class Users extends CI_Controller {
 							'birth' => set_value('birth'),
 							'gender' => set_value('gender'),
 							'year' => set_value('year'),
-							//'fac_id' => set_value('faculty'),
+							'fac_id' => set_value('faculty'),
 							//'branch_id' => set_value('branch'),
 							'email' => set_value('email'),
 						);
@@ -301,6 +301,7 @@ class Users extends CI_Controller {
 						'name' => set_value('name'),
 						'lname' => set_value('surname'),
 						'email' => set_value('email'),
+						'fac_id' => set_value('faculty'),
 					);
 					$this->load->view('admin/userfield_teacher_view', $data);
 					break;
@@ -486,7 +487,7 @@ class Users extends CI_Controller {
 				//$this->form_validation->set_rules('title', 'คำนำหน้า', 'required|trim');
 				$this->form_validation->set_rules('fname', 'ชื่อ', 'required|trim');
 				$this->form_validation->set_rules('surname', 'นามสกุล', 'required|trim');
-				$this->form_validation->set_rules('birth', 'วันเกิด', 'required');
+				// $this->form_validation->set_rules('birth', 'วันเกิด', 'required');
 				$this->form_validation->set_rules('gender', 'เพศ', 'required');
 				$this->form_validation->set_rules('year', 'ปีการศึกษา', 'required|trim');
 				$this->form_validation->set_rules('faculty', 'คณะ', 'required');
@@ -503,7 +504,7 @@ class Users extends CI_Controller {
 					$studentData['name'] = $this->input->post('fname');
 					$studentData['lname'] = $this->input->post('surname');
 					$studentData['email'] = $this->input->post('email');
-					$studentData['birth'] = $this->input->post('birth');
+					$studentData['birth'] = ($this->input->post('birth')!=''?$this->input->post('birth'):null);
 					$studentData['gender'] = ($this->input->post('gender')=="male"?"male":"female");
 					$studentData['year'] = $this->input->post('year');
 					$studentData['fac_id'] = $this->input->post('faculty');

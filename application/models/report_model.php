@@ -8,6 +8,15 @@ class Report_model extends CI_Model {
 
 	}
 
+	function getQuestionCount()
+	{
+		$query = $this->db
+			->select('count(question_id) as qcount')
+			->get('Questions')
+			->row_array();
+		return $query['qcount'];
+	}
+
 	function getCoursesListCount($teaid='', $keyword='', $perpage=0, $offset=0, $year=0)
 	{
 		if ($perpage=='') $perpage=0;
@@ -133,6 +142,15 @@ SELECT stu_id, getScoreByPaperId(11,stu_id) as paper_1 FROM `Student_Enroll` WHE
 			->result_array();
 		// echo $this->db->last_query();
 		return $query;
+	}
+
+	function testedCount()
+	{
+		$query = $this->db
+			->select('count(sco_id) as scorecount')
+			->get('Scoreboard')
+			->row_array();
+		return $query['scorecount'];
 	}
 
 }

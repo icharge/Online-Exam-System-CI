@@ -97,12 +97,12 @@
 			<hr>
 			<div class="row">
 				<div class="col-md-4">
-					<h3>Meet The Instructor</h3>
+					<h3>รู้จักกับคณะอาจารย์</h3>
 					<ul class="trainer-list">
 						<li>
 							<img src="assets-student/img/trainer-1.jpg">
 							<div class="info">
-								<h5><a href="#">Michael Bubble</a></h5>
+								<h5><a href="#">อ.อรวรรณ จิตตะกาญจน์</a></h5>
 								<h6>Project Manager</h6>
 								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
 							</div>
@@ -111,7 +111,7 @@
 						<li>
 							<img src="assets-student/img/trainer-2.jpg">
 							<div class="info">
-								<h5><a href="#">Michael Bubble</a></h5>
+								<h5><a href="#">อ.ธารารัตน์ พวงสุวรรณ</a></h5>
 								<h6>Project Manager</h6>
 								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
 							</div>
@@ -120,7 +120,7 @@
 						<li>
 							<img src="assets-student/img/trainer-3.jpg">
 							<div class="info">
-								<h5><a href="#">Michael Bubble</a></h5>
+								<h5><a href="#">อ.อุไรวรรณ บัวตูม</a></h5>
 								<h6>Project Manager</h6>
 								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
 							</div>
@@ -129,7 +129,7 @@
 				</div>
 
 				<div class="col-md-8">
-					<h3>Latest Courses</h3>
+					<h3>วิชาสอบล่าสุด</h3>
 					<div class="row fix">
 						<?php 
 							foreach ($coursesList as $courseItem) {
@@ -168,7 +168,7 @@ HTML;
 				<div class="col-md-12">
 					<div class="inner">
 						<h1>Learn from 542 courses, from our 107 partners.</h1>
-						<a class="btn btn-large btn-black pull-right">Try Now!</a>
+						<!-- <a class="btn btn-large btn-black pull-right">Try Now!</a> -->
 						<div class="clearfix"></div>
 					</div>
 				</div>

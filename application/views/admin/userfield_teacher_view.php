@@ -157,7 +157,6 @@ EOL;
 							echo form_error('surname', '<span class="label label-danger">', '</span>');
 							?>
 						</div>
-						<?php /*
 						<div class="form-group<?php if(form_error('faculty')) echo ' has-error';?>">
 							<?php 
 							echo form_label('คณะ <span class="text-danger">*</span>', 'faculty');
@@ -171,7 +170,6 @@ EOL;
 							echo form_error('faculty', '<span class="label label-danger">', '</span>');
 							?>
 						</div>
-						*/?>
 						<div class="form-group<?php if(form_error('email')) echo ' has-error';?>">
 							<?php 
 							echo form_label('อีเมล์', 'email');

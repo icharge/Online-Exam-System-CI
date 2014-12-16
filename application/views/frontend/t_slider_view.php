@@ -17,7 +17,7 @@
 							<li>
 								<img src="assets-student/img/slider-home/pic%20(2).jpg" alt="">
 								<div class="slider-info">
-									<h1>Huge library of courses
+									<h1 class="black">Huge library of courses
 										<br>
 										to extend your skills.<br>
 										Anytime. Anywhere.</h1>

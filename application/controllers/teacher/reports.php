@@ -26,9 +26,9 @@ class Reports extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('teacher/t_header_view');
-		$this->load->view('teacher/t_headerbar_view');
-		$this->load->view('teacher/t_sidebar_view');
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
 
 		// $data['formlink'] = 'teacher/reqcourse/add';
 		$data['pagetitle'] = 'รายงานตามรายวิชา';
@@ -38,7 +38,7 @@ class Reports extends CI_Controller {
 		$data['perpage'] = '10';
 		if ($this->input->get('perpage')!='') $data['perpage'] = $this->input->get('perpage');
 
-		$teaid = $this->session->userdata('uid');
+		$teaid = ($this->role=='teacher'?$this->session->userdata('uid'):'');
 		$data['total'] = $this->reports->countCoursesListCount($teaid, $this->input->get('q'),null,null,$this->input->get('year'));
 		$data['courseslist'] = $this->reports->getCoursesListCount($teaid, $this->input->get('q'),
 			$data['perpage'],
@@ -59,9 +59,9 @@ class Reports extends CI_Controller {
 
 	public function bypaper($courseId)
 	{
-		$this->load->view('teacher/t_header_view');
-		$this->load->view('teacher/t_headerbar_view');
-		$this->load->view('teacher/t_sidebar_view');
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
 
 		// $data['formlink'] = 'teacher/reqcourse/add';
 		$data['pagetitle'] = 'ชุดข้อสอบ';
@@ -90,9 +90,9 @@ class Reports extends CI_Controller {
 
 	public function bystudent($courseId)
 	{
-		$this->load->view('teacher/t_header_view');
-		$this->load->view('teacher/t_headerbar_view');
-		$this->load->view('teacher/t_sidebar_view');
+		$this->load->view($this->role.'/t_header_view');
+		$this->load->view($this->role.'/t_headerbar_view');
+		$this->load->view($this->role.'/t_sidebar_view');
 
 		// $data['formlink'] = 'teacher/reqcourse/add';
 		$data['pagetitle'] = '';
