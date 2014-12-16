@@ -75,9 +75,9 @@
 							<h4><i class="fa fa-info"></i> คำแนะนำ</h4>
 							<p>การนำเข้า สามารถนำเข้าโดยใช้ไฟล์ข้อมูลรูปแบบดังนี้<br>
 								<ul>
-									<li>Excel 2003 <a><b>(.XLS)</b></a></li>
-									<li>Excel 2007+ <a><b>(.XLSX)</b></a></li>
-									<li><span class="text-muted">comma-separated values</span> <a><b>(.CSV)</b></a></li>
+									<li>Excel 2003 <a href="files/ex1.xls"><b>(.XLS)</b></a></li>
+									<li>Excel 2007+ <a href="files/ex2.xlsx"><b>(.XLSX)</b></a></li>
+									<li>comma-separated values <a href="files/ex3.csv"><b>(.CSV)</b></a></li>
 								</ul>
 								คลิกที่รูปแบบไฟล์ เพื่อแสดงตัวอย่างการจัดรูปแบบ แถวและสดมภ์
 							</p>
