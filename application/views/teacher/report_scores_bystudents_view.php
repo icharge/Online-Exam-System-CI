@@ -79,7 +79,7 @@ if ($this->session->flashdata('msg_error')) {
 							'role' => 'search',
 							'method' => 'get'
 							);
-						echo form_open('teacher/reports', $attr); ?>
+						echo form_open('teacher/reports/bystudent/'.$courseInfo['course_id'], $attr); ?>
 							<div class="col-sm-6" style="z-index:500;">
 								
 							</div>
@@ -142,25 +142,30 @@ if ($this->session->flashdata('msg_error')) {
 					<?php
 						if (($reportRows)) {
 							foreach ($reportRows as $item) {
-								
-								echo <<<html
-								<tr>
-								<td>{$item['stu_id']} {$item['title']}{$item['name']} {$item['lname']}</td>
+								$stdGroup[$item['groupname']][] = $item;
+							}
+							foreach ($stdGroup as $groupkey => $groupval) {
+								echo '<tr><td colspan="3" style="background-color: #fff;vertical-align: bottom; border-bottom: 2px solid #ddd; font-weight: bold;">'.$groupkey.'</td></tr>';
+								foreach ($groupval as $item) {
+									
+									echo <<<html
+									<tr>
+									<td>{$item['stu_id']} {$item['title']}{$item['name']} {$item['lname']}</td>
 html;
-	$sum = 0;
-	foreach ($reportCols as $col) {
-		$colname = 'paper_'.$col['paper_id'];
-		if ($item[$colname] !== null)
-		{
-			echo "<td>".$item[$colname]."</td>";
-			$sum += $item[$colname];
-		}
-		else
-			echo "<td><i class='fa fa-square jtooltip' title='ยังไม่ได้สอบ'></i></td>";
-	}
-	
-								echo "<td>$sum</td>
-								</tr>";
+									$sum = 0;
+									foreach ($reportCols as $col) {
+										$colname = 'paper_'.$col['paper_id'];
+										if ($item[$colname] !== null)
+										{
+											echo "<td>".$item[$colname]."</td>";
+											$sum += $item[$colname];
+										}
+										else
+											echo "<td><i class='fa fa-square jtooltip' title='ยังไม่ได้สอบ'></i></td>";
+									}
+									echo "<td>$sum</td>
+									</tr>";
+								}
 							}
 						} else {
 							echo "<tr class='warning'><td colspan='7' class='text-center'>ไม่พบข้อมูล</td></tr>";

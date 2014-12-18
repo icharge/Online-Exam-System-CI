@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 18, 2014 at 04:41 PM
+-- Generation Time: Dec 18, 2014 at 07:40 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -82,6 +82,18 @@ IF FOUND_ROWS() > 0 THEN
     ELSE
     	RETURN null;
     END IF;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `getStudentGroupByCourseId`(`courseid` INT, `stuid` INT) RETURNS varchar(40) CHARSET utf8
+    NO SQL
+BEGIN
+declare groupname varchar(40);
+SELECT name INTO @groupname FROM `Student_Enroll` se 
+left join Course_Students_group csg on se.group_id = csg.group_id 
+where se.course_id = courseid and se.stu_id = stuid;
+
+return @groupname;
 
 END$$
 
@@ -422,7 +434,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('1f9fb7e8eccfcbb887d209f534534580', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418916957, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
+('662510ea321d8d96b40deb91911278ba', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418927805, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 

@@ -72,14 +72,24 @@ class Report_model extends CI_Model {
 
 	function getStdScoreByPaper($paperid)
 	{
+		/*
+			SELECT sco_id, scoreboard.stu_id, title, name, lname, course_id, paper_id, Score, getStudentGroupByCourseId(course_id, Scoreboard.stu_id) as groupname
+			FROM Scoreboard
+			LEFT JOIN Students ON Scoreboard.stu_id = Students.stu_id
+			WHERE paper_id =  '6'
+			ORDER BY scoreboard.stu_id asc
+		*/
 		$query = $this->db
-			->select(array('sco_id','scoreboard.stu_id','title','name','lname','course_id','paper_id','Score'))
+			->select(array('sco_id','scoreboard.stu_id','title','name','lname','course_id',
+				'paper_id','Score', 'getStudentGroupByCourseId(course_id, Scoreboard.stu_id) as groupname'))
 			->from('Scoreboard')
 			->join('Students','Scoreboard.stu_id = Students.stu_id','left')
 			->where('paper_id', $paperid)
+			->order_by('groupname', 'asc')
 			->order_by('scoreboard.stu_id', 'asc')
 			->get()
 			->result_array();
+		// echo $this->db->last_query();
 		return $query;
 	}
 
@@ -106,10 +116,12 @@ SELECT stu_id, getScoreByPaperId(11,stu_id) as paper_1 FROM `Student_Enroll` WHE
 		foreach ($this->getPapersByCourseId($courseid) as $item) {
 			$selcol[] = "getScoreByPaperId($item[paper_id],Student_Enroll.stu_id) as paper_$item[paper_id]";
 		}
+		$selcol[] = "getStudentGroupByCourseId(course_id, Student_Enroll.stu_id) as groupname";
 		$query = $this->db
 			->select($selcol)
 			->join('Students','Student_Enroll.stu_id = Students.stu_id','left')
 			->where('course_id', $courseid)
+			->order_by('groupname', 'asc')
 			->get('Student_Enroll')
 			->result_array();
 		return $query;

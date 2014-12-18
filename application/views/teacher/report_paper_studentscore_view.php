@@ -28,14 +28,22 @@ html;
 				//var_dump($reportRows);
 					if ($reportRows) {
 						foreach ($reportRows as $item) {
-							echo <<<html
-							<tr>
-							<td>{$item['stu_id']}</td>
-							<td>{$item['title']}{$item['name']} {$item['lname']}</td>
-							<td>{$item['Score']}</td>
-							</tr>
-html;
+							$stdGroup[$item['groupname']][] = $item;
 						}
+
+						foreach ($stdGroup as $groupkey => $groupval) {
+							echo '<tr><td colspan="3" style="background-color: #fff;vertical-align: bottom; border-bottom: 2px solid #ddd; font-weight: bold;">'.$groupkey.'</td></tr>';
+							foreach ($groupval as $item) {
+								echo <<<html
+								<tr>
+								<td>{$item['stu_id']}</td>
+								<td>{$item['title']}{$item['name']} {$item['lname']}</td>
+								<td>{$item['Score']}</td>
+								</tr>
+html;
+							}
+						}
+						
 					} else {
 						echo "<tr class='warning'><td colspan='3' class='text-center'>ไม่พบข้อมูล</td></tr>";
 					}
