@@ -80,6 +80,20 @@ EOL;
 									echo form_dropdown('chapterselect', $options, 'default', 
 										'id="chapterselect" class="form-control"');
 								?>
+								<div class="btn-group" data-toggle="buttons">
+									<label class="btn btn-default active">
+										<input type="radio" class="noicheck" name="questiontype" value="all" autocomplete="off" checked> ทุกแบบ
+									</label>
+									<label class="btn btn-default">
+										<input type="radio" class="noicheck" name="questiontype" value="choice" autocomplete="off"> ปรนัย
+									</label>
+									<label class="btn btn-default">
+										<input type="radio" class="noicheck" name="questiontype" value="boolean" autocomplete="off"> ถูก / ผิด
+									</label>
+									<label class="btn btn-default">
+										<input type="radio" class="noicheck" name="questiontype" value="numeric" autocomplete="off"> ตอบตัวเลข
+									</label>
+								</div>
 							</div>
 						</div>
 						<div id="availablequestions" class="questionSortable">

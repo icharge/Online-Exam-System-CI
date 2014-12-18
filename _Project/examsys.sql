@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 16, 2014 at 08:17 PM
+-- Generation Time: Dec 18, 2014 at 04:41 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -359,7 +359,15 @@ INSERT INTO `Answer_Papers` (`question_id`, `sco_id`, `answer`) VALUES
 (96, 16, '1'),
 (97, 16, '2'),
 (98, 16, '3'),
-(99, 16, '2');
+(99, 16, '2'),
+(100, 21, '3'),
+(100, 22, '2'),
+(101, 21, '1'),
+(101, 22, '1'),
+(102, 21, 't'),
+(102, 22, 't'),
+(103, 21, 't'),
+(103, 22, 't');
 
 -- --------------------------------------------------------
 
@@ -372,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `Chapter` (
   `name` varchar(60) NOT NULL,
   `description` text,
   `subject_id` int(5) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `Chapter`
@@ -391,7 +399,9 @@ INSERT INTO `Chapter` (`chapter_id`, `name`, `description`, `subject_id`) VALUES
 (14, 'การตลาดระดับโลก ปรนัย', NULL, 8),
 (15, 'reading comprehension', NULL, 9),
 (16, 'การเจริญเติบโตของร่างกาย', NULL, 6),
-(17, 'กีฬาเทควันโด', NULL, 10);
+(17, 'กีฬาเทควันโด', NULL, 10),
+(18, 'บทที่  1', NULL, 3),
+(19, 'บทที่ 2', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -412,11 +422,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('0d0ae9965daf98ca3583503e347b03d1', '192.168.1.11', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418722918, ''),
-('137ae4a351cd64289741e3ecff777156', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418713669, ''),
-('4ce8dd72d2722515c89599f2c3b074e4', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418736466, ''),
-('563fe65a94fb712452a921cac935d6bb', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418752069, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"1";s:3:"uid";s:1:"1";s:8:"username";s:5:"admin";s:8:"fullname";s:34:"สตีฟ แอปเปิล";s:5:"fname";s:12:"สตีฟ";s:5:"lname";s:21:"แอปเปิล";s:4:"role";s:5:"admin";s:6:"logged";b:1;s:16:"flash:old:noAnim";b:1;}'),
-('deeeeff3c40e697d0d2ab91ae56dc4fd', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418709205, '');
+('1f9fb7e8eccfcbb887d209f534534580', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418916957, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}');
 
 -- --------------------------------------------------------
 
@@ -431,7 +437,7 @@ CREATE TABLE IF NOT EXISTS `Courses` (
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   `status` varchar(20) NOT NULL,
   `subject_id` int(5) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `Courses`
@@ -445,7 +451,9 @@ INSERT INTO `Courses` (`course_id`, `year`, `pwd`, `visible`, `status`, `subject
 (5, '2014', NULL, 1, 'active', 7),
 (6, '2014', NULL, 1, 'active', 8),
 (7, '2014', NULL, 1, 'active', 9),
-(8, '2014', NULL, 1, 'active', 10);
+(8, '2014', NULL, 1, 'active', 10),
+(9, '2014', NULL, 1, 'active', 2),
+(10, '2014', NULL, 1, 'active', 3);
 
 -- --------------------------------------------------------
 
@@ -492,7 +500,7 @@ CREATE TABLE IF NOT EXISTS `Course_Students_group` (
   `name` varchar(40) NOT NULL,
   `description` text,
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `Course_Students_group`
@@ -507,7 +515,9 @@ INSERT INTO `Course_Students_group` (`group_id`, `name`, `description`, `course_
 (14, 'GM', '', 6),
 (15, 'TOEIC 1', 'เฉพาะผู้ที่ลงเรียนเท่านั้น', 7),
 (16, 'TOEIC 2', 'ลงเพิ่มเติม', 7),
-(17, 'กลุ่ม 1', '', 8);
+(17, 'กลุ่ม 1', '', 8),
+(18, 'กลุ่ม 1', '', 10),
+(19, 'กลุ่ม 2', '', 10);
 
 -- --------------------------------------------------------
 
@@ -520,33 +530,35 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers` (
   `title` varchar(70) NOT NULL,
   `description` text,
   `rules` text,
+  `semester` varchar(10) NOT NULL,
   `starttime` datetime NOT NULL,
   `endtime` datetime NOT NULL,
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   `status` varchar(20) NOT NULL DEFAULT 'active',
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `Exam_Papers`
 --
 
-INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `starttime`, `endtime`, `visible`, `status`, `course_id`) VALUES
-(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-07 09:00:00', '2014-12-07 10:00:00', 1, 'active', 1),
-(2, 'A', 'ชุดข้อสอบ', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-08 09:00:00', '2014-12-08 10:00:00', 1, 'deleted', 1),
-(3, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 'deleted', 1),
-(4, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 'deleted', 1),
-(5, 'สอบก่อนเรียน', '', '', '2014-12-08 15:30:00', '2014-12-08 15:45:00', 1, 'active', 3),
-(6, 'สอบก่อนเรียน', '', '', '2014-12-10 09:00:00', '2014-12-10 10:20:00', 1, 'active', 2),
-(7, 'สอบกลางภาค', '', '', '2014-12-16 09:20:00', '2014-12-16 10:30:00', 1, 'active', 2),
-(8, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 'deleted', 1),
-(9, 'ระบบย่อยอาหาร', 'จงเลือกคำตอบที่ถูกที่สุดเพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 10 นาที\nห้ามเปิดตำราเรียน\nทุจริตปรับตกวิชานี้', '2014-12-08 13:00:00', '2014-12-08 13:10:00', 1, 'active', 4),
-(10, 'การจัดเรียงอิเล็กตรอนในระดับพลังงาน', 'เลือกคำตอบที่ถูกต้องที่สุด เพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 20 นาที\nห้ามนำตำราเข้าห้องสอบ\nทุจริตปรับตกวิชานี้', '2014-12-08 09:00:00', '2014-12-08 09:20:00', 1, 'active', 5),
-(11, 'การตลาดระดับโลก', 'ข้อสอบมี 2 ตอน ทำทุกตอน', '1. ห้ามนำตำราเข้าห้องสอบ\n2.  ทุจริตปรับตกวิชานี้\n3. ใช้เวลาในการสอบ 40 นาที', '2014-12-27 08:00:00', '2014-12-27 08:40:00', 1, 'active', 6),
-(12, 'TOEIC TEST', 'Reading Comprehension', '60 minutes for testing', '2014-12-09 09:00:00', '2014-12-09 10:00:00', 1, 'active', 7),
-(13, 'การเจริญเติบโตของร่างกาย', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 1, 'active', 4),
-(14, 'ทดสอบความรู้สัตว์เลี้ยงลูกด้วยนม', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 1, 'deleted', 4),
-(15, 'กีฬาเทควันโด', '', '', '2014-12-25 13:00:00', '2014-12-25 14:30:00', 1, 'active', 8);
+INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `semester`, `starttime`, `endtime`, `visible`, `status`, `course_id`) VALUES
+(1, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '1', '2014-12-07 09:00:00', '2014-12-07 10:00:00', 1, 'active', 1),
+(2, 'A', 'ชุดข้อสอบ', 'ทำด้วยตนเอง ตามความเข้าใจ', '', '2014-12-08 09:00:00', '2014-12-08 10:00:00', 1, 'deleted', 1),
+(3, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 'deleted', 1),
+(4, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 'deleted', 1),
+(5, 'สอบก่อนเรียน', '', '', '1', '2014-12-08 03:30:00', '2014-12-08 03:45:00', 1, 'active', 3),
+(6, 'สอบก่อนเรียน', '', '', '1', '2014-12-10 09:00:00', '2014-12-10 10:20:00', 1, 'active', 2),
+(7, 'สอบกลางภาค', '', '', '2', '2014-12-16 09:20:00', '2014-12-16 10:30:00', 1, 'active', 2),
+(8, 'สอบพื้นฐาน', 'สอบก่อนเรียน', 'ทำด้วยตนเอง ตามความเข้าใจ', '', '2014-12-03 09:00:00', '2014-12-03 10:00:00', 1, 'deleted', 1),
+(9, 'ระบบย่อยอาหาร', 'จงเลือกคำตอบที่ถูกที่สุดเพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 10 นาที\nห้ามเปิดตำราเรียน\nทุจริตปรับตกวิชานี้', '1', '2014-12-08 01:00:00', '2014-12-08 01:10:00', 1, 'active', 4),
+(10, 'การจัดเรียงอิเล็กตรอนในระดับพลังงาน', 'เลือกคำตอบที่ถูกต้องที่สุด เพียงคำตอบเดียว', 'ใช้เวลาในการสอบ 20 นาที\nห้ามนำตำราเข้าห้องสอบ\nทุจริตปรับตกวิชานี้', '2', '2014-12-08 09:00:00', '2014-12-08 09:20:00', 1, 'active', 5),
+(11, 'การตลาดระดับโลก', 'ข้อสอบมี 2 ตอน ทำทุกตอน', '1. ห้ามนำตำราเข้าห้องสอบ\n2.  ทุจริตปรับตกวิชานี้\n3. ใช้เวลาในการสอบ 40 นาที', '1', '2014-12-27 08:00:00', '2014-12-27 08:40:00', 1, 'active', 6),
+(12, 'TOEIC TEST', 'Reading Comprehension', '60 minutes for testing', '1', '2014-12-09 09:00:00', '2014-12-09 10:00:00', 1, 'active', 7),
+(13, 'การเจริญเติบโตของร่างกาย', '', '', '2', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 1, 'active', 4),
+(14, 'ทดสอบความรู้สัตว์เลี้ยงลูกด้วยนม', '', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 1, 'deleted', 4),
+(15, 'กีฬาเทควันโด', '', '', '1', '2014-12-25 01:00:00', '2014-12-25 02:30:00', 1, 'active', 8),
+(16, 'ชุดที่ 1', 'เลือกตอบข้อที่ถูกที่สุด', 'ห้ามเปิดตำรา', '1', '2014-12-17 09:00:00', '2014-12-17 10:30:00', 1, 'active', 10);
 
 -- --------------------------------------------------------
 
@@ -667,7 +679,11 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (96, 20, 15, 17),
 (97, 20, 15, 18),
 (98, 20, 15, 19),
-(99, 20, 15, 20);
+(99, 20, 15, 20),
+(100, 21, 16, 1),
+(101, 22, 16, 1),
+(102, 22, 16, 2),
+(103, 21, 16, 2);
 
 -- --------------------------------------------------------
 
@@ -682,7 +698,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers_Parts` (
   `description` text,
   `israndom` tinyint(1) NOT NULL,
   `paper_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `Exam_Papers_Parts`
@@ -702,7 +718,9 @@ INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `isran
 (17, 2, 'ปรนัย', '', 0, 11),
 (18, 1, 'reading comprehension', '', 0, 12),
 (19, 1, 'เลือกตอบ', '', 1, 13),
-(20, 1, 'เลือกตอบ', '', 1, 15);
+(20, 1, 'เลือกตอบ', '', 1, 15),
+(21, 1, 'ตอนที่ 1', '', 1, 16),
+(22, 2, 'ตอนที่ 2', '', 1, 16);
 
 -- --------------------------------------------------------
 
@@ -734,7 +752,7 @@ CREATE TABLE IF NOT EXISTS `Questions` (
   `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `chapter_id` int(7) NOT NULL,
   `created_by_id` int(8) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=100 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=104 ;
 
 --
 -- Dumping data for table `Questions`
@@ -744,7 +762,7 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (1, '<p><strong><span style="font-size:16px;">ปัจจุบัน Office เวอร์ชั่นอะไร ที่นิยมที่สุด</span></strong></p>', 'numeric', 'inuse', '2014-09-02 18:30:26', 4, 8),
 (2, '<p>Test2</p>', 'choice', 'inuse', '2014-09-09 09:14:28', 4, 3),
 (3, '<p>คำสั่ง <br /><span style="line-height:1.6em;">   echo "Hello World";<br />\nเป็นภาษาใด</span></p>', 'choice', 'inuse', '2014-09-15 12:23:25', 5, 8),
-(4, '<p><span style="font-size:16px;"><u><strong>Method</strong></u> มีอีกชื่อเรียกหนึ่งว่าอะไร</span></p>', 'choice', 'active', '2014-09-17 19:41:24', 7, 3),
+(4, '<p><span style="font-size:16px;"><u><strong>Method</strong></u> มีอีกชื่อเรียกหนึ่งว่าอะไร</span></p>', 'choice', 'inuse', '2014-09-17 19:41:24', 7, 3),
 (5, '<p>VB.NET ถือเป็นการเขียนโปรแกรมแบบ OOP</p>', 'boolean', 'active', '2014-09-08 16:35:48', 7, 8),
 (6, '<p><strong>Class</strong> ประกอบไปด้วย <strong>Attribute</strong> และ <strong>Method</strong>  <u><span style="color:#FF0000;">ไม่สามารถสืบทอดได้</span></u></p>', 'boolean', 'inuse', '2014-09-22 08:23:26', 8, 3),
 (7, '<p><span style="font-size:22px;"><span style="font-family:''th sarabun new'', ''th sarabun psk'';">หากมี <strong>Method</strong>  <u>Run() </u> ใน <strong>Class</strong>  ต้องการให้เรียกใช้จากภายนอกได้  จะต้องกำหนด <span style="color:#FF0000;"><strong>Encapsulation</strong></span> อย่างไร</span></span></p>', 'choice', 'inuse', '2014-09-24 13:20:44', 8, 3),
@@ -753,7 +771,7 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (10, '<p>Drafting 2</p>', 'choice', 'inuse', '2014-10-01 15:20:10', 4, 3),
 (11, '<p>Disabled question</p>', 'numeric', 'inuse', '2014-09-08 21:05:28', 4, 8),
 (12, '<p>Trueeee</p>', 'boolean', 'inuse', '2014-09-08 21:09:05', 4, 8),
-(13, '<p><strong>jhglkdjf;sldkfs;dkjfls;</strong></p>', 'numeric', 'active', '2014-09-09 15:38:00', 7, 8),
+(13, '<p><strong>jhglkdjf;sldkfs;dkjfls;</strong></p>', 'numeric', 'inuse', '2014-09-09 15:38:00', 7, 8),
 (14, '<p><em>dfkjs;ldkfjs;ldfsoduypofsdjo</em></p>', 'choice', 'inuse', '2014-10-02 13:58:53', 4, 8),
 (15, '<p><span style="background-color:rgb(249,249,249);color:rgb(102,102,102);font-family:''source sans pro'', sans-serif;font-size:17px;">IT Consultancy Method</span></p>\n\n<p><font color="#666666" face="source sans pro, sans-serif"><span style="background-color:rgb(249,249,249);font-size:17px;">รหัสวิชาคืออะไร</span></font></p>', 'numeric', 'inuse', '2014-10-02 14:05:21', 4, 8),
 (16, '<p><span style="font-size:18px;">ITITITITITITITIT</span></p>', 'boolean', 'inuse', '2014-10-02 14:07:00', 4, 8),
@@ -839,7 +857,11 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (96, '<p>ข้อใดไม่ใช้ส่วนประกอบการเรียนรู้กีฬาเทควันโด</p>', 'choice', 'inuse', '2014-12-12 01:16:50', 17, 4),
 (97, '<p>Taekwondo  มาจากคำว่าอะไร</p>', 'choice', 'inuse', '2014-12-12 01:19:24', 17, 4),
 (98, '<p>ต้นกำเนิดจริงๆของศิลปะการป้องกันตัวขนิดนี้มาจากประเทศอะไร (แรกเริ่มเลย)</p>', 'choice', 'inuse', '2014-12-12 01:23:48', 17, 4),
-(99, '<p>คำอ่านที่ถูกต้องของคำว่า Tae-Kwon-Do คือข้อใด</p>', 'choice', 'inuse', '2014-12-12 01:25:55', 17, 4);
+(99, '<p>คำอ่านที่ถูกต้องของคำว่า Tae-Kwon-Do คือข้อใด</p>', 'choice', 'inuse', '2014-12-12 01:25:55', 17, 4),
+(100, '<p><span style="font-size:18px;">1+2 = ?</span></p>', 'numeric', 'inuse', '2014-12-17 09:54:06', 18, 3),
+(101, '<p>5+5 = เท่าใด</p>', 'choice', 'inuse', '2014-12-17 09:54:57', 18, 3),
+(102, '<p>2+3 = 5</p>', 'boolean', 'inuse', '2014-12-17 09:55:33', 19, 3),
+(103, '<p>3+3 = 10</p>', 'boolean', 'inuse', '2014-12-17 09:55:52', 19, 3);
 
 -- --------------------------------------------------------
 
@@ -851,7 +873,7 @@ CREATE TABLE IF NOT EXISTS `Question_boolean` (
 `id` int(10) NOT NULL,
   `answer` varchar(20) NOT NULL,
   `question_id` int(10) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `Question_boolean`
@@ -875,7 +897,9 @@ INSERT INTO `Question_boolean` (`id`, `answer`, `question_id`) VALUES
 (15, 't', 49),
 (16, 't', 50),
 (17, 't', 51),
-(18, 't', 52);
+(18, 't', 52),
+(19, 't', 102),
+(20, 'f', 103);
 
 -- --------------------------------------------------------
 
@@ -893,7 +917,7 @@ CREATE TABLE IF NOT EXISTS `Question_choice` (
   `choice6` text,
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=75 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
 
 --
 -- Dumping data for table `Question_choice`
@@ -973,7 +997,8 @@ INSERT INTO `Question_choice` (`id`, `choice1`, `choice2`, `choice3`, `choice4`,
 (71, 'โคยังมูล', 'เคียกพ่า', 'เคียวรูกิ', 'โฮชินซูล', '', '', '1', 96),
 (72, 'Takkwon + Kongsoodo', 'Takkyon + Kongsondo', 'Takkwon + Kongsondo', 'Takkyon + Kongsoodo', '', '', '4', 97),
 (73, 'ประเทศจีน', 'ประเทศญี่ปุ่น', 'ประเทศเกาหลี', 'ประเทศมองโกเลีย', '', '', '3', 98),
-(74, 'เท - ควัน - โด', 'เท - ควอน - โด', 'แท - ควัน - โด', 'แท - ควอน - โด', '', '', '4', 99);
+(74, 'เท - ควัน - โด', 'เท - ควอน - โด', 'แท - ควัน - โด', 'แท - ควอน - โด', '', '', '4', 99),
+(75, '10', '0', '7', '50', '', '', '1', 101);
 
 -- --------------------------------------------------------
 
@@ -1036,7 +1061,7 @@ CREATE TABLE IF NOT EXISTS `Question_numerical` (
 `id` int(10) NOT NULL,
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `Question_numerical`
@@ -1049,7 +1074,8 @@ INSERT INTO `Question_numerical` (`id`, `answer`, `question_id`) VALUES
 (4, '4234234', 13),
 (5, '29311', 15),
 (6, '22222', 18),
-(7, '3', 21);
+(7, '3', 21),
+(8, '3', 100);
 
 -- --------------------------------------------------------
 
@@ -1106,7 +1132,7 @@ CREATE TABLE IF NOT EXISTS `Scoreboard` (
   `Score` float DEFAULT NULL,
   `Max` float DEFAULT NULL,
   `Min` float DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `Scoreboard`
@@ -1132,7 +1158,9 @@ INSERT INTO `Scoreboard` (`sco_id`, `stu_id`, `course_id`, `paper_id`, `Score`, 
 (17, 57700192, 4, 13, 5, NULL, NULL),
 (18, 57700196, 4, 13, 2, NULL, NULL),
 (19, 57700193, 6, 11, 7, NULL, NULL),
-(20, 54310104, 6, 11, 0, NULL, NULL);
+(20, 54310104, 6, 11, 0, NULL, NULL),
+(21, 54310104, 10, 16, 3, NULL, NULL),
+(22, 54311095, 10, 16, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1176,6 +1204,16 @@ INSERT INTO `Students` (`stu_id`, `id`, `title`, `name`, `lname`, `birth`, `gend
 ('57700198', 46, 'นางสาว', 'วลัยพร', 'นามมี', NULL, 'female', '5770000000198', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
 ('57700199', 47, 'นางสาว', 'วาสนา', 'สวาดี', NULL, 'female', '5770000000199', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
 ('57700200', 48, 'นาย', 'มั่นคง', 'กิมจอง', NULL, 'male', '5770000000200', 2014, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'บริหารธุรกิจ', NULL, NULL),
+('58310101', 65, 'นาย', 'สมพงษ์', 'เจริญกรุง', NULL, 'male', '1132548710867', 2015, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
+('58310102', 66, 'นาย', 'อำพล', 'คนดี', NULL, 'male', '7848567199697', 2015, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
+('58310103', 67, 'นางสาว', 'กัญญาพร', 'บุญคำ', NULL, 'female', '1307042043087', 2015, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
+('58310104', 68, 'นาย', 'หรรษา', 'เจริญปัญญา', NULL, 'male', '7024157545548', 2015, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
+('58310105', 69, 'นางสาว', 'นิภาดา', 'แซ่ตั้ง', NULL, 'female', '8079703201330', 2015, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
+('58310106', 70, 'นางสาว', 'อัญมณี', 'แสงสว่าง', NULL, 'female', '8854874707597', 2015, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
+('58310107', 71, 'นาย', 'ปิยะพงศ์', 'หอมเสมอ', NULL, 'male', '3602692664921', 2015, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
+('58310108', 72, 'นางสาว', 'กิติญา', 'งามธรรม', NULL, 'female', '2605130771339', 2015, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
+('58310109', 73, 'นาย', 'อรรถพล', 'ทองสมบัติ', NULL, 'male', '7553807675658', 2015, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
+('58310110', 74, 'นาย', 'เกียรติศักดิ์', 'เชิดชู', NULL, 'male', '7329343824500', 2015, 'วิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศ', NULL, NULL),
 ('58700101', 50, 'นาย', 'สมพงษ์', 'อยู่รอด', NULL, 'male', '1190704545660', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
 ('58700105', 51, 'นาย', 'องอาจ', 'มานะศิล', NULL, 'male', '1154369903444', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
 ('58700112', 52, 'นาย', 'พงศกร', 'งามเหลือ', NULL, 'male', '1145777764432', 2015, 'คณะวิทยาศาสตร์และศิลปศาสตร์', 'ระบบสารสนเทศทางคอมพิวเตอร์', NULL, NULL),
@@ -1208,11 +1246,13 @@ CREATE TABLE IF NOT EXISTS `Student_Enroll` (
 
 INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('54310104', '1', 1),
+('54310104', '10', 19),
 ('54310104', '2', 11),
 ('54310104', '4', 12),
 ('54310104', '5', 13),
 ('54310104', '6', 14),
 ('54310104', '7', 16),
+('54311095', '10', 18),
 ('54311095', '2', 11),
 ('54311095', '4', 12),
 ('54311095', '5', 13),
@@ -1243,6 +1283,7 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('57700196', '7', 15),
 ('57700196', '8', 17),
 ('57700197', '1', 9),
+('57700197', '10', 18),
 ('57700197', '4', 12),
 ('57700198', '4', 12),
 ('57700198', '5', 13),
@@ -1259,6 +1300,7 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('58700105', '5', 13),
 ('58700105', '7', 16),
 ('58700112', '4', 12),
+('58700115', '10', 18),
 ('58700115', '4', 12),
 ('58700115', '5', 13),
 ('58700115', '6', 14),
@@ -1268,6 +1310,7 @@ INSERT INTO `Student_Enroll` (`stu_id`, `course_id`, `group_id`) VALUES
 ('58700121', '6', 14),
 ('58700121', '7', 15),
 ('58700127', '1', 9),
+('58700127', '10', 18),
 ('58700127', '4', 12),
 ('58700127', '7', 16),
 ('58700133', '4', 12),
@@ -1385,7 +1428,10 @@ INSERT INTO `Teacher_Course_Detail` (`tea_id`, `course_id`) VALUES
 (1, 4),
 (1, 8),
 (2, 2),
+(2, 10),
 (3, 1),
+(3, 10),
+(4, 10),
 (5, 4),
 (5, 5),
 (5, 6),
@@ -1425,7 +1471,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(128) NOT NULL,
   `role` varchar(20) DEFAULT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'active'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=65 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=75 ;
 
 --
 -- Dumping data for table `users`
@@ -1468,7 +1514,17 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`) VALUES
 (61, '58700156', '3b66eb863d7180d06c9bdca6e41e2981', 'student', 'active'),
 (62, '58700157', '97648f4805e0f8fdcd68eeb44cd08056', 'student', 'active'),
 (63, '54311095', '81dc9bdb52d04dc20036dbd8313ed055', 'student', 'active'),
-(64, 'sittinee', 'b59c67bf196a4758191e42f76670ceba', 'teacher', 'active');
+(64, 'sittinee', 'b59c67bf196a4758191e42f76670ceba', 'teacher', 'active'),
+(65, '58310101', '4cabad4498b33bad3b575846d0131566', 'student', 'active'),
+(66, '58310102', '4820dbedb5675bf4c8a4c4db174cbb45', 'student', 'active'),
+(67, '58310103', 'fd2823f14a2b3b22f797bf507b5d31b4', 'student', 'active'),
+(68, '58310104', 'b2cb1a1900797081c87ec93391c464ec', 'student', 'active'),
+(69, '58310105', '9c1f713f91b49bc0df686d67e59a5e94', 'student', 'active'),
+(70, '58310106', '1ed33111671ee18f3b55717c457ee7d2', 'student', 'active'),
+(71, '58310107', 'd709109cc9aab2194fd286929fc7bc08', 'student', 'active'),
+(72, '58310108', '3e76a67fab7fd40d2bb42792953f31de', 'student', 'active'),
+(73, '58310109', '16ceb1c121a385b6d95817d7e6b240ce', 'student', 'active'),
+(74, '58310110', '41c9a257b3d9ce0b4f62eaad2046fad7', 'student', 'active');
 
 -- --------------------------------------------------------
 
@@ -1676,52 +1732,52 @@ MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `Chapter`
 --
 ALTER TABLE `Chapter`
-MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+MODIFY `chapter_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `Courses`
 --
 ALTER TABLE `Courses`
-MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `course_id` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `Course_Students_group`
 --
 ALTER TABLE `Course_Students_group`
-MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `Exam_Papers`
 --
 ALTER TABLE `Exam_Papers`
-MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `Exam_Papers_Parts`
 --
 ALTER TABLE `Exam_Papers_Parts`
-MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `Questions`
 --
 ALTER TABLE `Questions`
-MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100;
+MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=104;
 --
 -- AUTO_INCREMENT for table `Question_boolean`
 --
 ALTER TABLE `Question_boolean`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `Question_choice`
 --
 ALTER TABLE `Question_choice`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=75;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=76;
 --
 -- AUTO_INCREMENT for table `Question_numerical`
 --
 ALTER TABLE `Question_numerical`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `Scoreboard`
 --
 ALTER TABLE `Scoreboard`
-MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `Subjects`
 --
@@ -1736,7 +1792,7 @@ MODIFY `tea_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
+MODIFY `id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=75;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

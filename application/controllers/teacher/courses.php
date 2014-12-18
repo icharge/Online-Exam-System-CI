@@ -549,6 +549,7 @@ HTML;
 		var txtenddate = myform.find("input[name='enddate']");
 		var txtstarttime = myform.find("input[name='starttime']");
 		var txtendtime = myform.find("input[name='endtime']");
+		var txtsemester = myform.find("select[name='semester']");
 
 		// clear class
 		txttitle.parent().removeClass('has-error');
@@ -558,6 +559,7 @@ HTML;
 		txtenddate.parent().parent().removeClass('has-error');
 		txtstarttime.parent().parent().removeClass('has-error');
 		txtendtime.parent().parent().removeClass('has-error');
+		myform.find("select[name='semester']").selectpicker('val', '1');
 		myform.find(".alert").hide();
 	});
 
@@ -651,6 +653,7 @@ HTML;
 		form.find("input[type='checkbox']").iCheck('uncheck');
 		form.find("textarea").val('');
 		form.find("input[name='paper_id']").val(paperid);
+
 	});
 
 	// แก้ไขชุดข้อสอบ
@@ -695,6 +698,7 @@ HTML;
 				var txtenddate = myform.find("input[name='enddate']");
 				var txtstarttime = myform.find("input[name='starttime']");
 				var txtendtime = myform.find("input[name='endtime']");
+				var txtsemester = myform.find("select[name='semester']");
 
 				txttitle.val(data.paperData.title);
 				txtdesc.val(data.paperData.description);
@@ -703,6 +707,7 @@ HTML;
 				txtenddate.val(data.paperData.enddate);
 				txtstarttime.val(data.paperData.starttime);
 				txtendtime.val(data.paperData.endtime);
+				txtsemester.selectpicker('val', data.paperData.semester);
 			}
 		})
 		.fail(function(jqxhr, textStatus, error) {
@@ -1012,6 +1017,7 @@ HTML;
 																' '.$this->input->post('starttime');
 			$paperData['endtime'] = $this->misc->reformatDate($this->input->post('enddate'),'Y-m-d', true, '/').
 																' '.$this->input->post('endtime');
+			$paperData['semester'] = $this->input->post('semester');
 			$paperData['course_id'] = $courseId;
 			$addPapaer = $this->courses->addPaper($paperData);
 			//echo $addPapaer['result'];
@@ -1036,6 +1042,7 @@ HTML;
 															' '.$this->input->post('starttime');
 		$paperData['endtime'] = $this->misc->reformatDate($this->input->post('enddate'),'Y-m-d', true, '/').
 															' '.$this->input->post('endtime');
+		$paperData['semester'] = $this->input->post('semester');
 		$editPaper = $this->courses->editPaper($paperData,$paperid);
 		//echo $editPaper['result'];
 		$this->session->set_flashdata('msg_info',
@@ -1178,12 +1185,12 @@ HTML;
 		}
 	});
 
-	$("select#chapterselect").change(function() {
+	$("select#chapterselect, input[name='questiontype']").change(function() {
 		//$("#availablequestions").hide();
 		$.ajax({
 			type: "POST",
 			url: "{$this->misc->getHref("teacher/courses/callbackjson/getPEQuestionList/")}/?ts="+Date.now(),
-			data: "chapter="+$(this).val()+"&subject={$data['courseInfo']['subject_id']}&paper={$data['partInfo']['paper_id']}",
+			data: "chapter="+$("select#chapterselect").val()+"&subject={$data['courseInfo']['subject_id']}&paper={$data['partInfo']['paper_id']}&qtype="+$("input[name='questiontype']:checked").val(),
 			dataType: "json"
 		})
 		.done(function(data) {
@@ -1348,8 +1355,9 @@ HTML;
 				$chapterid = $this->input->post('chapter');
 				$subjectid = $this->input->post('subject');
 				$paperid = $this->input->post('paper');
+				$qtype = $this->input->post('qtype');
 				$this->load->model('parteditor_model', 'parteditor');
-				$questionList = $this->parteditor->getQuestionList($chapterid,$subjectid,$paperid);
+				$questionList = $this->parteditor->getQuestionList($chapterid,$subjectid,$paperid,$qtype);
 				$html = "";
 				foreach ($questionList as $item) {
 					$item['number'] = null;
