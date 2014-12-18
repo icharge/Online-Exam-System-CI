@@ -1,7 +1,18 @@
 <div id="question-<?php echo $question_id;?>" data-chapterid="<?php echo $chapter_id; ?>" class="box box-solid nav-tabs-custom question-item collapsed-box">
 	<ul class="box-header nav nav-tabs">
 		<li class="pull-left header">
-			<i class="fa fa-file-o"></i> <?php 
+			<?php 
+			switch ($type) {
+				case 'choice':
+					echo '<i class="fa fa-list-ul"></i>';
+					break;
+				case 'boolean':
+					echo '<i class="fa fa-check"></i>';
+					break;
+				case 'numeric':
+					echo '<i class="fa fa-superscript"></i>';
+					break;
+			}
 			if (isset($number))
 				echo "<span class=\"question-labelno\">ข้อ</span> <span class=\"question-no\">$number</span>";
 			else

@@ -82,16 +82,16 @@ EOL;
 								?>
 								<div class="btn-group" data-toggle="buttons">
 									<label class="btn btn-default active">
-										<input type="radio" class="noicheck" name="questiontype" value="all" autocomplete="off" checked> ทุกแบบ
+										<input type="radio" class="noicheck" name="questiontype" value="all" autocomplete="off" checked><i class="fa fa-asterisk"></i> ทุกแบบ
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" class="noicheck" name="questiontype" value="choice" autocomplete="off"> ปรนัย
+										<input type="radio" class="noicheck" name="questiontype" value="choice" autocomplete="off"><i class="fa fa-list-ul"></i> ปรนัย
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" class="noicheck" name="questiontype" value="boolean" autocomplete="off"> ถูก / ผิด
+										<input type="radio" class="noicheck" name="questiontype" value="boolean" autocomplete="off"><i class="fa fa-check"></i> ถูก / ผิด
 									</label>
 									<label class="btn btn-default">
-										<input type="radio" class="noicheck" name="questiontype" value="numeric" autocomplete="off"> ตอบตัวเลข
+										<input type="radio" class="noicheck" name="questiontype" value="numeric" autocomplete="off"><i class="fa fa-superscript"></i> ตอบตัวเลข
 									</label>
 								</div>
 							</div>
