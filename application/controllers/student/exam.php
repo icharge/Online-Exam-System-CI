@@ -72,6 +72,7 @@ class Exam extends CI_Controller {
 		$headerData['subtitle'] = "การสอบ";
 		$this->load->view('frontend/t_header_view', $headerData);
 
+		$data['qcount'] = $this->examproc->getQuestionCount($paperid);
 		$data['score'] = $examproc;
 		$this->load->view('student/examposted_view', $data);
 
