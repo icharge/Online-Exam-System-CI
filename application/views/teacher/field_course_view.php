@@ -590,6 +590,17 @@ HTML;
 								?>
 							</div>
 							<div class="form-group">
+								<?php
+								echo form_label('รูปแบบข้อสอบ', 'qtype');
+								$options = null;
+								$options['any'] = "ไม่กำหนด";
+								$options['choice'] = "ปรนัย";
+								$options['boolean'] = "ถูก / ผิด";
+								$options['numeric'] = "ตอบตัวเลข";
+								echo form_dropdown('qtype', $options, 'default', 'class="form-control"');
+								?>
+							</div>
+							<div class="form-group">
 								<label><?php
 								echo form_checkbox('random', 'true', FALSE,'class="minimal-red"');
 								?> สุ่มข้อสอบ</label>

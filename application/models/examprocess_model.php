@@ -95,7 +95,7 @@ class Examprocess_model extends CI_Model {
 			->select('count(question_id) as qcount')
 			->where('paper_id', $paperid)
 			->get('question_detail_list')
-			->result_row();
+			->row_array();
 		return $query['qcount'];
 	}
 

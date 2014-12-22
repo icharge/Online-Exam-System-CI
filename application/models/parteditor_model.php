@@ -43,7 +43,7 @@ class Parteditor_model extends CI_Model {
 			// ->get()
 			// ->result_array();
 
-		if ($qtype == 'all') $qqtype = "";
+		if ($qtype == 'all' or $qtype == '') $qqtype = "";
 		else $qqtype = "and type = '$qtype'";
 
 		$query = $this->db->query("SELECT * FROM `question_list` 

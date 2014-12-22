@@ -16,7 +16,22 @@
 	</section>
 	<section class="content">
 		<h4 class="page-header">
-			<small><?php echo $pagesubtitle;?></small>
+			<?php echo $pagesubtitle;?><small> <?php 
+				switch ($partInfo['type']) {
+					case 'choice':
+						echo 'ข้อสอบปรนัย';
+						break;
+					case 'boolean':
+						echo 'ข้อสอบถูก / ผิด';
+						break;
+					case 'numeric':
+						echo 'ข้อสอบตอบตัวเลข';
+						break;
+					default:
+						
+						break;
+				}
+			?></small>
 		</h4>
 
 		<?php
@@ -24,7 +39,7 @@
 			'name' => 'course',
 			'role' => 'form',
 			'method' => 'post'
-			);
+		);
 		echo form_open($formlink, $attr);
 		?>
 		<div class="row">
@@ -79,7 +94,7 @@ EOL;
 									$options = $this->parteditor->buildChapterOptions($courseInfo['subject_id']);
 									echo form_dropdown('chapterselect', $options, 'default', 
 										'id="chapterselect" class="form-control"');
-								?>
+								if ($partInfo['type'] == 'any' or $partInfo['type'] == '') { ?>
 								<div class="btn-group" data-toggle="buttons">
 									<label class="btn btn-default active">
 										<input type="radio" class="noicheck" name="questiontype" value="all" autocomplete="off" checked><i class="fa fa-asterisk"></i> ทุกแบบ
@@ -94,6 +109,12 @@ EOL;
 										<input type="radio" class="noicheck" name="questiontype" value="numeric" autocomplete="off"><i class="fa fa-superscript"></i> ตอบตัวเลข
 									</label>
 								</div>
+								<?php }
+								else
+								{
+									echo form_hidden('questiontype', $partInfo['type']);
+								}
+								?>
 							</div>
 						</div>
 						<div id="availablequestions" class="questionSortable">

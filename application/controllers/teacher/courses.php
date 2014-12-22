@@ -653,6 +653,8 @@ HTML;
 		form.find("input[type='checkbox']").iCheck('uncheck');
 		form.find("textarea").val('');
 		form.find("input[name='paper_id']").val(paperid);
+		var partcount = $(this).parent().parent().find('.content-toggle .part-list li').length+1;
+		form.find("input[name='no']").val(partcount);
 
 	});
 
@@ -1067,6 +1069,7 @@ HTML;
 		$partData['description'] = $this->input->post('description');
 		$partData['israndom'] = ($this->input->post('random')=="true"?"1":"0");
 		$partData['paper_id'] = $this->input->post('paper_id');
+		$partData['type'] = $this->input->post('qtype');
 		$addPart = $this->courses->addPart($partData);
 
 		$this->session->set_flashdata('msg_info',
@@ -1104,7 +1107,7 @@ HTML;
 			$firstchapter = $firstchapter->row_array();
 			$firstchapter = $firstchapter['chapter_id'];
 			$data['questionDataWh'] = $this->parteditor->getQuestionList($firstchapter,
-				$data['courseInfo']['subject_id'],$data['partInfo']['paper_id']);
+				$data['courseInfo']['subject_id'],$data['partInfo']['paper_id'], $data['partInfo']['type']);
 		}
 
 		// Add script
@@ -1187,10 +1190,16 @@ HTML;
 
 	$("select#chapterselect, input[name='questiontype']").change(function() {
 		//$("#availablequestions").hide();
+		var questiontype = '';
+		if ($("input[name='questiontype']:checked").val() != undefined) {
+			questiontype = $("input[name='questiontype']:checked").val();
+		} else {
+			questiontype = $("input[name='questiontype']").val();
+		}
 		$.ajax({
 			type: "POST",
 			url: "{$this->misc->getHref("teacher/courses/callbackjson/getPEQuestionList/")}/?ts="+Date.now(),
-			data: "chapter="+$("select#chapterselect").val()+"&subject={$data['courseInfo']['subject_id']}&paper={$data['partInfo']['paper_id']}&qtype="+$("input[name='questiontype']:checked").val(),
+			data: "chapter="+$("select#chapterselect").val()+"&subject={$data['courseInfo']['subject_id']}&paper={$data['partInfo']['paper_id']}&qtype="+questiontype,
 			dataType: "json"
 		})
 		.done(function(data) {
