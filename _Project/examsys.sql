@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 22, 2014 at 09:52 AM
+-- Generation Time: Dec 23, 2014 at 05:20 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -376,10 +376,12 @@ INSERT INTO `Answer_Papers` (`question_id`, `sco_id`, `answer`) VALUES
 (100, 22, '2'),
 (101, 21, '1'),
 (101, 22, '1'),
+(101, 24, '1'),
 (102, 21, 't'),
 (102, 22, 't'),
 (103, 21, 't'),
-(103, 22, 't');
+(103, 22, 't'),
+(104, 24, '1');
 
 -- --------------------------------------------------------
 
@@ -434,9 +436,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('4bc6b514b5e3a794f033b6e5c53d31e7', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1419238274, 'a:10:{s:9:"user_data";s:0:"";s:2:"id";s:1:"3";s:3:"uid";s:1:"2";s:8:"username";s:7:"uraiwan";s:8:"fullname";s:47:"อ.อุไรวรรณ บัวตูม";s:5:"fname";s:28:"อ.อุไรวรรณ";s:5:"lname";s:18:"บัวตูม";s:7:"faculty";N;s:4:"role";s:7:"teacher";s:6:"logged";b:1;}'),
-('b86b674037526ed6a08db0427d69f191', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1418930963, ''),
-('c806937c41bac4514a1f6ef0ce12efd9', '192.168.1.11', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/53', 1418978856, '');
+('7da1589dab48683a9d2a3d397c87fb97', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1419308430, ''),
+('ad8e20d232b74999fc457c1ab0794fb5', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) Ap', 1419265173, '');
 
 -- --------------------------------------------------------
 
@@ -550,7 +551,7 @@ CREATE TABLE IF NOT EXISTS `Exam_Papers` (
   `visible` tinyint(1) NOT NULL DEFAULT '1',
   `status` varchar(20) NOT NULL DEFAULT 'active',
   `course_id` int(4) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `Exam_Papers`
@@ -572,7 +573,8 @@ INSERT INTO `Exam_Papers` (`paper_id`, `title`, `description`, `rules`, `semeste
 (13, 'การเจริญเติบโตของร่างกาย', '', '', '2', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 1, 'active', 4),
 (14, 'ทดสอบความรู้สัตว์เลี้ยงลูกด้วยนม', '', '', '', '2014-12-16 10:00:00', '2014-12-16 11:00:00', 1, 'deleted', 4),
 (15, 'กีฬาเทควันโด', '', '', '1', '2014-12-25 01:00:00', '2014-12-25 02:30:00', 1, 'active', 8),
-(16, 'ชุดที่ 1', 'เลือกตอบข้อที่ถูกที่สุด', 'ห้ามเปิดตำรา', '1', '2014-12-17 09:00:00', '2014-12-17 10:30:00', 1, 'active', 10);
+(16, 'ชุดที่ 1', 'เลือกตอบข้อที่ถูกที่สุด', 'ห้ามเปิดตำรา', '1', '2014-12-17 09:00:00', '2014-12-17 10:30:00', 1, 'active', 10),
+(17, 'ชุดที่ 2', '', '', '1', '2014-12-22 16:00:00', '2014-12-22 17:59:00', 1, 'active', 10);
 
 -- --------------------------------------------------------
 
@@ -694,10 +696,9 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 (97, 20, 15, 18),
 (98, 20, 15, 19),
 (99, 20, 15, 20),
-(100, 21, 16, 1),
-(101, 22, 16, 1),
-(102, 22, 16, 2),
-(103, 21, 16, 2);
+(101, 29, 17, 0),
+(102, 27, 16, 1),
+(103, 27, 16, 2);
 
 -- --------------------------------------------------------
 
@@ -708,33 +709,35 @@ INSERT INTO `Exam_Papers_Detail` (`question_id`, `part_id`, `paper_id`, `no`) VA
 CREATE TABLE IF NOT EXISTS `Exam_Papers_Parts` (
 `part_id` int(7) NOT NULL,
   `no` tinyint(3) NOT NULL,
+  `type` varchar(10) NOT NULL,
   `title` varchar(60) NOT NULL,
   `description` text,
   `israndom` tinyint(1) NOT NULL,
   `paper_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `Exam_Papers_Parts`
 --
 
-INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `title`, `description`, `israndom`, `paper_id`) VALUES
-(1, 1, 'ตอน 1', 'เลือกคำตอบที่ถูกต้อง', 0, 1),
-(3, 1, 'ตอนที่ 1', 'ทำความเข้าใจ', 0, 5),
-(5, 2, 'ข้อตัวเลือก', 'เป็นตัวเลือก 4 ข้อ', 0, 6),
-(6, 1, 'ตัวเลือกอัน2', '', 1, 6),
-(7, 1, 'ตัวเลือก', '', 0, 7),
-(8, 1, 'Choice', 'ตัวเลือก', 1, 8),
-(9, 2, 'Fill the Answer', 'เติมคำตอบให้ถูกต้อง', 1, 8),
-(13, 1, 'ระบบย่อยอาหาร', '', 1, 9),
-(15, 1, 'ปรนัย', '', 1, 10),
-(16, 1, 'ถูกผิด', '', 1, 11),
-(17, 2, 'ปรนัย', '', 0, 11),
-(18, 1, 'reading comprehension', '', 0, 12),
-(19, 1, 'เลือกตอบ', '', 1, 13),
-(20, 1, 'เลือกตอบ', '', 1, 15),
-(21, 1, 'ตอนที่ 1', '', 1, 16),
-(22, 2, 'ตอนที่ 2', '', 1, 16);
+INSERT INTO `Exam_Papers_Parts` (`part_id`, `no`, `type`, `title`, `description`, `israndom`, `paper_id`) VALUES
+(1, 1, '', 'ตอน 1', 'เลือกคำตอบที่ถูกต้อง', 0, 1),
+(3, 1, '', 'ตอนที่ 1', 'ทำความเข้าใจ', 0, 5),
+(5, 2, '', 'ข้อตัวเลือก', 'เป็นตัวเลือก 4 ข้อ', 0, 6),
+(6, 1, '', 'ตัวเลือกอัน2', '', 1, 6),
+(7, 1, '', 'ตัวเลือก', '', 0, 7),
+(8, 1, '', 'Choice', 'ตัวเลือก', 1, 8),
+(9, 2, '', 'Fill the Answer', 'เติมคำตอบให้ถูกต้อง', 1, 8),
+(13, 1, '', 'ระบบย่อยอาหาร', '', 1, 9),
+(15, 1, '', 'ปรนัย', '', 1, 10),
+(16, 1, '', 'ถูกผิด', '', 1, 11),
+(17, 2, '', 'ปรนัย', '', 0, 11),
+(18, 1, '', 'reading comprehension', '', 0, 12),
+(19, 1, '', 'เลือกตอบ', '', 1, 13),
+(20, 1, '', 'เลือกตอบ', '', 1, 15),
+(26, 1, 'choice', 'ตอนที่ 1', '', 1, 16),
+(27, 2, 'boolean', 'ตอนที่ 2', '', 0, 16),
+(29, 1, 'choice', 'ตอนที่ 1', '', 0, 17);
 
 -- --------------------------------------------------------
 
@@ -766,7 +769,7 @@ CREATE TABLE IF NOT EXISTS `Questions` (
   `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `chapter_id` int(7) NOT NULL,
   `created_by_id` int(8) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=104 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=106 ;
 
 --
 -- Dumping data for table `Questions`
@@ -875,7 +878,9 @@ INSERT INTO `Questions` (`question_id`, `question`, `type`, `status`, `created_t
 (100, '<p><span style="font-size:18px;">1+2 = ?</span></p>', 'numeric', 'inuse', '2014-12-17 09:54:06', 18, 3),
 (101, '<p>5+5 = เท่าใด</p>', 'choice', 'inuse', '2014-12-17 09:54:57', 18, 3),
 (102, '<p>2+3 = 5</p>', 'boolean', 'inuse', '2014-12-17 09:55:33', 19, 3),
-(103, '<p>3+3 = 10</p>', 'boolean', 'inuse', '2014-12-17 09:55:52', 19, 3);
+(103, '<p>3+3 = 10</p>', 'boolean', 'inuse', '2014-12-17 09:55:52', 19, 3),
+(104, '<p>22+1 = ?</p>', 'choice', 'inuse', '2014-12-22 16:09:53', 18, 3),
+(105, '<p>ในการสอบ Project  มีคณะอาจารย์กี่คน</p>', 'numeric', 'active', '2014-12-22 23:17:37', 18, 3);
 
 -- --------------------------------------------------------
 
@@ -931,7 +936,7 @@ CREATE TABLE IF NOT EXISTS `Question_choice` (
   `choice6` text,
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
 
 --
 -- Dumping data for table `Question_choice`
@@ -1012,7 +1017,8 @@ INSERT INTO `Question_choice` (`id`, `choice1`, `choice2`, `choice3`, `choice4`,
 (72, 'Takkwon + Kongsoodo', 'Takkyon + Kongsondo', 'Takkwon + Kongsondo', 'Takkyon + Kongsoodo', '', '', '4', 97),
 (73, 'ประเทศจีน', 'ประเทศญี่ปุ่น', 'ประเทศเกาหลี', 'ประเทศมองโกเลีย', '', '', '3', 98),
 (74, 'เท - ควัน - โด', 'เท - ควอน - โด', 'แท - ควัน - โด', 'แท - ควอน - โด', '', '', '4', 99),
-(75, '10', '0', '7', '50', '', '', '1', 101);
+(75, '10', '0', '7', '50', '', '', '1', 101),
+(76, '23', '24', '25', '26', '27', '28', '1', 104);
 
 -- --------------------------------------------------------
 
@@ -1075,7 +1081,7 @@ CREATE TABLE IF NOT EXISTS `Question_numerical` (
 `id` int(10) NOT NULL,
   `answer` varchar(20) NOT NULL,
   `question_id` int(7) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `Question_numerical`
@@ -1089,7 +1095,8 @@ INSERT INTO `Question_numerical` (`id`, `answer`, `question_id`) VALUES
 (5, '29311', 15),
 (6, '22222', 18),
 (7, '3', 21),
-(8, '3', 100);
+(8, '3', 100),
+(9, '3', 105);
 
 -- --------------------------------------------------------
 
@@ -1146,7 +1153,7 @@ CREATE TABLE IF NOT EXISTS `Scoreboard` (
   `Score` float DEFAULT NULL,
   `Max` float DEFAULT NULL,
   `Min` float DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `Scoreboard`
@@ -1174,7 +1181,8 @@ INSERT INTO `Scoreboard` (`sco_id`, `stu_id`, `course_id`, `paper_id`, `Score`, 
 (19, 57700193, 6, 11, 7, NULL, NULL),
 (20, 54310104, 6, 11, 0, NULL, NULL),
 (21, 54310104, 10, 16, 3, NULL, NULL),
-(22, 54311095, 10, 16, 2, NULL, NULL);
+(22, 54311095, 10, 16, 2, NULL, NULL),
+(24, 54310104, 10, 17, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1761,17 +1769,17 @@ MODIFY `group_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 -- AUTO_INCREMENT for table `Exam_Papers`
 --
 ALTER TABLE `Exam_Papers`
-MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `paper_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `Exam_Papers_Parts`
 --
 ALTER TABLE `Exam_Papers_Parts`
-MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+MODIFY `part_id` int(7) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `Questions`
 --
 ALTER TABLE `Questions`
-MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=104;
+MODIFY `question_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=106;
 --
 -- AUTO_INCREMENT for table `Question_boolean`
 --
@@ -1781,17 +1789,17 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 -- AUTO_INCREMENT for table `Question_choice`
 --
 ALTER TABLE `Question_choice`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=76;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
 --
 -- AUTO_INCREMENT for table `Question_numerical`
 --
 ALTER TABLE `Question_numerical`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `Scoreboard`
 --
 ALTER TABLE `Scoreboard`
-MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+MODIFY `sco_id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `Subjects`
 --
