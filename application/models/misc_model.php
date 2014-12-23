@@ -318,6 +318,13 @@ class Misc_model extends CI_Model {
 		return $options;
 	}
 
+	function buildsemesterOptions()
+	{
+		$options['1'] = "ภาคเรียนที่ 1";
+		$options['2'] = "ภาคเรียนที่ 2";
+		return $options;
+	}
+
 	function getActiveStatusIcon($str)
 	{
 		switch ($str) {

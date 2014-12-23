@@ -78,7 +78,7 @@ if ($this->session->flashdata('msg_error')) {
 							'role' => 'search',
 							'method' => 'get'
 							);
-						echo form_open('teacher/reports', $attr); ?>
+						echo form_open('teacher/reports/bypaper/'.$courseInfo['course_id'], $attr); ?>
 							<div class="col-sm-6" style="z-index:500;">
 								
 							</div>

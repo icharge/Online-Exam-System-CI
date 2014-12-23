@@ -27,7 +27,7 @@ glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;การสอบ</h3>
 ?>
 				<div class="form-group">
 					<div class="col-sm-12" style="text-align: center;">
-						ส่งข้อสอบเรียบร้อย คุณทำได้ <?php echo $score; ?> คะแนน<br>
+						ส่งข้อสอบเรียบร้อย คุณทำได้ <?php echo $score; ?> / <?php echo $qcount; ?> ข้อ<br>
 <?php
 echo anchor('', 'เสร็จสิ้น', 'class="btn btn-primary"');
 ?>

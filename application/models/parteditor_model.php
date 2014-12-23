@@ -8,7 +8,7 @@ class Parteditor_model extends CI_Model {
 
 	}
 
-	function getQuestionList($chapterid, $subjectId, $paperId)
+	function getQuestionList($chapterid, $subjectId, $paperId, $qtype='all')
 	{
 		// เรียกรายการ question ในคลังที่ไม่มีใน exam_papers_detail
 		/*
@@ -43,10 +43,13 @@ class Parteditor_model extends CI_Model {
 			// ->get()
 			// ->result_array();
 
+		if ($qtype == 'all' or $qtype == '') $qqtype = "";
+		else $qqtype = "and type = '$qtype'";
+
 		$query = $this->db->query("SELECT * FROM `question_list` 
 		where `chapter_id` in (SELECT chapter_id from chapter where subject_id = $subjectId) 
 		and question_id not in ( SELECT question_id FROM question_detail_list qd where qd.paper_id = $paperId) 
-		and chapter_id = $chapterid
+		and chapter_id = $chapterid $qqtype 
 		ORDER BY `question_id` ASC")->result_array();
 
 			//die($this->db->last_query());
